@@ -1,0 +1,329 @@
+---
+title: | 
+  | Ciencia de datos en R ![](images/Escuela de Doctorado_trilingue_positivo.png){width=80%,fig-align="right"}
+subtitle: "Organizando datos: el día a día"
+author: Julen Astigarraga and Verónica Cruz-Alonso
+date: today
+date-format: "DD/MM/YYYY"
+toc: true
+toc-title: "Índice"
+format:
+  html: default
+    # css: styles.css
+  gfm: default
+editor: visual
+editor_options: 
+  chunk_output_type: console
+number-sections: true
+---
+
+### Conceptos muy básicos
+
+-   R: lenguaje de programación dinámico (se interpreta el código en el momento que se ejecuta).
+
+-   RStudio: es un entorno de desarrollo integrado para programar en R. Tiene cuatro zonas diferenciadas: el editor de código, la consola (donde se ejecuta el código), el navegador del espacio de trabajo (con el entorno –*environment-* y el historial de comandos) y el mix de abajo a la derecha (Archivos, Gráficos, Paquetes, Ayuda).
+
+-   Objetos: cualquier elemento almacenado con un nombre específico. Pueden ser de muchos tipos: `numeric`, `integer`, `logical`, `data.frame`, `SpatVector`, etc.
+
+-   Funciones: objetos de R que toman un vector de entrada y dan como resultado otro vector haciendo una acción concreta (funcionalidad específica). Son los *bloques de construcción* fundamentales en cualquier script de R que es un lenguaje funcional.
+
+    ![](images/function.png)
+
+> Para comprender la computación en R, resultan útiles dos lemas:
+>
+> \- Todo lo que existe es un objeto.
+>
+> \- Todo lo que sucede es una llamada a función.
+>
+> --- John Chambers ([Advanced R](https://adv-r.hadley.nz/index.html))
+
+-   Paquetes o librerias: contienen funciones reutilizables, documentación sobre cómo usarlas y datos de ejemplo. Son las unidades fundamentales de código reproducible en R.
+
+-   CRAN: the Comprehensive R Archive Network.
+
+#### 1. Instalar paquetes y cargarlos en R
+
+# Ejecuto un comando con CTRL+ENTER (CTRL+R)
+
+# install.packages("tidyverse", dep = T) \# dep = T significa instalar dependencias
+
+library(tidyverse) \# Análogamente se puede hacer en R studio
+
+#### 2. Creación de objetos en R
+
+x \<- 4.5 \# shortcut ALT+"-" y \<- "objeto" \# si el objeto no es numérico, usar comillas
+
+class(x) \# Función para ver de que clase es nuestro objeto class(y)
+
+x \# Llamar al vector para saber su valor y
+
+#### 3. Operaciones aritméticas (R como calculadora)
+
+5 + 6 5 \* 6 60 / 4 5 + 4 - 2 5 + 4 \* 5 (5 + 4) \* 5 log(10) \# logaritmo neperiano log10(10) exp(1) 3 \^ 2 3 \^ 2 / 3 sqrt(16) pi sin(pi / 2) \# en radianes cos(pi / 2) tan(pi / 2) asin(1) asin(1) \* 2 asin(1) \* 2 - pi acos(1)
+
+#### 4. Tipos de objetos
+
+###### 4.1. Vectores
+
+v1 \<- c(2.4, 4, 6, 3.2) \# Si quiero asignar mas de un valor uso "c" (concatenar) v1 v1 \* 100 \# Puedo operar con los vectores log(v1)
+
+v2 \<- c(1, 3, 4, 8) \# Pero también entre vectores v1 + v2 v3 \<- v1 - v2 v3
+
+mean(x = v2) \# Funciones ya programadas sd(v2) length(v2) \# n vector max(v2) min(v2)
+
+?mean
+
+# Funciones que facilitan la creación de vectores
+
+v4 \<- rep(x = 1, times = 4) v4 v5 \<- 1:10 \# dos puntos de a a b v5 v6 \<- seq(from = 1, to = 20, by = 2) v6
+
+v7 \<- c(v5, v6) v7 v8 \<- c(v5, rep(0, 3), v6) v8
+
+# Ejercicio 1
+
+# Elije un número y multiplicalo por 3
+
+2*3 \# Crea un objeto que contenga 100 valores entre 1900 y 2000 o1 \<- 1900:1999 o1 v1 \<- seq(from = 1900, to = 2000, by = 1) v1 \# Suma un número a tu objeto o1 + 2 \# Multiplica tu objeto por sí mismo o1 \^ 2 o1* o1 \# Crea un único objeto que contenga el número 5 repetido 9 veces junto con \# una secuencia de 5 a 50 cada 5 elementos v \<- c(rep(5, 9), seq(from = 5, to = 50, by = 5)) v \# ¿Cuál es la longitud del objeto anterior? length(v)
+
+# Más estrategias para crear vectores
+
+rep(x = 1, times = 4) #v4 rep(1:4, times = 2) rep(1:4, each = 2) rep(1:4, times = 1:4)
+
+rep(x = c("gato", "perro", "pez"), times = c(5, 3, 1))
+
+rnorm(10, mean = 4, sd = 2.2)
+
+###### 4.2. Matrices
+
+mivector \<- sample(x = 1:10, size = 1000, replace = T) \# sample: función para crear numeros aleatorios mimatriz \<- matrix(mivector, nrow = 100, ncol = 10) \# matrix: función para convertir vector en matriz \# matrix va a rellenar por columnas por defecto
+
+str(mivector) \# mostrar estructura datos str(mimatriz)
+
+summary(mivector) \# resumen de los datos summary(mimatriz)
+
+a \<- c(1, 2, 3, 4) b \<- c(1, 2, 3, 4) c \<- c("hi", "hola", "hola", "hi")
+
+mimatriz_num \<- matrix(c(a, b), nrow = 4, ncol = 2) mimatriz_num
+
+mimatriz_car \<- matrix(c(a, b, c), nrow = 4, ncol = 3) mimatriz_car
+
+summary(mimatriz_num) summary(mimatriz_car)
+
+###### 4.3. Bases de datos (data frames)
+
+a \<- c(1, 2, 3, 4) b \<- c(1, 2, 3, 4) c \<- c("hi", "hola", "hola", "hi")
+
+midataframe \<- data.frame( mivariable1 = a, mivariable2 = b, mivariable3 = c)
+
+str(midataframe) summary(midataframe) View(midataframe)
+
+mitibble \<- tibble( #Un tibble es un data.frame de tidyverse, con características mejoradas mivariable1 = a, mivariable2 = b, mivariable3 = c)
+
+str(mitibble) str(midataframe) summary(mitibble) summary(midataframe) mitibble midataframe
+
+###### 4.4. Listas
+
+d \<- c(TRUE, TRUE, TRUE, FALSE, FALSE)
+
+milista \<- list(a, b, c, d)
+
+milista str(milista) summary(milista)
+
+milista2 \<- list(a, b, c, d, mivector, mimatriz, midataframe) str(milista2)
+
+#### 5. Comenzando a trabajar en R
+
+# El directorio de trabajo
+
+getwd() \# Saber directorio de trabajo setwd("C:/Users/veruk/Desktop/Disco/Curso estadística MURE") \# Ojo con la ruta / o \\
+
+# Proyectos de R: mejor crear desde el principio un proyecto donde se guarden
+
+# todos los datos de entrada y resultados del script. Al abrir el proyecto,
+
+# se sincroniza con pestaña Files.
+
+# Para crear un proyecto: Archivo \> Nuevo proyecto
+
+# Ejercicio 2
+
+# Crea un proyecto para el curso de estadística
+
+# Exportar datos (muy útil cuando organizamos los datos en R y queremos compartirlos)
+
+write_delim(x = mitibble, file = "misdatos.csv", delim = ",")
+
+# Importar datos
+
+taludes \<- read_delim(file = "DatosCursoR/taludes.csv", delim = ",")
+
+# Comprobar los datos
+
+taludes str(taludes) names(taludes) \# nombre de las variables (columnas)
+
+# Uno de los problemas más comunes es que R no reconoce bien la naturaleza de nuestra variable
+
+# Aquí especificamos que Luz y Agua son factores:
+
+taludes_bien \<- read_delim(file = "DatosCursoR/taludes.csv", delim = ",", col_types = list(Luz = "f", Agua = "f"))
+
+# Para entender qué es un factor: https://es.r4ds.hadley.nz/15-factors.html
+
+summary(taludes) summary(taludes_bien)
+
+#### 5. Ordenar datos
+
+###### 5.1 Acceder a elementos dentro de los objetos con R base
+
+mivector mivector\[505\]
+
+mimatriz mimatriz\[20, 9\] \# \[filas, columnas\] mimatriz\[20, \] \# selecciono todas las columnas mimatriz\[, 9\] \# selecciono todas las filas
+
+midataframe midataframe\[3,3\] midataframe\[3,"mivariable3"\] midataframe\[,"mivariable3"\] midataframe\$mivariable3
+
+milista milista\[\[4\]\] milista\[\[4\]\]\[4\]
+
+# Ejercicio 3
+
+# Crea una lista que contenga 2 data.frames con 2 variables cada uno (variable1 y variable2)
+
+# y 10 observaciones por variable
+
+# Accede a la octava observación de variable2 de cada data.frame
+
+###### 5.2 Funciones básicas de filtrado y selección
+
+# Se puede hacer también con R base pero vamos a aprenderlo con tidyverse
+
+taludes_bien View(taludes_bien)
+
+# Slice: filtrar según el índice numérico
+
+taludes_bien \|\> \# Shortcut para el pipe: CTRL + SHIFT + M slice(1)
+
+taludes_bien \|\> slice(1, 5)
+
+taludes_bien \|\> slice(1:6)
+
+taludes_bien \|\> slice(-c(1:5))
+
+# Rename: cambiar nombres de variables
+
+taludes_bien \|\> rename(biomasa = Biomasa, \# Nombre nuevo = nombre viejo luz = Luz, agua = Agua)
+
+# Arrange: ordenar por los valores de una o más variables
+
+taludes_bien \|\> arrange(Biomasa)
+
+taludes_bien \|\> arrange(desc(Biomasa))
+
+# Filter: filtrar utilizando condiciones
+
+# Se necesita un vector de filtrado que contenga valores TRUE/FALSE
+
+taludes_bien
+
+taludes_bien \|\> filter(Luz == "Nivel 1")
+
+taludes_bien \|\> filter(Luz == "Nivel 1" & Biomasa \> 4) #Combinar criterios: AND
+
+taludes_bien \|\> filter(Luz == "Nivel 1" \| Biomasa \> 5) #Combinar criterios: OR
+
+taludes_bien \|\> filter(Luz %in% c("Nivel 1", "Nivel 3")) #Combinar criterios
+
+# Ejercicio 4
+
+# Lee el data.frame "Macrobenthos.txt".
+
+# Pista: el delimitador entre datos es el tabulador ("\t")
+
+# Crea un subset que contenga las filas de la 1 a la 10 y de la 390 a la 400
+
+# Crea un subset que NO contenga el Taxon número 1.
+
+# Pista: revisa los operadores de R (https://bookdown.org/jboscomendoza/r-principiantes4/operadores-relacionales.html)
+
+# Crea un subset con las observaciones del Taxon 2 donde se haya registrado una abundancia mayor de 50 o menor o igual a 5
+
+# Pista: necesitarás paréntesis para filtrar
+
+# ¿Cuántas filas han quedado?
+
+# Select: seleccionar columnas utilizando condiciones
+
+# Se necesita un vector de selección que contenga valores TRUE/FALSE
+
+taludes_bien \|\> select(Biomasa, Agua)
+
+?select \# Seleccionar variables que tienen un patrón taludes_bien \|\> select(contains("a"))
+
+# se pueden utilizar todo tipo de patrones de texto: https://rstudio.github.io/cheatsheets/strings.pdf
+
+taludes_bien \|\> select(Luz, everything()) \# Se puede usar para reordenar variables
+
+# Ejercicio 5
+
+# Con el data.frame "Macrobenthos.txt", crea un nuevo data.frame que contenga las variables relacionadas con el medio
+
+# (de organic matter a temperature). Pista: mira la ayuda de select para ahorrar caracteres
+
+# Crea un nuevo objeto con el taxon al principio y que incluya las demás columnas excepto el
+
+# esfuerzo de muestreo (effort)
+
+#### 6. Transformar los datos y calcular nuevas variables
+
+###### 6.1 Función mutate
+
+# Renombramos las variables y guardamos un nuevo objeto para trabajar mejor
+
+# con las funciones de transformación:
+
+taludes_analisis \<- taludes_bien \|\> rename(biomasa = Biomasa, nivel_luz = Luz, agua_estival = Agua)
+
+taludes_analisis \|\> mutate(ID = 1:nrow(taludes_bien), \# Definir una variable desde cero supervivencia = as.factor(sample(c(0, 1), size = nrow(taludes_bien), prob = c(0.4, 0.6), replace = TRUE)), carbono = biomasa \* rnorm(n = nrow(taludes_bien), mean = 0.4, sd = 0.2)) \|\> \# Utilizar una variable para calcular otra select(ID, everything())
+
+taludes_analisis \|\> mutate( agua_estival = fct_recode( \# Sobreescribir una variable. En concreto fct_recode \# sirve para redefinir los niveles de un factor agua_estival, sequia = "Sequia estival", lluvia = "Lluvia estival"), nivel_luz = fct_recode( nivel_luz, `1` = "Nivel 1", `2` = "Nivel 2", `3` = "Nivel 3" ))
+
+taludes_analisis \|\> mutate( estres = case_when( \# Utilizar varias variables para calcular otra nueva nivel_luz == 1 & agua_estival == "sequia" \~ "alto", \# "Si el nivel de luz es 1 y hay sequia, el estrés será alto" nivel_luz == 3 & agua_estival == "lluvia" \~ "bajo", TRUE \~ "intermedio" ))
+
+# Repetimos todo lo anterior concatenando todo el proceso:
+
+taludes_analisis \<- taludes_bien \|\> rename(biomasa = Biomasa, nivel_luz = Luz, agua_estival = Agua) \|\> mutate(ID = 1:nrow(taludes_bien), supervivencia = as.factor(sample(c(0, 1), size = nrow(taludes_bien), prob = c(0.4, 0.6), replace = TRUE)), carbono = biomasa \* rnorm(n = nrow(taludes_bien), mean = 0.4, sd = 0.2)) \|\> select(ID, everything()) \|\> mutate( agua_estival = fct_recode( agua_estival, sequia = "Sequia estival", lluvia = "Lluvia estival"), nivel_luz = fct_recode( nivel_luz, `1` = "Nivel 1", `2` = "Nivel 2", `3` = "Nivel 3" )) \|\> mutate( estres = case_when( nivel_luz == 1 & agua_estival == "sequia" \~ "alto", nivel_luz == 3 & agua_estival == "lluvia" \~ "bajo", TRUE \~ "intermedio" ))
+
+# Ejercicio 6
+
+# Con el data.frame macrobenthos calcula en una nueva columna la relación entre
+
+# la turbidez del agua y la materia orgánica
+
+###### 6.2 Función summarize
+
+taludes_analisis \|\> summarise( c_min = min(carbono), c_max = max(carbono) )
+
+# Ver todas las funciones de agregación
+
+?summarise
+
+taludes_analisis \|\> group_by(estres) \|\> \# Este tipo de summary en R base se hace con aggregate() o tapply() summarise(biomasa_min = min(biomasa), biomasa_mean = mean(biomasa), biomasa_max = max(biomasa))
+
+# Ejercicio 7
+
+# Con el data.frame macrobenthos, cuenta el número de casos que hay en cada periodo de muestreo.
+
+# Cuenta el número de casos distintos que hay de esfuerzo de muestreo
+
+# Calcula la media de la turbidez para cada taxón
+
+------------------------------------------------------------------------
+
+<details>
+
+<summary>Session Info</summary>
+
+```{r session_info}
+Sys.time()
+sessionInfo()
+```
+
+</details>

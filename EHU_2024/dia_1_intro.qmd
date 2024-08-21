@@ -1,0 +1,97 @@
+---
+title: | 
+  | Ciencia de datos en R ![](images/Escuela de Doctorado_trilingue_positivo.png){width=80%,fig-align="right"}
+subtitle: "Organizando datos: el día a día"
+author: Julen Astigarraga and Verónica Cruz-Alonso
+date: today
+date-format: "DD/MM/YYYY"
+toc: true
+toc-title: "Índice"
+format:
+  html: default
+    # css: styles.css
+  gfm: default
+editor: visual
+editor_options: 
+  chunk_output_type: console
+number-sections: true
+---
+
+## Introducción
+
+En este curso, exploraremos tanto los fundamentos teóricos como las aplicaciones prácticas de la ciencia de datos en R. Abordaremos desde tareas comunes que nos enfrentamos en nuestro día a día, como la limpieza y transformación de datos, hasta nociones más avanzadas de visualización y programación. Además, aprenderemos a utilizar herramientas para generar documentos reproducibles y colaborativos. Durante el curso, combinaremos la teoría con la práctica, adaptando las lecciones a los problemas específicos de cada asistente, los cuales irán evolucionando día a día.
+
+El objetivo principal es garantizar que tanto aquellos con conocimientos básicos en ciencia de datos como aquellos con un nivel más avanzado puedan beneficiarse y llevar consigo nuevos aprendizajes al finalizar el curso.
+
+Dentro del modelo de ciencia de datos de Hadley Wickham (@fig-datascience), el curso de centra en el marco que envuelve todo el proceso, es decir, la programación.
+
+![Modelo de ciencia de datos de Hadley Wickham. Traducido de <https://r4ds.hadley.nz/intro#fig-ds-diagram>](images/datascience.png){#fig-datascience}
+
+## Estructura del curso
+
++---------------------------------------+--------------------------------------+
+| Bloques                               | Contenido                            |
++=======================================+======================================+
+| Organizar datos: el día a día         | • Importar                           |
+|                                       |                                      |
+|                                       | •Explorar                            |
+|                                       |                                      |
+|                                       | •Limpiar                             |
+|                                       |                                      |
+|                                       | •Transformar                         |
+|                                       |                                      |
+|                                       | •Manejar                             |
++---------------------------------------+--------------------------------------+
+| Visualización:                        | •Fundamentos de visualización        |
+| contando historias                    |                                      |
+|                                       | •Bases: gráficos por capas           |
+|                                       |                                      |
+|                                       | •Visualización avanzada              |
+|                                       |                                      |
+|                                       | •Introducción a la creación de mapas |
++---------------------------------------+--------------------------------------+
+| Programación:                         | •Funciones                           |
+| aprendiendo a programar con funciones |                                      |
+|                                       | •Estilo de código                    |
+|                                       |                                      |
+|                                       | •Iteraciones                         |
+|                                       |                                      |
+|                                       | •Programación funcional              |
++---------------------------------------+--------------------------------------+
+| Comunicación:                         | •Introducción a R Markdown           |
+| generando documentos reproducibles    |                                      |
+|                                       | •Introducción a Quarto               |
+|                                       |                                      |
+|                                       | •R Markdown vs Quarto                |
+|                                       |                                      |
+|                                       | •Trabajos reproducibles              |
++---------------------------------------+--------------------------------------+
+| Colaboración:                         | •Introducción a Git                  |
+| trabajando en equipo                  |                                      |
+|                                       | •Introducción a GitHub               |
+|                                       |                                      |
+|                                       | •Flujo de trabajo en Git y GitHub    |
+|                                       |                                      |
+|                                       | •Trabajos colaborativos              |
++---------------------------------------+--------------------------------------+
+
+## Quiénes somos
+
+Coordinamos el [grupo de trabajo de Ecoinformática](https://ecoinfaeet.github.io/website/index.html) de la Asociación Española de Ecología Terrestre.
+
+Y vosotros ¿quiénes sois?
+
+------------------------------------------------------------------------
+
+![El proceso de aprendizaje en R, por Allison Horst. https://allisonhorst.com/everything-else](images/e684f0da-13b1-4d00-ab25-37814e79ee1e.png){alt="El proceso de aprendizaje en R, por Allison Horst. https://allisonhorst.com/everything-else" width="362"}
+
+<details>
+
+<summary>Session Info</summary>
+
+```{r session_info}
+Sys.time()
+sessionInfo()
+```
+
+</details>

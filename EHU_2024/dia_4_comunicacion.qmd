@@ -1,0 +1,38 @@
+---
+title: | 
+  | Ciencia de datos en R ![](images/Escuela de Doctorado_trilingue_positivo.png){width=80%,fig-align="right"}
+subtitle: "Organizando datos: el día a día"
+author: Julen Astigarraga and Verónica Cruz-Alonso
+date: today
+date-format: "DD/MM/YYYY"
+toc: true
+toc-title: "Índice"
+format:
+  html: default
+    # css: styles.css
+  gfm: default
+editor: visual
+editor_options: 
+  chunk_output_type: console
+number-sections: true
+---
+
+## Introducción
+
+The objectives of this course are:
+
+
+
+
+------------------------------------------------------------------------
+
+<details>
+
+<summary>Session Info</summary>
+
+```{r session_info}
+Sys.time()
+sessionInfo()
+```
+
+</details>
