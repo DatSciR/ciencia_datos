@@ -315,6 +315,117 @@ taludes_analisis \|\> group_by(estres) \|\> \# Este tipo de summary en R base se
 
 # Calcula la media de la turbidez para cada taxón
 
+
+# ja
+
+```{r primeros_tidypasos}
+#| warning: false
+
+# install.packages("tidyverse")
+library(tidyverse)
+
+penguins <- palmerpenguins::penguins
+penguins
+
+summary(penguins)
+glimpse(penguins)
+View(penguins)
+
+# filter
+penguins |> 
+  filter(island == "Dream") 
+penguins |> 
+  filter(island == "Dream" & body_mass_g > 4500) # se pueden combinar criterios
+penguins |> 
+  filter(island == "Dream" | body_mass_g > 4500) 
+penguins |> 
+  filter(island %in% c("Dream", "Torgersen"))
+
+# select
+penguins |> 
+  select(sex, body_mass_g)
+penguins |> 
+  select(ends_with("mm")) # seleccionar variables que tienen un patron
+penguins |> 
+  select(ends_with(c("mm", "g"))) 
+
+# se pueden utilizar todo tipo de patrones de texto: https://rstudio.github.io/cheatsheets/strings.pdf
+
+penguins |> 
+  select(sex, body_mass_g, everything()) # se puede usar para reordenar variables
+
+# arrange
+penguins |> 
+  select(sex, body_mass_g) |> 
+  arrange(body_mass_g)
+penguins |> 
+  select(sex, body_mass_g) |> 
+  arrange(desc(body_mass_g))
+```
+
+#### Ejercicio
+
+1.  Crea un objeto con los pingüinos de la especie Adelie y ordena la tabla según la longitud del ala de los individuos.
+
+2.  Crea un objeto a partir del anterior donde selecciones la isla y las variables relacionadas con el pico.
+
+3.  Crea un objeto a partir del creado en el punto 1 donde selecciones todo menos la especie.
+
+```{r segundos_tidypasos}
+
+# mutate
+penguins |> 
+  mutate(bill_volume_mm2 = (bill_length_mm * bill_depth_mm) / 2) |> 
+  select(bill_volume_mm2, everything())
+
+penguins |>
+  mutate(female_penguin = case_when(
+    sex == "female" & body_mass_g < 3600 ~ "small female",
+    sex == "female" & body_mass_g >= 3600 ~ "big female",
+    TRUE ~ NA)) |>
+  select(female_penguin, sex, body_mass_g)
+
+# summarise
+# se utiliza con funciones que resumen: n, n_distinct, mean, etc.
+# ver ?summarise
+
+penguins |> 
+  summarise(
+    body_min = min(body_mass_g, na.rm = TRUE),
+    body_max = max(body_mass_g, na.rm = TRUE)
+  )
+
+penguins |> 
+  group_by(sex) |> 
+  summarise(body_min = min(body_mass_g, na.rm = TRUE),
+  body_max = max(body_mass_g, na.rm = TRUE))
+```
+
+#### Ejercicio
+
+1.  Con el `data.frame` penguins, cuenta el número de casos que hay en cada isla y calcula la media de la longitud del ala en cada isla.
+
+2.  Con el mismo `data.frame` calcula la relación entre el peso en kg y la longitud del ala para cada individuo.
+
+```{r save_read_tidyverse}
+#| eval: false
+mypenguins <- penguins |> 
+  mutate(bill_volume_mm2 = (bill_length_mm * bill_depth_mm) / 2,
+    female_penguin = case_when(
+      sex == "female" & body_mass_g < 3600 ~ "small female",
+      sex == "female" & body_mass_g >= 3600 ~ "big female",
+      TRUE ~ NA)) 
+
+write_delim(mypenguins, file = "mypenguins.csv", delim = ";")
+# en file hay que especificar el directorio donde queremos que se guarde. Si no, se guardará en el directorio de trabajo (getwd())
+
+misdatos <- read_delim(file = "mypenguins.csv")
+View(misdatos)
+```
+
+<!--# Vero: introducir también join -->
+
+
 ------------------------------------------------------------------------
 
 <details>

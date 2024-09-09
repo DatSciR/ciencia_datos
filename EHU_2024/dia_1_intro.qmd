@@ -29,51 +29,51 @@ Dentro del modelo de ciencia de datos de Hadley Wickham (@fig-datascience), el c
 
 ## Estructura del curso
 
-+---------------------------------------+--------------------------------------+
-| Bloques                               | Contenido                            |
-+=======================================+======================================+
-| Organizar datos: el día a día         | • Importar                           |
-|                                       |                                      |
-|                                       | •Explorar                            |
-|                                       |                                      |
-|                                       | •Limpiar                             |
-|                                       |                                      |
-|                                       | •Transformar                         |
-|                                       |                                      |
-|                                       | •Manejar                             |
-+---------------------------------------+--------------------------------------+
-| Visualización:                        | •Fundamentos de visualización        |
-| contando historias                    |                                      |
-|                                       | •Bases: gráficos por capas           |
-|                                       |                                      |
-|                                       | •Visualización avanzada              |
-|                                       |                                      |
-|                                       | •Introducción a la creación de mapas |
-+---------------------------------------+--------------------------------------+
-| Programación:                         | •Funciones                           |
-| aprendiendo a programar con funciones |                                      |
-|                                       | •Estilo de código                    |
-|                                       |                                      |
-|                                       | •Iteraciones                         |
-|                                       |                                      |
-|                                       | •Programación funcional              |
-+---------------------------------------+--------------------------------------+
-| Comunicación:                         | •Introducción a R Markdown           |
-| generando documentos reproducibles    |                                      |
-|                                       | •Introducción a Quarto               |
-|                                       |                                      |
-|                                       | •R Markdown vs Quarto                |
-|                                       |                                      |
-|                                       | •Trabajos reproducibles              |
-+---------------------------------------+--------------------------------------+
-| Colaboración:                         | •Introducción a Git                  |
-| trabajando en equipo                  |                                      |
-|                                       | •Introducción a GitHub               |
-|                                       |                                      |
-|                                       | •Flujo de trabajo en Git y GitHub    |
-|                                       |                                      |
-|                                       | •Trabajos colaborativos              |
-+---------------------------------------+--------------------------------------+
++-----------------------------------------------------+--------------------------------------+
+| Bloques                                             | Contenido                            |
++=====================================================+======================================+
+| Organizar datos: el día a día                       | • Importar                           |
+|                                                     |                                      |
+|                                                     | •Explorar                            |
+|                                                     |                                      |
+|                                                     | •Limpiar                             |
+|                                                     |                                      |
+|                                                     | •Transformar                         |
+|                                                     |                                      |
+|                                                     | •Manejar                             |
++-----------------------------------------------------+--------------------------------------+
+| Visualización: contando historias                   | •Fundamentos de visualización        |
+|                                                     |                                      |
+|                                                     | •Bases: gráficos por capas           |
+|                                                     |                                      |
+|                                                     | •Visualización avanzada              |
+|                                                     |                                      |
+|                                                     | •Introducción a la creación de mapas |
++-----------------------------------------------------+--------------------------------------+
+| Programación: aprendiendo a programar con funciones | •Funciones                           |
+|                                                     |                                      |
+|                                                     | •Estilo de código                    |
+|                                                     |                                      |
+|                                                     | •Iteraciones                         |
+|                                                     |                                      |
+|                                                     | •Programación funcional              |
++-----------------------------------------------------+--------------------------------------+
+| Comunicación: generando documentos reproducibles    | •Introducción a R Markdown           |
+|                                                     |                                      |
+|                                                     | •Introducción a Quarto               |
+|                                                     |                                      |
+|                                                     | •R Markdown vs Quarto                |
+|                                                     |                                      |
+|                                                     | •Trabajos reproducibles              |
++-----------------------------------------------------+--------------------------------------+
+| Colaboración: trabajando en equipo                  | •Introducción a Git                  |
+|                                                     |                                      |
+|                                                     | •Introducción a GitHub               |
+|                                                     |                                      |
+|                                                     | •Flujo de trabajo en Git y GitHub    |
+|                                                     |                                      |
+|                                                     | •Trabajos colaborativos              |
++-----------------------------------------------------+--------------------------------------+
 
 ## Quiénes somos
 
@@ -81,9 +81,136 @@ Coordinamos el [grupo de trabajo de Ecoinformática](https://ecoinfaeet.github.i
 
 Y vosotros ¿quiénes sois?
 
+
+
+# further info
+
+
+-   aprender las bases de la programación en R
+
+-   aprender estilos de código que facilitan su comprensión (📝)
+
+
+## Introducción a la programación en R
+<!--# ja: esta sección lo podemos enviar al primer dia cuando hacemos la intro -->
+
+![El proceso de aprendizaje en R, por Allison Horst. https://allisonhorst.com/everything-else](images/e684f0da-13b1-4d00-ab25-37814e79ee1e.png){width="362"}
+
+### Conceptos básicos
+
+-   R: lenguaje de programación dinámico (se interpreta el código en el momento que se ejecuta).
+
+-   RStudio: es un entorno de desarrollo integrado para programar en R. Tiene cuatro zonas diferenciadas: el editor de código, la consola (donde se ejecuta el código), el navegador del espacio de trabajo (con el entorno –*environment-* y el historial de comandos) y el mix de abajo a la derecha (Archivos, Gráficos, Paquetes, Ayuda).
+
+-   Objetos: cualquier elemento almacenado con un nombre específico. Pueden ser de muchos tipos: `numeric`, `integer`, `logical`, `data.frame`, `SpatVector`, etc.
+
+-   Funciones: objetos de R que toman un vector de entrada y dan como resultado otro vector haciendo una acción concreta (funcionalidad específica). Son los *bloques de construcción* fundamentales en cualquier script de R que es un lenguaje funcional.
+
+    ![](images/function.png)
+
+> Para comprender la computación en R, resultan útiles dos lemas:
+>
+> \- Todo lo que existe es un objeto.
+>
+> \- Todo lo que sucede es una llamada a función.
+>
+> --- John Chambers ([Advanced R](https://adv-r.hadley.nz/index.html))
+
+-   Paquetes o librerias: contienen funciones reutilizables, documentación sobre cómo usarlas y datos de ejemplo. Son las unidades fundamentales de código reproducible en R.
+
+-   CRAN: the Comprehensive R Archive Network.
+
+```{r primeros_pasos_programacion}
+
+3 + 2 # ejecuto un comando con CTRL+ENTER (CTRL+R)
+15 / 20 * 100
+1:50
+
+sum(1:3) # función y argumentos
+?sum
+
+# install.packages("palmerpenguins")
+library(palmerpenguins) # la funcion library carga paquetes
+
+palmerpenguins::penguins # :: permite explorar que hay dentro de los paquetes
+# loadedNamespaces()
+
+guau <- 2 # flecha de asignacion
+guau # al ejecutar un objeto el nombre se sustituye por su contenido
+
+guau + 4
+miau <- guau + 4 + guau
+miau
+
+str(miau)
+
+# objetos un poco más complejos
+miprimerdataframe <- data.frame(columna1 = guau,
+  columna2 = miau)
+str(miprimerdataframe)
+
+miprimeralista <- list(elemento1 = guau,
+  elemento2 = miau)
+str(miprimeralista)
+```
+
+#### Ejercicio
+
+1.  Elije un número y multiplicalo por 3
+
+2.  Crea un objeto que contenga 100 valores entre 1900 y 2000
+
+3.  Suma un número a tu objeto
+
+4.  Multiplica tu objeto por sí mismo
+
+📝Los nombre de los objetos deben ser descriptivos y no pueden contener símbolos especiales (`^`, `!`, `$`, `@`, `+`, `-`, `/`, `*`).
+
+📝R es sensible a las mayúsculas. Mejor no usarlas.
+
+### Tidyverse
+<!--# ja: esta sección lo podemos enviar al primer dia cuando hacemos la intro -->
+
+[*Tidyverse*](https://www.tidyverse.org/) es una colección de paquetes (meta-paquete) de R desarrollado por Hadley Wickham. Contiene ocho paquetes principales: `readr`, `tibble`, `dplyr`, `tidyr`, `stringr`, `forcats`, `ggplot2` y `purrr`. *Tidyverse* puede considerarse un dialecto del lenguaje de programación de R y, por ello, puede resultar difícil de aprender para gente con experiencia en el lenguaje tradicional de R base. Sin embargo, en este curso queremos enseñar las bases de programación utilizando *tidyverse* ya que en las secciones de iteración utilizaremos fundamentalmente `purrr` por razones que explicaremos más adelante.
+
+*Tidyverse* está diseñado para respaldar las actividades de un analista de datos humano por lo que sus estructuras de programación resultan más lógicas para la mente humana. Todos los paquetes están diseñados para trabajar con datos ordenados ([*tidy data*](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html)), es decir, aquellos donde cada columna es una variable, cada fila una observación y cada celda tiene un valor. Además, las funciones están preparadas para concatenarse a través del operador *pipe* (`%>%` del paquete `magrittr` o `|>` de R base), que coge lo que está en su izquierda y lo utiliza como el primer argumento de la función que está en su derecha. Esto permite seguir un flujo de lectura de izquierda a derecha, más cómodo para la mayoría de la gente.
+
+💡Los dos operador *pipe* tienen pequeñas [diferencias](https://www.tidyverse.org/blog/2023/04/base-vs-magrittr-pipe/) pero en general el comportamiento es el mismo.
+
+```{r pipe}
+
+mivector <- c(6, 4)
+mean(mivector)
+mivector |> 
+  mean() # CTRL+SHIFT+M para poner un pipe
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ------------------------------------------------------------------------
 
-![El proceso de aprendizaje en R, por Allison Horst. https://allisonhorst.com/everything-else](images/e684f0da-13b1-4d00-ab25-37814e79ee1e.png){alt="El proceso de aprendizaje en R, por Allison Horst. https://allisonhorst.com/everything-else" width="362"}
+![El proceso de aprendizaje en R, por Allison Horst. https://allisonhorst.com/everything-else](images/e684f0da-13b1-4d00-ab25-37814e79ee1e.png){width="362"}
 
 <details>
 
