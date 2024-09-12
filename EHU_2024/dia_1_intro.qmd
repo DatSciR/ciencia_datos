@@ -17,6 +17,22 @@ editor_options:
 number-sections: true
 ---
 
+## Quiénes somos
+
+Coordinamos el [grupo de trabajo de Ecoinformática](https://ecoinfaeet.github.io/website/index.html) de la Asociación Española de Ecología Terrestre.
+
+[Verónica Cruz-Alonso](https://www.transmittingscience.com/instructors/veronica-cruz-alonso) (veronica.cral\@gmail.com)
+
+<!--# ja: vero actualiza tu presentacion con el link que mas te mole -->
+
+[Julen Astigarraga](https://github.com/Julenasti) (julenastigarraga\@gmail.com)
+
+Y vosotros ¿quiénes sois?
+
+<https://www.menti.com/al2sdohesi5u>
+
+<!--# ja: habria que actualizar el menti -->
+
 ## Presentación
 
 En este curso, exploraremos tanto los fundamentos teóricos como las aplicaciones prácticas de la ciencia de datos en R. Abordaremos desde tareas comunes que nos enfrentamos en nuestro día a día, como la limpieza y transformación de datos, hasta nociones más avanzadas de visualización y programación. Además, aprenderemos a utilizar herramientas para generar documentos reproducibles y colaborativos. Durante el curso, combinaremos la teoría con la práctica, adaptando las lecciones a los problemas específicos de cada asistente, los cuales irán evolucionando día a día.
@@ -77,11 +93,9 @@ El objetivo principal es garantizar que tanto aquellos con conocimientos básico
 |                                                     | Trabajos colaborativos              |
 +-----------------------------------------------------+-------------------------------------+
 
-## Quiénes somos
+## Dinámica del curso
 
-Coordinamos el [grupo de trabajo de Ecoinformática](https://ecoinfaeet.github.io/website/index.html) de la Asociación Española de Ecología Terrestre.
-
-Y vosotros ¿quiénes sois?
+Cada día combinaremos teoría con ejercicios e, idealmente, el cuarto y quinto día tendremos tiempo para que cada uno trabaje con sus propios datos. Todos los apuntes y ejercicios resueltos estarán disponibles en el [repositorio de GitHub del curso](https://github.com/DatSciR/ciencia_datos). Si alguien tiene alguna duda o sugerencia, nos puede contactar por correo electrónico o publicarlo en las [discusiones del repositorio de GitHub](https://github.com/DatSciR/ciencia_datos/discussions/2) ¡así aprenderemos entre todos! 😉
 
 ## Introducción a la programación en R
 
@@ -386,6 +400,18 @@ mivector |>
   mean() # CTRL + SHIFT + M para poner un pipe
 
 ```
+
+### ¿Quién responde a mis dudas?
+
+-   <https://stackoverflow.com/>
+
+-   <https://github.com/features/copilot>
+
+-   <https://chatgpt.com/> y similares
+
+-   Slack de <https://ecoinfaeet.github.io/website/index.html>
+
+<!--# ja: estaria bien poner mas enlaces aqui -->
 
 ------------------------------------------------------------------------
 
