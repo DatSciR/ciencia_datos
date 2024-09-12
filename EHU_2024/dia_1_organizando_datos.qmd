@@ -17,26 +17,61 @@ editor_options:
 number-sections: true
 ---
 
+En este curso realizaremos las distintas tareas que forman parte de la ciencia de datos utilizando *tidyverse*, aunque también se podrían llevar a cabo con R base. Consideramos que los cuatro pilares básicos de *tidyverse* (centrado en humanos, consistencia, componibilidad e inclusividad) facilitan tanto el aprendizaje como el trabajo diario, permitiendo realizar las mismas acciones de manera más sencilla, aunque reconocemos que esto puede variar según la persona.
 
-###### 5.2 Funciones básicas de filtrado y selección
+```{r importar}
+#| eval: false
 
-# Se puede hacer también con R base pero vamos a aprenderlo con tidyverse
+taludes_bien <- read_delim(file = "DatosCursoR/taludes.csv", delim = ",", col_types = list(Luz = "f", Agua = "f"))
 
-taludes_bien View(taludes_bien)
+taludes_bien
+View(taludes_bien)
+summary(taludes_bien)
+glimpse(taludes_bien)
+```
 
-# Slice: filtrar según el índice numérico
+### Funciones básicas de filtrado y selección
 
-taludes_bien \|\> \# Shortcut para el pipe: CTRL + SHIFT + M slice(1)
+<!--# pondria el link a la viñeta de cada main function que explicamos -->
 
-taludes_bien \|\> slice(1, 5)
+#### [Slice](https://dplyr.tidyverse.org/reference/slice.html): filtrar filas según el índice numérico
 
-taludes_bien \|\> slice(1:6)
+```{r slice}
 
-taludes_bien \|\> slice(-c(1:5))
+taludes_bien |> 
+  slice(1) # shortcut para el pipe: CTRL + SHIFT + M 
 
-# Rename: cambiar nombres de variables
+taludes_bien |>
+  slice(1, 5)
 
-taludes_bien \|\> rename(biomasa = Biomasa, \# Nombre nuevo = nombre viejo luz = Luz, agua = Agua)
+taludes_bien |> 
+  slice(1:6)
+
+taludes_bien |>
+  slice(-c(1:5))
+
+```
+
+#### [Rename](https://dplyr.tidyverse.org/reference/rename.html): cambiar nombres de variables
+
+```{r rename}
+taludes_bien |> 
+  rename(biomasa = Biomasa, # Nombre nuevo = nombre viejo
+         luz = Luz, agua = Agua)
+```
+
+📝 Ajustar sangría de código: CTRL + I 
+📝 Reformatear código: CTRL + MAYÚS + A 
+
+
+ESTOY AQUI
+revisar lo que queda de script
+añadir ejemplos del tutorial de tidyverse con penguins
+
+
+
+
+
 
 # Arrange: ordenar por los valores de una o más variables
 
@@ -141,7 +176,6 @@ taludes_analisis \|\> group_by(estres) \|\> \# Este tipo de summary en R base se
 # Cuenta el número de casos distintos que hay de esfuerzo de muestreo
 
 # Calcula la media de la turbidez para cada taxón
-
 
 # ja
 
@@ -251,7 +285,6 @@ View(misdatos)
 ```
 
 <!--# Vero: introducir también join -->
-
 
 ------------------------------------------------------------------------
 

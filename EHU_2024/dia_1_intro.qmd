@@ -1,7 +1,7 @@
 ---
 title: | 
   | Ciencia de datos en R ![](images/Escuela de Doctorado_trilingue_positivo.png){width=80%,fig-align="right"}
-subtitle: "Organizando datos: el día a día"
+subtitle: "Introducción (Organizando datos: el día a día)"
 author: Julen Astigarraga and Verónica Cruz-Alonso
 date: today
 date-format: "DD/MM/YYYY"
@@ -104,6 +104,8 @@ Cada día combinaremos teoría con ejercicios e, idealmente, el cuarto y quinto 
 ### Objetivos
 
 -   Aprender las bases de la programación en R
+
+-   Aprender funciones básicas que nos permitan importar, explorar, limpiar, transformar y manejar datos
 
 -   Aprender estilos de código que facilitan su comprensión (📝)
 
@@ -342,7 +344,7 @@ milista[[4]][4]
 
 Muy útil cuando organizamos los datos en R y queremos compartirlos.
 
-<!--# ja: creo que por ahora haria todo con r base y una vez que quede esto claro nos metemos con tidyverse-->
+<!--# ja: creo que por ahora haria todo con r base y una vez que quede esto claro nos metemos con tidyverse. lo leeria con tidyverse en el siguiente script: dia_1_organizando_datos-->
 
 ```{r exportar}
 #| eval: false
@@ -403,15 +405,25 @@ mivector |>
 
 ### ¿Quién responde a mis dudas?
 
--   <https://stackoverflow.com/>
+-   [RStudio User Guide](https://docs.posit.co/ide/user)
 
--   <https://github.com/features/copilot>
+-   [Posit Recipes](https://posit.cloud/learn/recipes) y en general [Posit Resources](https://posit.co/resources)
 
--   <https://chatgpt.com/> y similares
+-   [Página web de *tidyverse*](https://www.tidyverse.org)
 
--   Slack de <https://ecoinfaeet.github.io/website/index.html>
+-   [Stack Overflow: plataforma de preguntas y respuestas para programadores profesionales y aficionados](https://stackoverflow.com)
 
-<!--# ja: estaria bien poner mas enlaces aqui -->
+-   [Comunidad de RStudio/Posit](RStudio%20community)
+
+-   [GitHub copilot](https://github.com/features/copilot)
+
+-   [ChatGPT](https://chatgpt.com) y similares
+
+-   Slack del [Grupo de Ecoinformática de la AEET](https://ecoinfaeet.github.io/website/index.html)
+
+-   Para dudas relacionadas con errores de paquetes: repositorio de GitHub del paquete en cuestión (p. ej. <https://github.com/tidyverse/dplyr/issues>)
+
+<!--# ja: si se te ocurren mas adelante! -->
 
 ------------------------------------------------------------------------
 
