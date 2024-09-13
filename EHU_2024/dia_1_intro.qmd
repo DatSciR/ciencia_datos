@@ -8,7 +8,8 @@ date-format: "DD/MM/YYYY"
 toc: true
 toc-title: "Índice"
 format:
-  html: default
+  html:
+    link-external-newwindow: true
     # css: styles.css
   gfm: default
 editor: visual
@@ -32,6 +33,12 @@ Y vosotros ¿quiénes sois?
 <https://www.menti.com/al2sdohesi5u>
 
 <!--# ja: habria que actualizar el menti -->
+
+¿Y qué es R y de dónde procede?
+
+[R es un lenguaje y un entorno para la computación estadística y gráfica](https://www.r-project.org/about.html)
+
+[Un poco de historia de R contada por Jumping Rivers](https://www.jumpingrivers.com/misc/timeline/)
 
 ## Presentación
 

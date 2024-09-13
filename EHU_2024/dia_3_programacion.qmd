@@ -8,7 +8,8 @@ date-format: "DD/MM/YYYY"
 toc: true
 toc-title: "Índice"
 format:
-  html: default
+  html:
+    link-external-newwindow: true
     # css: styles.css
   gfm: default
 editor: visual
@@ -18,6 +19,8 @@ number-sections: true
 ---
 
 ## Objetivos y estructura
+
+![](images/repeated_code.jpg)
 
 <!--# ja: empezaria siempre explicando lo que vamos a ver cada dia -->
 
@@ -33,31 +36,31 @@ Dentro del modelo de ciencia de datos de Hadley Wickham, Mine Çetinkaya-Rundel 
 
 <!--# ja: esta tabla lo podemos modificar al final cuando tengamos la apuntes recortados ready -->
 
-+------------------------------------------+---------------+
-| Bloques                                  | Día           |
-+==========================================+===============+
-| Presentación del curso                   | 13/05/24      |
-|                                          |               |
-| Introducción a la programación en R      |               |
-|                                          |               |
-| Introducción a la programación funcional |               |
-+------------------------------------------+---------------+
-| Teoría sobre funciones en R              | 15/05/24      |
-|                                          |               |
-| Cómo escribir funciones                  |               |
-+------------------------------------------+---------------+
-| Programación orientada a objetos         | 20/05/24      |
-|                                          |               |
-| Programación funcional                   |               |
-|                                          |               |
-| Iteraciones sobre uno y dos argumentos   |               |
-+------------------------------------------+---------------+
-| Iteraciones sobre múltiples argumentos   | 22/05/24      |
-|                                          |               |
-| Iteraciones sin salida                   |               |
-|                                          |               |
-| Operadores y otros funcionales           |               |
-+------------------------------------------+---------------+
++------------------------------------------+----------+
+| Bloques                                  | Día      |
++==========================================+==========+
+| Presentación del curso                   | 13/05/24 |
+|                                          |          |
+| Introducción a la programación en R      |          |
+|                                          |          |
+| Introducción a la programación funcional |          |
++------------------------------------------+----------+
+| Teoría sobre funciones en R              | 15/05/24 |
+|                                          |          |
+| Cómo escribir funciones                  |          |
++------------------------------------------+----------+
+| Programación orientada a objetos         | 20/05/24 |
+|                                          |          |
+| Programación funcional                   |          |
+|                                          |          |
+| Iteraciones sobre uno y dos argumentos   |          |
++------------------------------------------+----------+
+| Iteraciones sobre múltiples argumentos   | 22/05/24 |
+|                                          |          |
+| Iteraciones sin salida                   |          |
+|                                          |          |
+| Operadores y otros funcionales           |          |
++------------------------------------------+----------+
 
 <!--# ja: he quitado las secciones de arriba que eran mas bien de intro a r que lo he llevado a dia_1_intro o de tidyverse que lo he llevado a dia_1_organizando_datos -->
 
