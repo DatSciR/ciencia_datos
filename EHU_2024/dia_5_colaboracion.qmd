@@ -8,7 +8,8 @@ date-format: "DD/MM/YYYY"
 toc: true
 toc-title: "Índice"
 format:
-  html: default
+  html:
+    link-external-newwindow: true
     # css: styles.css
   gfm: default
 editor: visual
@@ -29,7 +30,7 @@ Por ejemplo, Git y GitHub nos pueden ayudar a solucionar algunos problemas comun
 
 \- Versiones finales infinitas
 
-!["FINAL.doc"](images/FINALdoc.png){alt="\"FINAL.doc\""}
+!["FINAL.doc"](images/FINALdoc.png)
 
 \- Trabajo por error en una versión que no era la final
 
@@ -37,7 +38,7 @@ Por ejemplo, Git y GitHub nos pueden ayudar a solucionar algunos problemas comun
 
 \- Ediciones sin control de cambios
 
-![Ediciones sin control de cambios](images/tracker.png){alt="Ediciones sin control de cambios"}
+![Ediciones sin control de cambios](images/tracker.png)
 
 ## [Qué es Git](https://git-scm.com/)
 
@@ -45,15 +46,15 @@ Git es un sistema avanzado de control de versiones (como el "control de cambios"
 
 Git surge en 2005, tras la ruptura de la relación entre la comunidad que estaba desarrollando Linux y la empresa comercial que desarrollaba BitKeeper (DVCS). En ese momento BitKeeper dejó de ser gratuita y esto llevó a la comunidad de desarrolladores de Linux (y en particular a Linus Torvalds, el creador de Linux) a desarrollar su propia herramienta para el control de versiones basándose en su experiencia al utilizar BitKeeper. Algunos de los objetivos del nuevo sistema eran velocidad, diseño sencillo, gran soporte para el desarrollo no lineal (ramas), sistema distribuido y capacidad para manejar grandes bases de datos. Por tanto, el propósito original de Git era ayudar a grupos de desarrolladores informáticos a trabajar en colaboración en grandes proyectos de software. En este sentido, veremos que hay múltiples soluciones para un mismo problema y que la curva de aprendizaje para no desarrolladores puede ser pronunciada.
 
-![Ejemplo de un proyecto rastreado por Git con indicaciones de cómo se registran los cambios y la evolución del proyecto, el autor o autora de los cambios (¿quién?), el momento en que se han registrado (¿cuándo?), en qué documentos o líneas se han producido cambios (¿dónde?) y qué ha cambiado (¿qué?)](images/git.jpg){alt="Ejemplo de un proyecto rastreado por Git con indicaciones de cómo se registran los cambios y la evolución del proyecto, el autor o autora de los cambios (¿quién?), el momento en que se han registrado (¿cuándo?), en qué documentos o líneas se han producido cambios (¿dónde?) y qué ha cambiado (¿qué?)"}
+![Ejemplo de un proyecto rastreado por Git con indicaciones de cómo se registran los cambios y la evolución del proyecto, el autor o autora de los cambios (¿quién?), el momento en que se han registrado (¿cuándo?), en qué documentos o líneas se han producido cambios (¿dónde?) y qué ha cambiado (¿qué?)](images/git.jpg)
 
 ## [Qué es GitHub](https://github.com/)
 
 GitHub es un servidor de alojamiento en línea o repositorio remoto para albergar proyectos basados en Git que permite la colaboración entre diferentes usuarios o con uno mismo [@galeano2018; @perez-riverol2016]. Un repositorio es un directorio donde desarrollar un proyecto que contiene todos los archivos necesarios para el mismo. Aunque existen distintos repositorios remotos (p. ej. GitLab, <https://gitlab.com/>, o Bitbucket, <https://bitbucket.org/>) con funcionalidad similar, GitHub es hoy en día el más utilizado. GitHub registra el desarrollo de los proyectos de manera remota, permite compartir proyectos entre distintos usuarios y proporciona la seguridad de la nube entre otras funciones. Cuando se trabaja en proyectos colaborativos, la base de la interacción entre Git y GitHub es que todos los colaboradores de un proyecto están de acuerdo en que GitHub contiene la copia principal del proyecto, es decir, GitHub contiene la copia centralizada del control de versiones distribuido o descentralizado.
 
-![Página inicial de GitHub](images/github_pag_ini.JPG){alt="Página inicial de GitHub"}
+![Página inicial de GitHub](images/github_pag_ini.JPG)
 
-![Interacción entre Git y GitHub. Git, al ser un control de versiones distribuido, permite que todos los usuarios trabajen paralelamente sin interferir en el trabajo de los demás. Luego cada usuario sincroniza su trabajo con la copia principal del proyecto ubicado en GitHub](images/conexiones.jpg){alt="Interacción entre Git y GitHub. Git, al ser un control de versiones distribuido, permite que todos los usuarios trabajen paralelamente sin interferir en el trabajo de los demás. Luego cada usuario sincroniza su trabajo con la copia principal del proyecto ubicado en GitHub"}
+![Interacción entre Git y GitHub. Git, al ser un control de versiones distribuido, permite que todos los usuarios trabajen paralelamente sin interferir en el trabajo de los demás. Luego cada usuario sincroniza su trabajo con la copia principal del proyecto ubicado en GitHub](images/conexiones.jpg)
 
 # Instalación
 
@@ -76,11 +77,11 @@ En este punto es necesario que tengas instalada la versión más reciente de R (
 
 ⚡¿Qué es el *shell*? El *shell* (o terminal) es un programa en tu ordenador cuyo trabajo es ejecutar otros programas (ver <https://happygitwithr.com/shell.html#shell>). En este curso aprenderemos a trabajar principalmente desde la línea de comandos del *shell* aunque también veremos cómo hacerlo a través de un cliente como RStudio (<https://www.rstudio.com/>), recomendable para usuarios noveles de Git (ver <https://happygitwithr.com/rstudio-git-github.html>). RStudio incorpora una pestaña llamada "Git" que facilita la transición entre zonas de trabajo ya que contiene funcionalidades básicas de Git.
 
-![Terminal](images/terminal.png){alt="Terminal"}
+![Terminal](images/terminal.png)
 
-![Terminal de Git](images/terminal-2.png){alt="Terminal de Git"}
+![Terminal de Git](images/terminal-2.png)
 
-![Git en RStudio](images/RStudio.JPG){alt="Git en RStudio"}
+![Git en RStudio](images/RStudio.JPG)
 
 2.  Compueba que has instalado Git correctamente:
 
@@ -131,7 +132,7 @@ Si vamos al directorio seleccionado, encontraremos la carpeta conectada a Git y 
 
 3.  En RStudio ve a la pestaña Git para ver todos los documentos que han sido identificados por Git
 
-![Lo que esperamos que hayáis aprendido](images/git-2.png){alt="Lo que esperamos que hayáis aprendido"}
+![Lo que esperamos que hayáis aprendido](images/git-2.png)
 
 # Flujo de trabajo en Git y GitHub
 
@@ -145,7 +146,7 @@ Git es capaz de rastrear todos los archivos contenidos en un repositorio. Para c
 
 4.  **Repositorio remoto (*remote repository*):** es donde se registran todos los cambios capturados por Git en la nube (GitHub).
 
-![Graphical representation of the different working areas in Git and GitHub: working directory, staging area or Index, local repository or HEAD, and remote repository. Background image from Philip Brookes (<https://creativecommons.org/licenses/by-nc-nd/2.0/legalcode>)](images/arboles.jpg){alt="Graphical representation of the different working areas in Git and GitHub: working directory, staging area or Index, local repository or HEAD, and remote repository. Background image from Philip Brookes (https://creativecommons.org/licenses/by-nc-nd/2.0/legalcode)"}
+![Graphical representation of the different working areas in Git and GitHub: working directory, staging area or Index, local repository or HEAD, and remote repository. Background image from Philip Brookes (https://creativecommons.org/licenses/by-nc-nd/2.0/legalcode)](images/arboles.jpg)
 
 ## ¿Cómo moverse de una zona a otra?
 
@@ -175,7 +176,7 @@ Por último, `git push` permite subir los cambios que hemos hecho a GitHub y que
 
 Cuando se retoma un proyecto tras horas, días o incluso meses, con `git pull` se descargan todas las actualizaciones que haya en GitHub (nuestras o de nuestros colaboradores), que se fusionarán (*merge*) con el último *commit* en nuestro repositorio local.
 
-![Flujo de trabajo en Git y GitHub mostrando las diferentes zonas de trabajo y los comandos utilizados para la transición de una zona de trabajo a otra.](images/workflow_git_github.jpg){alt="Flujo de trabajo en Git y GitHub mostrando las diferentes zonas de trabajo y los comandos utilizados para la transición de una zona de trabajo a otra."}
+![Flujo de trabajo en Git y GitHub mostrando las diferentes zonas de trabajo y los comandos utilizados para la transición de una zona de trabajo a otra.](images/workflow_git_github.jpg)
 
 ### 📝**Ejercicio 1.3**
 

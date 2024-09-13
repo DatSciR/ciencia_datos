@@ -8,7 +8,8 @@ date-format: "DD/MM/YYYY"
 toc: true
 toc-title: "Índice"
 format:
-  html: default
+  html: 
+    link-external-newwindow: true
     # css: styles.css
   gfm: default
 editor: visual
