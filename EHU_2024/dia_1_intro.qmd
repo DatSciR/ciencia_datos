@@ -50,7 +50,9 @@ El objetivo principal es garantizar que tanto aquellos con conocimientos básico
 +-----------------------------------------------------+-------------------------------------+
 | Bloques                                             | Contenido                           |
 +=====================================================+=====================================+
-| Organizar datos: el día a día                       | Importar                            |
+| Organizar datos: el día a día                       | Introducción a la programación en R |
+|                                                     |                                     |
+|                                                     | Importar                            |
 |                                                     |                                     |
 |                                                     | Explorar                            |
 |                                                     |                                     |
@@ -109,7 +111,7 @@ Cada día combinaremos teoría con ejercicios e, idealmente, el cuarto y quinto 
 
 -   Aprender estilos de código que facilitan su comprensión (📝)
 
-<!--# ja: sugerencia a valorar (not sure) poner todos los principales objetivos de cada dia. por ahora me ha ayudado a estructurar cada dia. y terminar con algunas refs interesantes que ya las tenemos-->
+<!--# ja: sugerencia a valorar (not sure) poner todos los principales objetivos de cada dia. por ahora me ha ayudado a estructurar cada dia. y terminar con algunas refs interesantes que ya las tenemos. he puesto algunos al final del dia_1_organizando_datos-->
 
 ### Conceptos básicos
 
@@ -149,7 +151,7 @@ De todas formas, no es recomendable establecer el directorio de trabajo manualme
 
 Para crear un proyecto: Archivo `->` Nuevo proyecto
 
-#### Ejercicio 1
+#### Ejercicio
 
 Crea un proyecto para el curso de de ciencia de datos
 
@@ -203,7 +205,7 @@ acos(1)
 
 ### Tipos de objetos
 
-<!--# ja: añadir definicion de cada tipo de objeto o link a una definicion?-->
+<!--# ja: añadir definicion de cada tipo de objeto o link a una definicion? mira como lo he hecho en el dia_1_organizando_datos por si te mola-->
 
 #### Vectores
 
@@ -238,7 +240,7 @@ v8
 
 <!--# ja: si el nivel no es muy bajo podemos pasar estos ejercicios. tambien para que nos de tiempo a ver todo lo que queremos ver el primer dia-->
 
-#### Ejercicio 2
+#### Ejercicio
 
 -   Elije un número y multiplicalo por 3
 
@@ -334,7 +336,7 @@ milista[[4]]
 milista[[4]][4]
 ```
 
-#### Ejercicio 3
+#### Ejercicio
 
 -   Crea una lista que contenga 2 `data.frames` con 2 variables cada uno (`variable1` y `variable2`) y 10 observaciones por variable.
 
@@ -390,7 +392,7 @@ A continuación, se muestran cuatro principios básicos para una introducción s
 
 -   Inclusividad: no se trata sólo de la colección de paquetes, sino también la comunidad de personas que los usan, basándose en la ayuda entre usuarios y generando un ambiente inclusivo. Dos ejemplos destacados de este último principio son la existencia de una guía de estilo para el flujo de trabajo y [escritura de código](https://style.tidyverse.org/index.html) o el desarrollo de un método específico para solicitar ayuda a la comunidad y obtener asesoramiento mediante ejemplos reproducibles (`reprex`).
 
-![Esquema comparativo entre tidyverse y R base donde se muestra el flujo de trabajo y funciones de ejemplo para cada paso de análisis de datos desde su importación en R hasta la comunicación de los resultados obtenidos. Extraido de [*Tidyverse: colección de paquetes de R para la ciencia de datos*](https://revistaecosistemas.net/index.php/ecosistemas/article/view/2745)](images/nota_workflow_v2_white.png)
+![Esquema comparativo entre *tidyverse* y R base donde se muestra el flujo de trabajo y funciones de ejemplo para cada paso de análisis de datos desde su importación en R hasta la comunicación de los resultados obtenidos. Extraido de [*Tidyverse: colección de paquetes de R para la ciencia de datos*](https://revistaecosistemas.net/index.php/ecosistemas/article/view/2745)](images/nota_workflow_v2_white.png)
 
 💡Los dos operador *pipe* tienen pequeñas [diferencias](https://www.tidyverse.org/blog/2023/04/base-vs-magrittr-pipe/) pero en general el comportamiento es el mismo. La información sobre *tidyverse* está extraida de la nota ecoinformática [*Tidyverse: colección de paquetes de R para la ciencia de datos*](https://revistaecosistemas.net/index.php/ecosistemas/article/view/2745). Leer la nota para más información sobre *tidyverse* y diferencias con R base.
 

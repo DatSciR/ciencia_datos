@@ -1,27 +1,55 @@
----
-title: | 
-  | Ciencia de datos en R ![](images/Escuela de Doctorado_trilingue_positivo.png){width=80%,fig-align="right"}
-subtitle: "Organizando datos: el día a día"
-author: Julen Astigarraga and Verónica Cruz-Alonso
-date: today
-date-format: "DD/MM/YYYY"
-toc: true
-toc-title: "Índice"
-format:
-  html: default
-    # css: styles.css
-  gfm: default
-editor: visual
-editor_options: 
-  chunk_output_type: console
-number-sections: true
----
+# Ciencia de datos en R
+<img src="images/Escuela%20de%20Doctorado_trilingue_positivo.png" />
 
-En este curso realizaremos las distintas tareas que forman parte de la ciencia de datos utilizando *tidyverse*, aunque también se podrían llevar a cabo con R base. Consideramos que los cuatro pilares básicos de *tidyverse* (centrado en humanos, consistencia, componibilidad e inclusividad) facilitan tanto el aprendizaje como el trabajo diario, permitiendo realizar las mismas acciones de manera más sencilla, aunque reconocemos que esto puede variar según la persona.
+Julen Astigarraga and Verónica Cruz-Alonso
+13/09/2024
 
-```{r read}
-#| eval: false
+- [<span class="toc-section-number">1</span> Funciones básicas de
+  filtrado y selección](#funciones-básicas-de-filtrado-y-selección)
+  - [<span class="toc-section-number">1.1</span> Slice: filtrar filas
+    según el índice
+    numérico](#slice-filtrar-filas-según-el-índice-numérico)
+  - [<span class="toc-section-number">1.2</span> Rename: cambiar nombres
+    de variables
+    (columnas)](#rename-cambiar-nombres-de-variables-columnas)
+  - [<span class="toc-section-number">1.3</span> Arrange: ordenar filas
+    por los valores de una o más variables
+    (columnas)](#arrange-ordenar-filas-por-los-valores-de-una-o-más-variables-columnas)
+  - [<span class="toc-section-number">1.4</span> Filter: filtrar filas
+    utilizando
+    condiciones](#filter-filtrar-filas-utilizando-condiciones)
+  - [<span class="toc-section-number">1.5</span> Select: seleccionar
+    columnas utilizando
+    condiciones](#select-seleccionar-columnas-utilizando-condiciones)
+- [<span class="toc-section-number">2</span> Transformar los datos y
+  calcular nuevas
+  variables](#transformar-los-datos-y-calcular-nuevas-variables)
+  - [<span class="toc-section-number">2.1</span> Mutate: crear,
+    modificar o eliminar
+    columnas](#mutate-crear-modificar-o-eliminar-columnas)
+  - [<span class="toc-section-number">2.2</span> Summarise: genera un
+    nuevo `data.frame` resumiendo cada grupo a una
+    fila](#summarise-genera-un-nuevo-dataframe-resumiendo-cada-grupo-a-una-fila)
+  - [<span class="toc-section-number">2.3</span> Group by: agrupa por
+    una o más variables](#group-by-agrupa-por-una-o-más-variables)
+- [<span class="toc-section-number">3</span> Unir
+  `data.frames`](#unir-dataframes)
+  - [<span class="toc-section-number">3.1</span>
+    Ejercicio](#ejercicio-4)
+  - [<span class="toc-section-number">3.2</span>
+    Ejercicio](#ejercicio-5)
+- [<span class="toc-section-number">4</span> Enlaces de
+  interés](#enlaces-de-interés)
 
+En este curso realizaremos las distintas tareas que forman parte de la
+ciencia de datos utilizando *tidyverse*, aunque también se podrían
+llevar a cabo con R base. Consideramos que los cuatro pilares básicos de
+*tidyverse* (centrado en humanos, consistencia, componibilidad e
+inclusividad) facilitan tanto el aprendizaje como el trabajo diario,
+permitiendo realizar las mismas acciones de manera más sencilla, aunque
+reconocemos que esto puede variar según la persona.
+
+``` r
 taludes_bien <- read_delim(file = "DatosCursoR/taludes.csv", delim = ",", col_types = list(Luz = "f", Agua = "f"))
 
 taludes_bien
@@ -36,9 +64,7 @@ glimpse(taludes_bien)
 
 ### [Slice](https://dplyr.tidyverse.org/reference/slice.html): filtrar filas según el índice numérico
 
-```{r slice}
-#| eval: false
-
+``` r
 taludes_bien |> 
   slice(1) # shortcut para el pipe: CTRL + SHIFT + M 
 
@@ -50,39 +76,32 @@ taludes_bien |>
 
 taludes_bien |>
   slice(-c(1:5))
-
 ```
 
 ### [Rename](https://dplyr.tidyverse.org/reference/rename.html): cambiar nombres de variables (columnas)
 
-```{r rename}
-#| eval: false
-
+``` r
 taludes_bien |> 
   rename(biomasa = Biomasa, # nombre nuevo = nombre viejo
          luz = Luz, agua = Agua)
 ```
 
-📝 Ajustar sangría de código: CTRL + I; Reformatear código: CTRL + MAYÚS + A 
+📝 Ajustar sangría de código: CTRL + I; Reformatear código: CTRL +
+MAYÚS + A
 
 ### [Arrange](https://dplyr.tidyverse.org/reference/arrange.html): ordenar filas por los valores de una o más variables (columnas)
 
-```{r arrange}
-#| eval: false
-
+``` r
 taludes_bien |>
   arrange(Biomasa)
 
 taludes_bien |> 
   arrange(desc(Biomasa))
-
 ```
 
 ### [Filter](https://dplyr.tidyverse.org/reference/filter.html): filtrar filas utilizando condiciones
 
-```{r filter}
-#| eval: false
-
+``` r
 # se necesita un vector de filtrado que contenga valores TRUE/FALSE
 
 taludes_bien
@@ -98,26 +117,29 @@ taludes_bien |>
 
 taludes_bien |>
   filter(Luz %in% c("Nivel 1", "Nivel 3")) # combinar criterios: %in% 
-
 ```
 
 #### Ejercicio
 
-- Lee el data.frame "Macrobenthos.txt". Pista: el delimitador entre datos es el tabulador ("\t").
+- Lee el data.frame “Macrobenthos.txt”. Pista: el delimitador entre
+  datos es el tabulador (“).
 
-- Crea un subset que contenga las filas de la 1 a la 10 y de la 390 a la 400.
+- Crea un subset que contenga las filas de la 1 a la 10 y de la 390 a la
+  400.
 
-- Crea un subset que NO contenga el Taxon número 1. Pista: revisa los [operadores de R](https://bookdown.org/jboscomendoza/r-principiantes4/operadores-relacionales.html).
+- Crea un subset que NO contenga el Taxon número 1. Pista: revisa los
+  [operadores de
+  R](https://bookdown.org/jboscomendoza/r-principiantes4/operadores-relacionales.html).
 
-- Crea un subset con las observaciones del Taxon 2 donde se haya registrado una abundancia mayor de 50 o menor o igual a 5. Pista: necesitarás paréntesis para filtrar.
+- Crea un subset con las observaciones del Taxon 2 donde se haya
+  registrado una abundancia mayor de 50 o menor o igual a 5. Pista:
+  necesitarás paréntesis para filtrar.
 
 - ¿Cuántas filas han quedado?
 
 ### [Select](https://dplyr.tidyverse.org/reference/select.html): seleccionar columnas utilizando condiciones
 
-```{r select}
-#| eval: false
-
+``` r
 # se necesita un vector de selección que contenga valores TRUE/FALSE
 
 taludes_bien |>
@@ -132,22 +154,22 @@ taludes_bien |>
 
 taludes_bien |>
   select(Luz, everything()) # se puede usar para reordenar variables
-
 ```
 
 #### Ejercicio
 
-- Con el data.frame "Macrobenthos.txt", crea un nuevo `data.frame` que contenga las variables relacionadas con el medio (de organic matter a temperature). Pista: mira la ayuda de select para ahorrar caracteres.
+- Con el data.frame “Macrobenthos.txt”, crea un nuevo `data.frame` que
+  contenga las variables relacionadas con el medio (de organic matter a
+  temperature). Pista: mira la ayuda de select para ahorrar caracteres.
 
-- Crea un nuevo objeto con el taxon al principio y que incluya las demás columnas excepto el esfuerzo de muestreo (effort).
+- Crea un nuevo objeto con el taxon al principio y que incluya las demás
+  columnas excepto el esfuerzo de muestreo (effort).
 
 ## Transformar los datos y calcular nuevas variables
 
 ### [Mutate](https://dplyr.tidyverse.org/reference/mutate.html): crear, modificar o eliminar columnas
 
-```{r mutate}
-#| eval: false
-
+``` r
 # renombramos las variables y guardamos un nuevo objeto para trabajar mejor con las funciones de transformación:
 taludes_analisis <- taludes_bien |>
   rename(biomasa = Biomasa, nivel_luz = Luz, agua_estival = Agua)
@@ -234,40 +256,35 @@ taludes_analisis <- taludes_bien |>
       TRUE ~ "intermedio"
     )
   )
-
 ```
 
 #### Ejercicio
 
-- Con el `data.frame` macrobenthos genera una nueva columna con la relación entre la turbidez del agua y la materia orgánica.
+- Con el `data.frame` macrobenthos genera una nueva columna con la
+  relación entre la turbidez del agua y la materia orgánica.
 
 ### [Summarise](https://dplyr.tidyverse.org/reference/summarise.html): genera un nuevo `data.frame` resumiendo cada grupo a una fila
 
-```{r summarise}
-#| eval: false
-
+``` r
 taludes_analisis |> 
   summarise(c_min = min(carbono),
             c_max = max(carbono))
-
 ```
 
 ### [Group by](https://dplyr.tidyverse.org/reference/group_by.html): agrupa por una o más variables
 
-```{r group_by}
-#| eval: false
-
+``` r
 taludes_analisis |>
   group_by(estres) |> # este tipo de summary en R base se hace con aggregate() o tapply() 
   summarise(biomasa_min = min(biomasa),
             biomasa_mean = mean(biomasa),
             biomasa_max = max(biomasa))
-
 ```
 
 #### Ejercicio
 
-- Con el data.frame macrobenthos, cuenta el número de casos que hay en cada periodo de muestreo.
+- Con el data.frame macrobenthos, cuenta el número de casos que hay en
+  cada periodo de muestreo.
 
 - Cuenta el número de casos distintos que hay de esfuerzo de muestreo.
 
@@ -275,21 +292,14 @@ taludes_analisis |>
 
 ## Unir `data.frames`
 
-[Joins](https://dplyr.tidyverse.org/reference/mutate-joins.html): añade columnas de `y` a `x`, haciendo coincidir las observaciones en función de las claves.
+[Joins](https://dplyr.tidyverse.org/reference/mutate-joins.html): añade
+columnas de `y` a `x`, haciendo coincidir las observaciones en función
+de las claves.
 
 <!--# ja: faltaria añadir algun ejemplo con la base de datos de taludes-->
-
-```{r joins}
-#| eval: false
-
-```
-
 <!--# ja: lo de abajo lo he traido del dia de programacion. faltaria incluir el ejemplo del join. el pivot_ lo dejaria para el dia de ggplot si no puede ser demasiado. decidir si tambien queremos hacer los ejercicios con el paquete de penguins-->
 
-```{r primeros_tidypasos}
-#| eval: false
-#| warning: false
-
+``` r
 # install.packages("tidyverse")
 library(tidyverse)
 
@@ -334,15 +344,16 @@ penguins |>
 
 ### Ejercicio
 
-1.  Crea un objeto con los pingüinos de la especie Adelie y ordena la tabla según la longitud del ala de los individuos.
+1.  Crea un objeto con los pingüinos de la especie Adelie y ordena la
+    tabla según la longitud del ala de los individuos.
 
-2.  Crea un objeto a partir del anterior donde selecciones la isla y las variables relacionadas con el pico.
+2.  Crea un objeto a partir del anterior donde selecciones la isla y las
+    variables relacionadas con el pico.
 
-3.  Crea un objeto a partir del creado en el punto 1 donde selecciones todo menos la especie.
+3.  Crea un objeto a partir del creado en el punto 1 donde selecciones
+    todo menos la especie.
 
-```{r segundos_tidypasos}
-#| eval: false
-
+``` r
 # mutate
 penguins |> 
   mutate(bill_volume_mm2 = (bill_length_mm * bill_depth_mm) / 2) |> 
@@ -373,13 +384,13 @@ penguins |>
 
 ### Ejercicio
 
-1.  Con el `data.frame` penguins, cuenta el número de casos que hay en cada isla y calcula la media de la longitud del ala en cada isla.
+1.  Con el `data.frame` penguins, cuenta el número de casos que hay en
+    cada isla y calcula la media de la longitud del ala en cada isla.
 
-2.  Con el mismo `data.frame` calcula la relación entre el peso en kg y la longitud del ala para cada individuo.
+2.  Con el mismo `data.frame` calcula la relación entre el peso en kg y
+    la longitud del ala para cada individuo.
 
-```{r save_read_tidyverse}
-#| eval: false
-
+``` r
 mypenguins <- penguins |> 
   mutate(bill_volume_mm2 = (bill_length_mm * bill_depth_mm) / 2,
     female_penguin = case_when(
@@ -396,31 +407,67 @@ View(misdatos)
 
 ## Enlaces de interés
 
--   [Hands-On Programming with R (basics)](https://rstudio-education.github.io/hopr/basics.html)
+- [Hands-On Programming with R
+  (basics)](https://rstudio-education.github.io/hopr/basics.html)
 
--   [R for data Science (Data transformation)](https://r4ds.had.co.nz/transform.html)
+- [R for data Science (Data
+  transformation)](https://r4ds.had.co.nz/transform.html)
 
--   [Style guide](http://adv-r.had.co.nz/Style.html)
+- [Style guide](http://adv-r.had.co.nz/Style.html)
 
--   [RStudio User Guide](https://docs.posit.co/ide/user)
+- [RStudio User Guide](https://docs.posit.co/ide/user)
 
--   [Posit Recipes](https://posit.cloud/learn/recipes) y en general [Posit Resources](https://posit.co/resources)
+- [Posit Recipes](https://posit.cloud/learn/recipes) y en general [Posit
+  Resources](https://posit.co/resources)
 
--   [Página web de *tidyverse*](https://www.tidyverse.org)
+- [Página web de *tidyverse*](https://www.tidyverse.org)
 
--   [*Tidyverse: colección de paquetes de R para la ciencia de datos*](https://revistaecosistemas.net/index.php/ecosistemas/article/view/2745)
+- [*Tidyverse: colección de paquetes de R para la ciencia de
+  datos*](https://revistaecosistemas.net/index.php/ecosistemas/article/view/2745)
 
 <!--# ja: si se te ocurren mas adelante! -->
 
 ------------------------------------------------------------------------
 
 <details>
+<summary>
+Session Info
+</summary>
 
-<summary>Session Info</summary>
-
-```{r session_info}
+``` r
 Sys.time()
+```
+
+    [1] "2024-09-13 09:46:17 CEST"
+
+``` r
 sessionInfo()
 ```
+
+    R version 4.4.1 (2024-06-14 ucrt)
+    Platform: x86_64-w64-mingw32/x64
+    Running under: Windows 10 x64 (build 19045)
+
+    Matrix products: default
+
+
+    locale:
+    [1] LC_COLLATE=English_United Kingdom.utf8 
+    [2] LC_CTYPE=English_United Kingdom.utf8   
+    [3] LC_MONETARY=English_United Kingdom.utf8
+    [4] LC_NUMERIC=C                           
+    [5] LC_TIME=English_United Kingdom.utf8    
+
+    time zone: Europe/Madrid
+    tzcode source: internal
+
+    attached base packages:
+    [1] stats     graphics  grDevices utils     datasets  methods   base     
+
+    loaded via a namespace (and not attached):
+     [1] compiler_4.4.1    fastmap_1.2.0     cli_3.6.3         tools_4.4.1      
+     [5] htmltools_0.5.8.1 rstudioapi_0.16.0 yaml_2.3.9        rmarkdown_2.27   
+     [9] knitr_1.48        jsonlite_1.8.8    xfun_0.45         digest_0.6.36    
+    [13] rlang_1.1.4       evaluate_0.24.0  
 
 </details>
