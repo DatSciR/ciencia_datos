@@ -20,13 +20,7 @@ number-sections: true
 
 ## Quiénes somos
 
-Coordinamos el [grupo de trabajo de Ecoinformática](https://ecoinfaeet.github.io/website/index.html) de la Asociación Española de Ecología Terrestre.
-
-[Verónica Cruz-Alonso](https://www.transmittingscience.com/instructors/veronica-cruz-alonso) (veronica.cral\@gmail.com)
-
-<!--# ja: vero actualiza tu presentacion con el link que mas te mole -->
-
-[Julen Astigarraga](https://github.com/Julenasti) (julenastigarraga\@gmail.com)
+Verónica Cruz-Alonso (veronica.cral\@gmail.com) y [Julen Astigarraga](https://github.com/Julenasti) (julenastigarraga\@gmail.com). Coordinamos el [grupo de trabajo de Ecoinformática](https://ecoinfaeet.github.io/website/index.html) de la Asociación Española de Ecología Terrestre.
 
 Y vosotros ¿quiénes sois?
 

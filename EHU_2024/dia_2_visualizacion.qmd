@@ -1,8 +1,8 @@
 ---
 title: | 
   | Ciencia de datos en R ![](images/Escuela de Doctorado_trilingue_positivo.png){width=80%,fig-align="right"}
-subtitle: "Organizando datos: el día a día"
-author: Julen Astigarraga and Verónica Cruz-Alonso
+subtitle: "Visualización: contando historias"
+author: Verónica Cruz-Alonso and Julen Astigarraga
 date: today
 date-format: "DD/MM/YYYY"
 toc: true
@@ -18,781 +18,541 @@ editor_options:
 number-sections: true
 ---
 
-setwd("C:/Users/veruk/Desktop/Rbase_visualizacion")
+## Introducción
 
-#Packages c("ggplot2", "readr", "dplyr", "ggThemeAssist", "patchwork", "titanic", "easyclimate", "terra", "sf", "ggmap", "plotly") %in% rownames(installed.packages()) c("promises","mime", "cachem") %in% rownames(installed.packages())
+La visualización de datos es una disciplina cuyo fin es mapear datos de forma gráfica para comunicar un mensaje. En investigación se usa principalmente en los análisis exploratorios (durante la fase de entendimiento de los datos) y en la comunicación de los resultados.
 
-# install.packages(c("ggplot2", "readr", "ggThemeAssist", "patchwork", "titanic", "dplyr", "terra", "sf", "ggmap", "plotly"))
+La representación gráfica de nuestras ideas o resultados de investigación es esencial para comunicar de forma efectiva nuestra interpretación de los datos y es clave si queremos causar cierto impacto en el interlocutor. El hombre de Vitruvio de Leonardo Da Vinci, el árbol de la vida de Charles Darwin o la primera foto de la doble hélice del ADN de Rosalind Franklin son visualizaciones de conceptos que han cambiado profundamente nuestro entendimiento del mundo. Algunos estudios sugieren que el tiempo medio que el usuario emplea en ojear una página web es de unos segundos, pero si hay algo que consigue atraer su atención entonces el tiempo se incrementa exponencialmente. Este atractor en el mundo científico puede ser un buen gráfico de resultados o un buen resumen gráfico.
 
-# install.packages(c("promises","mime", "cachem"))
+![](images/buen-grafico.png){width="469"}
 
-# remotes::install_github("VeruGHub/easyclimate")
+En este bloque vamos a aprender como representar de manera efectiva muestros datos utilizando el paquete {ggplot2} de *tidyverse*. {ggplot2} permite hacer gráficos razonablemente claros y estéticamente bonitos con poco tiempo y un esfuerzo pequeño. Es extremadamente flexible y potente por lo que ha alcanzado gran popularidad.
+
+{ggplot2} está escrito en R siguiendo la gramática de gráficos (gg). Por ello, al utilizarlo, el usuario tiene que pensar como cuando está haciendo un dibujo a mano y pensar en ir añadiendo diferentes capas a la creación. El flujo de trabajo es crear un gráfico vacío, añadir una capa con los datos, añadir una capa con las etiquetas, etc.
+
+![https://www.donnacowan.ca/category/animated-gifs/](images/Buckley-Bay-Oil-Painting-Animation-6x8-2.gif){width="441"}
+
+Otra característica de {ggplot2} además del trabajo por capas es que precisa de datos ordenados para que se ejecute de forma óptima.
+
+💡Recordamos que en una tabla de datos ordenados (*Tidy Data*) cada columna representa una variable, cada fila es una observación y cada celda contiene un único valor.
+
+## Elementos básicos en un gráfico de {ggplot2}
+
+Se necesitan tres capas básicas para crear un gráfico con {ggplot2}:
+
+-   Los datos (*data*).
+
+-   Las geometrías (*geom*): definen el tipo de gráfico (de puntos, de barras, etc.).
+
+-   Los *aesthetics*: características visuales de las geometrías (p.e. la posición, el color) definidas por las variables (columnas) de nuestros datos.
+
+Las capas se conectan entre sí con el símbolo "+", que siempre debe ir colocado al final de la línea de código si queremos seguir añadiendo capas al gráfico. Todas las capas que se pueden incluir están recogidas en la [guía de {ggplot2} de Posit](https://diegokoz.github.io/intro_ds/fuentes/ggplot2-cheatsheet-2.1-Spanish.pdf).
+
+```{r capas_basicas}
+
+library(tidyverse)
+
+# install.packages(c("titanic", "ggThemeAssist", "patchwork", "dplyr", "terra", "ggmap", "plotly", "easyclimate"))
 
 #Cargamos los datos
+titanic <- titanic::titanic_train 
 
-titanic \<- titanic::titanic_train head(titanic)
-
+head(titanic)
 # PassengerId: Id del pasajero
-
 # Survived: 1-si, 0-no
-
 # Pclass: clase del pasajero
-
 # Name: nombre Name
-
 # Sex: sexo
-
 # Age: edad
-
-# SibSp: n?mero de hermanos + parejas a bordo
-
-# Parch: n?mero de progenitores + hijos a bordo
-
-# Ticket: n?mero de billete
-
+# SibSp: numero de hermanos + parejas a bordo
+# Parch: numero de progenitores + hijos a bordo
+# Ticket: numero de billete
 # Fare: tarifa
-
 # Cabin: camarote
-
 # Embarked: puerta de embarque
-
-##### 3.1 Ggplot2: introducci?n
 
 library(ggplot2)
 
 ggplot(data = titanic)
 
-ggplot(data = titanic, aes(x = Age, y = Fare)) #Las variables se representan en forma de caracter?sticas visuales en el gr?fico (aesthetics)
+ggplot(data = titanic, aes(x = Age, y = Fare)) 
 
-ggplot() + geom_point(data = titanic, aes(x = Age, y = Fare)) #Las geometrias (geometry) son los tipos de gr?fico #Ver la chuleta #Los datos se pueden colocar dentro de la funcion ggplot si se van a usar los mismos en todas las geometr?as
+ggplot() + 
+  geom_point(data = titanic, aes(x = Age, y = Fare)) #Los datos se pueden colocar dentro de la funcion ggplot si se van a usar los mismos en todas las geometrias
 
-ggplot() + geom_jitter(data = titanic, aes(x = Pclass, y = Fare))
+ggplot() + 
+  geom_jitter(data = titanic, aes(x = Pclass, y = Fare))
 
-#Ejercicio 1: representa un gr?fico para ver la relaci?n entre el sexo de los #pasajeros y la clase
+# Como guardar plots satisfactorios
 
-ggplot(data = titanic, aes(x = Sex, y = Pclass)) + geom_count(color = "purple")
-
-#Aesthetics vs. argumentos
-
-ggplot(data = titanic) + geom_point(aes(x = Age, y = Fare, color = Sex))
-
-#No es lo mismo que... ggplot(data = titanic) + geom_point(aes(x = Age, y = Fare), color = "darkred") #R color chart ?geom_point #Aesthetics + arguments \##
-
-#Ejercicio 2: ?c?mo modificar?as el siguiente c?digo para representar #la puerta de embarque con diferentes formas pero los puntos de color rojo?
-
-ggplot(data = titanic) + geom_point(aes(x = Age, y = Fare, shape = Embarked), color = "darkred")
-
-#M?s aesthetics
-
-ggplot(data = titanic) + geom_point(aes(x = Age, y = Fare, size = Pclass, shape = Sex, color = Embarked))
-
-## 
-
-summary(titanic\$Pclass)
-
-library(dplyr) titanic \<- titanic %\>% mutate(Pclass = factor(Pclass, levels = c(3, 2, 1), labels = c("Tercera", "Segunda", "Primera")))
-
-summary(titanic\$Pclass)
-
-ggplot(data = titanic) + geom_point(aes(x = Age, y = Fare, size = Pclass, shape = Sex, color = Embarked), alpha = 0.5)
-
-#M?s geometrias
-
-ggplot(data = titanic) + geom_point(aes(x = Age, y = Fare, color = Sex)) + geom_smooth(aes(x = Age, y = Fare, color = Sex, fill = Sex))
-
-#ver chuleta de principios para creaci?n de gr?ficos #m?s informaci?n sobre tipos de gr?ficos en Vandemeulebroecke et al. 2019
-
-#Como guardar plots satisfactorios
-
-plotqmegusta \<- ggplot(data = titanic) + geom_point(aes(x = Age, y = Fare, color = Sex)) + geom_smooth(aes(x = Age, y = Fare, color = Sex, fill = Sex))
+plotqmegusta <- ggplot() + 
+  geom_point(data = titanic, aes(x = Age, y = Fare))
 
 ggsave(filename = "farebyage.jpg", plot = plotqmegusta, width = 12, height = 9, units = "cm", dpi = 300)
 
 ggsave(filename = "farebyage.pdf", plot = plotqmegusta, width = 12, height = 9, units = "cm")
+```
 
-#Tama?os en Science: <https://www.science.org/content/page/instructions-preparing-initial-manuscript#preparation-of-figures>
+💡Algunas revistas científicas dan especificaciones muy detalladas sobre cómo tienen que ser los gráficos (p.e. [Science](https://www.science.org/content/page/instructions-preparing-initial-manuscript#preparation-of-figures)). Cuando no tenemos una referencia clara recomendamos pensar en formato A4 (21 x 29,7 cm) y que todos los elementos visuales del gráfico queden visibles cuando se guarda dentro de estos límites de tamaño. <!--# v: no se que opinas tu de esto Jul -->
 
-##### 3.2 Ggplot2: gr?ficos unidimensionales
+#### Ejercicio 1
 
-# Variables categ?ricas
+Representa un gráfico para ver la relación entre el sexo de los pasajeros y la clase.
 
-# Conteo
+## Aesthetics vs. argumentos
 
-summary(titanic\$Pclass)
+Los aesthetics cambian cada elemento de las geometrías. Los argumentos estéticos cambian toda la geometría en conjunto.
 
-ggplot(data = titanic) + geom_bar(aes(x = Pclass))
+```{r aes_arguments}
 
-# Proporciones
+ggplot(data = titanic) + 
+  geom_point(aes(x = Age, y = Fare, color = Sex))
 
-miplot \<- ggplot(data = titanic) + geom_bar(aes(x = Pclass, group = 1)) #group = 1 hace que considere toda la variable como un todo
+#No es lo mismo que... 
 
-miplot_data \<- ggplot_build(miplot) head(miplot_data\$data)
+ggplot(data = titanic) + 
+  geom_point(aes(x = Age, y = Fare), color = "darkred") 
+```
 
-ggplot(data = titanic) + geom_bar(aes(x = Pclass, y = ..count.., group = 1))
+En la ayuda de las funciones de {ggplot2} aparece una lista de los *aesthetics* y los argumentos estéticos que acepta esa función. Se pueden incluir tantos *aesthetics* como se deseen.
 
-ggplot(data = titanic) + geom_bar(aes(x = Pclass, y = ..prop.., group = 1))
+```{r aes}
 
-# Variables num?ricas
+ggplot(data = titanic) + 
+  geom_point(aes(x = Age, y = Fare, size = Pclass, shape = Sex, color = Embarked))
 
-ggplot(data = titanic) + geom_histogram(aes(x = Age))
+summary(titanic$Pclass)
 
-ggplot(data = titanic) + geom_density(aes(x = Age))
+titanic <- titanic %>% mutate(Pclass = factor(Pclass, levels = c(3, 2, 1), labels = c("Tercera", "Segunda", "Primera")))
 
-ggplot(data = titanic) + geom_boxplot(aes(y = Age))
+summary(titanic$Pclass)
 
-ggplot(data = titanic) + geom_jitter(aes(x = 1, y = Age))
+ggplot(data = titanic) + 
+  geom_point(aes(x = Age, y = Fare, size = Pclass, shape = Sex, color = Embarked), alpha = 0.5)
+```
 
-#Ejercicio 3: describe la distribuci?n de las tarifas pagadas por los pasajeros
+#### Ejercicio 2
 
-ggplot(data = titanic, aes(x = Fare)) + geom_histogram() + geom_density(color = "red")
+¿Cómo modificarías el siguiente código para representar la puerta de embarque con diferentes formas pero los puntos de color rosa?
 
-ggplot(data = titanic) + geom_density(aes(x = Fare))
+```{r ejer_2}
 
-ggplot(data = titanic) + geom_boxplot(aes(y = Fare, fill = Pclass, x=Pclass)) + geom_histogram()
+ggplot(data = titanic) + 
+  geom_point(aes(x = Age, y = Fare))
 
-##### 3.3 Ggplot2: gr?ficos bidimensionales
+```
 
-# Variables categ?ricas
+## Tipos de gráfico (geoms)
 
-ggplot(data = titanic) + geom_count(aes(x = Sex, y = Survived))
+El tipo de gráfico que escojamos va a depender del tipo de variable y del mensaje que queramos transmitir (es decir, del propósito).
 
-titanic \<- titanic %\>% mutate(Survived = factor(Survived, levels = c(0, 1), labels = c("Muerto", "Vivo")))
+![](images/tipos_variables.png)
 
-ggplot(data = titanic) + geom_count(aes(x = Sex, y = Survived))
+TBD #ver chuleta de principios para creaci?n de gr?ficos #m?s informaci?n sobre tipos de gr?ficos en Vandemeulebroecke et al. 2019
+
+```{r geoms}
+
+ggplot(data = titanic) + 
+  geom_point(aes(x = Age, y = Fare, color = Sex)) + 
+  geom_smooth(aes(x = Age, y = Fare, color = Sex, fill = Sex))
+
+```
+
+### Exploración de variables categóricas
+
+#### Conteo
+
+```{r conteo}
+
+summary(titanic$Pclass)
+
+ggplot(data = titanic) + 
+  geom_bar(aes(x = Pclass))
+
+```
+
+#### Proporciones
+
+```{r prop}
+
+miplot <- ggplot(data = titanic) + 
+  geom_bar(aes(x = Pclass, group = 1)) 
+
+miplot #group = 1 hace que considere toda la variable como un todo
+
+miplot_data <- ggplot_build(miplot) 
+head(miplot_data$data)
+
+ggplot(data = titanic) + 
+  geom_bar(aes(x = Pclass, y = ..count.., group = 1))
+
+ggplot(data = titanic) + 
+  geom_bar(aes(x = Pclass, y = ..prop.., group = 1))
+```
+
+### Exploración de variables numéricas
+
+```{r num}
+
+ggplot(data = titanic) + 
+  geom_histogram(aes(x = Age))
+
+ggplot(data = titanic) + 
+  geom_density(aes(x = Age))
+
+ggplot(data = titanic) + 
+  geom_boxplot(aes(y = Age))
+
+ggplot(data = titanic) + 
+  geom_jitter(aes(x = 1, y = Age))
+```
+
+#### Ejercicio 3
+
+Describe la distribución de las tarifas pagadas por los pasajeros.
+
+### Relaciones entre variables
+
+#### Variables categóricas
+
+```{r dos_cat}
+
+ggplot(data = titanic) + 
+  geom_count(aes(x = Sex, y = Survived))
+
+titanic <- titanic %>% mutate(Survived = factor(Survived, levels = c(0, 1), labels = c("Muerto", "Vivo")))
+
+ggplot(data = titanic) + 
+  geom_count(aes(x = Sex, y = Survived))
 
 table(titanic$Sex, titanic$Survived)
 
-ggplot(data = titanic) + geom_bar(aes(x = Pclass, fill = Sex))
+ggplot(data = titanic) + 
+  geom_bar(aes(x = Pclass, fill = Sex))
 
-prueba \<- ggplot(data = titanic) + geom_bar(aes(x = Pclass, fill = Sex)) prueba2 \<- ggplot_build(prueba)
+prueba <- ggplot(data = titanic) + geom_bar(aes(x = Pclass, fill = Sex)) 
+prueba2 <- ggplot_build(prueba)
+```
 
-#Ejercicio 4: ?en que clase sobrevivieron m?s personas?
+#### Ejercicio 4
 
-ggplot(data = titanic) + geom_bar(aes(x = Survived, fill = Pclass))
+Haz un gráfico para averiguar en qué clase sobrevivieron más personas.
 
-ggplot(data = titanic) + geom_bar(aes(x = Pclass, fill = Survived))
+#### Variables numéricas
 
-# Variables num?ricas
+```{r dos_num}
 
-pnum \<- ggplot(data = titanic, aes(x = Age, y = Fare)) + geom_point(alpha = 0.5)
+pnum <- ggplot(data = titanic, aes(x = Age, y = Fare)) + 
+  geom_point(alpha = 0.5)
 
 pnum
 
-pnum + geom_smooth()
+pnum + 
+  geom_smooth()
+```
 
-# Variable categ?rica vs. num?rica
+#### Variable categórica vs. numérica
 
-ggplot(data = titanic) + geom_boxplot(aes(x = Pclass, y = Age))
+```{r}
 
-ggplot(data = titanic) + geom_violin(aes(x = Pclass, y = Age), draw_quantiles = 0.5) #+ #geom_jitter(aes(x = Pclass, y = Age), alpha = 0.3, width = 0.2)
+ggplot(data = titanic) + 
+  geom_boxplot(aes(x = Pclass, y = Age))
 
-ggplot(data = titanic) + geom_violin(aes(x = Pclass, y = Age, fill = Sex), draw_quantiles = 0.5)
+ggplot(data = titanic) + 
+  geom_violin(aes(x = Pclass, y = Age), draw_quantiles = 0.5) #+ 
+#geom_jitter(aes(x = Pclass, y = Age), alpha = 0.3, width = 0.2)
 
-#Echar un vistazo al paquete ggdist y los raincloud plots
+ggplot(data = titanic) + 
+  geom_violin(aes(x = Pclass, y = Age, fill = Sex), draw_quantiles = 0.5)
 
 #Haciendo calculos previos
 
-summ_titanic \<- titanic %\>% group_by(Pclass) %\>% summarise(Avg_age = mean(Age, na.rm = TRUE), Sd_age = sd(Age, na.rm = TRUE))
+summ_titanic <- titanic %>% 
+  group_by(Pclass) %>% 
+  summarise(Avg_age = mean(Age, na.rm = TRUE), Sd_age = sd(Age, na.rm = TRUE))
 
 summ_titanic
 
-ggplot(data = summ_titanic, aes(x = Pclass, y = Avg_age)) + geom_col(color = "black") + geom_errorbar(aes(ymax = Avg_age + Sd_age, ymin = Avg_age - Sd_age), width = 0.25)
+ggplot(data = summ_titanic, aes(x = Pclass, y = Avg_age)) + 
+  geom_col(color = "black") + 
+  geom_errorbar(aes(ymax = Avg_age + Sd_age, ymin = Avg_age - Sd_age), width = 0.25)
 
-ggplot(data = summ_titanic, aes(x = Pclass, y = Avg_age)) + geom_line(aes(group = 1))
+ggplot(data = summ_titanic, aes(x = Pclass, y = Avg_age)) + 
+  geom_line(aes(group = 1))
+```
 
-##### 3.4 Ggplot2: funciones avanzadas
+💡Echar un vistazo al paquete ggdist y los raincloud plots
+
+💡ggpairs
+
+💡corrgram
+
+## {Ggplot2}: funciones avanzadas
 
 #Ver la chuleta
 
-pnumcat \<- ggplot(data = titanic) + geom_boxplot(aes(x = Pclass, y = Age))
+### Etiquetas
 
-#1 Etiquetas
+```{r}
 
-pnumcat + labs(title = "Edad de los pasajeros seg?n su clase", x = "Clase", y = "Edad (a?os)") #title, subtitle, x, y, caption
+pnumcat <- ggplot(data = titanic) + 
+  geom_boxplot(aes(x = Pclass, y = Age))
 
-#2 Sistema de coordenadas
+pnumcat
 
-pnumcat +\
-coord_cartesian(ylim = c(0, 100))
+pnumcat + labs(title = "Edad de los pasajeros según su clase", x = "Clase", y = "Edad (años)") #title, subtitle, x, y, caption
+```
 
-#Ejercicio 5: cambia la posici?n de los ejes X e Y en el sistema de coordenadas #de pnumcat
+### Sistema de coordenadas
 
-pnumcat + coord_flip()
+```{r}
 
-# 3 Faceting
+pnumcat +
+  coord_cartesian(ylim = c(0, 100))
+```
 
-# Los "facets" dividen el gr?fico en subgr?ficos basados en el valor de una o varias
+💡Ojo con xlim
 
-# variables categ?ricas
+#### Ejercicio 5
 
-# Muy ?til en exploraci?n de datos
+Cambia la posición de los ejes X e Y en el sistema de coordenadas de pnumcat
 
-miplot2 \<- ggplot(data = titanic, aes(x = Age, y = Fare, color = Sex)) + geom_point()
+### Faceting
+
+Los "facets" dividen el gráfico en subgráficos basados en el valor de una o varias variables categóricas. Las facetas son muy útiles en exploración de datos.
+
+```{r facet_1}
+
+miplot2 <- ggplot(data = titanic, aes(x = Age, y = Fare, color = Sex)) + geom_point()
 
 miplot2
+```
 
-#Hay dos funciones para hacer esto: facet_grid y facet_wrap miplot2 + facet_grid(rows = vars(Pclass), scales = "free") miplot2 + facet_grid(rows = vars(Pclass), cols = vars(Embarked)) miplot2 + facet_wrap(facets = vars(Embarked), ncol=3)
+Hay dos funciones para facetar: `facet_grid()` y `facet_wrap()`.
 
-# 4 Posici?n
+```{r facet_2}
 
-# C?mo colocar geometrias que de otro modo ocupar?an el mismo espacio
+miplot2 + 
+  facet_grid(rows = vars(Pclass), scales = "free") 
 
-ggplot(data = titanic) + geom_bar(aes(x = Pclass, fill = Sex))
+miplot2 + 
+  facet_grid(rows = vars(Pclass), cols = vars(Embarked)) 
 
-ggplot(data = titanic) + geom_bar(aes(x = Pclass, fill = Sex), position = "dodge") #esquivar
+miplot2 + 
+  facet_wrap(facets = vars(Embarked), ncol=3)
+```
 
-ggplot(data = titanic) + geom_bar(aes(x = Pclass, fill = Sex), position = "fill") #rellenar
+### Posición
 
-# 5 Escalas
+¿Cómo colocar geometrias que de otro modo ocuparían el mismo espacio?
 
-# Sirven para personalizar los aesthetics
+```{r}
 
-miplot2 +\
-scale_color_manual(values = c("darkgreen", "chartreuse")) + scale_y_sqrt(breaks = c(9,16,25), labels = c("a", "b","c")) #scale + aesthetic que se personaliza + tipo de escala (continuous, discrete)
+ggplot(data = titanic) + 
+  geom_bar(aes(x = Pclass, fill = Sex))
 
-#Ejercicio 6: ?qu? har?as para cambiar la escala de la edad a un degradado de colores \# de azul a amarillo en el siguiente gr?fico?
+ggplot(data = titanic) + 
+  geom_bar(aes(x = Pclass, fill = Sex), position = "dodge") #esquivar
 
-ggplot(data = titanic, aes(x = Age, y = Fare, color = Age)) + geom_point() + scale_color_gradient(low = "blue", high = "yellow")
+ggplot(data = titanic) + 
+  geom_bar(aes(x = Pclass, fill = Sex), position = "fill") #rellenar
 
-#Paletas de colores #manual y gradient se personalizan con el nombre del color
+```
 
-#Brewer y distiller (secuenciales, cualitativas y divergentes) RColorBrewer::display.brewer.all() RColorBrewer::brewer.pal(name = "Set3", n = 6)
+### Escalas
 
-#HCL Palettes (hue-chroma-luminance) grDevices::hcl.pals()
+Sirven para personalizar los *aesthetics*. Las funciones de la familia *scale* siempre tienen la misma estructura: "scale" \_ aesthetic que se personaliza \_ tipo de escala (p.e. continua, discreta, manual, etc.).
 
-example("hcl.colors") #Paletas muy populares tienen su propia funci?n #El resto se crean con hcl.colors
+```{r escale}
 
-#Viridis ggplot(data = titanic, aes(x = Age, y = Fare, color = Age)) + geom_point() + scale_color_gradientn(colours = hcl.colors(12, "viridis"))
+miplot2 +
+  scale_color_manual(values = c("darkgreen", "chartreuse")) + 
+  scale_y_sqrt(breaks = c(9,16,25), labels = c("a", "b","c")) 
 
-ggplot(data = titanic, aes(x = Age, y = Fare, color = Age)) + geom_point() + scale_color_viridis_c()
+```
 
-\#<https://ggplot2-book.org/scale-colour.html>
+#### Ejercicio 6
 
-# 6 Temas
+¿Qué harías para cambiar la escala de la edad a un degradado de colores de azul a amarillo en el siguiente gráfico?
 
-#theme() permite la personalizaci?n completa de todos los elementos del gr?fico ?theme
+### Los colores en R
 
-miplot2 + theme(axis.title.x = element_text(color = "red", face = "bold")) #theme(parte.del.gr?fico = elemento_a_cambiar (...) )
+Las paletas de colores tipo *manual* y *gradient* se personalizan con el nombre o código del color. Con [esta herramienta](https://r-charts.com/colors/) puedes elegir entre cientos de colores.
 
-#Ejercicio 7: dibujar una linea negra que represente los ejes de miplot y quita #el fondo del gr?fico
+Las paletas tipo *brewer* y *distiller* utilizan paletas de colores que pueden ser secuenciales, cualitativas o divergentes, que aunque tienen utilidad en gran variedad de situaciones, están diseñadas para trabajar [con mapas o a grandes escalas](https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3).
 
-miplot2 + theme(panel.background = element_rect(fill = "transparent"), axis.line = element_line(color = "black", size = 1))
+Las paletas HCL (*hue-chroma-luminance*) son paletas muy populares que tienen su propia función (p.e. colores para representar batimetría). De entre ellas, *Viridis* se he vuelto muy popular porque está diseñada para que personas con distintos tipos de daltonismo puedan distinguir los colores.
 
-# 
+```{r paletas}
 
-miplot2 + theme_classic() miplot2 + theme_light() miplot2 + theme_void()
+RColorBrewer::display.brewer.all() 
 
-#GgthemeAssist miplot2 + theme(panel.grid.major = element_line(linetype = "blank"), panel.grid.minor = element_line(linetype = "blank"))
+RColorBrewer::brewer.pal(name = "Set3", n = 6) # para crear paleta
 
-#Ggplotly library(plotly) ggplotly(miplot2)
+grDevices::hcl.pals() # HCL Palettes 
 
-##### 3.5 Ggplot2: multipaneles
+X11()
+example("hcl.colors")
 
-#Patchwork
+hcl.colors(n = 6, palette = "Lajolla") # para crear paleta
 
+# Viridis 
+
+ggplot(data = titanic, aes(x = Age, y = Fare, color = Age)) + 
+  geom_point() + 
+  scale_color_gradientn(colours = hcl.colors(12, "viridis"))
+
+ggplot(data = titanic, aes(x = Age, y = Fare, color = Age)) + 
+  geom_point() + 
+  scale_color_viridis_c()
+```
+
+💡[Aquí](https://ggplot2-book.org/scale-colour.html) puedes encontrar más información sobre cómo utilizar colores en {ggplot2}.
+
+### Temas
+
+`theme()` permite la personalización completa de todos los elementos del gráfico. Los argumentos dentro de la función definen la parte del gráfico a cambiar. Se les asigna una función de cambio según el elemento a cambiar dentro de esa parte (parte.del.gráfico = elemento_a_cambiar(...)): *line*, *rect*, *text*.
+
+```{r theme}
+
+?theme
+
+miplot2 + 
+  theme(axis.title.x = element_text(color = "red", face = "bold")) 
+
+```
+
+#### Ejercicio 7
+
+Dibuja una linea negra que represente los ejes de miplot y quita el fondo del gráfico.
+
+Existen temas configurados por defecto y un asistente que te ayuda a personalizar el gráfico.
+
+```{r temas_defecto}
+
+miplot2 + theme_classic() 
+miplot2 + theme_light() 
+miplot2 + theme_void()
+
+# GgthemeAssist
+#install.packages("ggThemeAssist")
+
+miplot2
+```
+
+💡Ggplotly library(plotly) ggplotly(miplot2)
+
+## Multipaneles
+
+La librería {patchwork} permite añadir gráficos entre sí como si fueran diferentes capas.
+
+```{r patchwork}
+
+#install.packages("patchwork")
 library(patchwork)
 
-#Permite a?adir gr?ficos como si fueran diferentes capas
+miplot + miplot2 
+miplot / miplot2
 
-miplot + miplot2 miplot / miplot2
+miplot / miplot2 + 
+  plot_annotation(tag_levels = "a", tag_suffix = ")")
 
-#Otras disposiciones: \#<https://patchwork.data-imaginist.com/articles/guides/layout.html>
+```
 
-miplot / miplot2 + plot_annotation(tag_levels = "a", tag_suffix = ")")
+En [este enlace](https://patchwork.data-imaginist.com/articles/guides/layout.html) puedes ver cómo personalizar mucho más la disposición de los diferentes gráficos.
 
-##### 3.6 Visualizaci?n de datos en R base
+## Mapas
 
-# Una variable categ?rica
+La representación de mapas es sencilla con {ggplot2} si conseguimos transformar los datos espaciales en una tabla de datos ordenada.
 
-count \<- table(titanic\$Pclass) #Hay que calcular antes la tabla de contingencia barplot(height = count) miplot
+![Mapas en formato vectorial y en formato raster. https://commons.wikimedia.org/wiki/File:Vectores_vs_rasters.png](https://upload.wikimedia.org/wikipedia/commons/0/02/Vectores_vs_rasters.png?20180402154102)
 
-?barplot #Se puede personalizar igual que en ggplot pero a?adiento argumentos a la funci?n en lugar de capas barplot(height = count, col = "blue", ylab = "Count", ylim = c(0,500))
+![](https://jcheshire.com/wp-content/uploads/2012/02/bike_ggplot-800x529.png)
 
-# Una variable continua
+### Raster
 
-plot(x = titanic\$Fare)
+```{r raster}
 
-hist(x = titanic\$Fare)
+#install.packages(c("terra", "easyclimate))
 
-dens \<- density(titanic\$Fare) #Hay que calcular antes la curva de densidad y luego representarla plot(x = dens)
+library(terra)
+library(easyclimate) 
 
-boxplot(x = titanic$Fare)
-boxplot(x = titanic$Fare, outline = FALSE)
+# Obtenemos datos de temperatura máxima para el 31 de diciembre de 2020 en una zona de España 
 
-# Dos variables continuas
-
-plot(x = titanic$Age,
-     y = titanic$Fare)
-
-plot(titanic$Fare ~ titanic$Age, type = "l") #Las selecci?n de geometrias se hace con el argumento type
-
-# Dos variables categ?ricas
-
-plot(table(titanic$Pclass, titanic$Sex))
-
-# Una variable categ?rica y una continua
-
-boxplot(titanic$Age ~ titanic$Sex) #Expresar como "en funci?n de" con \~
-
-# Ejercicio 8: representa el n?mero de supervivientes y fallecidos por cada
-
-#clase con R base y con ggplot. ?Qu? gr?fico te gusta m?s?
-
-plot(table(titanic$Survived, titanic$Pclass))
-
-ggplot(data = titanic) + geom_bar(aes(x = Pclass, fill = Survived))
-
-##### 3.7 Mapas
-
-#1.- Raster
-
-#Transformaci?n de datos espaciales en una tabla de datos ordenada library(easyclimate) library(terra)
-
-raster \<- get_daily_climate( #Obtenemos datos de temperatura m?xima para el 31 de diciembre de 2020 en una zona de Espa?a coords = vect("POLYGON ((-4.5 41, -4.5 40.5, -5 40.5, -5 41))"), period = "2020-12-31", climatic_var = "Tmax", output = "raster")
+raster <- get_daily_climate(
+  coords = vect("POLYGON ((-4.5 41, -4.5 40.5, -5 40.5, -5 41))"), 
+  period = "2020-12-31", 
+  climatic_var = "Tmax", 
+  output = "raster")
 
 plot(raster)
 
-tidy_raster \<- terra::as.data.frame(raster, xy = TRUE) head(tidy_raster)
+tidy_raster <- terra::as.data.frame(raster, xy = TRUE) 
+head(tidy_raster)
 
-#Representacion de un mapa raster rastermap \<- ggplot(data = tidy_raster) + geom_raster(aes(x = x, y = y, fill = `2020-12-31`), interpolate = TRUE) #interpolate = TRUE
+rastermap <- ggplot(data = tidy_raster) + 
+  geom_raster(aes(x = x, y = y, fill = `2020-12-31`), interpolate = TRUE) 
 
 rastermap
 
-rastermap + scale_fill_viridis_c(name = "Temperatura\nm?nima (?C)\n31 Enero 2021") + ylab("Latitude") + xlab("Longitude") + theme_bw()
+rastermap + 
+  scale_fill_viridis_c(name = "Temperatura\nmáxima (ºC)\n31 Dic. 2020") +
+  labs(y = "Latitude", x = "Longitude") + 
+  theme_bw()
 
-#2.- Vectorial
+```
 
+### Vectorial
+
+En general, se recomienda usar `geom_sf()`. Cuando el mapa contiene puntos es sencillo transformarlo en formato ordenado con `terra::as.data.frame()` y tratarlo con `geom_point()`. Para líneas y polígonos es mas dificil, pero se puede como veremos en el ejemplo debajo.
+
+💡<https://ggplot2.tidyverse.org/reference/ggsf.html>
+
+```{r vect}
+
+#install.packages("sf")
 library(sf)
 
-vectorial \<- read_sf("prov_ETRS8930N_maternityage.shp") #Mapa de Castilla y Le?n con datos de la edad media a la maternidad 1991-2010 por provincias plot(vectorial) vectorial vectorial\[,20:26\]
+vect_terra <- vect(system.file("ex/lux.shp", package="terra"))
+vectorial <- st_as_sf(vect_terra)
 
-#Representacion de un mapa vectorial
+vectorial
 
-#Se recomienda usar geom_sf. Cuando el mapa contiene puntos es sencillo transformatlo en un #dataframe ordenado con as.data.frame y tratarlo con geom_point #Para lineas y poligonos es mas dificil, pero se puede (library terra): #vect("prov_ETRS8930N_maternityage.shp") %\>% geom() %\>% as.data.frame()
-
-vecmap \<- ggplot(data = vectorial) + geom_sf(aes(fill = `2010`), color = "white") #M?s informaci?n: <https://ggplot2.tidyverse.org/reference/ggsf.html>
+vecmap <- ggplot(data = vectorial) + 
+  geom_sf(aes(fill = NAME_2), color = "white")
 
 vecmap
 
-vecmap + coord_sf() + scale_fill_gradientn(colors = rev(heat.colors(6)), name = "Edad de maternidad\n2010") + ylab("Latitude") + xlab("Longitude") + theme_bw()
+vecmap + 
+  coord_sf() + 
+  scale_fill_brewer(palette = "Set3", 
+    name = "Cantones de\nLuxemburgo") + 
+  labs(y = "Latitude", x = "Longitude") + 
+  theme_bw()
 
-#3.- Mapas de localizaci?n
+vectorial_df <- vect_terra %>% geom() %>% terra::as.data.frame()
 
-library(readr)
+ggplot(data = vectorial_df) + 
+  geom_polygon(aes(x = x, y = y, group = geom, fill = as.factor(geom)), color = "white") +
+  scale_fill_brewer(palette = "Set3", 
+    name = "Cantones de\nLuxemburgo") + 
+  labs(y = "Latitude", x = "Longitude") + 
+  theme_bw()
 
-asent \<- read_delim("dataset_chapinal_longlat.csv", delim = ";") \#<https://www.cairn.info/revue-dialogues-d-histoire-ancienne-2019-2-page-147.html> head(asent)
+```
 
-#Opcion 1
+library ggmap TBD
 
-#Creamos un fondo sort(unique(map_data("world")\$region))
+## Enlaces de interés
 
-limites \<- map_data(map = "world", region = c("Albania","Greece", "Italy", "Bulgaria", "North Macedonia", "Turkey")) #Mapa b?sico de regiones head(limites)
+-   [Guía de {ggplot2} de Posit](https://diegokoz.github.io/intro_ds/fuentes/ggplot2-cheatsheet-2.1-Spanish.pdf)
 
-bg1 \<- ggplot() + geom_polygon(data = limites, aes(x=long, y = lat, group = group), fill = "grey90", color = "grey30") bg1
+-   [Construye un gráfico capa a capa](https://rpubs.com/hadley/ggplot2-layers)
 
-#Representamos nuestros puntos sobre el fondo bg1 + geom_point(data = asent, aes(x = long, y = lat))
+-   [Elegant graphics for data analysis](https://ggplot2-book.org/)
 
-bg1 + geom_point(data = asent, aes(x = long, y = lat)) + labs(x = "Longitude", y = "Latitude") + coord_fixed(ratio = 1.3, xlim = c(18, 28), ylim = c(37.5, 41.5)) + theme_light()
-
-#Opcion 2
-
-library(ggmap) #Descarga mapas de diferentes servidores #Ver tambi?n library geodata: <https://cran.r-project.org/web/packages/geodata/geodata.pdf>
-
-extent \<- c(left = 20, bottom = 39, right = 21.5, top = 40.25) bg2 \<- get_stamenmap(bbox = extent, zoom = 9, maptype="terrain-background") bg2 \<- ggmap(bg2) bg2
-
-mymap \<- bg2 + geom_point(data = asent, aes(x = long, y = lat, shape = Type, color = Type)) + labs(x = "Longitude", y = "Latitude") + coord_fixed(ratio = 1.3) + scale_shape_manual(values = c(15, 16)) + scale_color_manual(values = c("red","tomato3")) + theme_light()
-
-#Extra sanct \<- asent %\>% filter(Type == "Sanctuary")
-
-mymap + geom_text(data = sanct, aes(x = long, y = lat, label = Names), position = position_nudge(y = -0.02), size = 3)
-
-setwd("C:/Users/veruk/Desktop/Rbase_visualizacion")
-
-#Packages c("ggplot2", "readr", "dplyr", "ggThemeAssist", "patchwork", "titanic", "easyclimate", "terra", "sf", "ggmap", "plotly") %in% rownames(installed.packages()) c("promises","mime", "cachem") %in% rownames(installed.packages())
-
-# install.packages(c("ggplot2", "readr", "ggThemeAssist", "patchwork", "titanic", "dplyr", "terra", "sf", "ggmap", "plotly"))
-
-# install.packages(c("promises","mime", "cachem"))
-
-# remotes::install_github("VeruGHub/easyclimate")
-
-#Cargamos los datos
-
-titanic \<- titanic::titanic_train head(titanic)
-
-# PassengerId: Id del pasajero
-
-# Survived: 1-si, 0-no
-
-# Pclass: clase del pasajero
-
-# Name: nombre Name
-
-# Sex: sexo
-
-# Age: edad
-
-# SibSp: n?mero de hermanos + parejas a bordo
-
-# Parch: n?mero de progenitores + hijos a bordo
-
-# Ticket: n?mero de billete
-
-# Fare: tarifa
-
-# Cabin: camarote
-
-# Embarked: puerta de embarque
-
-##### 3.1 Ggplot2: introducci?n
-
-library(ggplot2)
-
-ggplot(data = titanic)
-
-ggplot(data = titanic, aes(x = Age, y = Fare)) #Las variables se representan en forma de caracter?sticas visuales en el gr?fico (aesthetics)
-
-ggplot() + geom_point(data = titanic, aes(x = Age, y = Fare)) #Las geometrias (geometry) son los tipos de gr?fico #Ver la chuleta #Los datos se pueden colocar dentro de la funcion ggplot si se van a usar los mismos en todas las geometr?as
-
-ggplot() + geom_jitter(data = titanic, aes(x = Pclass, y = Fare))
-
-#Ejercicio 1: representa un gr?fico para ver la relaci?n entre el sexo de los #pasajeros y la clase
-
-ggplot(data = titanic, aes(x = Sex, y = Pclass)) + geom_count(color = "purple")
-
-#Aesthetics vs. argumentos
-
-ggplot(data = titanic) + geom_point(aes(x = Age, y = Fare, color = Sex))
-
-#No es lo mismo que... ggplot(data = titanic) + geom_point(aes(x = Age, y = Fare), color = "darkred") #R color chart ?geom_point #Aesthetics + arguments \##
-
-#Ejercicio 2: ?c?mo modificar?as el siguiente c?digo para representar #la puerta de embarque con diferentes formas pero los puntos de color rojo?
-
-ggplot(data = titanic) + geom_point(aes(x = Age, y = Fare, shape = Embarked), color = "darkred")
-
-#M?s aesthetics
-
-ggplot(data = titanic) + geom_point(aes(x = Age, y = Fare, size = Pclass, shape = Sex, color = Embarked))
-
-## 
-
-summary(titanic\$Pclass)
-
-library(dplyr) titanic \<- titanic %\>% mutate(Pclass = factor(Pclass, levels = c(3, 2, 1), labels = c("Tercera", "Segunda", "Primera")))
-
-summary(titanic\$Pclass)
-
-ggplot(data = titanic) + geom_point(aes(x = Age, y = Fare, size = Pclass, shape = Sex, color = Embarked), alpha = 0.5)
-
-#M?s geometrias
-
-ggplot(data = titanic) + geom_point(aes(x = Age, y = Fare, color = Sex)) + geom_smooth(aes(x = Age, y = Fare, color = Sex, fill = Sex))
-
-#ver chuleta de principios para creaci?n de gr?ficos #m?s informaci?n sobre tipos de gr?ficos en Vandemeulebroecke et al. 2019
-
-#Como guardar plots satisfactorios
-
-plotqmegusta \<- ggplot(data = titanic) + geom_point(aes(x = Age, y = Fare, color = Sex)) + geom_smooth(aes(x = Age, y = Fare, color = Sex, fill = Sex))
-
-ggsave(filename = "farebyage.jpg", plot = plotqmegusta, width = 12, height = 9, units = "cm", dpi = 300)
-
-ggsave(filename = "farebyage.pdf", plot = plotqmegusta, width = 12, height = 9, units = "cm")
-
-#Tama?os en Science: <https://www.science.org/content/page/instructions-preparing-initial-manuscript#preparation-of-figures>
-
-##### 3.2 Ggplot2: gr?ficos unidimensionales
-
-# Variables categ?ricas
-
-# Conteo
-
-summary(titanic\$Pclass)
-
-ggplot(data = titanic) + geom_bar(aes(x = Pclass))
-
-# Proporciones
-
-miplot \<- ggplot(data = titanic) + geom_bar(aes(x = Pclass, group = 1)) #group = 1 hace que considere toda la variable como un todo
-
-miplot_data \<- ggplot_build(miplot) head(miplot_data\$data)
-
-ggplot(data = titanic) + geom_bar(aes(x = Pclass, y = ..count.., group = 1))
-
-ggplot(data = titanic) + geom_bar(aes(x = Pclass, y = ..prop.., group = 1))
-
-# Variables num?ricas
-
-ggplot(data = titanic) + geom_histogram(aes(x = Age))
-
-ggplot(data = titanic) + geom_density(aes(x = Age))
-
-ggplot(data = titanic) + geom_boxplot(aes(y = Age))
-
-ggplot(data = titanic) + geom_jitter(aes(x = 1, y = Age))
-
-#Ejercicio 3: describe la distribuci?n de las tarifas pagadas por los pasajeros
-
-ggplot(data = titanic, aes(x = Fare)) + geom_histogram() + geom_density(color = "red")
-
-ggplot(data = titanic) + geom_density(aes(x = Fare))
-
-ggplot(data = titanic) + geom_boxplot(aes(y = Fare, fill = Pclass, x=Pclass)) + geom_histogram()
-
-##### 3.3 Ggplot2: gr?ficos bidimensionales
-
-# Variables categ?ricas
-
-ggplot(data = titanic) + geom_count(aes(x = Sex, y = Survived))
-
-titanic \<- titanic %\>% mutate(Survived = factor(Survived, levels = c(0, 1), labels = c("Muerto", "Vivo")))
-
-ggplot(data = titanic) + geom_count(aes(x = Sex, y = Survived))
-
-table(titanic$Sex, titanic$Survived)
-
-ggplot(data = titanic) + geom_bar(aes(x = Pclass, fill = Sex))
-
-prueba \<- ggplot(data = titanic) + geom_bar(aes(x = Pclass, fill = Sex)) prueba2 \<- ggplot_build(prueba)
-
-#Ejercicio 4: ?en que clase sobrevivieron m?s personas?
-
-ggplot(data = titanic) + geom_bar(aes(x = Survived, fill = Pclass))
-
-ggplot(data = titanic) + geom_bar(aes(x = Pclass, fill = Survived))
-
-# Variables num?ricas
-
-pnum \<- ggplot(data = titanic, aes(x = Age, y = Fare)) + geom_point(alpha = 0.5)
-
-pnum
-
-pnum + geom_smooth()
-
-# Variable categ?rica vs. num?rica
-
-ggplot(data = titanic) + geom_boxplot(aes(x = Pclass, y = Age))
-
-ggplot(data = titanic) + geom_violin(aes(x = Pclass, y = Age), draw_quantiles = 0.5) #+ #geom_jitter(aes(x = Pclass, y = Age), alpha = 0.3, width = 0.2)
-
-ggplot(data = titanic) + geom_violin(aes(x = Pclass, y = Age, fill = Sex), draw_quantiles = 0.5)
-
-#Echar un vistazo al paquete ggdist y los raincloud plots
-
-#Haciendo calculos previos
-
-summ_titanic \<- titanic %\>% group_by(Pclass) %\>% summarise(Avg_age = mean(Age, na.rm = TRUE), Sd_age = sd(Age, na.rm = TRUE))
-
-summ_titanic
-
-ggplot(data = summ_titanic, aes(x = Pclass, y = Avg_age)) + geom_col(color = "black") + geom_errorbar(aes(ymax = Avg_age + Sd_age, ymin = Avg_age - Sd_age), width = 0.25)
-
-ggplot(data = summ_titanic, aes(x = Pclass, y = Avg_age)) + geom_line(aes(group = 1))
-
-##### 3.4 Ggplot2: funciones avanzadas
-
-#Ver la chuleta
-
-pnumcat \<- ggplot(data = titanic) + geom_boxplot(aes(x = Pclass, y = Age))
-
-#1 Etiquetas
-
-pnumcat + labs(title = "Edad de los pasajeros seg?n su clase", x = "Clase", y = "Edad (a?os)") #title, subtitle, x, y, caption
-
-#2 Sistema de coordenadas
-
-pnumcat +\
-coord_cartesian(ylim = c(0, 100))
-
-#Ejercicio 5: cambia la posici?n de los ejes X e Y en el sistema de coordenadas #de pnumcat
-
-pnumcat + coord_flip()
-
-# 3 Faceting
-
-# Los "facets" dividen el gr?fico en subgr?ficos basados en el valor de una o varias
-
-# variables categ?ricas
-
-# Muy ?til en exploraci?n de datos
-
-miplot2 \<- ggplot(data = titanic, aes(x = Age, y = Fare, color = Sex)) + geom_point()
-
-miplot2
-
-#Hay dos funciones para hacer esto: facet_grid y facet_wrap miplot2 + facet_grid(rows = vars(Pclass), scales = "free") miplot2 + facet_grid(rows = vars(Pclass), cols = vars(Embarked)) miplot2 + facet_wrap(facets = vars(Embarked), ncol=3)
-
-# 4 Posici?n
-
-# C?mo colocar geometrias que de otro modo ocupar?an el mismo espacio
-
-ggplot(data = titanic) + geom_bar(aes(x = Pclass, fill = Sex))
-
-ggplot(data = titanic) + geom_bar(aes(x = Pclass, fill = Sex), position = "dodge") #esquivar
-
-ggplot(data = titanic) + geom_bar(aes(x = Pclass, fill = Sex), position = "fill") #rellenar
-
-# 5 Escalas
-
-# Sirven para personalizar los aesthetics
-
-miplot2 +\
-scale_color_manual(values = c("darkgreen", "chartreuse")) + scale_y_sqrt(breaks = c(9,16,25), labels = c("a", "b","c")) #scale + aesthetic que se personaliza + tipo de escala (continuous, discrete)
-
-#Ejercicio 6: ?qu? har?as para cambiar la escala de la edad a un degradado de colores \# de azul a amarillo en el siguiente gr?fico?
-
-ggplot(data = titanic, aes(x = Age, y = Fare, color = Age)) + geom_point() + scale_color_gradient(low = "blue", high = "yellow")
-
-#Paletas de colores #manual y gradient se personalizan con el nombre del color
-
-#Brewer y distiller (secuenciales, cualitativas y divergentes) RColorBrewer::display.brewer.all() RColorBrewer::brewer.pal(name = "Set3", n = 6)
-
-#HCL Palettes (hue-chroma-luminance) grDevices::hcl.pals()
-
-example("hcl.colors") #Paletas muy populares tienen su propia funci?n #El resto se crean con hcl.colors
-
-#Viridis ggplot(data = titanic, aes(x = Age, y = Fare, color = Age)) + geom_point() + scale_color_gradientn(colours = hcl.colors(12, "viridis"))
-
-ggplot(data = titanic, aes(x = Age, y = Fare, color = Age)) + geom_point() + scale_color_viridis_c()
-
-\#<https://ggplot2-book.org/scale-colour.html>
-
-# 6 Temas
-
-#theme() permite la personalizaci?n completa de todos los elementos del gr?fico ?theme
-
-miplot2 + theme(axis.title.x = element_text(color = "red", face = "bold")) #theme(parte.del.gr?fico = elemento_a_cambiar (...) )
-
-#Ejercicio 7: dibujar una linea negra que represente los ejes de miplot y quita #el fondo del gr?fico
-
-miplot2 + theme(panel.background = element_rect(fill = "transparent"), axis.line = element_line(color = "black", size = 1))
-
-# 
-
-miplot2 + theme_classic() miplot2 + theme_light() miplot2 + theme_void()
-
-#GgthemeAssist miplot2 + theme(panel.grid.major = element_line(linetype = "blank"), panel.grid.minor = element_line(linetype = "blank"))
-
-#Ggplotly library(plotly) ggplotly(miplot2)
-
-##### 3.5 Ggplot2: multipaneles
-
-#Patchwork
-
-library(patchwork)
-
-#Permite a?adir gr?ficos como si fueran diferentes capas
-
-miplot + miplot2 miplot / miplot2
-
-#Otras disposiciones: \#<https://patchwork.data-imaginist.com/articles/guides/layout.html>
-
-miplot / miplot2 + plot_annotation(tag_levels = "a", tag_suffix = ")")
-
-##### 3.6 Visualizaci?n de datos en R base
-
-# Una variable categ?rica
-
-count \<- table(titanic\$Pclass) #Hay que calcular antes la tabla de contingencia barplot(height = count) miplot
-
-?barplot #Se puede personalizar igual que en ggplot pero a?adiento argumentos a la funci?n en lugar de capas barplot(height = count, col = "blue", ylab = "Count", ylim = c(0,500))
-
-# Una variable continua
-
-plot(x = titanic\$Fare)
-
-hist(x = titanic\$Fare)
-
-dens \<- density(titanic\$Fare) #Hay que calcular antes la curva de densidad y luego representarla plot(x = dens)
-
-boxplot(x = titanic$Fare)
-boxplot(x = titanic$Fare, outline = FALSE)
-
-# Dos variables continuas
-
-plot(x = titanic$Age,
-     y = titanic$Fare)
-
-plot(titanic$Fare ~ titanic$Age, type = "l") #Las selecci?n de geometrias se hace con el argumento type
-
-# Dos variables categ?ricas
-
-plot(table(titanic$Pclass, titanic$Sex))
-
-# Una variable categ?rica y una continua
-
-boxplot(titanic$Age ~ titanic$Sex) #Expresar como "en funci?n de" con \~
-
-# Ejercicio 8: representa el n?mero de supervivientes y fallecidos por cada
-
-#clase con R base y con ggplot. ?Qu? gr?fico te gusta m?s?
-
-plot(table(titanic$Survived, titanic$Pclass))
-
-ggplot(data = titanic) + geom_bar(aes(x = Pclass, fill = Survived))
-
-##### 3.7 Mapas
-
-#1.- Raster
-
-#Transformaci?n de datos espaciales en una tabla de datos ordenada library(easyclimate) library(terra)
-
-raster \<- get_daily_climate( #Obtenemos datos de temperatura m?xima para el 31 de diciembre de 2020 en una zona de Espa?a coords = vect("POLYGON ((-4.5 41, -4.5 40.5, -5 40.5, -5 41))"), period = "2020-12-31", climatic_var = "Tmax", output = "raster")
-
-plot(raster)
-
-tidy_raster \<- terra::as.data.frame(raster, xy = TRUE) head(tidy_raster)
-
-#Representacion de un mapa raster rastermap \<- ggplot(data = tidy_raster) + geom_raster(aes(x = x, y = y, fill = `2020-12-31`), interpolate = TRUE) #interpolate = TRUE
-
-rastermap
-
-rastermap + scale_fill_viridis_c(name = "Temperatura\nm?nima (?C)\n31 Enero 2021") + ylab("Latitude") + xlab("Longitude") + theme_bw()
-
-#2.- Vectorial
-
-library(sf)
-
-vectorial \<- read_sf("prov_ETRS8930N_maternityage.shp") #Mapa de Castilla y Le?n con datos de la edad media a la maternidad 1991-2010 por provincias plot(vectorial) vectorial vectorial\[,20:26\]
-
-#Representacion de un mapa vectorial
-
-#Se recomienda usar geom_sf. Cuando el mapa contiene puntos es sencillo transformatlo en un #dataframe ordenado con as.data.frame y tratarlo con geom_point #Para lineas y poligonos es mas dificil, pero se puede (library terra): #vect("prov_ETRS8930N_maternityage.shp") %\>% geom() %\>% as.data.frame()
-
-vecmap \<- ggplot(data = vectorial) + geom_sf(aes(fill = `2010`), color = "white") #M?s informaci?n: <https://ggplot2.tidyverse.org/reference/ggsf.html>
-
-vecmap
-
-vecmap + coord_sf() + scale_fill_gradientn(colors = rev(heat.colors(6)), name = "Edad de maternidad\n2010") + ylab("Latitude") + xlab("Longitude") + theme_bw()
-
-#3.- Mapas de localizaci?n
-
-library(readr)
-
-asent \<- read_delim("dataset_chapinal_longlat.csv", delim = ";") \#<https://www.cairn.info/revue-dialogues-d-histoire-ancienne-2019-2-page-147.html> head(asent)
-
-#Opcion 1
-
-#Creamos un fondo sort(unique(map_data("world")\$region))
-
-limites \<- map_data(map = "world", region = c("Albania","Greece", "Italy", "Bulgaria", "North Macedonia", "Turkey")) #Mapa b?sico de regiones head(limites)
-
-bg1 \<- ggplot() + geom_polygon(data = limites, aes(x=long, y = lat, group = group), fill = "grey90", color = "grey30") bg1
-
-#Representamos nuestros puntos sobre el fondo bg1 + geom_point(data = asent, aes(x = long, y = lat))
-
-bg1 + geom_point(data = asent, aes(x = long, y = lat)) + labs(x = "Longitude", y = "Latitude") + coord_fixed(ratio = 1.3, xlim = c(18, 28), ylim = c(37.5, 41.5)) + theme_light()
-
-#Opcion 2
-
-library(ggmap) #Descarga mapas de diferentes servidores #Ver tambi?n library geodata: <https://cran.r-project.org/web/packages/geodata/geodata.pdf>
-
-extent \<- c(left = 20, bottom = 39, right = 21.5, top = 40.25) bg2 \<- get_stamenmap(bbox = extent, zoom = 9, maptype="terrain-background") bg2 \<- ggmap(bg2) bg2
-
-mymap \<- bg2 + geom_point(data = asent, aes(x = long, y = lat, shape = Type, color = Type)) + labs(x = "Longitude", y = "Latitude") + coord_fixed(ratio = 1.3) + scale_shape_manual(values = c(15, 16)) + scale_color_manual(values = c("red","tomato3")) + theme_light()
-
-#Extra sanct \<- asent %\>% filter(Type == "Sanctuary")
-
-mymap + geom_text(data = sanct, aes(x = long, y = lat, label = Names), position = position_nudge(y = -0.02), size = 3)
+-   [Tutorial de {ggplot2} de Cedric Scherer](https://www.cedricscherer.com/2019/08/05/a-ggplot2-tutorial-for-beautiful-plotting-in-r/)
 
 <details>
 
