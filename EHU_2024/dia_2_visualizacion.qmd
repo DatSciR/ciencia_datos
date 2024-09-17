@@ -6,6 +6,7 @@ author: Verónica Cruz-Alonso and Julen Astigarraga
 date: today
 date-format: "DD/MM/YYYY"
 toc: true
+toc-depth: 4
 toc-title: "Índice"
 format:
   html: 

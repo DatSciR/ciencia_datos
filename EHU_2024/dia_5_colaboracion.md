@@ -15,22 +15,32 @@ Julen Astigarraga and Verónica Cruz-Alonso
   proyectos](#repositorios-y-proyectos)
   - [<span class="toc-section-number">3.1</span> Estructura del
     repositorio de GitHub](#estructura-del-repositorio-de-github)
+    - [<span class="toc-section-number">3.1.1</span>
+      Ejercicio](#ejercicio)
   - [<span class="toc-section-number">3.2</span> Git
     ignore](#git-ignore)
 - [<span class="toc-section-number">4</span> Flujo de trabajo en Git y
   GitHub](#flujo-de-trabajo-en-git-y-github)
   - [<span class="toc-section-number">4.1</span> ¿Cómo moverse de una
     zona a otra?](#cómo-moverse-de-una-zona-a-otra)
+    - [<span class="toc-section-number">4.1.1</span>
+      Ejercicio](#ejercicio-1)
   - [<span class="toc-section-number">4.2</span> Navegar por el
     historial](#navegar-por-el-historial)
 - [<span class="toc-section-number">5</span> Trabajo
   colaborativo](#trabajo-colaborativo)
+  - [<span class="toc-section-number">5.0.1</span>
+    Ejercicio](#ejercicio-2)
   - [<span class="toc-section-number">5.1</span>
     Ramificación](#ramificación)
+    - [<span class="toc-section-number">5.1.1</span>
+      Ejercicio](#ejercicio-3)
   - [<span class="toc-section-number">5.2</span> ¿Cómo se unen distintas
     ramas?](#cómo-se-unen-distintas-ramas)
   - [<span class="toc-section-number">5.3</span> Resolución de
     conflictos](#resolución-de-conflictos)
+    - [<span class="toc-section-number">5.3.1</span>
+      Ejercicio](#ejercicio-4)
 - [<span class="toc-section-number">6</span> Enlaces de
   interés](#enlaces-de-interés)
 
@@ -529,7 +539,7 @@ Session Info
 Sys.time()
 ```
 
-    [1] "2024-09-17 13:39:07 CEST"
+    [1] "2024-09-17 13:50:01 CEST"
 
 ``` r
 sessionInfo()
