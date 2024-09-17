@@ -18,6 +18,10 @@ editor_options:
 number-sections: true
 ---
 
+## Objetivos
+
+<!--# ja: añadiria los objetivos de este día aquí -->
+
 ## Introducción
 
 La visualización de datos es una disciplina cuyo fin es mapear datos de forma gráfica para comunicar un mensaje. En investigación se usa principalmente en los análisis exploratorios (durante la fase de entendimiento de los datos) y en la comunicación de los resultados.
@@ -28,7 +32,7 @@ La representación gráfica de nuestras ideas o resultados de investigación es 
 
 En este bloque vamos a aprender como representar de manera efectiva muestros datos utilizando el paquete {ggplot2} de *tidyverse*. {ggplot2} permite hacer gráficos razonablemente claros y estéticamente bonitos con poco tiempo y un esfuerzo pequeño. Es extremadamente flexible y potente por lo que ha alcanzado gran popularidad.
 
-{ggplot2} está escrito en R siguiendo la gramática de gráficos (gg). Por ello, al utilizarlo, el usuario tiene que pensar como cuando está haciendo un dibujo a mano y pensar en ir añadiendo diferentes capas a la creación. El flujo de trabajo es crear un gráfico vacío, añadir una capa con los datos, añadir una capa con las etiquetas, etc.
+{ggplot2} está escrito en R siguiendo la [gramática de gráficos (gg)](https://www.amazon.com/Grammar-Graphics-Statistics-Computing/dp/0387245448/ref=as_li_ss_tl). Por ello, al utilizarlo, el usuario tiene que pensar como cuando está haciendo un dibujo a mano y pensar en ir añadiendo diferentes capas a la creación. El flujo de trabajo es crear un gráfico vacío, añadir una capa con los datos, añadir una capa con las etiquetas, etc.
 
 ![https://www.donnacowan.ca/category/animated-gifs/](images/Buckley-Bay-Oil-Painting-Animation-6x8-2.gif){width="441"}
 
@@ -36,7 +40,7 @@ Otra característica de {ggplot2} además del trabajo por capas es que precisa d
 
 💡Recordamos que en una tabla de datos ordenados (*Tidy Data*) cada columna representa una variable, cada fila es una observación y cada celda contiene un único valor.
 
-## Elementos básicos en un gráfico de {ggplot2}
+## Elementos básicos en un gráfico de {[ggplot2](https://ggplot2.tidyverse.org/)}
 
 Se necesitan tres capas básicas para crear un gráfico con {ggplot2}:
 
@@ -44,9 +48,11 @@ Se necesitan tres capas básicas para crear un gráfico con {ggplot2}:
 
 -   Las geometrías (*geom*): definen el tipo de gráfico (de puntos, de barras, etc.).
 
--   Los *aesthetics*: características visuales de las geometrías (p.e. la posición, el color) definidas por las variables (columnas) de nuestros datos.
+-   Los *aesthetics*: características visuales de las geometrías (p. ej. la posición, el color) definidas por las variables (columnas) de nuestros datos.
 
-Las capas se conectan entre sí con el símbolo "+", que siempre debe ir colocado al final de la línea de código si queremos seguir añadiendo capas al gráfico. Todas las capas que se pueden incluir están recogidas en la [guía de {ggplot2} de Posit](https://diegokoz.github.io/intro_ds/fuentes/ggplot2-cheatsheet-2.1-Spanish.pdf).
+Las capas se conectan entre sí con el símbolo `+`, que siempre debe ir colocado al final de la línea de código si queremos seguir añadiendo capas al gráfico. Todas las capas que se pueden incluir están recogidas en la [guía de {ggplot2} de Posit](https://diegokoz.github.io/intro_ds/fuentes/ggplot2-cheatsheet-2.1-Spanish.pdf).
+
+💡 Se utiliza el símbolo `+` porque {ggplot2} es anterior al *pipe* (`|>`), y cambiar la `+` por el *pipe* requeríría muchos reajustes en un montón de paquetes.
 
 ```{r capas_basicas}
 
@@ -93,9 +99,11 @@ ggsave(filename = "farebyage.jpg", plot = plotqmegusta, width = 12, height = 9, 
 ggsave(filename = "farebyage.pdf", plot = plotqmegusta, width = 12, height = 9, units = "cm")
 ```
 
-💡Algunas revistas científicas dan especificaciones muy detalladas sobre cómo tienen que ser los gráficos (p.e. [Science](https://www.science.org/content/page/instructions-preparing-initial-manuscript#preparation-of-figures)). Cuando no tenemos una referencia clara recomendamos pensar en formato A4 (21 x 29,7 cm) y que todos los elementos visuales del gráfico queden visibles cuando se guarda dentro de estos límites de tamaño. <!--# v: no se que opinas tu de esto Jul -->
+💡Algunas revistas científicas dan especificaciones muy detalladas sobre cómo tienen que ser los gráficos (p. ej. [Science](https://www.science.org/content/page/instructions-preparing-initial-manuscript#preparation-of-figures)). Cuando no tenemos una referencia clara recomendamos pensar en formato A4 (21 x 29,7 cm) y que todos los elementos visuales del gráfico queden visibles cuando se guarda dentro de estos límites de tamaño. <!--# v: no se que opinas tu de esto Jul -->
 
-#### Ejercicio 1
+<!--# ja: me parece bien. yo no lo hago pero me parece un buen consejo. justo esta semana he tenido que reajustar el tamaño de una imagen muy grande para subirlo a una revista y lo he hecho con image_resize() del paquete magick, jaja -->
+
+#### Ejercicio
 
 Representa un gráfico para ver la relación entre el sexo de los pasajeros y la clase.
 
@@ -108,7 +116,7 @@ Los aesthetics cambian cada elemento de las geometrías. Los argumentos estétic
 ggplot(data = titanic) + 
   geom_point(aes(x = Age, y = Fare, color = Sex))
 
-#No es lo mismo que... 
+# No es lo mismo que... 
 
 ggplot(data = titanic) + 
   geom_point(aes(x = Age, y = Fare), color = "darkred") 
@@ -123,7 +131,7 @@ ggplot(data = titanic) +
 
 summary(titanic$Pclass)
 
-titanic <- titanic %>% mutate(Pclass = factor(Pclass, levels = c(3, 2, 1), labels = c("Tercera", "Segunda", "Primera")))
+titanic <- titanic |> mutate(Pclass = factor(Pclass, levels = c(3, 2, 1), labels = c("Tercera", "Segunda", "Primera")))
 
 summary(titanic$Pclass)
 
@@ -131,7 +139,7 @@ ggplot(data = titanic) +
   geom_point(aes(x = Age, y = Fare, size = Pclass, shape = Sex, color = Embarked), alpha = 0.5)
 ```
 
-#### Ejercicio 2
+#### Ejercicio
 
 ¿Cómo modificarías el siguiente código para representar la puerta de embarque con diferentes formas pero los puntos de color rosa?
 
@@ -147,6 +155,8 @@ ggplot(data = titanic) +
 El tipo de gráfico que escojamos va a depender del tipo de variable y del mensaje que queramos transmitir (es decir, del propósito).
 
 ![](images/tipos_variables.png)
+
+<!--# ja: poner esto de abajo como un comentario? -->
 
 TBD #ver chuleta de principios para creaci?n de gr?ficos #m?s informaci?n sobre tipos de gr?ficos en Vandemeulebroecke et al. 2019
 
@@ -178,7 +188,7 @@ ggplot(data = titanic) +
 miplot <- ggplot(data = titanic) + 
   geom_bar(aes(x = Pclass, group = 1)) 
 
-miplot #group = 1 hace que considere toda la variable como un todo
+miplot # group = 1 hace que considere toda la variable como un todo
 
 miplot_data <- ggplot_build(miplot) 
 head(miplot_data$data)
@@ -207,7 +217,7 @@ ggplot(data = titanic) +
   geom_jitter(aes(x = 1, y = Age))
 ```
 
-#### Ejercicio 3
+#### Ejercicio
 
 Describe la distribución de las tarifas pagadas por los pasajeros.
 
@@ -220,7 +230,8 @@ Describe la distribución de las tarifas pagadas por los pasajeros.
 ggplot(data = titanic) + 
   geom_count(aes(x = Sex, y = Survived))
 
-titanic <- titanic %>% mutate(Survived = factor(Survived, levels = c(0, 1), labels = c("Muerto", "Vivo")))
+titanic <- titanic |> 
+  mutate(Survived = factor(Survived, levels = c(0, 1), labels = c("Muerto", "Vivo")))
 
 ggplot(data = titanic) + 
   geom_count(aes(x = Sex, y = Survived))
@@ -230,11 +241,12 @@ table(titanic$Sex, titanic$Survived)
 ggplot(data = titanic) + 
   geom_bar(aes(x = Pclass, fill = Sex))
 
-prueba <- ggplot(data = titanic) + geom_bar(aes(x = Pclass, fill = Sex)) 
+prueba <- ggplot(data = titanic) + 
+  geom_bar(aes(x = Pclass, fill = Sex)) 
 prueba2 <- ggplot_build(prueba)
 ```
 
-#### Ejercicio 4
+#### Ejercicio
 
 Haz un gráfico para averiguar en qué clase sobrevivieron más personas.
 
@@ -253,22 +265,22 @@ pnum +
 
 #### Variable categórica vs. numérica
 
-```{r}
+```{r cat_num}
 
 ggplot(data = titanic) + 
   geom_boxplot(aes(x = Pclass, y = Age))
 
 ggplot(data = titanic) + 
   geom_violin(aes(x = Pclass, y = Age), draw_quantiles = 0.5) #+ 
-#geom_jitter(aes(x = Pclass, y = Age), alpha = 0.3, width = 0.2)
+# geom_jitter(aes(x = Pclass, y = Age), alpha = 0.3, width = 0.2)
 
 ggplot(data = titanic) + 
   geom_violin(aes(x = Pclass, y = Age, fill = Sex), draw_quantiles = 0.5)
 
-#Haciendo calculos previos
+# Haciendo calculos previos
 
-summ_titanic <- titanic %>% 
-  group_by(Pclass) %>% 
+summ_titanic <- titanic |> 
+  group_by(Pclass) |> 
   summarise(Avg_age = mean(Age, na.rm = TRUE), Sd_age = sd(Age, na.rm = TRUE))
 
 summ_titanic
@@ -281,19 +293,21 @@ ggplot(data = summ_titanic, aes(x = Pclass, y = Avg_age)) +
   geom_line(aes(group = 1))
 ```
 
-💡Echar un vistazo al paquete ggdist y los raincloud plots
+💡Echar un vistazo al paquete {ggdist} y los raincloud plots
 
-💡ggpairs
+💡{ggpairs}
 
-💡corrgram
+💡{corrgram}
 
 ## {Ggplot2}: funciones avanzadas
 
 #Ver la chuleta
 
+<!--# ja: pon esto tambien como comentario -->
+
 ### Etiquetas
 
-```{r}
+```{r etiquetas}
 
 pnumcat <- ggplot(data = titanic) + 
   geom_boxplot(aes(x = Pclass, y = Age))
@@ -305,25 +319,26 @@ pnumcat + labs(title = "Edad de los pasajeros según su clase", x = "Clase", y =
 
 ### Sistema de coordenadas
 
-```{r}
+```{r coords}
 
 pnumcat +
   coord_cartesian(ylim = c(0, 100))
 ```
 
-💡Ojo con xlim
+💡Ojo con `xlim`
 
-#### Ejercicio 5
+#### Ejercicio
 
-Cambia la posición de los ejes X e Y en el sistema de coordenadas de pnumcat
+Cambia la posición de los ejes X e Y en el sistema de coordenadas de pnumcat.
 
 ### Faceting
 
-Los "facets" dividen el gráfico en subgráficos basados en el valor de una o varias variables categóricas. Las facetas son muy útiles en exploración de datos.
+Los *facets* dividen el gráfico en subgráficos basados en el valor de una o varias variables categóricas. Las facetas son muy útiles en exploración de datos.
 
 ```{r facet_1}
 
-miplot2 <- ggplot(data = titanic, aes(x = Age, y = Fare, color = Sex)) + geom_point()
+miplot2 <- ggplot(data = titanic, aes(x = Age, y = Fare, color = Sex)) + 
+  geom_point()
 
 miplot2
 ```
@@ -346,7 +361,7 @@ miplot2 +
 
 ¿Cómo colocar geometrias que de otro modo ocuparían el mismo espacio?
 
-```{r}
+```{r posicion}
 
 ggplot(data = titanic) + 
   geom_bar(aes(x = Pclass, fill = Sex))
@@ -361,9 +376,9 @@ ggplot(data = titanic) +
 
 ### Escalas
 
-Sirven para personalizar los *aesthetics*. Las funciones de la familia *scale* siempre tienen la misma estructura: "scale" \_ aesthetic que se personaliza \_ tipo de escala (p.e. continua, discreta, manual, etc.).
+Sirven para personalizar los *aesthetics*. Las funciones de la familia `scale` siempre tienen la misma estructura: `scale_aesthetic` que se personaliza con \_ tipo de escala (p. ej. continua, discreta, manual, etc.).
 
-```{r escale}
+```{r escala}
 
 miplot2 +
   scale_color_manual(values = c("darkgreen", "chartreuse")) + 
@@ -371,7 +386,7 @@ miplot2 +
 
 ```
 
-#### Ejercicio 6
+#### Ejercicio
 
 ¿Qué harías para cambiar la escala de la edad a un degradado de colores de azul a amarillo en el siguiente gráfico?
 
@@ -381,7 +396,9 @@ Las paletas de colores tipo *manual* y *gradient* se personalizan con el nombre 
 
 Las paletas tipo *brewer* y *distiller* utilizan paletas de colores que pueden ser secuenciales, cualitativas o divergentes, que aunque tienen utilidad en gran variedad de situaciones, están diseñadas para trabajar [con mapas o a grandes escalas](https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3).
 
-Las paletas HCL (*hue-chroma-luminance*) son paletas muy populares que tienen su propia función (p.e. colores para representar batimetría). De entre ellas, *Viridis* se he vuelto muy popular porque está diseñada para que personas con distintos tipos de daltonismo puedan distinguir los colores.
+<!--# ja: una escala grande es un mapa muy detallado, creo que te refieres a una escala pequeña... es un poco contraintuitivo pero se refiere al valor de la division. 1:50 es mas grande que 1:500000 -->
+
+Las paletas HCL (*hue-chroma-luminance*) son paletas muy populares que tienen su propia función (p. ej. colores para representar batimetría). De entre ellas, *Viridis* se he vuelto muy popular porque está diseñada para que personas con distintos tipos de daltonismo puedan distinguir los colores.
 
 ```{r paletas}
 
@@ -422,7 +439,7 @@ miplot2 +
 
 ```
 
-#### Ejercicio 7
+#### Ejercicio
 
 Dibuja una linea negra que represente los ejes de miplot y quita el fondo del gráfico.
 
@@ -435,20 +452,24 @@ miplot2 + theme_light()
 miplot2 + theme_void()
 
 # GgthemeAssist
-#install.packages("ggThemeAssist")
+# install.packages("ggThemeAssist")
 
 miplot2
 ```
+
+<!--# ja: que quieres hacer aqui abajo? -->
 
 💡Ggplotly library(plotly) ggplotly(miplot2)
 
 ## Multipaneles
 
-La librería {patchwork} permite añadir gráficos entre sí como si fueran diferentes capas.
+La librería {patchwork} permite añadir gráficos y tablas entre sí como si fueran diferentes capas.
+
+<!--# ja: ahora tablas tambien: https://www.tidyverse.org/blog/2024/09/patchwork-1-3-0/ -->
 
 ```{r patchwork}
 
-#install.packages("patchwork")
+# install.packages("patchwork")
 library(patchwork)
 
 miplot + miplot2 
@@ -471,12 +492,14 @@ La representación de mapas es sencilla con {ggplot2} si conseguimos transformar
 
 ### Raster
 
+<!--# ja: a mi el get_daily_climate() no me funciona. esta bien? -->
+
 ```{r raster}
 
 #install.packages(c("terra", "easyclimate))
 
 library(terra)
-library(easyclimate) 
+library(easyclimate)
 
 # Obtenemos datos de temperatura máxima para el 31 de diciembre de 2020 en una zona de España 
 
@@ -509,12 +532,14 @@ En general, se recomienda usar `geom_sf()`. Cuando el mapa contiene puntos es se
 
 💡<https://ggplot2.tidyverse.org/reference/ggsf.html>
 
+<!--# ja: creo que el geom() de abajo no hace nada, no? -->
+
 ```{r vect}
 
-#install.packages("sf")
+# install.packages("sf")
 library(sf)
 
-vect_terra <- vect(system.file("ex/lux.shp", package="terra"))
+vect_terra <- vect(system.file("ex/lux.shp", package = "terra"))
 vectorial <- st_as_sf(vect_terra)
 
 vectorial
@@ -531,7 +556,9 @@ vecmap +
   labs(y = "Latitude", x = "Longitude") + 
   theme_bw()
 
-vectorial_df <- vect_terra %>% geom() %>% terra::as.data.frame()
+vectorial_df <- vect_terra |> 
+  geom() |> 
+  terra::as.data.frame()
 
 ggplot(data = vectorial_df) + 
   geom_polygon(aes(x = x, y = y, group = geom, fill = as.factor(geom)), color = "white") +
@@ -541,6 +568,8 @@ ggplot(data = vectorial_df) +
   theme_bw()
 
 ```
+
+<!--# ja: quieres añadir algo mas aqui? o si no ponlo como comentario?-->
 
 library ggmap TBD
 

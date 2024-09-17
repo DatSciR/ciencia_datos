@@ -1,7 +1,7 @@
 ---
 title: | 
   | Ciencia de datos en R ![](images/Escuela de Doctorado_trilingue_positivo.png){width=80%,fig-align="right"}
-subtitle: "Organizando datos: el día a día"
+subtitle: "Programación: aprendiendo a programar con funciones"
 author: Julen Astigarraga and Verónica Cruz-Alonso
 date: today
 date-format: "DD/MM/YYYY"

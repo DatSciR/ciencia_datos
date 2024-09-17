@@ -2,42 +2,34 @@
 <img src="images/Escuela%20de%20Doctorado_trilingue_positivo.png" />
 
 Julen Astigarraga and Verónica Cruz-Alonso
-13/09/2024
+17/09/2024
 
 - [<span class="toc-section-number">1</span> Objetivos](#objetivos)
 - [<span class="toc-section-number">2</span> R Markdown](#r-markdown)
   - [<span class="toc-section-number">2.1</span> Fundamentos básicos de
     R Markdown](#fundamentos-básicos-de-r-markdown)
-    - [<span class="toc-section-number">2.1.1</span>
-      Ejercicio](#ejercicio)
 - [<span class="toc-section-number">3</span> Quarto](#quarto)
   - [<span class="toc-section-number">3.1</span> R Markdown
     vs. Quarto](#r-markdown-vs-quarto)
   - [<span class="toc-section-number">3.2</span> ¿Por qué utilizar
     Quarto en lugar de R
     Markdown?](#por-qué-utilizar-quarto-en-lugar-de-r-markdown)
-    - [<span class="toc-section-number">3.2.1</span>
-      Ejercicio](#ejercicio-1)
   - [<span class="toc-section-number">3.3</span>
     Renderización](#renderización)
   - [<span class="toc-section-number">3.4</span> ¿Qué hago con mi `.Rmd`
     o `.ipynb` existentes?](#qué-hago-con-mi-rmd-o-ipynb-existentes)
-    - [<span class="toc-section-number">3.4.1</span>
-      Ejercicio](#ejercicio-2)
 - [<span class="toc-section-number">4</span> Generando el documento
   final](#generando-el-documento-final)
   - [<span class="toc-section-number">4.1</span> Formato](#formato)
   - [<span class="toc-section-number">4.2</span>
     Referencias](#referencias)
-    - [<span class="toc-section-number">4.2.1</span>
-      Ejercicio](#ejercicio-3)
 - [<span class="toc-section-number">5</span> Automatizar varias
   versiones con
   parámetros](#automatizar-varias-versiones-con-parámetros)
 - [<span class="toc-section-number">6</span> Enlaces de
   interés](#enlaces-de-interés)
 
-# Objetivos
+## Objetivos
 
 - Aprender las bases de la programación literaria en R
 
@@ -46,7 +38,7 @@ Julen Astigarraga and Verónica Cruz-Alonso
 
 - Generar documentos reproducibles en R
 
-# R Markdown
+## R Markdown
 
 R Markdown (<https://rmarkdown.rstudio.com/>) empezó en 2012 con el
 objetivo de facilitar la reproducibilidad en R. Ha sido desarrollado
@@ -67,7 +59,7 @@ la eficiencia de trabajo (a medio-largo plazo), centrarse en el texto
 sin perder tiempo en el diseño y la producción de documentos de alta
 calidad.
 
-## Fundamentos básicos de R Markdown
+### Fundamentos básicos de R Markdown
 
 Para crear un archivo R Markdown: *File -\> New File -\> R Markdown*.
 Debemos cambiar el modelo mental: ahora tendremos un documento fuente de
@@ -194,13 +186,13 @@ Videos:
 <iframe width="560" height="315" src="https://www.youtube.com/embed/s3JldKoA0zw">
 </iframe>
 
-### Ejercicio
+#### Ejercicio
 
 Genera un documento R Markdown que esté compuesto por al menos
 metadatos, código y texto. También puedes añadir otros elementos, como
 tablas.
 
-# Quarto
+## Quarto
 
 Quarto (<https://quarto.org/>) es un sistema de publicación científica y
 técnica de código abierto construido sobre Pandoc. Convierte los
@@ -220,7 +212,7 @@ filtros Lua de Quarto + Bootstrap CSS para HTML o LaTeX para PDF.
 ![Figura de
 jthomasmock.github.io/quarto-2hr-webinar](images/qmd-universe.png)
 
-## R Markdown vs. Quarto
+### R Markdown vs. Quarto
 
 La diferencia principal de Quarto respecto a R Markdown es que se ha
 generado para la colaboración de más de una comunidad (es decir, no solo
@@ -262,7 +254,7 @@ Algunas diferencias entre Quarto y R Markdown en cuanto al código:
   para crear diferentes formatos de salida:
   <https://quarto.org/docs/output-formats/all-formats.html>
 
-## ¿Por qué utilizar Quarto en lugar de R Markdown?
+### ¿Por qué utilizar Quarto en lugar de R Markdown?
 
 - Baterias incluidas
 
@@ -272,13 +264,13 @@ Algunas diferencias entre Quarto y R Markdown en cuanto al código:
   se mantiene, pero la mayoría de las nuevas características serán
   incorporadas en Quarto)
 
-### Ejercicio
+#### Ejercicio
 
 Genera un documento Quarto que también esté compuesto por al menos
 metadatos, código y texto. ¿Qué diferencias observas respecto al de R
 Markdown?
 
-## Renderización
+### Renderización
 
 Existen tres formas para renderizar un documento en Quarto:
 
@@ -309,7 +301,7 @@ Sobre la importancia del YAML:
 
 `quarto_render("archivo.qmd", output_format = "pdf")`
 
-## ¿Qué hago con mi `.Rmd` o `.ipynb` existentes?
+### ¿Qué hago con mi `.Rmd` o `.ipynb` existentes?
 
 ¡No pasa nada! La mayoría de los `.Rmd` o `.ipynb` existentes se pueden
 convertir `as-is` a través de Quarto. Para hacerlo a través de la línea
@@ -330,14 +322,14 @@ Además existen distintas opciones para convertir archivos `.Rmd` a
 No tienes que convertir la sintaxis de todos tus documentos antiguos.
 Quarto es compatible con versiones anteriores de R Markdown.
 
-### Ejercicio
+#### Ejercicio
 
 Convierte todos los archivos del ejercicio 4.1 a `.qmd` y renderizalo a
 HTML y word mediante la opción de renderización que más te guste.
 
-# Generando el documento final
+## Generando el documento final
 
-## Formato
+### Formato
 
 Títulos coloreados en azul, el texto no está con un espaciado doble, no
 hay números de línea y… ¡manuscrito rechazado! ¡PERO NO VAMOS A EDITAR
@@ -360,7 +352,7 @@ format:
     reference-doc: plantilla.docx
 ```
 
-## Referencias
+### Referencias
 
 Para introducir citas y referencias en nuestro texto en Quarto
 utilizaremos BibTeX y así evitaremos tener que hacerlo manualmente. Con
@@ -382,13 +374,13 @@ gestor.
 
 </div>
 
-### Ejercicio
+#### Ejercicio
 
 Genera una plantilla y modifica los colores, tamaño de los títulos, etc.
 Después, añadelo al YAML. Añade alguna referencia en el documento y
 renderizalo. Por último, sube este documento al repositorio de GitHub.
 
-# Automatizar varias versiones con parámetros
+## Automatizar varias versiones con parámetros
 
 También podemos añadir parámetros a un documento, que son como variables
 definidas externamente durante la renderización. Esto permite utilizar
@@ -426,7 +418,7 @@ purrr::walk(as.vector(c("Fagus sylvatica", "Quercus ilex")), render_mi_doc)
 [Aquí](https://github.com/Julenasti/tree_species_density/blob/main/02_analyses/01_species_modelling/input_sp_modelling.Rmd)
 tenéis un ejemplo real un poco más avanzado.
 
-# Enlaces de interés
+## Enlaces de interés
 
 - [Quarto](https://quarto.org)
 
@@ -454,7 +446,7 @@ Session Info
 Sys.time()
 ```
 
-    [1] "2024-09-13 17:16:25 CEST"
+    [1] "2024-09-17 11:59:29 CEST"
 
 ``` r
 sessionInfo()
@@ -490,10 +482,10 @@ sessionInfo()
     [13] lattice_0.22-6    here_1.0.1        R6_2.5.1          labeling_0.4.3   
     [17] generics_0.1.3    tibble_3.2.1      munsell_0.5.1     rprojroot_2.0.4  
     [21] pillar_1.9.0      rlang_1.1.4       utf8_1.2.4        xfun_0.45        
-    [25] cli_3.6.3         withr_3.0.0       magrittr_2.0.3    mgcv_1.9-1       
+    [25] cli_3.6.3         withr_3.0.1       magrittr_2.0.3    mgcv_1.9-1       
     [29] digest_0.6.36     grid_4.4.1        rstudioapi_0.16.0 rappdirs_0.3.3   
     [33] nlme_3.1-164      lifecycle_1.0.4   vctrs_0.6.5       evaluate_0.24.0  
-    [37] glue_1.7.0        farver_2.1.2      fansi_1.0.6       colorspace_2.1-0 
+    [37] glue_1.7.0        farver_2.1.2      fansi_1.0.6       colorspace_2.1-1 
     [41] rmarkdown_2.27    tools_4.4.1       pkgconfig_2.0.3   htmltools_0.5.8.1
 
 </details>
