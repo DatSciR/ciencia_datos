@@ -332,6 +332,8 @@ write_delim(taludes_trans, file = "taludes_trans.csv", delim = ";")
 
 -   [Cheat sheet the dplyr](https://nyu-cdsc.github.io/learningr/assets/data-transformation.pdf)
 
+-   [Quince consejos para mejorar nuestro código y flujo de trabajo con R](https://www.revistaecosistemas.net/index.php/ecosistemas/article/view/2129)
+
 ------------------------------------------------------------------------
 
 <details>

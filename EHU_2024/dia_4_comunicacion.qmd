@@ -34,6 +34,8 @@ params:
 
 -   Generar documentos reproducibles en R
 
+![Modelo de ciencia de datos de Hadley Wickham, Mine Çetinkaya-Rundel y Garrett Grolemund. Traducido de https://r4ds.hadley.nz/intro#fig-ds-diagram](images/datascience.png){#fig-datascience alt="Modelo de ciencia de datos de Hadley Wickham, Mine Çetinkaya-Rundel y Garrett Grolemund. Traducido de https://r4ds.hadley.nz/intro#fig-ds-diagram"}
+
 ## R Markdown
 
 R Markdown (<https://rmarkdown.rstudio.com/>) empezó en 2012 con el objetivo de facilitar la reproducibilidad en R. Ha sido desarrollado principalmente por [Yihui Xie](https://yihui.org/). R Markdown es un formato de archivo para crear documentos dinámicos con R que se apoya en [`knitr`](https://yihui.org/knitr/) (paquete para generación de informes dinámicos en R) y [Pandoc](https://pandoc.org/) (conversor de documentos).

@@ -23,6 +23,8 @@ number-sections: true
 
 <!--# ja: añadiria los objetivos de este día aquí -->
 
+![Modelo de ciencia de datos de Hadley Wickham, Mine Çetinkaya-Rundel y Garrett Grolemund. Traducido de https://r4ds.hadley.nz/intro#fig-ds-diagram](images/datascience.png){#fig-datascience alt="Modelo de ciencia de datos de Hadley Wickham, Mine Çetinkaya-Rundel y Garrett Grolemund. Traducido de https://r4ds.hadley.nz/intro#fig-ds-diagram"}
+
 ## Introducción
 
 La visualización de datos es una disciplina cuyo fin es mapear datos de forma gráfica para comunicar un mensaje. En investigación se usa principalmente en los análisis exploratorios (durante la fase de entendimiento de los datos) y en la comunicación de los resultados.

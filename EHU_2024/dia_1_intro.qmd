@@ -362,6 +362,18 @@ milista[[4]][4]
 
 💡Puedes leer más sobre los tipos de objetos en R [aquí](https://bookdown.org/jboscomendoza/r-principiantes4/estructuras-de-datos.html).
 
+📝 Usar espacios antes y después de `=` y después de `,` hace mucho más fácil identificar los argumentos de la función y, en general, todos los componentes.
+
+```{r espacios}
+
+set.seed(123)
+mean(rnorm(10, mean = 50, sd = 25) / 12, trim = 0.2)
+
+set.seed(123)
+mean(rnorm(10,mean=50,sd=25)/12,trim=0.2)
+
+```
+
 #### Ejercicio
 
 -   Crea una lista que contenga dos `data.frame` con dos variables cada uno (`variable1` y `variable2`) y diez observaciones por variable.
