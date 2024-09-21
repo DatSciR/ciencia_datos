@@ -19,12 +19,19 @@ editor_options:
 number-sections: true
 ---
 
-En este curso realizaremos las distintas tareas que forman parte de la ciencia de datos utilizando *tidyverse*, aunque también se podrían llevar a cabo con R base. Consideramos que los cuatro pilares básicos de *tidyverse* (centrado en humanos, consistencia, componibilidad e inclusividad) facilitan tanto el aprendizaje como el trabajo diario, permitiendo realizar las mismas acciones de manera más sencilla, aunque reconocemos que esto puede variar según la persona.
+## Importar y renombrar datos
+
+### [Read_delim](https://readr.tidyverse.org/reference/read_delim.html): leer datos desde fuera de R
 
 ```{r read}
 #| eval: false
 
-taludes_bien <- read_delim(file = "DatosCursoR/taludes.csv", delim = ",", col_types = list(Luz = "f", Agua = "f"))
+taludes <- read_delim(file = "taludes.csv", delim = ",")
+
+taludes
+
+taludes_bien <- read_delim(file = "taludes.csv", 
+  delim = ",", col_types = list(Luz = "f", Agua = "f"))
 
 taludes_bien
 View(taludes_bien)
@@ -32,9 +39,22 @@ summary(taludes_bien)
 glimpse(taludes_bien)
 ```
 
-## Funciones básicas de filtrado y selección
+### [Rename](https://dplyr.tidyverse.org/reference/rename.html): cambiar nombres de variables (columnas)
 
-<!--# ja: pondria el link a la viñeta de cada main function que explicamos -->
+```{r rename}
+#| eval: false  
+
+names(taludes_bien)
+
+taludes_bien <- taludes_bien |>    
+  rename(biomasa = Biomasa, # nombre nuevo = nombre viejo          
+         nivel_luz = Luz, 
+         agua_estival = Agua)
+```
+
+📝 Ajustar sangría de código: Ctrl + i; Reformatear código: Ctrl + Shift + a
+
+## Funciones básicas de filtrado y selección
 
 ### [Slice](https://dplyr.tidyverse.org/reference/slice.html): filtrar filas según el índice numérico
 
@@ -55,75 +75,63 @@ taludes_bien |>
 
 ```
 
-### [Rename](https://dplyr.tidyverse.org/reference/rename.html): cambiar nombres de variables (columnas)
-
-```{r rename}
-#| eval: false
-
-taludes_bien |> 
-  rename(biomasa = Biomasa, # nombre nuevo = nombre viejo
-         luz = Luz, agua = Agua)
-```
-
-📝 Ajustar sangría de código: CTRL + I; Reformatear código: CTRL + MAYÚS + A 
-
 ### [Arrange](https://dplyr.tidyverse.org/reference/arrange.html): ordenar filas por los valores de una o más variables (columnas)
 
 ```{r arrange}
 #| eval: false
 
 taludes_bien |>
-  arrange(Biomasa)
+  arrange(biomasa)
 
 taludes_bien |> 
-  arrange(desc(Biomasa))
+  arrange(desc(biomasa))
 
 ```
 
 ### [Filter](https://dplyr.tidyverse.org/reference/filter.html): filtrar filas utilizando condiciones
 
+Se necesita un vector de filtrado que contenga valores lógicos (TRUE/FALSE).
+
 ```{r filter}
 #| eval: false
 
-# se necesita un vector de filtrado que contenga valores TRUE/FALSE
-
-taludes_bien
+taludes_bien |>
+  filter(nivel_luz == "Nivel 1") # filtrar por filas que cumplen un patrón 
 
 taludes_bien |>
-  filter(Luz == "Nivel 1") # seleccionar variables que tienen un patrón 
+  filter(nivel_luz == "Nivel 1" & biomasa > 4) # combinar criterios: AND
 
 taludes_bien |>
-  filter(Luz == "Nivel 1" & Biomasa > 4) # combinar criterios: AND
+  filter(nivel_luz == "Nivel 1" | biomasa > 5) # combinar criterios: OR
 
 taludes_bien |>
-  filter(Luz == "Nivel 1" | Biomasa > 5) # combinar criterios: OR
-
-taludes_bien |>
-  filter(Luz %in% c("Nivel 1", "Nivel 3")) # combinar criterios: %in% 
+  filter(nivel_luz %in% c("Nivel 1", "Nivel 3")) # combinar criterios: %in% 
 
 ```
 
 #### Ejercicio
 
-- Lee el data.frame "Macrobenthos.txt". Pista: el delimitador entre datos es el tabulador ("\t").
+-   Lee el data.frame "Macrobenthos.txt". Pista: el delimitador entre datos es el tabulador ("\t").
 
-- Crea un subset que contenga las filas de la 1 a la 10 y de la 390 a la 400.
+💡"Macrobenthos.txt" es una base de datos sobre la abundancia de distintos grupos taxonómicos de macroinvertebrados marinos ([Zuur et al. 2009](https://link.springer.com/book/10.1007/978-0-387-93837-0)).
 
-- Crea un subset que NO contenga el Taxon número 1. Pista: revisa los [operadores de R](https://bookdown.org/jboscomendoza/r-principiantes4/operadores-relacionales.html).
+-   Crea un subset de datos que contenga las filas de la 1 a la 10 y de la 390 a la 400.
 
-- Crea un subset con las observaciones del Taxon 2 donde se haya registrado una abundancia mayor de 50 o menor o igual a 5. Pista: necesitarás paréntesis para filtrar.
+-   Crea un subset que NO contenga el Taxon número 1. Pista: revisa los [operadores de R](https://bookdown.org/jboscomendoza/r-principiantes4/operadores-relacionales.html).
 
-- ¿Cuántas filas han quedado?
+-   Crea un subset con las observaciones del Taxon 2 donde se haya registrado una abundancia mayor de 50 o menor o igual a 5. Pista: necesitarás paréntesis para filtrar.
+
+-   ¿Cuántas filas han quedado?
 
 ### [Select](https://dplyr.tidyverse.org/reference/select.html): seleccionar columnas utilizando condiciones
+
+Se necesita un vector de selección que contenga valores lógicos (TRUE/FALSE).
 
 ```{r select}
 #| eval: false
 
-# se necesita un vector de selección que contenga valores TRUE/FALSE
-
 taludes_bien |>
-  select(Biomasa, Agua)
+  select(biomasa, agua_estival)
 
 # ?select 
 
@@ -133,15 +141,15 @@ taludes_bien |>
 # se pueden utilizar todo tipo de patrones de texto: https://rstudio.github.io/cheatsheets/strings.pdf
 
 taludes_bien |>
-  select(Luz, everything()) # se puede usar para reordenar variables
+  select(nivel_luz, everything()) # se puede usar para reordenar variables
 
 ```
 
 #### Ejercicio
 
-- Con el data.frame "Macrobenthos.txt", crea un nuevo `data.frame` que contenga las variables relacionadas con el medio (de organic matter a temperature). Pista: mira la ayuda de select para ahorrar caracteres.
+-   Con el data.frame "Macrobenthos.txt", crea un nuevo data.frame que contenga las variables relacionadas con el medio (de *organic matter* a *temperature*). Pista: mira la ayuda de select para ahorrar caracteres.
 
-- Crea un nuevo objeto con el taxon al principio y que incluya las demás columnas excepto el esfuerzo de muestreo (effort).
+-   Crea un nuevo objeto con el taxon al principio y que incluya las demás columnas excepto el esfuerzo de muestreo (*effort*).
 
 ## Transformar los datos y calcular nuevas variables
 
@@ -150,11 +158,7 @@ taludes_bien |>
 ```{r mutate}
 #| eval: false
 
-# renombramos las variables y guardamos un nuevo objeto para trabajar mejor con las funciones de transformación:
-taludes_analisis <- taludes_bien |>
-  rename(biomasa = Biomasa, nivel_luz = Luz, agua_estival = Agua)
-
-taludes_analisis |>
+taludes_bien |>
   mutate(
     ID = 1:nrow(taludes_bien),
     # definir una variable desde cero
@@ -173,7 +177,7 @@ taludes_analisis |>
   ) |> 
   select(ID, everything())
 
-taludes_analisis |>
+taludes_bien |>
   mutate(
     # sobreescribir una variable. En concreto fct_recode 
     # sirve para redefinir los niveles de un factor
@@ -187,7 +191,7 @@ taludes_analisis |>
     )
   )
 
-taludes_analisis |>
+taludes_bien |>
   mutate(
     estres = case_when(
       # utilizar varias variables para calcular otra nueva
@@ -200,10 +204,8 @@ taludes_analisis |>
   )
 
 # repetimos todo lo anterior concatenando todo el proceso:
-taludes_analisis <- taludes_bien |>
-  rename(biomasa = Biomasa,
-         nivel_luz = Luz,
-         agua_estival = Agua) |> mutate(
+
+taludes_trans <- taludes_bien |> mutate(
            ID = 1:nrow(taludes_bien),
            supervivencia = as.factor(sample(
              c(0, 1),
@@ -241,26 +243,24 @@ taludes_analisis <- taludes_bien |>
 
 #### Ejercicio
 
-- Con el `data.frame` macrobenthos genera una nueva columna con la relación entre la turbidez del agua y la materia orgánica.
+-   Con el data.frame macrobenthos genera una nueva columna con la relación entre la turbidez del agua y la materia orgánica.
 
-### [Summarise](https://dplyr.tidyverse.org/reference/summarise.html): genera un nuevo `data.frame` resumiendo cada grupo a una fila
+### [Summarise](https://dplyr.tidyverse.org/reference/summarise.html) y [group by](https://dplyr.tidyverse.org/reference/group_by.html): generar un nuevo `data.frame` resumiendo cada grupo a una fila
 
 ```{r summarise}
 #| eval: false
 
-taludes_analisis |> 
+taludes_trans |> 
   summarise(c_min = min(carbono),
             c_max = max(carbono))
 
 ```
 
-### [Group by](https://dplyr.tidyverse.org/reference/group_by.html): agrupa por una o más variables
-
 ```{r group_by}
 #| eval: false
 
-taludes_analisis |>
-  group_by(estres) |> # este tipo de summary en R base se hace con aggregate() o tapply() 
+taludes_trans |>
+  group_by(estres) |>  
   summarise(biomasa_min = min(biomasa),
             biomasa_mean = mean(biomasa),
             biomasa_max = max(biomasa))
@@ -269,150 +269,68 @@ taludes_analisis |>
 
 #### Ejercicio
 
-- Con el data.frame macrobenthos, cuenta el número de casos que hay en cada periodo de muestreo.
+-   Con el data.frame macrobenthos, cuenta el número de casos que hay en cada periodo de muestreo.
 
-- Cuenta el número de casos distintos que hay de esfuerzo de muestreo.
+-   Cuenta el número de casos distintos que hay de esfuerzo de muestreo.
 
-- Calcula la media de la turbidez para cada taxón.
+-   Calcula la media de la turbidez para cada taxón.
 
-## Unir `data.frames`
+### [Pivot](https://tidyr.tidyverse.org/reference/pivot_longer.html): transformar datos a formato largo o ancho
 
-[Joins](https://dplyr.tidyverse.org/reference/mutate-joins.html): añade columnas de `y` a `x`, haciendo coincidir las observaciones en función de las claves.
+![La variable año está dividida en dos columnas y cada fila representa dos observaciones no una. Extraido de [R for Data Science](https://r4ds.had.co.nz/tidy-data.html). ](images/tidy_pivot_longer.png)
 
-<!--# ja: faltaria añadir algun ejemplo con la base de datos de taludes-->
+```{r pivot}
+
+stocks <- tibble(
+  year   = c(2015, 2015, 2016, 2016),
+  half  = c(   1,    2,     1,    2),
+  return = c(1.88, 0.59, 0.92, 0.17)
+)
+
+stocks |> 
+  pivot_wider(names_from = year, values_from = return) |> 
+  pivot_longer(`2015`:`2016`, names_to = "year", values_to = "return")
+```
+
+## [Joins](https://dplyr.tidyverse.org/reference/mutate-joins.html): unir data.frames
+
+`*_join()` añade columnas de `y` (segundo data.frame) a `x` (primer data.frame), haciendo coincidir las observaciones en función de la variable común.
 
 ```{r joins}
 #| eval: false
 
+# join: left, right, full, inner
+
+set.seed(123)
+
+bloques <- tibble(ID = 1:nrow(taludes_trans), 
+  bloque = sample(x = 1:2, size = nrow(taludes_trans), replace = TRUE))
+
+taludes_trans <- taludes_trans |> 
+  left_join(bloques, by = "ID") |> 
+  select(ID, bloque, everything())
+
 ```
 
-<!--# ja: lo de abajo lo he traido del dia de programacion. faltaria incluir el ejemplo del join. el pivot_ lo dejaria para el dia de ggplot si no puede ser demasiado. decidir si tambien queremos hacer los ejercicios con el paquete de penguins-->
+## [Write_delim](https://readr.tidyverse.org/reference/write_delim.html): guardar datos
 
-```{r primeros_tidypasos}
-#| eval: false
-#| warning: false
+```{r export}
 
-# install.packages("tidyverse")
-library(tidyverse)
-
-penguins <- palmerpenguins::penguins
-penguins
-
-summary(penguins)
-glimpse(penguins)
-View(penguins)
-
-# filter
-penguins |> 
-  filter(island == "Dream") 
-penguins |> 
-  filter(island == "Dream" & body_mass_g > 4500) # se pueden combinar criterios
-penguins |> 
-  filter(island == "Dream" | body_mass_g > 4500) 
-penguins |> 
-  filter(island %in% c("Dream", "Torgersen"))
-
-# select
-penguins |> 
-  select(sex, body_mass_g)
-penguins |> 
-  select(ends_with("mm")) # seleccionar variables que tienen un patron
-penguins |> 
-  select(ends_with(c("mm", "g"))) 
-
-# se pueden utilizar todo tipo de patrones de texto: https://rstudio.github.io/cheatsheets/strings.pdf
-
-penguins |> 
-  select(sex, body_mass_g, everything()) # se puede usar para reordenar variables
-
-# arrange
-penguins |> 
-  select(sex, body_mass_g) |> 
-  arrange(body_mass_g)
-penguins |> 
-  select(sex, body_mass_g) |> 
-  arrange(desc(body_mass_g))
-```
-
-### Ejercicio
-
-1.  Crea un objeto con los pingüinos de la especie Adelie y ordena la tabla según la longitud del ala de los individuos.
-
-2.  Crea un objeto a partir del anterior donde selecciones la isla y las variables relacionadas con el pico.
-
-3.  Crea un objeto a partir del creado en el punto 1 donde selecciones todo menos la especie.
-
-```{r segundos_tidypasos}
-#| eval: false
-
-# mutate
-penguins |> 
-  mutate(bill_volume_mm2 = (bill_length_mm * bill_depth_mm) / 2) |> 
-  select(bill_volume_mm2, everything())
-
-penguins |>
-  mutate(female_penguin = case_when(
-    sex == "female" & body_mass_g < 3600 ~ "small female",
-    sex == "female" & body_mass_g >= 3600 ~ "big female",
-    TRUE ~ NA)) |>
-  select(female_penguin, sex, body_mass_g)
-
-# summarise
-# se utiliza con funciones que resumen: n, n_distinct, mean, etc.
-# ver ?summarise
-
-penguins |> 
-  summarise(
-    body_min = min(body_mass_g, na.rm = TRUE),
-    body_max = max(body_mass_g, na.rm = TRUE)
-  )
-
-penguins |> 
-  group_by(sex) |> 
-  summarise(body_min = min(body_mass_g, na.rm = TRUE),
-  body_max = max(body_mass_g, na.rm = TRUE))
-```
-
-### Ejercicio
-
-1.  Con el `data.frame` penguins, cuenta el número de casos que hay en cada isla y calcula la media de la longitud del ala en cada isla.
-
-2.  Con el mismo `data.frame` calcula la relación entre el peso en kg y la longitud del ala para cada individuo.
-
-```{r save_read_tidyverse}
-#| eval: false
-
-mypenguins <- penguins |> 
-  mutate(bill_volume_mm2 = (bill_length_mm * bill_depth_mm) / 2,
-    female_penguin = case_when(
-      sex == "female" & body_mass_g < 3600 ~ "small female",
-      sex == "female" & body_mass_g >= 3600 ~ "big female",
-      TRUE ~ NA)) 
-
-write_delim(mypenguins, file = "mypenguins.csv", delim = ";")
+write_delim(taludes_trans, file = "taludes_trans.csv", delim = ";")
 # en file hay que especificar el directorio donde queremos que se guarde. Si no, se guardará en el directorio de trabajo (getwd())
-
-misdatos <- read_delim(file = "mypenguins.csv")
-View(misdatos)
 ```
 
 ## Enlaces de interés
 
--   [Hands-On Programming with R (basics)](https://rstudio-education.github.io/hopr/basics.html)
+-   [Hands-On Programming with R](https://rstudio-education.github.io/hopr/)
 
 -   [R for data Science (Data transformation)](https://r4ds.had.co.nz/transform.html)
 
 -   [Style guide](http://adv-r.had.co.nz/Style.html)
 
--   [RStudio User Guide](https://docs.posit.co/ide/user)
-
--   [Posit Recipes](https://posit.cloud/learn/recipes) y en general [Posit Resources](https://posit.co/resources)
-
 -   [Página web de *tidyverse*](https://www.tidyverse.org)
 
--   [*Tidyverse: colección de paquetes de R para la ciencia de datos*](https://revistaecosistemas.net/index.php/ecosistemas/article/view/2745)
-
-<!--# ja: si se te ocurren mas adelante! -->
+-   [Cheat sheet the dplyr](https://nyu-cdsc.github.io/learningr/assets/data-transformation.pdf)
 
 ------------------------------------------------------------------------
 
