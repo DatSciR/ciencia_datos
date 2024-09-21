@@ -19,7 +19,7 @@ editor_options:
 number-sections: true
 ---
 
-## Objetivos
+## Objetivos del día 5
 
 -   Comprender la estructura, funcionalidad y potencialidad de Git y GitHub
 
