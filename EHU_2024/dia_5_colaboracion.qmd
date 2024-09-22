@@ -17,6 +17,7 @@ editor: visual
 editor_options: 
   chunk_output_type: console
 number-sections: true
+bibliography: references_git.bib
 ---
 
 ## Objetivos del día 5
@@ -27,7 +28,7 @@ number-sections: true
 
 -   Aprender a trabajar colaborativamente con Git y GitHub
 
-![Modelo de ciencia de datos de Hadley Wickham, Mine Çetinkaya-Rundel y Garrett Grolemund. Traducido de https://r4ds.hadley.nz/intro#fig-ds-diagram](images/datascience.png){#fig-datascience alt="Modelo de ciencia de datos de Hadley Wickham, Mine Çetinkaya-Rundel y Garrett Grolemund. Traducido de https://r4ds.hadley.nz/intro#fig-ds-diagram"}
+![Modelo de ciencia de datos de Hadley Wickham, Mine Çetinkaya-Rundel y Garrett Grolemund. Traducido de https://r4ds.hadley.nz/intro#fig-ds-diagram](images/datascience.png){#fig-datascience}
 
 ## Introducción
 
@@ -62,6 +63,65 @@ GitHub es un servidor de alojamiento en línea o repositorio remoto para alberga
 ![Página inicial de GitHub](images/github_pag_ini.JPG)
 
 ![Interacción entre Git y GitHub. Git, al ser un control de versiones distribuido, permite que todos los usuarios trabajen paralelamente sin interferir en el trabajo de los demás. Luego cada usuario sincroniza su trabajo con la copia principal del proyecto ubicado en GitHub](images/conexiones.jpg){fig-align="center"}
+
+## Instalación
+
+En este punto es necesario que tengas instalada la versión más reciente de R (<https://cloud.r-project.org/>), RStudio (<https://posit.co/download/rstudio-desktop/>), Git (<https://happygitwithr.com/install-git.html>) y una cuenta en GitHub (<https://github.com/>) creada.
+
+### Ejercicio
+
+1.  En el *shell*, preséntate a Git ([Chapter 7: Git-Intro](https://happygitwithr.com/hello-git.html))
+
+    *Tools* -\> *Terminal*
+
+    `git config --global user.name 'Nombre Apellido'`
+
+    `git config --global user.email 'nombre@ejemplo.com'`
+
+    💡**Este debe ser el correo electrónico asociado a tu cuenta de GitHub**
+
+    ```{r config, eval = F}
+    # install.packages("usethis")
+    # library(usethis)
+    # use_git_config(user.name = "Jane Doe", user.email = "jane@example.org")
+    ```
+
+![Terminal](images/terminal.png)\
+
+2.  Compueba que has instalado Git correctamente:
+
+    `git --version`
+
+    Para ver el usuario utilizado para configurar Git:
+
+    `git config user.name`
+
+    Para ver a qué cuenta de correo está asociado Git:
+
+    `git config user.email`
+
+    Para ver tanto el usuario como el correo asociado:
+
+    `git config --global --list`
+
+Para la resolución de problemas durante la instalación recomendamos mirar aquí: <https://happygitwithr.com/troubleshooting.html>
+
+3.  Genera un PAT (*Personal Access Token*) para HTTPS
+
+    Git puede comunicarse con un servidor remoto utilizando uno de los dos protocolos: HTTPS o SSH. Nosotros utilzaremos HTTPS con *personal access token* (PAT, <https://happygitwithr.com/https-pat.html>).
+
+```{r token, eval = F}
+# install.packages("usethis")
+# install.packages("gitcreds")
+# library(usethis)
+# library(gitcreds)
+# create_github_token() # generar un token
+# gitcreds_set() # acceder al Git credential store
+```
+
+💡Conviene describir el propósito del token en el campo *Note*, porque se pueden tener varios PATs. No podrás volver a ver este token, así que no cierres ni salgas de la ventana del navegador hasta que almacenes el PAT localmente. ¡Trata este PAT como una contraseña!
+
+![Git en RStudio](images/RStudio.JPG)
 
 ## Repositorios y proyectos
 
@@ -113,6 +173,12 @@ En la página principal del repositorio en GitHub podemos encontrar las siguient
 
 Al crear un repositorio se recomienda crear un archivo "*.gitignore*". Este archivo contendrá los nombres o extensiones de los archivos del proyecto que por defecto no queremos compartir aunque estén en el repositorio local (p. ej., el archivo "*.Rhistory*" que RStudio crea por defecto). Es una buena práctica ignorar archivos que no sean útiles pare el resto de colaboradores así como archivos muy pesados (p. ej., una base de datos resultado de correr un script) para no subirlos y descargarlos continuamente de GitHub. Para añadir archivos al *gitignore* se puede utilizar el botón derecho del ratón sobre el archivo en la pestaña Git de RStudio pero también se puede añadir el nombre del archivo que desamos ignorar en el archivo "*.gitignore*" manualmente.
 
+### GitHub: la red social
+
+GitHub no es sólo un repositorio remoto donde almacenar diferentes versiones de tu trabajo o desarrollar proyectos colaborativos, si no que también es una red de encuentro para programadores. Como en otras redes puedes cotillear perfiles, seguir a ciertas personas, tener seguidores, guardar proyectos que te gustan…
+
+Con el buscador (🔍) puedes buscar aquellos contenidos que te interesan. La búsqueda está organizada por categorías (*Repositories, Commits, Issues, Users*…) lo que facilita encontrar lo que buscas. Para seguir a un usuario tienes la opción *Follow*. Pulsando *Star*⭐ puedes guardar un enlace a cualquier repositorio en tu cuenta de GitHub y con *Fork* estarías guardando una copia con la que puedes interaccionar. Con *Watch*👁️ puedes hacer un seguimiento de un repositorio. *Download* te permite guardar una copia de cualquier repositorio público en tu ordenador.
+
 ## Flujo de trabajo en Git y GitHub
 
 Git es capaz de rastrear todos los archivos contenidos en un repositorio. Para comprender cómo Git registra los cambios y cómo podemos compartir dichos cambios con nuestros colaboradores es importante entender cómo se estructura Git y cómo se sincroniza con GitHub. Hay cuatro "zonas" de trabajo:
@@ -151,11 +217,9 @@ Además, en la pestaña Git de RStudio podemos observar el botón "*Diff*" que m
 
 ![](images/git_RStudio.png){fig-align="center" width="486"}
 
-![Git en RStudio](images/RStudio.JPG)
-
 #### Ejercicio
 
-En el proyecto generado en el Ejercicio 1, guardad y subid los cambios realizados a GitHub (`git add` + `git commit` + `git push`)
+En el proyecto generado en el ejercicio anterior, guardad y subid los cambios realizados a GitHub (`git add` + `git commit` + `git push`)
 
 💡Usar `git commit` es para el proyecto como usar anclajes cuando estamos escalando una pared de roca. Desarrollar un script sin commits es como escalar sin asegurarse: puedes avanzar mucho más rápido a corto plazo, pero a largo plazo las probabilidades de fallo catastrófico son altas. Por otro lado, hacer muchos commits va a ralentizar tu progreso. Lo mejor: usar más commits cuando estás en un territorio incierto o peligroso.
 
@@ -246,9 +310,11 @@ Para solucionarlo hay que escoger los cambios de la rama principal o de la rama 
 
 #### Ejercicio
 
-1.  Un integrante del equipo modifica también la primera frase del archivo README.txt en la rama main y sube los cambios al repositorio remoto. Esta frase había sido previamente modificada en una rama en el ejercicio 4.
-2.  Un integrante del equipo combina la rama del ejercicio 4 con la rama principal (*main*) del proyecto.
+1.  Un integrante del equipo modifica también la primera frase del archivo README.txt en la rama main y sube los cambios al repositorio remoto. Esta frase había sido previamente modificada en una rama en el ejercicio anterior.
+2.  Un integrante del equipo combina la rama del ejercicio anterior con la rama principal (*main*) del proyecto.
 3.  Resolved el conflicto (es decir, quedaos con los cambios que sirvan y subid los cambios al repositorio remoto).
+
+La información mostrada en el día de hoy está resumida en la nota ecoinformática [¡Se puede entender cómo funcionan Git y GitHub!](https://www.revistaecosistemas.net/index.php/ecosistemas/article/view/2332)
 
 ## Enlaces de interés
 

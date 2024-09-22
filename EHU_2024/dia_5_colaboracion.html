@@ -8,7 +8,7 @@
 
 <meta name="author" content="Julen Astigarraga and Verónica Cruz-Alonso">
 
-<title>quarto-input994b3279</title>
+<title>quarto-inputc9c3fb14</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -55,7 +55,27 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="dia_5_colaboracion_files/libs/clipboard/clipboard.min.js"></script>
@@ -80,29 +100,47 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Índice</h2>
    
   <ul>
-  <li><a href="#objetivos" id="toc-objetivos" class="nav-link active" data-scroll-target="#objetivos"><span class="header-section-number">1</span> Objetivos</a></li>
+  <li><a href="#objetivos-del-día-5" id="toc-objetivos-del-día-5" class="nav-link active" data-scroll-target="#objetivos-del-día-5"><span class="header-section-number">1</span> Objetivos del día 5</a></li>
   <li><a href="#introducción" id="toc-introducción" class="nav-link" data-scroll-target="#introducción"><span class="header-section-number">2</span> Introducción</a>
-  <ul class="collapse">
+  <ul>
   <li><a href="#qué-es-git" id="toc-qué-es-git" class="nav-link" data-scroll-target="#qué-es-git"><span class="header-section-number">2.1</span> Qué es Git</a></li>
   <li><a href="#qué-es-github" id="toc-qué-es-github" class="nav-link" data-scroll-target="#qué-es-github"><span class="header-section-number">2.2</span> Qué es GitHub</a></li>
   </ul></li>
-  <li><a href="#repositorios-y-proyectos" id="toc-repositorios-y-proyectos" class="nav-link" data-scroll-target="#repositorios-y-proyectos"><span class="header-section-number">3</span> Repositorios y proyectos</a>
-  <ul class="collapse">
-  <li><a href="#estructura-del-repositorio-de-github" id="toc-estructura-del-repositorio-de-github" class="nav-link" data-scroll-target="#estructura-del-repositorio-de-github"><span class="header-section-number">3.1</span> Estructura del repositorio de GitHub</a></li>
-  <li><a href="#git-ignore" id="toc-git-ignore" class="nav-link" data-scroll-target="#git-ignore"><span class="header-section-number">3.2</span> Git ignore</a></li>
+  <li><a href="#instalación" id="toc-instalación" class="nav-link" data-scroll-target="#instalación"><span class="header-section-number">3</span> Instalación</a>
+  <ul>
+  <li><a href="#ejercicio" id="toc-ejercicio" class="nav-link" data-scroll-target="#ejercicio"><span class="header-section-number">3.1</span> Ejercicio</a></li>
   </ul></li>
-  <li><a href="#flujo-de-trabajo-en-git-y-github" id="toc-flujo-de-trabajo-en-git-y-github" class="nav-link" data-scroll-target="#flujo-de-trabajo-en-git-y-github"><span class="header-section-number">4</span> Flujo de trabajo en Git y GitHub</a>
+  <li><a href="#repositorios-y-proyectos" id="toc-repositorios-y-proyectos" class="nav-link" data-scroll-target="#repositorios-y-proyectos"><span class="header-section-number">4</span> Repositorios y proyectos</a>
+  <ul>
+  <li><a href="#estructura-del-repositorio-de-github" id="toc-estructura-del-repositorio-de-github" class="nav-link" data-scroll-target="#estructura-del-repositorio-de-github"><span class="header-section-number">4.1</span> Estructura del repositorio de GitHub</a>
   <ul class="collapse">
-  <li><a href="#cómo-moverse-de-una-zona-a-otra" id="toc-cómo-moverse-de-una-zona-a-otra" class="nav-link" data-scroll-target="#cómo-moverse-de-una-zona-a-otra"><span class="header-section-number">4.1</span> ¿Cómo moverse de una zona a otra?</a></li>
-  <li><a href="#navegar-por-el-historial" id="toc-navegar-por-el-historial" class="nav-link" data-scroll-target="#navegar-por-el-historial"><span class="header-section-number">4.2</span> Navegar por el historial</a></li>
+  <li><a href="#ejercicio-1" id="toc-ejercicio-1" class="nav-link" data-scroll-target="#ejercicio-1"><span class="header-section-number">4.1.1</span> Ejercicio</a></li>
   </ul></li>
-  <li><a href="#trabajo-colaborativo" id="toc-trabajo-colaborativo" class="nav-link" data-scroll-target="#trabajo-colaborativo"><span class="header-section-number">5</span> Trabajo colaborativo</a>
+  <li><a href="#git-ignore" id="toc-git-ignore" class="nav-link" data-scroll-target="#git-ignore"><span class="header-section-number">4.2</span> Git ignore</a></li>
+  <li><a href="#github-la-red-social" id="toc-github-la-red-social" class="nav-link" data-scroll-target="#github-la-red-social"><span class="header-section-number">4.3</span> GitHub: la red social</a></li>
+  </ul></li>
+  <li><a href="#flujo-de-trabajo-en-git-y-github" id="toc-flujo-de-trabajo-en-git-y-github" class="nav-link" data-scroll-target="#flujo-de-trabajo-en-git-y-github"><span class="header-section-number">5</span> Flujo de trabajo en Git y GitHub</a>
+  <ul>
+  <li><a href="#cómo-moverse-de-una-zona-a-otra" id="toc-cómo-moverse-de-una-zona-a-otra" class="nav-link" data-scroll-target="#cómo-moverse-de-una-zona-a-otra"><span class="header-section-number">5.1</span> ¿Cómo moverse de una zona a otra?</a>
   <ul class="collapse">
-  <li><a href="#ramificación" id="toc-ramificación" class="nav-link" data-scroll-target="#ramificación"><span class="header-section-number">5.1</span> Ramificación</a></li>
-  <li><a href="#cómo-se-unen-distintas-ramas" id="toc-cómo-se-unen-distintas-ramas" class="nav-link" data-scroll-target="#cómo-se-unen-distintas-ramas"><span class="header-section-number">5.2</span> ¿Cómo se unen distintas ramas?</a></li>
-  <li><a href="#resolución-de-conflictos" id="toc-resolución-de-conflictos" class="nav-link" data-scroll-target="#resolución-de-conflictos"><span class="header-section-number">5.3</span> Resolución de conflictos</a></li>
+  <li><a href="#ejercicio-2" id="toc-ejercicio-2" class="nav-link" data-scroll-target="#ejercicio-2"><span class="header-section-number">5.1.1</span> Ejercicio</a></li>
   </ul></li>
-  <li><a href="#enlaces-de-interés" id="toc-enlaces-de-interés" class="nav-link" data-scroll-target="#enlaces-de-interés"><span class="header-section-number">6</span> Enlaces de interés</a></li>
+  <li><a href="#navegar-por-el-historial" id="toc-navegar-por-el-historial" class="nav-link" data-scroll-target="#navegar-por-el-historial"><span class="header-section-number">5.2</span> Navegar por el historial</a></li>
+  </ul></li>
+  <li><a href="#trabajo-colaborativo" id="toc-trabajo-colaborativo" class="nav-link" data-scroll-target="#trabajo-colaborativo"><span class="header-section-number">6</span> Trabajo colaborativo</a>
+  <ul>
+  <li><a href="#ejercicio-3" id="toc-ejercicio-3" class="nav-link" data-scroll-target="#ejercicio-3"><span class="header-section-number">6.0.1</span> Ejercicio</a></li>
+  <li><a href="#ramificación" id="toc-ramificación" class="nav-link" data-scroll-target="#ramificación"><span class="header-section-number">6.1</span> Ramificación</a>
+  <ul class="collapse">
+  <li><a href="#ejercicio-4" id="toc-ejercicio-4" class="nav-link" data-scroll-target="#ejercicio-4"><span class="header-section-number">6.1.1</span> Ejercicio</a></li>
+  </ul></li>
+  <li><a href="#cómo-se-unen-distintas-ramas" id="toc-cómo-se-unen-distintas-ramas" class="nav-link" data-scroll-target="#cómo-se-unen-distintas-ramas"><span class="header-section-number">6.2</span> ¿Cómo se unen distintas ramas?</a></li>
+  <li><a href="#resolución-de-conflictos" id="toc-resolución-de-conflictos" class="nav-link" data-scroll-target="#resolución-de-conflictos"><span class="header-section-number">6.3</span> Resolución de conflictos</a>
+  <ul class="collapse">
+  <li><a href="#ejercicio-5" id="toc-ejercicio-5" class="nav-link" data-scroll-target="#ejercicio-5"><span class="header-section-number">6.3.1</span> Ejercicio</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#enlaces-de-interés" id="toc-enlaces-de-interés" class="nav-link" data-scroll-target="#enlaces-de-interés"><span class="header-section-number">7</span> Enlaces de interés</a></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="dia_5_colaboracion.md"><i class="bi bi-file-code"></i>Github (GFM)</a></li></ul></div></nav>
 </div>
@@ -128,7 +166,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">17/09/2024</p>
+      <p class="date">22/09/2024</p>
     </div>
   </div>
   
@@ -140,13 +178,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="objetivos" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="objetivos"><span class="header-section-number">1</span> Objetivos</h2>
+<section id="objetivos-del-día-5" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="objetivos-del-día-5"><span class="header-section-number">1</span> Objetivos del día 5</h2>
 <ul>
 <li><p>Comprender la estructura, funcionalidad y potencialidad de Git y GitHub</p></li>
 <li><p>Comprender el flujo de trabajo entre Git, GitHub y RStudio</p></li>
 <li><p>Aprender a trabajar colaborativamente con Git y GitHub</p></li>
 </ul>
+<div id="fig-datascience" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-datascience-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/datascience.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-datascience-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Modelo de ciencia de datos de Hadley Wickham, Mine Çetinkaya-Rundel y Garrett Grolemund. Traducido de https://r4ds.hadley.nz/intro#fig-ds-diagram
+</figcaption>
+</figure>
+</div>
 </section>
 <section id="introducción" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="introducción"><span class="header-section-number">2</span> Introducción</h2>
@@ -166,7 +214,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="qué-es-git" class="level3" data-number="2.1">
 <h3 data-number="2.1" class="anchored" data-anchor-id="qué-es-git"><span class="header-section-number">2.1</span> <a href="https://git-scm.com/">Qué es Git</a></h3>
-<p>Git es un sistema avanzado de control de versiones (como el “control de cambios” de Microsoft Word) distribuido <span class="citation" data-cites="blischak2016 ram2013">[@blischak2016; @ram2013]</span>. Git permite “rastrear” el progreso de un proyecto a lo largo del tiempo ya que hace “capturas” del mismo a medida que evoluciona y los cambios se van registrando. Este sistema permite ver qué cambios se hicieron, quién los hizo y por qué, e incluso volver a versiones anteriores. Además, Git facilita el trabajo en paralelo de varios participantes. Mientras que en otros sistemas de control de versiones (p.&nbsp;ej. Subversion (SVN, <a href="https://subversion.apache.org/" class="uri">https://subversion.apache.org/</a>) o Concurrent Versions System (CVS, <a href="http://cvs.nongnu.org/" class="uri">http://cvs.nongnu.org/</a>)) hay un servidor central y cualquier cambio hecho por un usuario se sincroniza con este servidor y de ahí con el resto de usuarios, Git es un control de versiones distribuido que permite a todos los usuarios trabajar en el proyecto paralelamente e ir haciendo “capturas” del trabajo de cada uno para luego unirlos. Otras alternativas de control de versiones distribuido comparables a Git son Mercurial (<a href="https://www.mercurial-scm.org/" class="uri">https://www.mercurial-scm.org/</a>) o Bazaar (<a href="https://bazaar.canonical.com/" class="uri">https://bazaar.canonical.com/</a>), pero Git es con diferencia el más utilizado.</p>
+<p>Git es un sistema avanzado de control de versiones (como el “control de cambios” de Microsoft Word) distribuido <span class="citation" data-cites="blischak2016 ram2013">(<a href="#ref-blischak2016" role="doc-biblioref">Blischak, Davenport, and Wilson 2016</a>; <a href="#ref-ram2013" role="doc-biblioref">Ram 2013</a>)</span>. Git permite “rastrear” el progreso de un proyecto a lo largo del tiempo ya que hace “capturas” del mismo a medida que evoluciona y los cambios se van registrando. Este sistema permite ver qué cambios se hicieron, quién los hizo y por qué, e incluso volver a versiones anteriores. Además, Git facilita el trabajo en paralelo de varios participantes. Mientras que en otros sistemas de control de versiones (p.&nbsp;ej. Subversion (SVN, <a href="https://subversion.apache.org/" class="uri">https://subversion.apache.org/</a>) o Concurrent Versions System (CVS, <a href="http://cvs.nongnu.org/" class="uri">http://cvs.nongnu.org/</a>)) hay un servidor central y cualquier cambio hecho por un usuario se sincroniza con este servidor y de ahí con el resto de usuarios, Git es un control de versiones distribuido que permite a todos los usuarios trabajar en el proyecto paralelamente e ir haciendo “capturas” del trabajo de cada uno para luego unirlos. Otras alternativas de control de versiones distribuido comparables a Git son Mercurial (<a href="https://www.mercurial-scm.org/" class="uri">https://www.mercurial-scm.org/</a>) o Bazaar (<a href="https://bazaar.canonical.com/" class="uri">https://bazaar.canonical.com/</a>), pero Git es con diferencia el más utilizado.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/git.jpg" class="img-fluid figure-img"></p>
@@ -176,7 +224,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="qué-es-github" class="level3" data-number="2.2">
 <h3 data-number="2.2" class="anchored" data-anchor-id="qué-es-github"><span class="header-section-number">2.2</span> <a href="https://github.com/">Qué es GitHub</a></h3>
-<p>GitHub es un servidor de alojamiento en línea o repositorio remoto para albergar proyectos basados en Git que permite la colaboración entre diferentes usuarios o con uno mismo <span class="citation" data-cites="galeano2018 perez-riverol2016">[@galeano2018; @perez-riverol2016]</span>. Un repositorio es un directorio donde desarrollar un proyecto que contiene todos los archivos necesarios para el mismo. Aunque existen distintos repositorios remotos (p.&nbsp;ej. GitLab, <a href="https://gitlab.com/" class="uri">https://gitlab.com/</a>, o Bitbucket, <a href="https://bitbucket.org/" class="uri">https://bitbucket.org/</a>) con funcionalidad similar, GitHub es hoy en día el más utilizado. GitHub registra el desarrollo de los proyectos de manera remota, permite compartir proyectos entre distintos usuarios y proporciona la seguridad de la nube entre otras funciones. Cuando se trabaja en proyectos colaborativos, la base de la interacción entre Git y GitHub es que todos los colaboradores de un proyecto están de acuerdo en que GitHub contiene la copia principal del proyecto, es decir, GitHub contiene la copia centralizada del control de versiones distribuido o descentralizado.</p>
+<p>GitHub es un servidor de alojamiento en línea o repositorio remoto para albergar proyectos basados en Git que permite la colaboración entre diferentes usuarios o con uno mismo <span class="citation" data-cites="galeano2018 perez-riverol2016">(<a href="#ref-galeano2018" role="doc-biblioref">Galeano 2018</a>; <a href="#ref-perez-riverol2016" role="doc-biblioref">Perez-Riverol et al. 2016</a>)</span>. Un repositorio es un directorio donde desarrollar un proyecto que contiene todos los archivos necesarios para el mismo. Aunque existen distintos repositorios remotos (p.&nbsp;ej. GitLab, <a href="https://gitlab.com/" class="uri">https://gitlab.com/</a>, o Bitbucket, <a href="https://bitbucket.org/" class="uri">https://bitbucket.org/</a>) con funcionalidad similar, GitHub es hoy en día el más utilizado. GitHub registra el desarrollo de los proyectos de manera remota, permite compartir proyectos entre distintos usuarios y proporciona la seguridad de la nube entre otras funciones. Cuando se trabaja en proyectos colaborativos, la base de la interacción entre Git y GitHub es que todos los colaboradores de un proyecto están de acuerdo en que GitHub contiene la copia principal del proyecto, es decir, GitHub contiene la copia centralizada del control de versiones distribuido o descentralizado.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/github_pag_ini.JPG" class="img-fluid figure-img"></p>
@@ -191,16 +239,67 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
-<section id="repositorios-y-proyectos" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="repositorios-y-proyectos"><span class="header-section-number">3</span> Repositorios y proyectos</h2>
+<section id="instalación" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="instalación"><span class="header-section-number">3</span> Instalación</h2>
+<p>En este punto es necesario que tengas instalada la versión más reciente de R (<a href="https://cloud.r-project.org/" class="uri">https://cloud.r-project.org/</a>), RStudio (<a href="https://posit.co/download/rstudio-desktop/" class="uri">https://posit.co/download/rstudio-desktop/</a>), Git (<a href="https://happygitwithr.com/install-git.html" class="uri">https://happygitwithr.com/install-git.html</a>) y una cuenta en GitHub (<a href="https://github.com/" class="uri">https://github.com/</a>) creada.</p>
+<section id="ejercicio" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="ejercicio"><span class="header-section-number">3.1</span> Ejercicio</h3>
+<ol type="1">
+<li><p>En el <em>shell</em>, preséntate a Git (<a href="https://happygitwithr.com/hello-git.html">Chapter 7: Git-Intro</a>)</p>
+<p><em>Tools</em> -&gt; <em>Terminal</em></p>
+<p><code>git config --global user.name 'Nombre Apellido'</code></p>
+<p><code>git config --global user.email 'nombre@ejemplo.com'</code></p>
+<p>💡<strong>Este debe ser el correo electrónico asociado a tu cuenta de GitHub</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("usethis")</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># library(usethis)</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># use_git_config(user.name = "Jane Doe", user.email = "jane@example.org")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></li>
+</ol>
+<p><img src="images/terminal.png" class="img-fluid" alt="Terminal"><br>
+</p>
+<ol start="2" type="1">
+<li><p>Compueba que has instalado Git correctamente:</p>
+<p><code>git --version</code></p>
+<p>Para ver el usuario utilizado para configurar Git:</p>
+<p><code>git config user.name</code></p>
+<p>Para ver a qué cuenta de correo está asociado Git:</p>
+<p><code>git config user.email</code></p>
+<p>Para ver tanto el usuario como el correo asociado:</p>
+<p><code>git config --global --list</code></p></li>
+</ol>
+<p>Para la resolución de problemas durante la instalación recomendamos mirar aquí: <a href="https://happygitwithr.com/troubleshooting.html" class="uri">https://happygitwithr.com/troubleshooting.html</a></p>
+<ol start="3" type="1">
+<li><p>Genera un PAT (<em>Personal Access Token</em>) para HTTPS</p>
+<p>Git puede comunicarse con un servidor remoto utilizando uno de los dos protocolos: HTTPS o SSH. Nosotros utilzaremos HTTPS con <em>personal access token</em> (PAT, <a href="https://happygitwithr.com/https-pat.html" class="uri">https://happygitwithr.com/https-pat.html</a>).</p></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("usethis")</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("gitcreds")</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># library(usethis)</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># library(gitcreds)</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># create_github_token() # generar un token</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># gitcreds_set() # acceder al Git credential store</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>💡Conviene describir el propósito del token en el campo <em>Note</em>, porque se pueden tener varios PATs. No podrás volver a ver este token, así que no cierres ni salgas de la ventana del navegador hasta que almacenes el PAT localmente. ¡Trata este PAT como una contraseña!</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/RStudio.JPG" class="img-fluid figure-img"></p>
+<figcaption>Git en RStudio</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="repositorios-y-proyectos" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="repositorios-y-proyectos"><span class="header-section-number">4</span> Repositorios y proyectos</h2>
 <p>Un repositorio es como un “contenedor” donde desarrollar un proyecto.</p>
 <p>Para crear un repositorio en GitHub damos a “<em>+ New repository</em>”. Aquí se indica el nombre, una pequeña descripción, y si quieres que sea público o privado. Se recomienda iniciar el repositorio con un archivo “README” (<em>Initialize this repository with a README</em>) para recoger cualquier información esencial para el uso del repositorio (estructura, descripción más detallada del contenido, etc.).</p>
 <p>En RStudio, creamos un nuevo proyecto y lo conectamos al repositorio: File -&gt; New project -&gt; Version control -&gt; Git -&gt; copiar el URL del repositorio que hemos creado de GitHub (está en la página principal de nuestro repositorio, en “<em>clone or download</em>”). Seleccionamos el directorio local donde queremos guardar el proyecto y pulsamos en “<em>Create project</em>”.</p>
 <p>Si vamos al directorio local seleccionado, encontraremos la carpeta conectada a Git y GitHub que hemos creado en nuestro ordenador. Podemos copiar aquí todos los archivos que nos interesan para el proyecto (datos, imágenes, etc).</p>
-<p>💡Para más información sobre cómo clonar el repositorio en GitHub (repositorio remoto) en nuestro ordenador (repositorio local) ver <a href="https://happygitwithr.com/rstudio-git-github.html" class="uri">https://happygitwithr.com/rstudio-git-github.html</a> para hacerlo desde RStudio y <span class="citation" data-cites="galeano2018">@galeano2018</span> para hacerlo mediante la línea de comandos.</p>
+<p>💡Para más información sobre cómo clonar el repositorio en GitHub (repositorio remoto) en nuestro ordenador (repositorio local) ver <a href="https://happygitwithr.com/rstudio-git-github.html" class="uri">https://happygitwithr.com/rstudio-git-github.html</a> para hacerlo desde RStudio y <span class="citation" data-cites="galeano2018">Galeano (<a href="#ref-galeano2018" role="doc-biblioref">2018</a>)</span> para hacerlo mediante la línea de comandos.</p>
 <p>💡En caso de querer conectar un antiguo proyecto de RStudio a Git y GitHub, puedes seguir los pasos que se describen aquí: <a href="https://happygitwithr.com/existing-github-first.html" class="uri">https://happygitwithr.com/existing-github-first.html</a>.</p>
-<section id="estructura-del-repositorio-de-github" class="level3" data-number="3.1">
-<h3 data-number="3.1" class="anchored" data-anchor-id="estructura-del-repositorio-de-github"><span class="header-section-number">3.1</span> Estructura del repositorio de GitHub</h3>
+<section id="estructura-del-repositorio-de-github" class="level3" data-number="4.1">
+<h3 data-number="4.1" class="anchored" data-anchor-id="estructura-del-repositorio-de-github"><span class="header-section-number">4.1</span> Estructura del repositorio de GitHub</h3>
 <p>En la página principal del repositorio en GitHub podemos encontrar las siguientes pestañas:</p>
 <ul>
 <li><p><strong>Code</strong>: contenido del proyecto</p></li>
@@ -219,8 +318,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <figcaption>Repositorio en GitHub destacando algunas pestañas importantes</figcaption>
 </figure>
 </div>
-<section id="ejercicio" class="level4" data-number="3.1.1">
-<h4 data-number="3.1.1" class="anchored" data-anchor-id="ejercicio"><span class="header-section-number">3.1.1</span> Ejercicio</h4>
+<section id="ejercicio-1" class="level4" data-number="4.1.1">
+<h4 data-number="4.1.1" class="anchored" data-anchor-id="ejercicio-1"><span class="header-section-number">4.1.1</span> Ejercicio</h4>
 <ol type="1">
 <li><p>Crea un repositorio en GitHub y conéctalo a un nuevo proyecto de RStudio (esto generará un repositorio (carpeta) en tu ordenador en la ubicación que hayas especificado). Incluir un archivo “<em>.gitignore”</em></p></li>
 <li><p>Crea un nuevo script de R en el directorio de trabajo (es decir, crea un script de R y guárdalo dentro del repositorio que has creado)</p></li>
@@ -228,13 +327,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 </section>
 </section>
-<section id="git-ignore" class="level3" data-number="3.2">
-<h3 data-number="3.2" class="anchored" data-anchor-id="git-ignore"><span class="header-section-number">3.2</span> Git ignore</h3>
+<section id="git-ignore" class="level3" data-number="4.2">
+<h3 data-number="4.2" class="anchored" data-anchor-id="git-ignore"><span class="header-section-number">4.2</span> Git ignore</h3>
 <p>Al crear un repositorio se recomienda crear un archivo “<em>.gitignore</em>”. Este archivo contendrá los nombres o extensiones de los archivos del proyecto que por defecto no queremos compartir aunque estén en el repositorio local (p.&nbsp;ej., el archivo “<em>.Rhistory</em>” que RStudio crea por defecto). Es una buena práctica ignorar archivos que no sean útiles pare el resto de colaboradores así como archivos muy pesados (p.&nbsp;ej., una base de datos resultado de correr un script) para no subirlos y descargarlos continuamente de GitHub. Para añadir archivos al <em>gitignore</em> se puede utilizar el botón derecho del ratón sobre el archivo en la pestaña Git de RStudio pero también se puede añadir el nombre del archivo que desamos ignorar en el archivo “<em>.gitignore</em>” manualmente.</p>
 </section>
+<section id="github-la-red-social" class="level3" data-number="4.3">
+<h3 data-number="4.3" class="anchored" data-anchor-id="github-la-red-social"><span class="header-section-number">4.3</span> GitHub: la red social</h3>
+<p>GitHub no es sólo un repositorio remoto donde almacenar diferentes versiones de tu trabajo o desarrollar proyectos colaborativos, si no que también es una red de encuentro para programadores. Como en otras redes puedes cotillear perfiles, seguir a ciertas personas, tener seguidores, guardar proyectos que te gustan…</p>
+<p>Con el buscador (🔍) puedes buscar aquellos contenidos que te interesan. La búsqueda está organizada por categorías (<em>Repositories, Commits, Issues, Users</em>…) lo que facilita encontrar lo que buscas. Para seguir a un usuario tienes la opción <em>Follow</em>. Pulsando <em>Star</em>⭐ puedes guardar un enlace a cualquier repositorio en tu cuenta de GitHub y con <em>Fork</em> estarías guardando una copia con la que puedes interaccionar. Con <em>Watch</em>👁️ puedes hacer un seguimiento de un repositorio. <em>Download</em> te permite guardar una copia de cualquier repositorio público en tu ordenador.</p>
 </section>
-<section id="flujo-de-trabajo-en-git-y-github" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="flujo-de-trabajo-en-git-y-github"><span class="header-section-number">4</span> Flujo de trabajo en Git y GitHub</h2>
+</section>
+<section id="flujo-de-trabajo-en-git-y-github" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="flujo-de-trabajo-en-git-y-github"><span class="header-section-number">5</span> Flujo de trabajo en Git y GitHub</h2>
 <p>Git es capaz de rastrear todos los archivos contenidos en un repositorio. Para comprender cómo Git registra los cambios y cómo podemos compartir dichos cambios con nuestros colaboradores es importante entender cómo se estructura Git y cómo se sincroniza con GitHub. Hay cuatro “zonas” de trabajo:</p>
 <ol type="1">
 <li><p><strong>Directorio de trabajo (<em>working directory</em>):</strong> es donde se está trabajando. Esta zona se sincroniza con los archivos locales del ordenador.</p></li>
@@ -248,8 +352,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <figcaption>Representación gráfica de las diferentes zonas de trabajo en Git y GitHub: directorio de trabajo, área de preparación o Index, repositorio local o HEAD, y repositorio remoto. Imagen de fondo de Philip Brookes (https://creativecommons.org/licenses/by-nc-nd/2.0/legalcode)</figcaption>
 </figure>
 </div>
-<section id="cómo-moverse-de-una-zona-a-otra" class="level3" data-number="4.1">
-<h3 data-number="4.1" class="anchored" data-anchor-id="cómo-moverse-de-una-zona-a-otra"><span class="header-section-number">4.1</span> ¿Cómo moverse de una zona a otra?</h3>
+<section id="cómo-moverse-de-una-zona-a-otra" class="level3" data-number="5.1">
+<h3 data-number="5.1" class="anchored" data-anchor-id="cómo-moverse-de-una-zona-a-otra"><span class="header-section-number">5.1</span> ¿Cómo moverse de una zona a otra?</h3>
 <p>Se puede hacer mediante línea de comandos en la terminal y también mediante la pestaña integrada en RStudio, pero el proceso es el mismo.</p>
 <p>Al principio todos los cambios realizados aparecen en amarillo porque Git no sabe que hacer con ellos. Estamos en el directorio de trabajo y puede que no nos interese guardar todos los cambios para el futuro.</p>
 <p>Para añadir un cambio del directorio de trabajo al área de preparación hay que utilizar <code>git add</code> (en la pestaña Git de RStudio se hace seleccionando el archivo). Este comando indica a Git que se quieren incluir las actualizaciones de algún archivo en la próxima “captura” del proyecto y que Git las registre. Sin embargo, <code>git add</code> no afecta al repositorio local.</p>
@@ -280,15 +384,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="images/git_RStudio.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="486"></p>
 </figure>
 </div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/RStudio.JPG" class="img-fluid figure-img"></p>
-<figcaption>Git en RStudio</figcaption>
-</figure>
-</div>
-<section id="ejercicio-1" class="level4" data-number="4.1.1">
-<h4 data-number="4.1.1" class="anchored" data-anchor-id="ejercicio-1"><span class="header-section-number">4.1.1</span> Ejercicio</h4>
-<p>En el proyecto generado en el Ejercicio 1, guardad y subid los cambios realizados a GitHub (<code>git add</code> + <code>git commit</code> + <code>git push</code>)</p>
+<section id="ejercicio-2" class="level4" data-number="5.1.1">
+<h4 data-number="5.1.1" class="anchored" data-anchor-id="ejercicio-2"><span class="header-section-number">5.1.1</span> Ejercicio</h4>
+<p>En el proyecto generado en el ejercicio anterior, guardad y subid los cambios realizados a GitHub (<code>git add</code> + <code>git commit</code> + <code>git push</code>)</p>
 <p>💡Usar <code>git commit</code> es para el proyecto como usar anclajes cuando estamos escalando una pared de roca. Desarrollar un script sin commits es como escalar sin asegurarse: puedes avanzar mucho más rápido a corto plazo, pero a largo plazo las probabilidades de fallo catastrófico son altas. Por otro lado, hacer muchos commits va a ralentizar tu progreso. Lo mejor: usar más commits cuando estás en un territorio incierto o peligroso.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -305,8 +403,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
-<section id="navegar-por-el-historial" class="level3" data-number="4.2">
-<h3 data-number="4.2" class="anchored" data-anchor-id="navegar-por-el-historial"><span class="header-section-number">4.2</span> Navegar por el historial</h3>
+<section id="navegar-por-el-historial" class="level3" data-number="5.2">
+<h3 data-number="5.2" class="anchored" data-anchor-id="navegar-por-el-historial"><span class="header-section-number">5.2</span> Navegar por el historial</h3>
 <p>El historial de un repositorio (<em>🕘XX commits</em>) contiene una lista de enlaces a todos los commits que se han realizado en cualquiera de las ramas. Dentro de cada <em>commit</em> se pueden ver los archivos añadidos o borrados en esa “captura” y las líneas de código añadidas (en verde) o borradas (en rojo) en cada archivo modificado. Además, en el historial, se pueden añadir comentarios en líneas concretas de código o comentarios generales al <em>commit</em> entero.</p>
 <p>En GitHub también se puede acceder a la historia de commits de cada archivo en concreto (<em>History</em>) y al autor de cada parte del código (<em>Blame</em>).</p>
 <p>El historial del proyecto y de los archivos también es accesible a través de RStudio (🕒).</p>
@@ -320,20 +418,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>💡En los <em>issues</em> se puede referenciar a una línea concreta de código de un estado concreto del proyecto entrando en el archivo en la pestaña <em>Code</em> y clickando en el número de línea que se quiere comentar, o un <em>commit</em> entero copiando el SHA.</p>
 </section>
 </section>
-<section id="trabajo-colaborativo" class="level2" data-number="5">
-<h2 data-number="5" class="anchored" data-anchor-id="trabajo-colaborativo"><span class="header-section-number">5</span> Trabajo colaborativo</h2>
+<section id="trabajo-colaborativo" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="trabajo-colaborativo"><span class="header-section-number">6</span> Trabajo colaborativo</h2>
 <p>Aunque Git y GitHub facilitan el control de versiones de nuestros proyectos individuales, su máxima potencialidad se despliega al trabajar en equipo ya que facilitan el seguimiento del trabajo de todos los colaboradores y la integración ordenada de cada parte en un producto final.</p>
 <p>Para dar acceso de edición a tus colaboradores, en la página principal de nuestro proyecto en GitHub entramos en “<em>Settings -&gt; Access -&gt; Collaborators -&gt; Manage Access -&gt; Add people</em>”. Los colaboradores pueden crear su copia local del proyecto de control de versiones clonando el repositorio remoto.</p>
-<section id="ejercicio-2" class="level4" data-number="5.0.1">
-<h4 data-number="5.0.1" class="anchored" data-anchor-id="ejercicio-2"><span class="header-section-number">5.0.1</span> Ejercicio</h4>
+<section id="ejercicio-3" class="level4" data-number="6.0.1">
+<h4 data-number="6.0.1" class="anchored" data-anchor-id="ejercicio-3"><span class="header-section-number">6.0.1</span> Ejercicio</h4>
 <p>En equipos de 2 o 3 personas:</p>
 <ol type="1">
 <li>El dueño del repositorio invita al resto de integrantes del equipo a su proyecto</li>
 <li>Los colaboradores clonan el repositorio al que han sido invitados a su directorio de trabajo</li>
 </ol>
 </section>
-<section id="ramificación" class="level3" data-number="5.1">
-<h3 data-number="5.1" class="anchored" data-anchor-id="ramificación"><span class="header-section-number">5.1</span> Ramificación</h3>
+<section id="ramificación" class="level3" data-number="6.1">
+<h3 data-number="6.1" class="anchored" data-anchor-id="ramificación"><span class="header-section-number">6.1</span> Ramificación</h3>
 <p>Git permite crear una “rama” (<em>branch</em>) paralela al proyecto si se desea seguir una línea independiente de trabajo, bien por ser diferente de la principal (p.&nbsp;ej. probar un nuevo análisis) o bien para desarrollar específicamente una parte del proyecto (p.&nbsp;ej. trabajar sólo en la escritura de los métodos de un artículo mientras otros colaboradores trabajan en otras secciones). Las ramas permiten trabajar en el proyecto sin interferir con lo que están haciendo los compañeros. En Git, una rama es un <em>commit</em> al que le se le da un nombre y que contiene un “enlace” (puntero o <em>pointer</em>) a un SHA específico que es el origen de la rama. La rama <em>main</em> es la rama por defecto cuando se crea un repositorio y a partir de ella se suelen crear las demás.</p>
 <p>Las ramas se pueden generar en la <a href="https://github.com/DatSciR/intro_git-github/blob/main/centra/dia2_colaboracion.md">terminal</a> y en la pestaña Git de RStudio. En la pestaña Git se generan mediante el botón “<em>New Branch</em>”. Al lado de “<em>New Branch”</em> podemos observar todas las ramas que contiene el repositorio y nos permite cambiar de rama fácilmente clickando en ellas.</p>
 <div class="quarto-figure quarto-figure-center">
@@ -342,8 +440,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <figcaption>Proceso de creación de la rama PPP y la rama monchi</figcaption>
 </figure>
 </div>
-<section id="ejercicio-3" class="level4" data-number="5.1.1">
-<h4 data-number="5.1.1" class="anchored" data-anchor-id="ejercicio-3"><span class="header-section-number">5.1.1</span> Ejercicio</h4>
+<section id="ejercicio-4" class="level4" data-number="6.1.1">
+<h4 data-number="6.1.1" class="anchored" data-anchor-id="ejercicio-4"><span class="header-section-number">6.1.1</span> Ejercicio</h4>
 <ol type="1">
 <li><p>Un integrante del equipo crea una rama en el proyecto en el que colabora</p></li>
 <li><p>Modifica la primera frase del archivo README.txt y sube los cambios al repositorio remoto</p></li>
@@ -356,8 +454,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
-<section id="cómo-se-unen-distintas-ramas" class="level3" data-number="5.2">
-<h3 data-number="5.2" class="anchored" data-anchor-id="cómo-se-unen-distintas-ramas"><span class="header-section-number">5.2</span> ¿Cómo se unen distintas ramas?</h3>
+<section id="cómo-se-unen-distintas-ramas" class="level3" data-number="6.2">
+<h3 data-number="6.2" class="anchored" data-anchor-id="cómo-se-unen-distintas-ramas"><span class="header-section-number">6.2</span> ¿Cómo se unen distintas ramas?</h3>
 <p>Cuando el trabajo desarrollado en una rama se da por finalizado hay que hacer la unión a la rama principal (“<em>main</em>”). Esto se puede hacer en la <a href="https://github.com/DatSciR/intro_git-github/blob/main/centra/dia2_colaboracion.md">terminal</a> y con el botón “<em>pull request</em>” en la página del proyecto en GitHub siguiendo los pasos que se explican a continuación.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -390,8 +488,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </section>
-<section id="resolución-de-conflictos" class="level3" data-number="5.3">
-<h3 data-number="5.3" class="anchored" data-anchor-id="resolución-de-conflictos"><span class="header-section-number">5.3</span> Resolución de conflictos</h3>
+<section id="resolución-de-conflictos" class="level3" data-number="6.3">
+<h3 data-number="6.3" class="anchored" data-anchor-id="resolución-de-conflictos"><span class="header-section-number">6.3</span> Resolución de conflictos</h3>
 <p>Git puede encontrar conflictos al fusionar ramas que hay que arreglar manualmente (GitHub os indicará “Can’t automatically merge”). Esto ocurrirá si en las dos ramas se han cambiado las mismas líneas de un archivo. Hay que generar el pull request y “<em>Resolve conflicts</em>”.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -409,18 +507,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><code>&lt;&lt;&lt;&lt;&lt;&lt;código del main=======código de la rama a unir&gt;&gt;&gt;&gt;&gt;&gt;</code></p>
 <p><img src="images/cant_merge3.png" class="img-fluid"></p>
 <p>Para solucionarlo hay que escoger los cambios de la rama principal o de la rama a unir según corresponda. Una vez solucionados, Git permite completar el <em>merge</em> (es decir, un nuevo <em>commit</em> que contendrá las ramas fusionadas). La mejor manera de evitar conflictos o por lo menos reducir su dificultad es realizar cambios pequeños y sincronizar frecuentemente con GitHub.</p>
-<section id="ejercicio-4" class="level4" data-number="5.3.1">
-<h4 data-number="5.3.1" class="anchored" data-anchor-id="ejercicio-4"><span class="header-section-number">5.3.1</span> Ejercicio</h4>
+<section id="ejercicio-5" class="level4" data-number="6.3.1">
+<h4 data-number="6.3.1" class="anchored" data-anchor-id="ejercicio-5"><span class="header-section-number">6.3.1</span> Ejercicio</h4>
 <ol type="1">
-<li>Un integrante del equipo modifica también la primera frase del archivo README.txt en la rama main y sube los cambios al repositorio remoto. Esta frase había sido previamente modificada en una rama en el ejercicio 4.</li>
-<li>Un integrante del equipo combina la rama del ejercicio 4 con la rama principal (<em>main</em>) del proyecto.</li>
+<li>Un integrante del equipo modifica también la primera frase del archivo README.txt en la rama main y sube los cambios al repositorio remoto. Esta frase había sido previamente modificada en una rama en el ejercicio anterior.</li>
+<li>Un integrante del equipo combina la rama del ejercicio anterior con la rama principal (<em>main</em>) del proyecto.</li>
 <li>Resolved el conflicto (es decir, quedaos con los cambios que sirvan y subid los cambios al repositorio remoto).</li>
 </ol>
+<p>La información mostrada en el día de hoy está resumida en la nota ecoinformática <a href="https://www.revistaecosistemas.net/index.php/ecosistemas/article/view/2332">¡Se puede entender cómo funcionan Git y GitHub!</a></p>
 </section>
 </section>
 </section>
-<section id="enlaces-de-interés" class="level2" data-number="6">
-<h2 data-number="6" class="anchored" data-anchor-id="enlaces-de-interés"><span class="header-section-number">6</span> Enlaces de interés</h2>
+<section id="enlaces-de-interés" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="enlaces-de-interés"><span class="header-section-number">7</span> Enlaces de interés</h2>
 <p><strong>Ciencia reproducible</strong></p>
 <ul>
 <li><a href="https://github.com/ecoinfAEET/Reproducibilidad">Ciencia reproducible: qué, por qué, cómo</a></li>
@@ -448,11 +547,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 Session Info
 </summary>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.time</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.time</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "2024-09-17 13:36:58 CEST"</code></pre>
+<pre><code>[1] "2024-09-22 13:50:53 CEST"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>R version 4.4.1 (2024-06-14 ucrt)
 Platform: x86_64-w64-mingw32/x64
@@ -482,9 +581,23 @@ loaded via a namespace (and not attached):
 </div>
 </div>
 </details>
+
 </section>
 
-</main>
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-blischak2016" class="csl-entry" role="listitem">
+Blischak, John D., Emily R. Davenport, and Greg Wilson. 2016. <span>“A Quick Introduction to Version Control with Git and GitHub.”</span> <em>PLOS Computational Biology</em> 12 (1): e1004668. <a href="https://doi.org/10.1371/journal.pcbi.1004668">https://doi.org/10.1371/journal.pcbi.1004668</a>.
+</div>
+<div id="ref-galeano2018" class="csl-entry" role="listitem">
+Galeano, Javier. 2018. <span>“¿Por qué usar GitHub? Diez pasos para disfrutar de GitHub y no morir en el intento.”</span> <em>Ecosistemas</em> 27 (2): 140–41. <a href="https://doi.org/10.7818/ECOS.1604">https://doi.org/10.7818/ECOS.1604</a>.
+</div>
+<div id="ref-perez-riverol2016" class="csl-entry" role="listitem">
+Perez-Riverol, Yasset, Laurent Gatto, Rui Wang, Timo Sachsenberg, Julian Uszkoreit, Felipe da Veiga Leprevost, Christian Fufezan, et al. 2016. <span>“Ten Simple Rules for Taking Advantage of Git and GitHub.”</span> <em>PLOS Computational Biology</em> 12 (7): e1004947. <a href="https://doi.org/10.1371/journal.pcbi.1004947">https://doi.org/10.1371/journal.pcbi.1004947</a>.
+</div>
+<div id="ref-ram2013" class="csl-entry" role="listitem">
+Ram, Karthik. 2013. <span>“Git Can Facilitate Greater Reproducibility and Increased Transparency in Science.”</span> <em>Source Code for Biology and Medicine</em> 8 (1): 7. <a href="https://doi.org/10.1186/1751-0473-8-7">https://doi.org/10.1186/1751-0473-8-7</a>.
+</div>
+</div></section></div></main>
 <!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
