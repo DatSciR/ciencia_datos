@@ -2,7 +2,7 @@
 title: | 
   | Ciencia de datos en R ![](images/Escuela de Doctorado_trilingue_positivo.png){width=80%,fig-align="right"}
 subtitle: "Organizando datos: el día a día"
-author: Julen Astigarraga and Verónica Cruz-Alonso
+author: Verónica Cruz-Alonso and Julen Astigarraga
 date: today
 date-format: "DD/MM/YYYY"
 toc: true
@@ -24,7 +24,7 @@ number-sections: true
 ### [Read_delim](https://readr.tidyverse.org/reference/read_delim.html): leer datos desde fuera de R
 
 ```{r read}
-#| eval: false
+#| warning: false
 
 taludes <- read_delim(file = "taludes.csv", delim = ",")
 
@@ -42,7 +42,7 @@ glimpse(taludes_bien)
 ### [Rename](https://dplyr.tidyverse.org/reference/rename.html): cambiar nombres de variables (columnas)
 
 ```{r rename}
-#| eval: false  
+#| warning: false  
 
 names(taludes_bien)
 
@@ -59,7 +59,7 @@ taludes_bien <- taludes_bien |>
 ### [Slice](https://dplyr.tidyverse.org/reference/slice.html): filtrar filas según el índice numérico
 
 ```{r slice}
-#| eval: false
+#| warning: false
 
 taludes_bien |> 
   slice(1) # shortcut para el pipe: CTRL + SHIFT + M 
@@ -78,7 +78,7 @@ taludes_bien |>
 ### [Arrange](https://dplyr.tidyverse.org/reference/arrange.html): ordenar filas por los valores de una o más variables (columnas)
 
 ```{r arrange}
-#| eval: false
+#| warning: false
 
 taludes_bien |>
   arrange(biomasa)
@@ -93,7 +93,7 @@ taludes_bien |>
 Se necesita un vector de filtrado que contenga valores lógicos (TRUE/FALSE).
 
 ```{r filter}
-#| eval: false
+#| warning: false
 
 taludes_bien |>
   filter(nivel_luz == "Nivel 1") # filtrar por filas que cumplen un patrón 
@@ -128,7 +128,7 @@ taludes_bien |>
 Se necesita un vector de selección que contenga valores lógicos (TRUE/FALSE).
 
 ```{r select}
-#| eval: false
+#| warning: false
 
 taludes_bien |>
   select(biomasa, agua_estival)
@@ -156,7 +156,7 @@ taludes_bien |>
 ### [Mutate](https://dplyr.tidyverse.org/reference/mutate.html): crear, modificar o eliminar columnas
 
 ```{r mutate}
-#| eval: false
+#| warning: false
 
 taludes_bien |>
   mutate(
@@ -248,7 +248,7 @@ taludes_trans <- taludes_bien |> mutate(
 ### [Summarise](https://dplyr.tidyverse.org/reference/summarise.html) y [group by](https://dplyr.tidyverse.org/reference/group_by.html): generar un nuevo `data.frame` resumiendo cada grupo a una fila
 
 ```{r summarise}
-#| eval: false
+#| warning: false
 
 taludes_trans |> 
   summarise(c_min = min(carbono),
@@ -257,7 +257,7 @@ taludes_trans |>
 ```
 
 ```{r group_by}
-#| eval: false
+#| warning: false
 
 taludes_trans |>
   group_by(estres) |>  
@@ -277,9 +277,10 @@ taludes_trans |>
 
 ### [Pivot](https://tidyr.tidyverse.org/reference/pivot_longer.html): transformar datos a formato largo o ancho
 
-![La variable año está dividida en dos columnas y cada fila representa dos observaciones no una. Extraido de [R for Data Science](https://r4ds.had.co.nz/tidy-data.html). ](images/tidy_pivot_longer.png)
+![La variable año está dividida en dos columnas y cada fila representa dos observaciones no una. Extraido de [R for Data Science](https://r4ds.had.co.nz/tidy-data.html).](images/tidy_pivot_longer.png)
 
 ```{r pivot}
+#| warning: false
 
 stocks <- tibble(
   year   = c(2015, 2015, 2016, 2016),
@@ -297,7 +298,7 @@ stocks |>
 `*_join()` añade columnas de `y` (segundo data.frame) a `x` (primer data.frame), haciendo coincidir las observaciones en función de la variable común.
 
 ```{r joins}
-#| eval: false
+#| warning: false
 
 # join: left, right, full, inner
 
@@ -315,6 +316,7 @@ taludes_trans <- taludes_trans |>
 ## [Write_delim](https://readr.tidyverse.org/reference/write_delim.html): guardar datos
 
 ```{r export}
+#| warning: false
 
 write_delim(taludes_trans, file = "taludes_trans.csv", delim = ";")
 # en file hay que especificar el directorio donde queremos que se guarde. Si no, se guardará en el directorio de trabajo (getwd())
