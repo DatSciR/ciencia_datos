@@ -2,49 +2,54 @@
 <img src="images/Escuela%20de%20Doctorado_trilingue_positivo.png" />
 
 Julen Astigarraga and Verónica Cruz-Alonso
-17/09/2024
+22/09/2024
 
-- [<span class="toc-section-number">1</span> Objetivos](#objetivos)
+- [<span class="toc-section-number">1</span> Objetivos del día
+  5](#objetivos-del-día-5)
 - [<span class="toc-section-number">2</span>
   Introducción](#introducción)
   - [<span class="toc-section-number">2.1</span> Qué es
     Git](#qué-es-git)
   - [<span class="toc-section-number">2.2</span> Qué es
     GitHub](#qué-es-github)
-- [<span class="toc-section-number">3</span> Repositorios y
+- [<span class="toc-section-number">3</span> Instalación](#instalación)
+  - [<span class="toc-section-number">3.1</span> Ejercicio](#ejercicio)
+- [<span class="toc-section-number">4</span> Repositorios y
   proyectos](#repositorios-y-proyectos)
-  - [<span class="toc-section-number">3.1</span> Estructura del
+  - [<span class="toc-section-number">4.1</span> Estructura del
     repositorio de GitHub](#estructura-del-repositorio-de-github)
-    - [<span class="toc-section-number">3.1.1</span>
-      Ejercicio](#ejercicio)
-  - [<span class="toc-section-number">3.2</span> Git
-    ignore](#git-ignore)
-- [<span class="toc-section-number">4</span> Flujo de trabajo en Git y
-  GitHub](#flujo-de-trabajo-en-git-y-github)
-  - [<span class="toc-section-number">4.1</span> ¿Cómo moverse de una
-    zona a otra?](#cómo-moverse-de-una-zona-a-otra)
     - [<span class="toc-section-number">4.1.1</span>
       Ejercicio](#ejercicio-1)
-  - [<span class="toc-section-number">4.2</span> Navegar por el
-    historial](#navegar-por-el-historial)
-- [<span class="toc-section-number">5</span> Trabajo
-  colaborativo](#trabajo-colaborativo)
-  - [<span class="toc-section-number">5.0.1</span>
-    Ejercicio](#ejercicio-2)
-  - [<span class="toc-section-number">5.1</span>
-    Ramificación](#ramificación)
+  - [<span class="toc-section-number">4.2</span> Git
+    ignore](#git-ignore)
+  - [<span class="toc-section-number">4.3</span> GitHub: la red
+    social](#github-la-red-social)
+- [<span class="toc-section-number">5</span> Flujo de trabajo en Git y
+  GitHub](#flujo-de-trabajo-en-git-y-github)
+  - [<span class="toc-section-number">5.1</span> ¿Cómo moverse de una
+    zona a otra?](#cómo-moverse-de-una-zona-a-otra)
     - [<span class="toc-section-number">5.1.1</span>
-      Ejercicio](#ejercicio-3)
-  - [<span class="toc-section-number">5.2</span> ¿Cómo se unen distintas
-    ramas?](#cómo-se-unen-distintas-ramas)
-  - [<span class="toc-section-number">5.3</span> Resolución de
-    conflictos](#resolución-de-conflictos)
-    - [<span class="toc-section-number">5.3.1</span>
+      Ejercicio](#ejercicio-2)
+  - [<span class="toc-section-number">5.2</span> Navegar por el
+    historial](#navegar-por-el-historial)
+- [<span class="toc-section-number">6</span> Trabajo
+  colaborativo](#trabajo-colaborativo)
+  - [<span class="toc-section-number">6.0.1</span>
+    Ejercicio](#ejercicio-3)
+  - [<span class="toc-section-number">6.1</span>
+    Ramificación](#ramificación)
+    - [<span class="toc-section-number">6.1.1</span>
       Ejercicio](#ejercicio-4)
-- [<span class="toc-section-number">6</span> Enlaces de
+  - [<span class="toc-section-number">6.2</span> ¿Cómo se unen distintas
+    ramas?](#cómo-se-unen-distintas-ramas)
+  - [<span class="toc-section-number">6.3</span> Resolución de
+    conflictos](#resolución-de-conflictos)
+    - [<span class="toc-section-number">6.3.1</span>
+      Ejercicio](#ejercicio-5)
+- [<span class="toc-section-number">7</span> Enlaces de
   interés](#enlaces-de-interés)
 
-## Objetivos
+## Objetivos del día 5
 
 - Comprender la estructura, funcionalidad y potencialidad de Git y
   GitHub
@@ -52,6 +57,8 @@ Julen Astigarraga and Verónica Cruz-Alonso
 - Comprender el flujo de trabajo entre Git, GitHub y RStudio
 
 - Aprender a trabajar colaborativamente con Git y GitHub
+
+![](images/datascience.png)
 
 ## Introducción
 
@@ -92,21 +99,22 @@ vez
 ### [Qué es Git](https://git-scm.com/)
 
 Git es un sistema avanzado de control de versiones (como el “control de
-cambios” de Microsoft Word) distribuido \[@blischak2016; @ram2013\]. Git
-permite “rastrear” el progreso de un proyecto a lo largo del tiempo ya
-que hace “capturas” del mismo a medida que evoluciona y los cambios se
-van registrando. Este sistema permite ver qué cambios se hicieron, quién
-los hizo y por qué, e incluso volver a versiones anteriores. Además, Git
-facilita el trabajo en paralelo de varios participantes. Mientras que en
-otros sistemas de control de versiones (p. ej. Subversion (SVN,
-<https://subversion.apache.org/>) o Concurrent Versions System (CVS,
-<http://cvs.nongnu.org/>)) hay un servidor central y cualquier cambio
-hecho por un usuario se sincroniza con este servidor y de ahí con el
-resto de usuarios, Git es un control de versiones distribuido que
-permite a todos los usuarios trabajar en el proyecto paralelamente e ir
-haciendo “capturas” del trabajo de cada uno para luego unirlos. Otras
-alternativas de control de versiones distribuido comparables a Git son
-Mercurial (<https://www.mercurial-scm.org/>) o Bazaar
+cambios” de Microsoft Word) distribuido (Blischak, Davenport, and Wilson
+2016; Ram 2013). Git permite “rastrear” el progreso de un proyecto a lo
+largo del tiempo ya que hace “capturas” del mismo a medida que
+evoluciona y los cambios se van registrando. Este sistema permite ver
+qué cambios se hicieron, quién los hizo y por qué, e incluso volver a
+versiones anteriores. Además, Git facilita el trabajo en paralelo de
+varios participantes. Mientras que en otros sistemas de control de
+versiones (p. ej. Subversion (SVN, <https://subversion.apache.org/>) o
+Concurrent Versions System (CVS, <http://cvs.nongnu.org/>)) hay un
+servidor central y cualquier cambio hecho por un usuario se sincroniza
+con este servidor y de ahí con el resto de usuarios, Git es un control
+de versiones distribuido que permite a todos los usuarios trabajar en el
+proyecto paralelamente e ir haciendo “capturas” del trabajo de cada uno
+para luego unirlos. Otras alternativas de control de versiones
+distribuido comparables a Git son Mercurial
+(<https://www.mercurial-scm.org/>) o Bazaar
 (<https://bazaar.canonical.com/>), pero Git es con diferencia el más
 utilizado.
 
@@ -120,24 +128,96 @@ cambiado (¿qué?)](images/git.jpg)
 
 GitHub es un servidor de alojamiento en línea o repositorio remoto para
 albergar proyectos basados en Git que permite la colaboración entre
-diferentes usuarios o con uno mismo \[@galeano2018;
-@perez-riverol2016\]. Un repositorio es un directorio donde desarrollar
-un proyecto que contiene todos los archivos necesarios para el mismo.
-Aunque existen distintos repositorios remotos (p. ej. GitLab,
-<https://gitlab.com/>, o Bitbucket, <https://bitbucket.org/>) con
-funcionalidad similar, GitHub es hoy en día el más utilizado. GitHub
-registra el desarrollo de los proyectos de manera remota, permite
-compartir proyectos entre distintos usuarios y proporciona la seguridad
-de la nube entre otras funciones. Cuando se trabaja en proyectos
-colaborativos, la base de la interacción entre Git y GitHub es que todos
-los colaboradores de un proyecto están de acuerdo en que GitHub contiene
-la copia principal del proyecto, es decir, GitHub contiene la copia
-centralizada del control de versiones distribuido o descentralizado.
+diferentes usuarios o con uno mismo (Galeano 2018; Perez-Riverol et al.
+2016). Un repositorio es un directorio donde desarrollar un proyecto que
+contiene todos los archivos necesarios para el mismo. Aunque existen
+distintos repositorios remotos (p. ej. GitLab, <https://gitlab.com/>, o
+Bitbucket, <https://bitbucket.org/>) con funcionalidad similar, GitHub
+es hoy en día el más utilizado. GitHub registra el desarrollo de los
+proyectos de manera remota, permite compartir proyectos entre distintos
+usuarios y proporciona la seguridad de la nube entre otras funciones.
+Cuando se trabaja en proyectos colaborativos, la base de la interacción
+entre Git y GitHub es que todos los colaboradores de un proyecto están
+de acuerdo en que GitHub contiene la copia principal del proyecto, es
+decir, GitHub contiene la copia centralizada del control de versiones
+distribuido o descentralizado.
 
 ![Página inicial de GitHub](images/github_pag_ini.JPG)
 
 <img src="images/conexiones.jpg" data-fig-align="center"
 alt="Interacción entre Git y GitHub. Git, al ser un control de versiones distribuido, permite que todos los usuarios trabajen paralelamente sin interferir en el trabajo de los demás. Luego cada usuario sincroniza su trabajo con la copia principal del proyecto ubicado en GitHub" />
+
+## Instalación
+
+En este punto es necesario que tengas instalada la versión más reciente
+de R (<https://cloud.r-project.org/>), RStudio
+(<https://posit.co/download/rstudio-desktop/>), Git
+(<https://happygitwithr.com/install-git.html>) y una cuenta en GitHub
+(<https://github.com/>) creada.
+
+### Ejercicio
+
+1.  En el *shell*, preséntate a Git ([Chapter 7:
+    Git-Intro](https://happygitwithr.com/hello-git.html))
+
+    *Tools* -\> *Terminal*
+
+    `git config --global user.name 'Nombre Apellido'`
+
+    `git config --global user.email 'nombre@ejemplo.com'`
+
+    💡**Este debe ser el correo electrónico asociado a tu cuenta de
+    GitHub**
+
+    ``` r
+    # install.packages("usethis")
+    # library(usethis)
+    # use_git_config(user.name = "Jane Doe", user.email = "jane@example.org")
+    ```
+
+![Terminal](images/terminal.png)  
+
+2.  Compueba que has instalado Git correctamente:
+
+    `git --version`
+
+    Para ver el usuario utilizado para configurar Git:
+
+    `git config user.name`
+
+    Para ver a qué cuenta de correo está asociado Git:
+
+    `git config user.email`
+
+    Para ver tanto el usuario como el correo asociado:
+
+    `git config --global --list`
+
+Para la resolución de problemas durante la instalación recomendamos
+mirar aquí: <https://happygitwithr.com/troubleshooting.html>
+
+3.  Genera un PAT (*Personal Access Token*) para HTTPS
+
+    Git puede comunicarse con un servidor remoto utilizando uno de los
+    dos protocolos: HTTPS o SSH. Nosotros utilzaremos HTTPS con
+    *personal access token* (PAT,
+    <https://happygitwithr.com/https-pat.html>).
+
+``` r
+# install.packages("usethis")
+# install.packages("gitcreds")
+# library(usethis)
+# library(gitcreds)
+# create_github_token() # generar un token
+# gitcreds_set() # acceder al Git credential store
+```
+
+💡Conviene describir el propósito del token en el campo *Note*, porque
+se pueden tener varios PATs. No podrás volver a ver este token, así que
+no cierres ni salgas de la ventana del navegador hasta que almacenes el
+PAT localmente. ¡Trata este PAT como una contraseña!
+
+![Git en RStudio](images/RStudio.JPG)
 
 ## Repositorios y proyectos
 
@@ -165,7 +245,7 @@ copiar aquí todos los archivos que nos interesan para el proyecto
 💡Para más información sobre cómo clonar el repositorio en GitHub
 (repositorio remoto) en nuestro ordenador (repositorio local) ver
 <https://happygitwithr.com/rstudio-git-github.html> para hacerlo desde
-RStudio y @galeano2018 para hacerlo mediante la línea de comandos.
+RStudio y Galeano (2018) para hacerlo mediante la línea de comandos.
 
 💡En caso de querer conectar un antiguo proyecto de RStudio a Git y
 GitHub, puedes seguir los pasos que se describen aquí:
@@ -234,6 +314,24 @@ descargarlos continuamente de GitHub. Para añadir archivos al
 archivo en la pestaña Git de RStudio pero también se puede añadir el
 nombre del archivo que desamos ignorar en el archivo “*.gitignore*”
 manualmente.
+
+### GitHub: la red social
+
+GitHub no es sólo un repositorio remoto donde almacenar diferentes
+versiones de tu trabajo o desarrollar proyectos colaborativos, si no que
+también es una red de encuentro para programadores. Como en otras redes
+puedes cotillear perfiles, seguir a ciertas personas, tener seguidores,
+guardar proyectos que te gustan…
+
+Con el buscador (🔍) puedes buscar aquellos contenidos que te interesan.
+La búsqueda está organizada por categorías (*Repositories, Commits,
+Issues, Users*…) lo que facilita encontrar lo que buscas. Para seguir a
+un usuario tienes la opción *Follow*. Pulsando *Star*⭐ puedes guardar
+un enlace a cualquier repositorio en tu cuenta de GitHub y con *Fork*
+estarías guardando una copia con la que puedes interaccionar. Con
+*Watch*👁️ puedes hacer un seguimiento de un repositorio. *Download* te
+permite guardar una copia de cualquier repositorio público en tu
+ordenador.
 
 ## Flujo de trabajo en Git y GitHub
 
@@ -320,12 +418,10 @@ cambios realizados en tu directorio de trabajo).
 
 <img src="images/git_RStudio.png" data-fig-align="center" width="486" />
 
-![Git en RStudio](images/RStudio.JPG)
-
 #### Ejercicio
 
-En el proyecto generado en el Ejercicio 1, guardad y subid los cambios
-realizados a GitHub (`git add` + `git commit` + `git push`)
+En el proyecto generado en el ejercicio anterior, guardad y subid los
+cambios realizados a GitHub (`git add` + `git commit` + `git push`)
 
 💡Usar `git commit` es para el proyecto como usar anclajes cuando
 estamos escalando una pared de roca. Desarrollar un script sin commits
@@ -491,11 +587,15 @@ frecuentemente con GitHub.
 1.  Un integrante del equipo modifica también la primera frase del
     archivo README.txt en la rama main y sube los cambios al repositorio
     remoto. Esta frase había sido previamente modificada en una rama en
-    el ejercicio 4.
-2.  Un integrante del equipo combina la rama del ejercicio 4 con la rama
-    principal (*main*) del proyecto.
+    el ejercicio anterior.
+2.  Un integrante del equipo combina la rama del ejercicio anterior con
+    la rama principal (*main*) del proyecto.
 3.  Resolved el conflicto (es decir, quedaos con los cambios que sirvan
     y subid los cambios al repositorio remoto).
+
+La información mostrada en el día de hoy está resumida en la nota
+ecoinformática [¡Se puede entender cómo funcionan Git y
+GitHub!](https://www.revistaecosistemas.net/index.php/ecosistemas/article/view/2332)
 
 ## Enlaces de interés
 
@@ -539,7 +639,7 @@ Session Info
 Sys.time()
 ```
 
-    [1] "2024-09-17 13:50:01 CEST"
+    [1] "2024-09-22 13:51:20 CEST"
 
 ``` r
 sessionInfo()
@@ -572,3 +672,43 @@ sessionInfo()
     [13] rlang_1.1.4       evaluate_0.24.0  
 
 </details>
+
+<div id="refs" class="references csl-bib-body hanging-indent"
+entry-spacing="0">
+
+<div id="ref-blischak2016" class="csl-entry">
+
+Blischak, John D., Emily R. Davenport, and Greg Wilson. 2016. “A Quick
+Introduction to Version Control with Git and GitHub.” *PLOS
+Computational Biology* 12 (1): e1004668.
+<https://doi.org/10.1371/journal.pcbi.1004668>.
+
+</div>
+
+<div id="ref-galeano2018" class="csl-entry">
+
+Galeano, Javier. 2018. “¿Por qué usar GitHub? Diez pasos para disfrutar
+de GitHub y no morir en el intento.” *Ecosistemas* 27 (2): 140–41.
+<https://doi.org/10.7818/ECOS.1604>.
+
+</div>
+
+<div id="ref-perez-riverol2016" class="csl-entry">
+
+Perez-Riverol, Yasset, Laurent Gatto, Rui Wang, Timo Sachsenberg, Julian
+Uszkoreit, Felipe da Veiga Leprevost, Christian Fufezan, et al. 2016.
+“Ten Simple Rules for Taking Advantage of Git and GitHub.” *PLOS
+Computational Biology* 12 (7): e1004947.
+<https://doi.org/10.1371/journal.pcbi.1004947>.
+
+</div>
+
+<div id="ref-ram2013" class="csl-entry">
+
+Ram, Karthik. 2013. “Git Can Facilitate Greater Reproducibility and
+Increased Transparency in Science.” *Source Code for Biology and
+Medicine* 8 (1): 7. <https://doi.org/10.1186/1751-0473-8-7>.
+
+</div>
+
+</div>
