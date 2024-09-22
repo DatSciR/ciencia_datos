@@ -49,11 +49,11 @@ Se necesitan tres capas básicas para crear un gráfico con {ggplot2}:
 
 -   Las geometrías (*geom*): definen el tipo de gráfico (de puntos, de barras, etc.).
 
--   Los *aesthetics*: características visuales de las geometrías (p. ej. la posición, el color) definidas por las variables (columnas) de nuestros datos.
+-   Los *aesthetics*: características visuales de las geometrías (p. ej. la posición, el color) definidas por las variables de nuestros datos.
 
 Las capas se conectan entre sí con el símbolo `+`, que siempre debe ir colocado al final de la línea de código si queremos seguir añadiendo capas al gráfico. Todas las capas que se pueden incluir están recogidas en la [guía de {ggplot2} de Posit](https://diegokoz.github.io/intro_ds/fuentes/ggplot2-cheatsheet-2.1-Spanish.pdf).
 
-💡 Se utiliza el símbolo `+` porque {ggplot2} es anterior al *pipe* (`|>`), y cambiar la `+` por el *pipe* requeríría muchos reajustes en un montón de paquetes.
+💡 Se utiliza el símbolo `+` porque {ggplot2} es anterior al *pipe* (`|>`) y cambiar `+` por el *pipe* requeríría muchos reajustes en un montón de paquetes.
 
 ```{r capas_basicas}
 
@@ -100,9 +100,7 @@ ggsave(filename = "farebyage.jpg", plot = plotqmegusta, width = 12, height = 9, 
 ggsave(filename = "farebyage.pdf", plot = plotqmegusta, width = 12, height = 9, units = "cm")
 ```
 
-💡Algunas revistas científicas dan especificaciones muy detalladas sobre cómo tienen que ser los gráficos (p. ej. [Science](https://www.science.org/content/page/instructions-preparing-initial-manuscript#preparation-of-figures)). Cuando no tenemos una referencia clara recomendamos pensar en formato A4 (21 x 29,7 cm) y que todos los elementos visuales del gráfico queden visibles cuando se guarda dentro de estos límites de tamaño. <!--# v: no se que opinas tu de esto Jul -->
-
-<!--# ja: me parece bien. yo no lo hago pero me parece un buen consejo. justo esta semana he tenido que reajustar el tamaño de una imagen muy grande para subirlo a una revista y lo he hecho con image_resize() del paquete magick, jaja -->
+💡Algunas revistas científicas dan especificaciones muy detalladas sobre cómo tienen que ser los gráficos (p. ej. [Science](https://www.science.org/content/page/instructions-preparing-initial-manuscript#preparation-of-figures)). Cuando no tenemos una referencia clara recomendamos pensar en formato A4 (21 x 29,7 cm) y que todos los elementos visuales del gráfico queden visibles cuando se guarda dentro de estos límites de tamaño.
 
 #### Ejercicio
 
@@ -155,9 +153,9 @@ ggplot(data = titanic) +
 
 El tipo de gráfico que escojamos va a depender del tipo de variable y del mensaje que queramos transmitir (es decir, del propósito).
 
-![](images/tipos_variables.png)
+![Tipos de variables](images/tipos_variables.png)
 
-<!--# ja: poner esto de abajo como un comentario? -->
+Para elegir qué tipo de gráfico nos conviene según el propósito
 
 TBD #ver chuleta de principios para creaci?n de gr?ficos #m?s informaci?n sobre tipos de gr?ficos en Vandemeulebroecke et al. 2019
 
@@ -395,9 +393,7 @@ miplot2 +
 
 Las paletas de colores tipo *manual* y *gradient* se personalizan con el nombre o código del color. Con [esta herramienta](https://r-charts.com/colors/) puedes elegir entre cientos de colores.
 
-Las paletas tipo *brewer* y *distiller* utilizan paletas de colores que pueden ser secuenciales, cualitativas o divergentes, que aunque tienen utilidad en gran variedad de situaciones, están diseñadas para trabajar [con mapas o a grandes escalas](https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3).
-
-<!--# ja: una escala grande es un mapa muy detallado, creo que te refieres a una escala pequeña... es un poco contraintuitivo pero se refiere al valor de la division. 1:50 es mas grande que 1:500000 -->
+Las paletas tipo *brewer* y *distiller* utilizan paletas de colores que pueden ser secuenciales, cualitativas o divergentes, que aunque tienen utilidad en gran variedad de situaciones, están diseñadas para trabajar [con mapas o a escalas pequeñas](https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3).
 
 Las paletas HCL (*hue-chroma-luminance*) son paletas muy populares que tienen su propia función (p. ej. colores para representar batimetría). De entre ellas, *Viridis* se he vuelto muy popular porque está diseñada para que personas con distintos tipos de daltonismo puedan distinguir los colores.
 
@@ -464,9 +460,7 @@ miplot2
 
 ## Multipaneles
 
-La librería {patchwork} permite añadir gráficos y tablas entre sí como si fueran diferentes capas.
-
-<!--# ja: ahora tablas tambien: https://www.tidyverse.org/blog/2024/09/patchwork-1-3-0/ -->
+La librería {patchwork} permite añadir gráficos ([y también tablas](https://www.tidyverse.org/blog/2024/09/patchwork-1-3-0/)) entre sí como si fueran diferentes capas.
 
 ```{r patchwork}
 
