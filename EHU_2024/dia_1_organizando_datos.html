@@ -2,13 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.555">
+<meta name="generator" content="quarto-1.4.553">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Julen Astigarraga and Verónica Cruz-Alonso">
+<meta name="author" content="Verónica Cruz-Alonso and Julen Astigarraga">
 
-<title>quarto-input4e162fb8</title>
+<title>quarto-input2e117585</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -80,26 +80,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Índice</h2>
    
   <ul>
-  <li><a href="#funciones-básicas-de-filtrado-y-selección" id="toc-funciones-básicas-de-filtrado-y-selección" class="nav-link active" data-scroll-target="#funciones-básicas-de-filtrado-y-selección"><span class="header-section-number">1</span> Funciones básicas de filtrado y selección</a>
-  <ul class="collapse">
-  <li><a href="#slice-filtrar-filas-según-el-índice-numérico" id="toc-slice-filtrar-filas-según-el-índice-numérico" class="nav-link" data-scroll-target="#slice-filtrar-filas-según-el-índice-numérico"><span class="header-section-number">1.1</span> Slice: filtrar filas según el índice numérico</a></li>
+  <li><a href="#importar-y-renombrar-datos" id="toc-importar-y-renombrar-datos" class="nav-link active" data-scroll-target="#importar-y-renombrar-datos"><span class="header-section-number">1</span> Importar y renombrar datos</a>
+  <ul>
+  <li><a href="#read_delim-leer-datos-desde-fuera-de-r" id="toc-read_delim-leer-datos-desde-fuera-de-r" class="nav-link" data-scroll-target="#read_delim-leer-datos-desde-fuera-de-r"><span class="header-section-number">1.1</span> Read_delim: leer datos desde fuera de R</a></li>
   <li><a href="#rename-cambiar-nombres-de-variables-columnas" id="toc-rename-cambiar-nombres-de-variables-columnas" class="nav-link" data-scroll-target="#rename-cambiar-nombres-de-variables-columnas"><span class="header-section-number">1.2</span> Rename: cambiar nombres de variables (columnas)</a></li>
-  <li><a href="#arrange-ordenar-filas-por-los-valores-de-una-o-más-variables-columnas" id="toc-arrange-ordenar-filas-por-los-valores-de-una-o-más-variables-columnas" class="nav-link" data-scroll-target="#arrange-ordenar-filas-por-los-valores-de-una-o-más-variables-columnas"><span class="header-section-number">1.3</span> Arrange: ordenar filas por los valores de una o más variables (columnas)</a></li>
-  <li><a href="#filter-filtrar-filas-utilizando-condiciones" id="toc-filter-filtrar-filas-utilizando-condiciones" class="nav-link" data-scroll-target="#filter-filtrar-filas-utilizando-condiciones"><span class="header-section-number">1.4</span> Filter: filtrar filas utilizando condiciones</a></li>
-  <li><a href="#select-seleccionar-columnas-utilizando-condiciones" id="toc-select-seleccionar-columnas-utilizando-condiciones" class="nav-link" data-scroll-target="#select-seleccionar-columnas-utilizando-condiciones"><span class="header-section-number">1.5</span> Select: seleccionar columnas utilizando condiciones</a></li>
   </ul></li>
-  <li><a href="#transformar-los-datos-y-calcular-nuevas-variables" id="toc-transformar-los-datos-y-calcular-nuevas-variables" class="nav-link" data-scroll-target="#transformar-los-datos-y-calcular-nuevas-variables"><span class="header-section-number">2</span> Transformar los datos y calcular nuevas variables</a>
+  <li><a href="#funciones-básicas-de-filtrado-y-selección" id="toc-funciones-básicas-de-filtrado-y-selección" class="nav-link" data-scroll-target="#funciones-básicas-de-filtrado-y-selección"><span class="header-section-number">2</span> Funciones básicas de filtrado y selección</a>
+  <ul>
+  <li><a href="#slice-filtrar-filas-según-el-índice-numérico" id="toc-slice-filtrar-filas-según-el-índice-numérico" class="nav-link" data-scroll-target="#slice-filtrar-filas-según-el-índice-numérico"><span class="header-section-number">2.1</span> Slice: filtrar filas según el índice numérico</a></li>
+  <li><a href="#arrange-ordenar-filas-por-los-valores-de-una-o-más-variables-columnas" id="toc-arrange-ordenar-filas-por-los-valores-de-una-o-más-variables-columnas" class="nav-link" data-scroll-target="#arrange-ordenar-filas-por-los-valores-de-una-o-más-variables-columnas"><span class="header-section-number">2.2</span> Arrange: ordenar filas por los valores de una o más variables (columnas)</a></li>
+  <li><a href="#filter-filtrar-filas-utilizando-condiciones" id="toc-filter-filtrar-filas-utilizando-condiciones" class="nav-link" data-scroll-target="#filter-filtrar-filas-utilizando-condiciones"><span class="header-section-number">2.3</span> Filter: filtrar filas utilizando condiciones</a>
   <ul class="collapse">
-  <li><a href="#mutate-crear-modificar-o-eliminar-columnas" id="toc-mutate-crear-modificar-o-eliminar-columnas" class="nav-link" data-scroll-target="#mutate-crear-modificar-o-eliminar-columnas"><span class="header-section-number">2.1</span> Mutate: crear, modificar o eliminar columnas</a></li>
-  <li><a href="#summarise-genera-un-nuevo-data.frame-resumiendo-cada-grupo-a-una-fila" id="toc-summarise-genera-un-nuevo-data.frame-resumiendo-cada-grupo-a-una-fila" class="nav-link" data-scroll-target="#summarise-genera-un-nuevo-data.frame-resumiendo-cada-grupo-a-una-fila"><span class="header-section-number">2.2</span> Summarise: genera un nuevo <code>data.frame</code> resumiendo cada grupo a una fila</a></li>
-  <li><a href="#group-by-agrupa-por-una-o-más-variables" id="toc-group-by-agrupa-por-una-o-más-variables" class="nav-link" data-scroll-target="#group-by-agrupa-por-una-o-más-variables"><span class="header-section-number">2.3</span> Group by: agrupa por una o más variables</a></li>
+  <li><a href="#ejercicio" id="toc-ejercicio" class="nav-link" data-scroll-target="#ejercicio"><span class="header-section-number">2.3.1</span> Ejercicio</a></li>
   </ul></li>
-  <li><a href="#unir-data.frames" id="toc-unir-data.frames" class="nav-link" data-scroll-target="#unir-data.frames"><span class="header-section-number">3</span> Unir <code>data.frames</code></a>
+  <li><a href="#select-seleccionar-columnas-utilizando-condiciones" id="toc-select-seleccionar-columnas-utilizando-condiciones" class="nav-link" data-scroll-target="#select-seleccionar-columnas-utilizando-condiciones"><span class="header-section-number">2.4</span> Select: seleccionar columnas utilizando condiciones</a>
   <ul class="collapse">
-  <li><a href="#ejercicio-4" id="toc-ejercicio-4" class="nav-link" data-scroll-target="#ejercicio-4"><span class="header-section-number">3.1</span> Ejercicio</a></li>
-  <li><a href="#ejercicio-5" id="toc-ejercicio-5" class="nav-link" data-scroll-target="#ejercicio-5"><span class="header-section-number">3.2</span> Ejercicio</a></li>
+  <li><a href="#ejercicio-1" id="toc-ejercicio-1" class="nav-link" data-scroll-target="#ejercicio-1"><span class="header-section-number">2.4.1</span> Ejercicio</a></li>
   </ul></li>
-  <li><a href="#enlaces-de-interés" id="toc-enlaces-de-interés" class="nav-link" data-scroll-target="#enlaces-de-interés"><span class="header-section-number">4</span> Enlaces de interés</a></li>
+  </ul></li>
+  <li><a href="#transformar-los-datos-y-calcular-nuevas-variables" id="toc-transformar-los-datos-y-calcular-nuevas-variables" class="nav-link" data-scroll-target="#transformar-los-datos-y-calcular-nuevas-variables"><span class="header-section-number">3</span> Transformar los datos y calcular nuevas variables</a>
+  <ul>
+  <li><a href="#mutate-crear-modificar-o-eliminar-columnas" id="toc-mutate-crear-modificar-o-eliminar-columnas" class="nav-link" data-scroll-target="#mutate-crear-modificar-o-eliminar-columnas"><span class="header-section-number">3.1</span> Mutate: crear, modificar o eliminar columnas</a>
+  <ul class="collapse">
+  <li><a href="#ejercicio-2" id="toc-ejercicio-2" class="nav-link" data-scroll-target="#ejercicio-2"><span class="header-section-number">3.1.1</span> Ejercicio</a></li>
+  </ul></li>
+  <li><a href="#summarise-y-group-by-generar-un-nuevo-data.frame-resumiendo-cada-grupo-a-una-fila" id="toc-summarise-y-group-by-generar-un-nuevo-data.frame-resumiendo-cada-grupo-a-una-fila" class="nav-link" data-scroll-target="#summarise-y-group-by-generar-un-nuevo-data.frame-resumiendo-cada-grupo-a-una-fila"><span class="header-section-number">3.2</span> Summarise y group by: generar un nuevo <code>data.frame</code> resumiendo cada grupo a una fila</a>
+  <ul class="collapse">
+  <li><a href="#ejercicio-3" id="toc-ejercicio-3" class="nav-link" data-scroll-target="#ejercicio-3"><span class="header-section-number">3.2.1</span> Ejercicio</a></li>
+  </ul></li>
+  <li><a href="#pivot-transformar-datos-a-formato-largo-o-ancho" id="toc-pivot-transformar-datos-a-formato-largo-o-ancho" class="nav-link" data-scroll-target="#pivot-transformar-datos-a-formato-largo-o-ancho"><span class="header-section-number">3.3</span> Pivot: transformar datos a formato largo o ancho</a></li>
+  </ul></li>
+  <li><a href="#joins-unir-data.frames" id="toc-joins-unir-data.frames" class="nav-link" data-scroll-target="#joins-unir-data.frames"><span class="header-section-number">4</span> Joins: unir data.frames</a></li>
+  <li><a href="#write_delim-guardar-datos" id="toc-write_delim-guardar-datos" class="nav-link" data-scroll-target="#write_delim-guardar-datos"><span class="header-section-number">5</span> Write_delim: guardar datos</a></li>
+  <li><a href="#enlaces-de-interés" id="toc-enlaces-de-interés" class="nav-link" data-scroll-target="#enlaces-de-interés"><span class="header-section-number">6</span> Enlaces de interés</a></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="dia_1_organizando_datos.md"><i class="bi bi-file-code"></i>Github (GFM)</a></li></ul></div></nav>
 </div>
@@ -118,14 +131,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Julen Astigarraga and Verónica Cruz-Alonso </p>
+             <p>Verónica Cruz-Alonso and Julen Astigarraga </p>
           </div>
   </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">13/09/2024</p>
+      <p class="date">22/09/2024</p>
     </div>
   </div>
   
@@ -137,228 +150,520 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>En este curso realizaremos las distintas tareas que forman parte de la ciencia de datos utilizando <em>tidyverse</em>, aunque también se podrían llevar a cabo con R base. Consideramos que los cuatro pilares básicos de <em>tidyverse</em> (centrado en humanos, consistencia, componibilidad e inclusividad) facilitan tanto el aprendizaje como el trabajo diario, permitiendo realizar las mismas acciones de manera más sencilla, aunque reconocemos que esto puede variar según la persona.</p>
+<section id="importar-y-renombrar-datos" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="importar-y-renombrar-datos"><span class="header-section-number">1</span> Importar y renombrar datos</h2>
+<section id="read_delim-leer-datos-desde-fuera-de-r" class="level3" data-number="1.1">
+<h3 data-number="1.1" class="anchored" data-anchor-id="read_delim-leer-datos-desde-fuera-de-r"><span class="header-section-number">1.1</span> <a href="https://readr.tidyverse.org/reference/read_delim.html">Read_delim</a>: leer datos desde fuera de R</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>taludes_bien <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="at">file =</span> <span class="st">"DatosCursoR/taludes.csv"</span>, <span class="at">delim =</span> <span class="st">","</span>, <span class="at">col_types =</span> <span class="fu">list</span>(<span class="at">Luz =</span> <span class="st">"f"</span>, <span class="at">Agua =</span> <span class="st">"f"</span>))</span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>taludes_bien</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(taludes_bien)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(taludes_bien)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(taludes_bien)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>taludes <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="at">file =</span> <span class="st">"taludes.csv"</span>, <span class="at">delim =</span> <span class="st">","</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>taludes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 91 × 3
+   Biomasa Luz     Agua          
+     &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;         
+ 1    3.04 Nivel 1 Sequia estival
+ 2    3.57 Nivel 1 Sequia estival
+ 3    3.67 Nivel 1 Sequia estival
+ 4    4.59 Nivel 1 Sequia estival
+ 5    4.34 Nivel 1 Sequia estival
+ 6    2.25 Nivel 1 Sequia estival
+ 7    4.12 Nivel 1 Sequia estival
+ 8    2.45 Nivel 1 Sequia estival
+ 9    4.46 Nivel 1 Sequia estival
+10    3.51 Nivel 1 Sequia estival
+# ℹ 81 more rows</code></pre>
 </div>
-<section id="funciones-básicas-de-filtrado-y-selección" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="funciones-básicas-de-filtrado-y-selección"><span class="header-section-number">1</span> Funciones básicas de filtrado y selección</h2>
-<!--# ja: pondria el link a la viñeta de cada main function que explicamos -->
-<section id="slice-filtrar-filas-según-el-índice-numérico" class="level3" data-number="1.1">
-<h3 data-number="1.1" class="anchored" data-anchor-id="slice-filtrar-filas-según-el-índice-numérico"><span class="header-section-number">1.1</span> <a href="https://dplyr.tidyverse.org/reference/slice.html">Slice</a>: filtrar filas según el índice numérico</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>taludes_bien <span class="sc">|&gt;</span> </span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span>) <span class="co"># shortcut para el pipe: CTRL + SHIFT + M </span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>taludes_bien <span class="sc">|&gt;</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span>, <span class="dv">5</span>)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>taludes_bien <span class="sc">|&gt;</span> </span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>)</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>taludes_bien <span class="sc">|&gt;</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>taludes_bien <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="at">file =</span> <span class="st">"taludes.csv"</span>, </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">delim =</span> <span class="st">","</span>, <span class="at">col_types =</span> <span class="fu">list</span>(<span class="at">Luz =</span> <span class="st">"f"</span>, <span class="at">Agua =</span> <span class="st">"f"</span>))</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>taludes_bien</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 91 × 3
+   Biomasa Luz     Agua          
+     &lt;dbl&gt; &lt;fct&gt;   &lt;fct&gt;         
+ 1    3.04 Nivel 1 Sequia estival
+ 2    3.57 Nivel 1 Sequia estival
+ 3    3.67 Nivel 1 Sequia estival
+ 4    4.59 Nivel 1 Sequia estival
+ 5    4.34 Nivel 1 Sequia estival
+ 6    2.25 Nivel 1 Sequia estival
+ 7    4.12 Nivel 1 Sequia estival
+ 8    2.45 Nivel 1 Sequia estival
+ 9    4.46 Nivel 1 Sequia estival
+10    3.51 Nivel 1 Sequia estival
+# ℹ 81 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(taludes_bien)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(taludes_bien)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Biomasa           Luz                 Agua   
+ Min.   :2.120   Nivel 1:30   Sequia estival:46  
+ 1st Qu.:3.531   Nivel 2:31   Lluvia estival:45  
+ Median :4.053   Nivel 3:30                      
+ Mean   :3.993                                   
+ 3rd Qu.:4.609                                   
+ Max.   :5.347                                   </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(taludes_bien)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 91
+Columns: 3
+$ Biomasa &lt;dbl&gt; 3.039767, 3.573515, 3.669172, 4.592334, 4.337278, 2.254230, 4.…
+$ Luz     &lt;fct&gt; Nivel 1, Nivel 1, Nivel 1, Nivel 1, Nivel 1, Nivel 1, Nivel 1,…
+$ Agua    &lt;fct&gt; Sequia estival, Sequia estival, Sequia estival, Sequia estival…</code></pre>
+</div>
 </div>
 </section>
 <section id="rename-cambiar-nombres-de-variables-columnas" class="level3" data-number="1.2">
 <h3 data-number="1.2" class="anchored" data-anchor-id="rename-cambiar-nombres-de-variables-columnas"><span class="header-section-number">1.2</span> <a href="https://dplyr.tidyverse.org/reference/rename.html">Rename</a>: cambiar nombres de variables (columnas)</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>taludes_bien <span class="sc">|&gt;</span> </span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">biomasa =</span> Biomasa, <span class="co"># nombre nuevo = nombre viejo</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">luz =</span> Luz, <span class="at">agua =</span> Agua)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(taludes_bien)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Biomasa" "Luz"     "Agua"   </code></pre>
 </div>
-<p>📝 Ajustar sangría de código: CTRL + I; Reformatear código: CTRL + MAYÚS + A</p>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>taludes_bien <span class="ot">&lt;-</span> taludes_bien <span class="sc">|&gt;</span>    </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">biomasa =</span> Biomasa, <span class="co"># nombre nuevo = nombre viejo          </span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">nivel_luz =</span> Luz, </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">agua_estival =</span> Agua)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>📝 Ajustar sangría de código: Ctrl + i; Reformatear código: Ctrl + Shift + a</p>
 </section>
-<section id="arrange-ordenar-filas-por-los-valores-de-una-o-más-variables-columnas" class="level3" data-number="1.3">
-<h3 data-number="1.3" class="anchored" data-anchor-id="arrange-ordenar-filas-por-los-valores-de-una-o-más-variables-columnas"><span class="header-section-number">1.3</span> <a href="https://dplyr.tidyverse.org/reference/arrange.html">Arrange</a>: ordenar filas por los valores de una o más variables (columnas)</h3>
+</section>
+<section id="funciones-básicas-de-filtrado-y-selección" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="funciones-básicas-de-filtrado-y-selección"><span class="header-section-number">2</span> Funciones básicas de filtrado y selección</h2>
+<section id="slice-filtrar-filas-según-el-índice-numérico" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="slice-filtrar-filas-según-el-índice-numérico"><span class="header-section-number">2.1</span> <a href="https://dplyr.tidyverse.org/reference/slice.html">Slice</a>: filtrar filas según el índice numérico</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>taludes_bien <span class="sc">|&gt;</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(Biomasa)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>taludes_bien <span class="sc">|&gt;</span> </span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(Biomasa))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>taludes_bien <span class="sc">|&gt;</span> </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span>) <span class="co"># shortcut para el pipe: CTRL + SHIFT + M </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+  biomasa nivel_luz agua_estival  
+    &lt;dbl&gt; &lt;fct&gt;     &lt;fct&gt;         
+1    3.04 Nivel 1   Sequia estival</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>taludes_bien <span class="sc">|&gt;</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span>, <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 3
+  biomasa nivel_luz agua_estival  
+    &lt;dbl&gt; &lt;fct&gt;     &lt;fct&gt;         
+1    3.04 Nivel 1   Sequia estival
+2    4.34 Nivel 1   Sequia estival</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>taludes_bien <span class="sc">|&gt;</span> </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+  biomasa nivel_luz agua_estival  
+    &lt;dbl&gt; &lt;fct&gt;     &lt;fct&gt;         
+1    3.04 Nivel 1   Sequia estival
+2    3.57 Nivel 1   Sequia estival
+3    3.67 Nivel 1   Sequia estival
+4    4.59 Nivel 1   Sequia estival
+5    4.34 Nivel 1   Sequia estival
+6    2.25 Nivel 1   Sequia estival</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>taludes_bien <span class="sc">|&gt;</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 86 × 3
+   biomasa nivel_luz agua_estival  
+     &lt;dbl&gt; &lt;fct&gt;     &lt;fct&gt;         
+ 1    2.25 Nivel 1   Sequia estival
+ 2    4.12 Nivel 1   Sequia estival
+ 3    2.45 Nivel 1   Sequia estival
+ 4    4.46 Nivel 1   Sequia estival
+ 5    3.51 Nivel 1   Sequia estival
+ 6    3.49 Nivel 1   Sequia estival
+ 7    2.80 Nivel 1   Sequia estival
+ 8    3.91 Nivel 1   Sequia estival
+ 9    3.16 Nivel 1   Sequia estival
+10    3.81 Nivel 1   Sequia estival
+# ℹ 76 more rows</code></pre>
+</div>
 </div>
 </section>
-<section id="filter-filtrar-filas-utilizando-condiciones" class="level3" data-number="1.4">
-<h3 data-number="1.4" class="anchored" data-anchor-id="filter-filtrar-filas-utilizando-condiciones"><span class="header-section-number">1.4</span> <a href="https://dplyr.tidyverse.org/reference/filter.html">Filter</a>: filtrar filas utilizando condiciones</h3>
+<section id="arrange-ordenar-filas-por-los-valores-de-una-o-más-variables-columnas" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="arrange-ordenar-filas-por-los-valores-de-una-o-más-variables-columnas"><span class="header-section-number">2.2</span> <a href="https://dplyr.tidyverse.org/reference/arrange.html">Arrange</a>: ordenar filas por los valores de una o más variables (columnas)</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># se necesita un vector de filtrado que contenga valores TRUE/FALSE</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>taludes_bien</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>taludes_bien <span class="sc">|&gt;</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Luz <span class="sc">==</span> <span class="st">"Nivel 1"</span>) <span class="co"># seleccionar variables que tienen un patrón </span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>taludes_bien <span class="sc">|&gt;</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Luz <span class="sc">==</span> <span class="st">"Nivel 1"</span> <span class="sc">&amp;</span> Biomasa <span class="sc">&gt;</span> <span class="dv">4</span>) <span class="co"># combinar criterios: AND</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>taludes_bien <span class="sc">|&gt;</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Luz <span class="sc">==</span> <span class="st">"Nivel 1"</span> <span class="sc">|</span> Biomasa <span class="sc">&gt;</span> <span class="dv">5</span>) <span class="co"># combinar criterios: OR</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>taludes_bien <span class="sc">|&gt;</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Luz <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Nivel 1"</span>, <span class="st">"Nivel 3"</span>)) <span class="co"># combinar criterios: %in% </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>taludes_bien <span class="sc">|&gt;</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(biomasa)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 91 × 3
+   biomasa nivel_luz agua_estival  
+     &lt;dbl&gt; &lt;fct&gt;     &lt;fct&gt;         
+ 1    2.12 Nivel 2   Lluvia estival
+ 2    2.25 Nivel 1   Sequia estival
+ 3    2.35 Nivel 3   Lluvia estival
+ 4    2.45 Nivel 1   Sequia estival
+ 5    2.49 Nivel 3   Lluvia estival
+ 6    2.54 Nivel 3   Lluvia estival
+ 7    2.70 Nivel 3   Lluvia estival
+ 8    2.73 Nivel 3   Lluvia estival
+ 9    2.80 Nivel 1   Sequia estival
+10    2.86 Nivel 3   Lluvia estival
+# ℹ 81 more rows</code></pre>
 </div>
-<section id="ejercicio" class="level4" data-number="1.4.1">
-<h4 data-number="1.4.1" class="anchored" data-anchor-id="ejercicio"><span class="header-section-number">1.4.1</span> Ejercicio</h4>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>taludes_bien <span class="sc">|&gt;</span> </span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(biomasa))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 91 × 3
+   biomasa nivel_luz agua_estival  
+     &lt;dbl&gt; &lt;fct&gt;     &lt;fct&gt;         
+ 1    5.35 Nivel 3   Sequia estival
+ 2    5.30 Nivel 3   Sequia estival
+ 3    5.21 Nivel 1   Lluvia estival
+ 4    5.17 Nivel 2   Lluvia estival
+ 5    5.16 Nivel 1   Lluvia estival
+ 6    5.13 Nivel 2   Sequia estival
+ 7    5.10 Nivel 2   Lluvia estival
+ 8    5.06 Nivel 3   Sequia estival
+ 9    4.98 Nivel 2   Lluvia estival
+10    4.94 Nivel 1   Lluvia estival
+# ℹ 81 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="filter-filtrar-filas-utilizando-condiciones" class="level3" data-number="2.3">
+<h3 data-number="2.3" class="anchored" data-anchor-id="filter-filtrar-filas-utilizando-condiciones"><span class="header-section-number">2.3</span> <a href="https://dplyr.tidyverse.org/reference/filter.html">Filter</a>: filtrar filas utilizando condiciones</h3>
+<p>Se necesita un vector de filtrado que contenga valores lógicos (TRUE/FALSE).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>taludes_bien <span class="sc">|&gt;</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(nivel_luz <span class="sc">==</span> <span class="st">"Nivel 1"</span>) <span class="co"># filtrar por filas que cumplen un patrón </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 30 × 3
+   biomasa nivel_luz agua_estival  
+     &lt;dbl&gt; &lt;fct&gt;     &lt;fct&gt;         
+ 1    3.04 Nivel 1   Sequia estival
+ 2    3.57 Nivel 1   Sequia estival
+ 3    3.67 Nivel 1   Sequia estival
+ 4    4.59 Nivel 1   Sequia estival
+ 5    4.34 Nivel 1   Sequia estival
+ 6    2.25 Nivel 1   Sequia estival
+ 7    4.12 Nivel 1   Sequia estival
+ 8    2.45 Nivel 1   Sequia estival
+ 9    4.46 Nivel 1   Sequia estival
+10    3.51 Nivel 1   Sequia estival
+# ℹ 20 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>taludes_bien <span class="sc">|&gt;</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(nivel_luz <span class="sc">==</span> <span class="st">"Nivel 1"</span> <span class="sc">&amp;</span> biomasa <span class="sc">&gt;</span> <span class="dv">4</span>) <span class="co"># combinar criterios: AND</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 16 × 3
+   biomasa nivel_luz agua_estival  
+     &lt;dbl&gt; &lt;fct&gt;     &lt;fct&gt;         
+ 1    4.59 Nivel 1   Sequia estival
+ 2    4.34 Nivel 1   Sequia estival
+ 3    4.12 Nivel 1   Sequia estival
+ 4    4.46 Nivel 1   Sequia estival
+ 5    4.73 Nivel 1   Lluvia estival
+ 6    4.94 Nivel 1   Lluvia estival
+ 7    4.37 Nivel 1   Lluvia estival
+ 8    4.79 Nivel 1   Lluvia estival
+ 9    5.16 Nivel 1   Lluvia estival
+10    4.55 Nivel 1   Lluvia estival
+11    4.72 Nivel 1   Lluvia estival
+12    4.23 Nivel 1   Lluvia estival
+13    4.83 Nivel 1   Lluvia estival
+14    4.48 Nivel 1   Lluvia estival
+15    4.58 Nivel 1   Lluvia estival
+16    5.21 Nivel 1   Lluvia estival</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>taludes_bien <span class="sc">|&gt;</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(nivel_luz <span class="sc">==</span> <span class="st">"Nivel 1"</span> <span class="sc">|</span> biomasa <span class="sc">&gt;</span> <span class="dv">5</span>) <span class="co"># combinar criterios: OR</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 36 × 3
+   biomasa nivel_luz agua_estival  
+     &lt;dbl&gt; &lt;fct&gt;     &lt;fct&gt;         
+ 1    3.04 Nivel 1   Sequia estival
+ 2    3.57 Nivel 1   Sequia estival
+ 3    3.67 Nivel 1   Sequia estival
+ 4    4.59 Nivel 1   Sequia estival
+ 5    4.34 Nivel 1   Sequia estival
+ 6    2.25 Nivel 1   Sequia estival
+ 7    4.12 Nivel 1   Sequia estival
+ 8    2.45 Nivel 1   Sequia estival
+ 9    4.46 Nivel 1   Sequia estival
+10    3.51 Nivel 1   Sequia estival
+# ℹ 26 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>taludes_bien <span class="sc">|&gt;</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(nivel_luz <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Nivel 1"</span>, <span class="st">"Nivel 3"</span>)) <span class="co"># combinar criterios: %in% </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 60 × 3
+   biomasa nivel_luz agua_estival  
+     &lt;dbl&gt; &lt;fct&gt;     &lt;fct&gt;         
+ 1    3.04 Nivel 1   Sequia estival
+ 2    3.57 Nivel 1   Sequia estival
+ 3    3.67 Nivel 1   Sequia estival
+ 4    4.59 Nivel 1   Sequia estival
+ 5    4.34 Nivel 1   Sequia estival
+ 6    2.25 Nivel 1   Sequia estival
+ 7    4.12 Nivel 1   Sequia estival
+ 8    2.45 Nivel 1   Sequia estival
+ 9    4.46 Nivel 1   Sequia estival
+10    3.51 Nivel 1   Sequia estival
+# ℹ 50 more rows</code></pre>
+</div>
+</div>
+<section id="ejercicio" class="level4" data-number="2.3.1">
+<h4 data-number="2.3.1" class="anchored" data-anchor-id="ejercicio"><span class="header-section-number">2.3.1</span> Ejercicio</h4>
 <ul>
-<li><p>Lee el data.frame “Macrobenthos.txt”. Pista: el delimitador entre datos es el tabulador (“).</p></li>
-<li><p>Crea un subset que contenga las filas de la 1 a la 10 y de la 390 a la 400.</p></li>
+<li>Lee el data.frame “Macrobenthos.txt”. Pista: el delimitador entre datos es el tabulador (“).</li>
+</ul>
+<p>💡“Macrobenthos.txt” es una base de datos sobre la abundancia de distintos grupos taxonómicos de macroinvertebrados marinos (<a href="https://link.springer.com/book/10.1007/978-0-387-93837-0">Zuur et al.&nbsp;2009</a>).</p>
+<ul>
+<li><p>Crea un subset de datos que contenga las filas de la 1 a la 10 y de la 390 a la 400.</p></li>
 <li><p>Crea un subset que NO contenga el Taxon número 1. Pista: revisa los <a href="https://bookdown.org/jboscomendoza/r-principiantes4/operadores-relacionales.html">operadores de R</a>.</p></li>
 <li><p>Crea un subset con las observaciones del Taxon 2 donde se haya registrado una abundancia mayor de 50 o menor o igual a 5. Pista: necesitarás paréntesis para filtrar.</p></li>
 <li><p>¿Cuántas filas han quedado?</p></li>
 </ul>
 </section>
 </section>
-<section id="select-seleccionar-columnas-utilizando-condiciones" class="level3" data-number="1.5">
-<h3 data-number="1.5" class="anchored" data-anchor-id="select-seleccionar-columnas-utilizando-condiciones"><span class="header-section-number">1.5</span> <a href="https://dplyr.tidyverse.org/reference/select.html">Select</a>: seleccionar columnas utilizando condiciones</h3>
+<section id="select-seleccionar-columnas-utilizando-condiciones" class="level3" data-number="2.4">
+<h3 data-number="2.4" class="anchored" data-anchor-id="select-seleccionar-columnas-utilizando-condiciones"><span class="header-section-number">2.4</span> <a href="https://dplyr.tidyverse.org/reference/select.html">Select</a>: seleccionar columnas utilizando condiciones</h3>
+<p>Se necesita un vector de selección que contenga valores lógicos (TRUE/FALSE).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># se necesita un vector de selección que contenga valores TRUE/FALSE</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>taludes_bien <span class="sc">|&gt;</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Biomasa, Agua)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># ?select </span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>taludes_bien <span class="sc">|&gt;</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">contains</span>(<span class="st">"a"</span>))</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co"># se pueden utilizar todo tipo de patrones de texto: https://rstudio.github.io/cheatsheets/strings.pdf</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>taludes_bien <span class="sc">|&gt;</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Luz, <span class="fu">everything</span>()) <span class="co"># se puede usar para reordenar variables</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>taludes_bien <span class="sc">|&gt;</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(biomasa, agua_estival)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 91 × 2
+   biomasa agua_estival  
+     &lt;dbl&gt; &lt;fct&gt;         
+ 1    3.04 Sequia estival
+ 2    3.57 Sequia estival
+ 3    3.67 Sequia estival
+ 4    4.59 Sequia estival
+ 5    4.34 Sequia estival
+ 6    2.25 Sequia estival
+ 7    4.12 Sequia estival
+ 8    2.45 Sequia estival
+ 9    4.46 Sequia estival
+10    3.51 Sequia estival
+# ℹ 81 more rows</code></pre>
 </div>
-<section id="ejercicio-1" class="level4" data-number="1.5.1">
-<h4 data-number="1.5.1" class="anchored" data-anchor-id="ejercicio-1"><span class="header-section-number">1.5.1</span> Ejercicio</h4>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ?select </span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>taludes_bien <span class="sc">|&gt;</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">contains</span>(<span class="st">"a"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 91 × 2
+   biomasa agua_estival  
+     &lt;dbl&gt; &lt;fct&gt;         
+ 1    3.04 Sequia estival
+ 2    3.57 Sequia estival
+ 3    3.67 Sequia estival
+ 4    4.59 Sequia estival
+ 5    4.34 Sequia estival
+ 6    2.25 Sequia estival
+ 7    4.12 Sequia estival
+ 8    2.45 Sequia estival
+ 9    4.46 Sequia estival
+10    3.51 Sequia estival
+# ℹ 81 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># se pueden utilizar todo tipo de patrones de texto: https://rstudio.github.io/cheatsheets/strings.pdf</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>taludes_bien <span class="sc">|&gt;</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(nivel_luz, <span class="fu">everything</span>()) <span class="co"># se puede usar para reordenar variables</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 91 × 3
+   nivel_luz biomasa agua_estival  
+   &lt;fct&gt;       &lt;dbl&gt; &lt;fct&gt;         
+ 1 Nivel 1      3.04 Sequia estival
+ 2 Nivel 1      3.57 Sequia estival
+ 3 Nivel 1      3.67 Sequia estival
+ 4 Nivel 1      4.59 Sequia estival
+ 5 Nivel 1      4.34 Sequia estival
+ 6 Nivel 1      2.25 Sequia estival
+ 7 Nivel 1      4.12 Sequia estival
+ 8 Nivel 1      2.45 Sequia estival
+ 9 Nivel 1      4.46 Sequia estival
+10 Nivel 1      3.51 Sequia estival
+# ℹ 81 more rows</code></pre>
+</div>
+</div>
+<section id="ejercicio-1" class="level4" data-number="2.4.1">
+<h4 data-number="2.4.1" class="anchored" data-anchor-id="ejercicio-1"><span class="header-section-number">2.4.1</span> Ejercicio</h4>
 <ul>
-<li><p>Con el data.frame “Macrobenthos.txt”, crea un nuevo <code>data.frame</code> que contenga las variables relacionadas con el medio (de organic matter a temperature). Pista: mira la ayuda de select para ahorrar caracteres.</p></li>
-<li><p>Crea un nuevo objeto con el taxon al principio y que incluya las demás columnas excepto el esfuerzo de muestreo (effort).</p></li>
+<li><p>Con el data.frame “Macrobenthos.txt”, crea un nuevo data.frame que contenga las variables relacionadas con el medio (de <em>organic matter</em> a <em>temperature</em>). Pista: mira la ayuda de select para ahorrar caracteres.</p></li>
+<li><p>Crea un nuevo objeto con el taxon al principio y que incluya las demás columnas excepto el esfuerzo de muestreo (<em>effort</em>).</p></li>
 </ul>
 </section>
 </section>
 </section>
-<section id="transformar-los-datos-y-calcular-nuevas-variables" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="transformar-los-datos-y-calcular-nuevas-variables"><span class="header-section-number">2</span> Transformar los datos y calcular nuevas variables</h2>
-<section id="mutate-crear-modificar-o-eliminar-columnas" class="level3" data-number="2.1">
-<h3 data-number="2.1" class="anchored" data-anchor-id="mutate-crear-modificar-o-eliminar-columnas"><span class="header-section-number">2.1</span> <a href="https://dplyr.tidyverse.org/reference/mutate.html">Mutate</a>: crear, modificar o eliminar columnas</h3>
+<section id="transformar-los-datos-y-calcular-nuevas-variables" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="transformar-los-datos-y-calcular-nuevas-variables"><span class="header-section-number">3</span> Transformar los datos y calcular nuevas variables</h2>
+<section id="mutate-crear-modificar-o-eliminar-columnas" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="mutate-crear-modificar-o-eliminar-columnas"><span class="header-section-number">3.1</span> <a href="https://dplyr.tidyverse.org/reference/mutate.html">Mutate</a>: crear, modificar o eliminar columnas</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># renombramos las variables y guardamos un nuevo objeto para trabajar mejor con las funciones de transformación:</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>taludes_analisis <span class="ot">&lt;-</span> taludes_bien <span class="sc">|&gt;</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">biomasa =</span> Biomasa, <span class="at">nivel_luz =</span> Luz, <span class="at">agua_estival =</span> Agua)</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>taludes_analisis <span class="sc">|&gt;</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">ID =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(taludes_bien),</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># definir una variable desde cero</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">supervivencia =</span> <span class="fu">as.factor</span>(<span class="fu">sample</span>(</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">size =</span> <span class="fu">nrow</span>(taludes_bien),</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.4</span>, <span class="fl">0.6</span>),</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">replace =</span> <span class="cn">TRUE</span></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    )),</span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># utilizar una variable para calcular otra</span></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">carbono =</span> biomasa <span class="sc">*</span> <span class="fu">rnorm</span>(</span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>      <span class="at">n =</span> <span class="fu">nrow</span>(taludes_bien),</span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>      <span class="at">mean =</span> <span class="fl">0.4</span>,</span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>      <span class="at">sd =</span> <span class="fl">0.2</span></span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(ID, <span class="fu">everything</span>())</span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>taludes_analisis <span class="sc">|&gt;</span></span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>    <span class="co"># sobreescribir una variable. En concreto fct_recode </span></span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>    <span class="co"># sirve para redefinir los niveles de un factor</span></span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">agua_estival =</span> <span class="fu">fct_recode</span>(</span>
-<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>      agua_estival, <span class="at">sequia =</span> <span class="st">"Sequia estival"</span>, <span class="at">lluvia =</span> <span class="st">"Lluvia estival"</span>),</span>
-<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">nivel_luz =</span> <span class="fu">fct_recode</span>(</span>
-<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>      nivel_luz,</span>
-<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>      <span class="st">`</span><span class="at">1</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"Nivel 1"</span>,</span>
-<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>      <span class="st">`</span><span class="at">2</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"Nivel 2"</span>,</span>
-<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>      <span class="st">`</span><span class="at">3</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"Nivel 3"</span></span>
-<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>taludes_analisis <span class="sc">|&gt;</span></span>
-<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">estres =</span> <span class="fu">case_when</span>(</span>
-<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>      <span class="co"># utilizar varias variables para calcular otra nueva</span></span>
-<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>      nivel_luz <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span></span>
-<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a>        agua_estival <span class="sc">==</span> <span class="st">"sequia"</span> <span class="sc">~</span> <span class="st">"alto"</span>,</span>
-<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a>      <span class="co"># "Si el nivel de luz es 1 y hay sequia, el estrés será alto"</span></span>
-<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>      nivel_luz <span class="sc">==</span> <span class="dv">3</span> <span class="sc">&amp;</span> agua_estival <span class="sc">==</span> <span class="st">"lluvia"</span> <span class="sc">~</span> <span class="st">"bajo"</span>,</span>
-<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"intermedio"</span></span>
-<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a><span class="co"># repetimos todo lo anterior concatenando todo el proceso:</span></span>
-<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a>taludes_analisis <span class="ot">&lt;-</span> taludes_bien <span class="sc">|&gt;</span></span>
-<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">biomasa =</span> Biomasa,</span>
-<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a>         <span class="at">nivel_luz =</span> Luz,</span>
-<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a>         <span class="at">agua_estival =</span> Agua) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(</span>
-<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a>           <span class="at">ID =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(taludes_bien),</span>
-<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a>           <span class="at">supervivencia =</span> <span class="fu">as.factor</span>(<span class="fu">sample</span>(</span>
-<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a>             <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
-<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a>             <span class="at">size =</span> <span class="fu">nrow</span>(taludes_bien),</span>
-<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a>             <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.4</span>, <span class="fl">0.6</span>),</span>
-<span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a>             <span class="at">replace =</span> <span class="cn">TRUE</span></span>
-<span id="cb7-61"><a href="#cb7-61" aria-hidden="true" tabindex="-1"></a>           )),</span>
-<span id="cb7-62"><a href="#cb7-62" aria-hidden="true" tabindex="-1"></a>           <span class="at">carbono =</span> biomasa <span class="sc">*</span> <span class="fu">rnorm</span>(</span>
-<span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a>             <span class="at">n =</span> <span class="fu">nrow</span>(taludes_bien),</span>
-<span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a>             <span class="at">mean =</span> <span class="fl">0.4</span>,</span>
-<span id="cb7-65"><a href="#cb7-65" aria-hidden="true" tabindex="-1"></a>             <span class="at">sd =</span> <span class="fl">0.2</span></span>
-<span id="cb7-66"><a href="#cb7-66" aria-hidden="true" tabindex="-1"></a>           )</span>
-<span id="cb7-67"><a href="#cb7-67" aria-hidden="true" tabindex="-1"></a>         ) <span class="sc">|&gt;</span></span>
-<span id="cb7-68"><a href="#cb7-68" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(ID, <span class="fu">everything</span>()) <span class="sc">|&gt;</span> </span>
-<span id="cb7-69"><a href="#cb7-69" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb7-70"><a href="#cb7-70" aria-hidden="true" tabindex="-1"></a>    <span class="at">agua_estival =</span> <span class="fu">fct_recode</span>(agua_estival, <span class="at">sequia =</span> <span class="st">"Sequia estival"</span>, <span class="at">lluvia =</span> <span class="st">"Lluvia estival"</span>),</span>
-<span id="cb7-71"><a href="#cb7-71" aria-hidden="true" tabindex="-1"></a>    <span class="at">nivel_luz =</span> <span class="fu">fct_recode</span>(</span>
-<span id="cb7-72"><a href="#cb7-72" aria-hidden="true" tabindex="-1"></a>      nivel_luz,</span>
-<span id="cb7-73"><a href="#cb7-73" aria-hidden="true" tabindex="-1"></a>      <span class="st">`</span><span class="at">1</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"Nivel 1"</span>,</span>
-<span id="cb7-74"><a href="#cb7-74" aria-hidden="true" tabindex="-1"></a>      <span class="st">`</span><span class="at">2</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"Nivel 2"</span>,</span>
-<span id="cb7-75"><a href="#cb7-75" aria-hidden="true" tabindex="-1"></a>      <span class="st">`</span><span class="at">3</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"Nivel 3"</span></span>
-<span id="cb7-76"><a href="#cb7-76" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb7-77"><a href="#cb7-77" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb7-78"><a href="#cb7-78" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb7-79"><a href="#cb7-79" aria-hidden="true" tabindex="-1"></a>    <span class="at">estres =</span> <span class="fu">case_when</span>(</span>
-<span id="cb7-80"><a href="#cb7-80" aria-hidden="true" tabindex="-1"></a>      nivel_luz <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span></span>
-<span id="cb7-81"><a href="#cb7-81" aria-hidden="true" tabindex="-1"></a>        agua_estival <span class="sc">==</span> <span class="st">"sequia"</span> <span class="sc">~</span> <span class="st">"alto"</span>,</span>
-<span id="cb7-82"><a href="#cb7-82" aria-hidden="true" tabindex="-1"></a>      nivel_luz <span class="sc">==</span> <span class="dv">3</span> <span class="sc">&amp;</span></span>
-<span id="cb7-83"><a href="#cb7-83" aria-hidden="true" tabindex="-1"></a>        agua_estival <span class="sc">==</span> <span class="st">"lluvia"</span> <span class="sc">~</span> <span class="st">"bajo"</span>,</span>
-<span id="cb7-84"><a href="#cb7-84" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"intermedio"</span></span>
-<span id="cb7-85"><a href="#cb7-85" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb7-86"><a href="#cb7-86" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>taludes_bien <span class="sc">|&gt;</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">ID =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(taludes_bien),</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># definir una variable desde cero</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">supervivencia =</span> <span class="fu">as.factor</span>(<span class="fu">sample</span>(</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">size =</span> <span class="fu">nrow</span>(taludes_bien),</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.4</span>, <span class="fl">0.6</span>),</span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">replace =</span> <span class="cn">TRUE</span></span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>    )),</span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># utilizar una variable para calcular otra</span></span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">carbono =</span> biomasa <span class="sc">*</span> <span class="fu">rnorm</span>(</span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">n =</span> <span class="fu">nrow</span>(taludes_bien),</span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">mean =</span> <span class="fl">0.4</span>,</span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">sd =</span> <span class="fl">0.2</span></span>
+<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(ID, <span class="fu">everything</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 91 × 6
+      ID biomasa nivel_luz agua_estival   supervivencia carbono
+   &lt;int&gt;   &lt;dbl&gt; &lt;fct&gt;     &lt;fct&gt;          &lt;fct&gt;           &lt;dbl&gt;
+ 1     1    3.04 Nivel 1   Sequia estival 1               0.992
+ 2     2    3.57 Nivel 1   Sequia estival 1               3.00 
+ 3     3    3.67 Nivel 1   Sequia estival 0               0.905
+ 4     4    4.59 Nivel 1   Sequia estival 1               2.33 
+ 5     5    4.34 Nivel 1   Sequia estival 0               1.26 
+ 6     6    2.25 Nivel 1   Sequia estival 1               0.923
+ 7     7    4.12 Nivel 1   Sequia estival 1               2.32 
+ 8     8    2.45 Nivel 1   Sequia estival 1               0.471
+ 9     9    4.46 Nivel 1   Sequia estival 1               1.23 
+10    10    3.51 Nivel 1   Sequia estival 1               1.09 
+# ℹ 81 more rows</code></pre>
 </div>
-<section id="ejercicio-2" class="level4" data-number="2.1.1">
-<h4 data-number="2.1.1" class="anchored" data-anchor-id="ejercicio-2"><span class="header-section-number">2.1.1</span> Ejercicio</h4>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>taludes_bien <span class="sc">|&gt;</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># sobreescribir una variable. En concreto fct_recode </span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># sirve para redefinir los niveles de un factor</span></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">agua_estival =</span> <span class="fu">fct_recode</span>(</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>      agua_estival, <span class="at">sequia =</span> <span class="st">"Sequia estival"</span>, <span class="at">lluvia =</span> <span class="st">"Lluvia estival"</span>),</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">nivel_luz =</span> <span class="fu">fct_recode</span>(</span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>      nivel_luz,</span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>      <span class="st">`</span><span class="at">1</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"Nivel 1"</span>,</span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>      <span class="st">`</span><span class="at">2</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"Nivel 2"</span>,</span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a>      <span class="st">`</span><span class="at">3</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"Nivel 3"</span></span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 91 × 3
+   biomasa nivel_luz agua_estival
+     &lt;dbl&gt; &lt;fct&gt;     &lt;fct&gt;       
+ 1    3.04 1         sequia      
+ 2    3.57 1         sequia      
+ 3    3.67 1         sequia      
+ 4    4.59 1         sequia      
+ 5    4.34 1         sequia      
+ 6    2.25 1         sequia      
+ 7    4.12 1         sequia      
+ 8    2.45 1         sequia      
+ 9    4.46 1         sequia      
+10    3.51 1         sequia      
+# ℹ 81 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>taludes_bien <span class="sc">|&gt;</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">estres =</span> <span class="fu">case_when</span>(</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>      <span class="co"># utilizar varias variables para calcular otra nueva</span></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>      nivel_luz <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span></span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>        agua_estival <span class="sc">==</span> <span class="st">"sequia"</span> <span class="sc">~</span> <span class="st">"alto"</span>,</span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>      <span class="co"># "Si el nivel de luz es 1 y hay sequia, el estrés será alto"</span></span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>      nivel_luz <span class="sc">==</span> <span class="dv">3</span> <span class="sc">&amp;</span> agua_estival <span class="sc">==</span> <span class="st">"lluvia"</span> <span class="sc">~</span> <span class="st">"bajo"</span>,</span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"intermedio"</span></span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 91 × 4
+   biomasa nivel_luz agua_estival   estres    
+     &lt;dbl&gt; &lt;fct&gt;     &lt;fct&gt;          &lt;chr&gt;     
+ 1    3.04 Nivel 1   Sequia estival intermedio
+ 2    3.57 Nivel 1   Sequia estival intermedio
+ 3    3.67 Nivel 1   Sequia estival intermedio
+ 4    4.59 Nivel 1   Sequia estival intermedio
+ 5    4.34 Nivel 1   Sequia estival intermedio
+ 6    2.25 Nivel 1   Sequia estival intermedio
+ 7    4.12 Nivel 1   Sequia estival intermedio
+ 8    2.45 Nivel 1   Sequia estival intermedio
+ 9    4.46 Nivel 1   Sequia estival intermedio
+10    3.51 Nivel 1   Sequia estival intermedio
+# ℹ 81 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># repetimos todo lo anterior concatenando todo el proceso:</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>taludes_trans <span class="ot">&lt;-</span> taludes_bien <span class="sc">|&gt;</span> <span class="fu">mutate</span>(</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">ID =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(taludes_bien),</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">supervivencia =</span> <span class="fu">as.factor</span>(<span class="fu">sample</span>(</span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>             <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">size =</span> <span class="fu">nrow</span>(taludes_bien),</span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.4</span>, <span class="fl">0.6</span>),</span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">replace =</span> <span class="cn">TRUE</span></span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>           )),</span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>           <span class="at">carbono =</span> biomasa <span class="sc">*</span> <span class="fu">rnorm</span>(</span>
+<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">n =</span> <span class="fu">nrow</span>(taludes_bien),</span>
+<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a>             <span class="at">mean =</span> <span class="fl">0.4</span>,</span>
+<span id="cb44-14"><a href="#cb44-14" aria-hidden="true" tabindex="-1"></a>             <span class="at">sd =</span> <span class="fl">0.2</span></span>
+<span id="cb44-15"><a href="#cb44-15" aria-hidden="true" tabindex="-1"></a>           )</span>
+<span id="cb44-16"><a href="#cb44-16" aria-hidden="true" tabindex="-1"></a>         ) <span class="sc">|&gt;</span></span>
+<span id="cb44-17"><a href="#cb44-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(ID, <span class="fu">everything</span>()) <span class="sc">|&gt;</span> </span>
+<span id="cb44-18"><a href="#cb44-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb44-19"><a href="#cb44-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">agua_estival =</span> <span class="fu">fct_recode</span>(agua_estival, <span class="at">sequia =</span> <span class="st">"Sequia estival"</span>, <span class="at">lluvia =</span> <span class="st">"Lluvia estival"</span>),</span>
+<span id="cb44-20"><a href="#cb44-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">nivel_luz =</span> <span class="fu">fct_recode</span>(</span>
+<span id="cb44-21"><a href="#cb44-21" aria-hidden="true" tabindex="-1"></a>      nivel_luz,</span>
+<span id="cb44-22"><a href="#cb44-22" aria-hidden="true" tabindex="-1"></a>      <span class="st">`</span><span class="at">1</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"Nivel 1"</span>,</span>
+<span id="cb44-23"><a href="#cb44-23" aria-hidden="true" tabindex="-1"></a>      <span class="st">`</span><span class="at">2</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"Nivel 2"</span>,</span>
+<span id="cb44-24"><a href="#cb44-24" aria-hidden="true" tabindex="-1"></a>      <span class="st">`</span><span class="at">3</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"Nivel 3"</span></span>
+<span id="cb44-25"><a href="#cb44-25" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb44-26"><a href="#cb44-26" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb44-27"><a href="#cb44-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb44-28"><a href="#cb44-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">estres =</span> <span class="fu">case_when</span>(</span>
+<span id="cb44-29"><a href="#cb44-29" aria-hidden="true" tabindex="-1"></a>      nivel_luz <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span></span>
+<span id="cb44-30"><a href="#cb44-30" aria-hidden="true" tabindex="-1"></a>        agua_estival <span class="sc">==</span> <span class="st">"sequia"</span> <span class="sc">~</span> <span class="st">"alto"</span>,</span>
+<span id="cb44-31"><a href="#cb44-31" aria-hidden="true" tabindex="-1"></a>      nivel_luz <span class="sc">==</span> <span class="dv">3</span> <span class="sc">&amp;</span></span>
+<span id="cb44-32"><a href="#cb44-32" aria-hidden="true" tabindex="-1"></a>        agua_estival <span class="sc">==</span> <span class="st">"lluvia"</span> <span class="sc">~</span> <span class="st">"bajo"</span>,</span>
+<span id="cb44-33"><a href="#cb44-33" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"intermedio"</span></span>
+<span id="cb44-34"><a href="#cb44-34" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb44-35"><a href="#cb44-35" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="ejercicio-2" class="level4" data-number="3.1.1">
+<h4 data-number="3.1.1" class="anchored" data-anchor-id="ejercicio-2"><span class="header-section-number">3.1.1</span> Ejercicio</h4>
 <ul>
-<li>Con el <code>data.frame</code> macrobenthos genera una nueva columna con la relación entre la turbidez del agua y la materia orgánica.</li>
+<li>Con el data.frame macrobenthos genera una nueva columna con la relación entre la turbidez del agua y la materia orgánica.</li>
 </ul>
 </section>
 </section>
-<section id="summarise-genera-un-nuevo-data.frame-resumiendo-cada-grupo-a-una-fila" class="level3" data-number="2.2">
-<h3 data-number="2.2" class="anchored" data-anchor-id="summarise-genera-un-nuevo-data.frame-resumiendo-cada-grupo-a-una-fila"><span class="header-section-number">2.2</span> <a href="https://dplyr.tidyverse.org/reference/summarise.html">Summarise</a>: genera un nuevo <code>data.frame</code> resumiendo cada grupo a una fila</h3>
+<section id="summarise-y-group-by-generar-un-nuevo-data.frame-resumiendo-cada-grupo-a-una-fila" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="summarise-y-group-by-generar-un-nuevo-data.frame-resumiendo-cada-grupo-a-una-fila"><span class="header-section-number">3.2</span> <a href="https://dplyr.tidyverse.org/reference/summarise.html">Summarise</a> y <a href="https://dplyr.tidyverse.org/reference/group_by.html">group by</a>: generar un nuevo <code>data.frame</code> resumiendo cada grupo a una fila</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>taludes_analisis <span class="sc">|&gt;</span> </span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">c_min =</span> <span class="fu">min</span>(carbono),</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">c_max =</span> <span class="fu">max</span>(carbono))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>taludes_trans <span class="sc">|&gt;</span> </span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">c_min =</span> <span class="fu">min</span>(carbono),</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">c_max =</span> <span class="fu">max</span>(carbono))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+   c_min c_max
+   &lt;dbl&gt; &lt;dbl&gt;
+1 -0.580  3.51</code></pre>
 </div>
-</section>
-<section id="group-by-agrupa-por-una-o-más-variables" class="level3" data-number="2.3">
-<h3 data-number="2.3" class="anchored" data-anchor-id="group-by-agrupa-por-una-o-más-variables"><span class="header-section-number">2.3</span> <a href="https://dplyr.tidyverse.org/reference/group_by.html">Group by</a>: agrupa por una o más variables</h3>
+</div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>taludes_analisis <span class="sc">|&gt;</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(estres) <span class="sc">|&gt;</span> <span class="co"># este tipo de summary en R base se hace con aggregate() o tapply() </span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">biomasa_min =</span> <span class="fu">min</span>(biomasa),</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">biomasa_mean =</span> <span class="fu">mean</span>(biomasa),</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">biomasa_max =</span> <span class="fu">max</span>(biomasa))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>taludes_trans <span class="sc">|&gt;</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(estres) <span class="sc">|&gt;</span>  </span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">biomasa_min =</span> <span class="fu">min</span>(biomasa),</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">biomasa_mean =</span> <span class="fu">mean</span>(biomasa),</span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">biomasa_max =</span> <span class="fu">max</span>(biomasa))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 4
+  estres     biomasa_min biomasa_mean biomasa_max
+  &lt;chr&gt;            &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt;
+1 alto              2.25         3.51        4.59
+2 bajo              2.35         3.30        4.58
+3 intermedio        2.12         4.32        5.35</code></pre>
 </div>
-<section id="ejercicio-3" class="level4" data-number="2.3.1">
-<h4 data-number="2.3.1" class="anchored" data-anchor-id="ejercicio-3"><span class="header-section-number">2.3.1</span> Ejercicio</h4>
+</div>
+<section id="ejercicio-3" class="level4" data-number="3.2.1">
+<h4 data-number="3.2.1" class="anchored" data-anchor-id="ejercicio-3"><span class="header-section-number">3.2.1</span> Ejercicio</h4>
 <ul>
 <li><p>Con el data.frame macrobenthos, cuenta el número de casos que hay en cada periodo de muestreo.</p></li>
 <li><p>Cuenta el número de casos distintos que hay de esfuerzo de muestreo.</p></li>
@@ -366,161 +671,118 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </section>
 </section>
-</section>
-<section id="unir-data.frames" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="unir-data.frames"><span class="header-section-number">3</span> Unir <code>data.frames</code></h2>
-<p><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">Joins</a>: añade columnas de <code>y</code> a <code>x</code>, haciendo coincidir las observaciones en función de las claves.</p>
-<!--# ja: faltaria añadir algun ejemplo con la base de datos de taludes-->
-<!--# ja: lo de abajo lo he traido del dia de programacion. faltaria incluir el ejemplo del join. el pivot_ lo dejaria para el dia de ggplot si no puede ser demasiado. decidir si tambien queremos hacer los ejercicios con el paquete de penguins-->
-<div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("tidyverse")</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>penguins <span class="ot">&lt;-</span> palmerpenguins<span class="sc">::</span>penguins</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>penguins</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(penguins)</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(penguins)</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(penguins)</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co"># filter</span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span> </span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(island <span class="sc">==</span> <span class="st">"Dream"</span>) </span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span> </span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(island <span class="sc">==</span> <span class="st">"Dream"</span> <span class="sc">&amp;</span> body_mass_g <span class="sc">&gt;</span> <span class="dv">4500</span>) <span class="co"># se pueden combinar criterios</span></span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span> </span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(island <span class="sc">==</span> <span class="st">"Dream"</span> <span class="sc">|</span> body_mass_g <span class="sc">&gt;</span> <span class="dv">4500</span>) </span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span> </span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(island <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Dream"</span>, <span class="st">"Torgersen"</span>))</span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a><span class="co"># select</span></span>
-<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span> </span>
-<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(sex, body_mass_g)</span>
-<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span> </span>
-<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">ends_with</span>(<span class="st">"mm"</span>)) <span class="co"># seleccionar variables que tienen un patron</span></span>
-<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span> </span>
-<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">ends_with</span>(<span class="fu">c</span>(<span class="st">"mm"</span>, <span class="st">"g"</span>))) </span>
-<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a><span class="co"># se pueden utilizar todo tipo de patrones de texto: https://rstudio.github.io/cheatsheets/strings.pdf</span></span>
-<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span> </span>
-<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(sex, body_mass_g, <span class="fu">everything</span>()) <span class="co"># se puede usar para reordenar variables</span></span>
-<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a><span class="co"># arrange</span></span>
-<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span> </span>
-<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(sex, body_mass_g) <span class="sc">|&gt;</span> </span>
-<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(body_mass_g)</span>
-<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span> </span>
-<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(sex, body_mass_g) <span class="sc">|&gt;</span> </span>
-<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(body_mass_g))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="pivot-transformar-datos-a-formato-largo-o-ancho" class="level3" data-number="3.3">
+<h3 data-number="3.3" class="anchored" data-anchor-id="pivot-transformar-datos-a-formato-largo-o-ancho"><span class="header-section-number">3.3</span> <a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">Pivot</a>: transformar datos a formato largo o ancho</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/tidy_pivot_longer.png" class="img-fluid figure-img"></p>
+<figcaption>La variable año está dividida en dos columnas y cada fila representa dos observaciones no una. Extraido de <a href="https://r4ds.had.co.nz/tidy-data.html">R for Data Science</a>.</figcaption>
+</figure>
 </div>
-<section id="ejercicio-4" class="level3" data-number="3.1">
-<h3 data-number="3.1" class="anchored" data-anchor-id="ejercicio-4"><span class="header-section-number">3.1</span> Ejercicio</h3>
-<ol type="1">
-<li><p>Crea un objeto con los pingüinos de la especie Adelie y ordena la tabla según la longitud del ala de los individuos.</p></li>
-<li><p>Crea un objeto a partir del anterior donde selecciones la isla y las variables relacionadas con el pico.</p></li>
-<li><p>Crea un objeto a partir del creado en el punto 1 donde selecciones todo menos la especie.</p></li>
-</ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># mutate</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span> </span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">bill_volume_mm2 =</span> (bill_length_mm <span class="sc">*</span> bill_depth_mm) <span class="sc">/</span> <span class="dv">2</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(bill_volume_mm2, <span class="fu">everything</span>())</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">female_penguin =</span> <span class="fu">case_when</span>(</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    sex <span class="sc">==</span> <span class="st">"female"</span> <span class="sc">&amp;</span> body_mass_g <span class="sc">&lt;</span> <span class="dv">3600</span> <span class="sc">~</span> <span class="st">"small female"</span>,</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    sex <span class="sc">==</span> <span class="st">"female"</span> <span class="sc">&amp;</span> body_mass_g <span class="sc">&gt;=</span> <span class="dv">3600</span> <span class="sc">~</span> <span class="st">"big female"</span>,</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(female_penguin, sex, body_mass_g)</span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="co"># summarise</span></span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="co"># se utiliza con funciones que resumen: n, n_distinct, mean, etc.</span></span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="co"># ver ?summarise</span></span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span> </span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">body_min =</span> <span class="fu">min</span>(body_mass_g, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">body_max =</span> <span class="fu">max</span>(body_mass_g, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span> </span>
-<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex) <span class="sc">|&gt;</span> </span>
-<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">body_min =</span> <span class="fu">min</span>(body_mass_g, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">body_max =</span> <span class="fu">max</span>(body_mass_g, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>stocks <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">year   =</span> <span class="fu">c</span>(<span class="dv">2015</span>, <span class="dv">2015</span>, <span class="dv">2016</span>, <span class="dv">2016</span>),</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">half  =</span> <span class="fu">c</span>(   <span class="dv">1</span>,    <span class="dv">2</span>,     <span class="dv">1</span>,    <span class="dv">2</span>),</span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">return =</span> <span class="fu">c</span>(<span class="fl">1.88</span>, <span class="fl">0.59</span>, <span class="fl">0.92</span>, <span class="fl">0.17</span>)</span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>stocks <span class="sc">|&gt;</span> </span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> year, <span class="at">values_from =</span> return) <span class="sc">|&gt;</span> </span>
+<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="st">`</span><span class="at">2015</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2016</span><span class="st">`</span>, <span class="at">names_to =</span> <span class="st">"year"</span>, <span class="at">values_to =</span> <span class="st">"return"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+   half year  return
+  &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt;
+1     1 2015    1.88
+2     1 2016    0.92
+3     2 2015    0.59
+4     2 2016    0.17</code></pre>
 </div>
-</section>
-<section id="ejercicio-5" class="level3" data-number="3.2">
-<h3 data-number="3.2" class="anchored" data-anchor-id="ejercicio-5"><span class="header-section-number">3.2</span> Ejercicio</h3>
-<ol type="1">
-<li><p>Con el <code>data.frame</code> penguins, cuenta el número de casos que hay en cada isla y calcula la media de la longitud del ala en cada isla.</p></li>
-<li><p>Con el mismo <code>data.frame</code> calcula la relación entre el peso en kg y la longitud del ala para cada individuo.</p></li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>mypenguins <span class="ot">&lt;-</span> penguins <span class="sc">|&gt;</span> </span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">bill_volume_mm2 =</span> (bill_length_mm <span class="sc">*</span> bill_depth_mm) <span class="sc">/</span> <span class="dv">2</span>,</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">female_penguin =</span> <span class="fu">case_when</span>(</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>      sex <span class="sc">==</span> <span class="st">"female"</span> <span class="sc">&amp;</span> body_mass_g <span class="sc">&lt;</span> <span class="dv">3600</span> <span class="sc">~</span> <span class="st">"small female"</span>,</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>      sex <span class="sc">==</span> <span class="st">"female"</span> <span class="sc">&amp;</span> body_mass_g <span class="sc">&gt;=</span> <span class="dv">3600</span> <span class="sc">~</span> <span class="st">"big female"</span>,</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA</span>)) </span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="fu">write_delim</span>(mypenguins, <span class="at">file =</span> <span class="st">"mypenguins.csv"</span>, <span class="at">delim =</span> <span class="st">";"</span>)</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co"># en file hay que especificar el directorio donde queremos que se guarde. Si no, se guardará en el directorio de trabajo (getwd())</span></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>misdatos <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="at">file =</span> <span class="st">"mypenguins.csv"</span>)</span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(misdatos)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
-<section id="enlaces-de-interés" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="enlaces-de-interés"><span class="header-section-number">4</span> Enlaces de interés</h2>
+<section id="joins-unir-data.frames" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="joins-unir-data.frames"><span class="header-section-number">4</span> <a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">Joins</a>: unir data.frames</h2>
+<p><code>*_join()</code> añade columnas de <code>y</code> (segundo data.frame) a <code>x</code> (primer data.frame), haciendo coincidir las observaciones en función de la variable común.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># join: left, right, full, inner</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>bloques <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">ID =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(taludes_trans), </span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">bloque =</span> <span class="fu">sample</span>(<span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">size =</span> <span class="fu">nrow</span>(taludes_trans), <span class="at">replace =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>taludes_trans <span class="ot">&lt;-</span> taludes_trans <span class="sc">|&gt;</span> </span>
+<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(bloques, <span class="at">by =</span> <span class="st">"ID"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb51-10"><a href="#cb51-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(ID, bloque, <span class="fu">everything</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="write_delim-guardar-datos" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="write_delim-guardar-datos"><span class="header-section-number">5</span> <a href="https://readr.tidyverse.org/reference/write_delim.html">Write_delim</a>: guardar datos</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_delim</span>(taludes_trans, <span class="at">file =</span> <span class="st">"taludes_trans.csv"</span>, <span class="at">delim =</span> <span class="st">";"</span>)</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="co"># en file hay que especificar el directorio donde queremos que se guarde. Si no, se guardará en el directorio de trabajo (getwd())</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="enlaces-de-interés" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="enlaces-de-interés"><span class="header-section-number">6</span> Enlaces de interés</h2>
 <ul>
-<li><p><a href="https://rstudio-education.github.io/hopr/basics.html">Hands-On Programming with R (basics)</a></p></li>
+<li><p><a href="https://rstudio-education.github.io/hopr/">Hands-On Programming with R</a></p></li>
 <li><p><a href="https://r4ds.had.co.nz/transform.html">R for data Science (Data transformation)</a></p></li>
 <li><p><a href="http://adv-r.had.co.nz/Style.html">Style guide</a></p></li>
-<li><p><a href="https://docs.posit.co/ide/user">RStudio User Guide</a></p></li>
-<li><p><a href="https://posit.cloud/learn/recipes">Posit Recipes</a> y en general <a href="https://posit.co/resources">Posit Resources</a></p></li>
 <li><p><a href="https://www.tidyverse.org">Página web de <em>tidyverse</em></a></p></li>
-<li><p><a href="https://revistaecosistemas.net/index.php/ecosistemas/article/view/2745"><em>Tidyverse: colección de paquetes de R para la ciencia de datos</em></a></p></li>
+<li><p><a href="https://nyu-cdsc.github.io/learningr/assets/data-transformation.pdf">Cheat sheet the dplyr</a></p></li>
+<li><p><a href="https://www.revistaecosistemas.net/index.php/ecosistemas/article/view/2129">Quince consejos para mejorar nuestro código y flujo de trabajo con R</a></p></li>
 </ul>
-<!--# ja: si se te ocurren mas adelante! -->
 <hr>
 <details>
 <summary>
 Session Info
 </summary>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.time</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.time</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "2024-09-13 16:55:45 CEST"</code></pre>
+<pre><code>[1] "2024-09-22 21:26:51 CEST"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>R version 4.4.1 (2024-06-14 ucrt)
-Platform: x86_64-w64-mingw32/x64
-Running under: Windows 10 x64 (build 19045)
+<pre><code>R version 4.3.1 (2023-06-16 ucrt)
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+Running under: Windows 11 x64 (build 22631)
 
 Matrix products: default
 
 
 locale:
-[1] LC_COLLATE=English_United Kingdom.utf8 
-[2] LC_CTYPE=English_United Kingdom.utf8   
-[3] LC_MONETARY=English_United Kingdom.utf8
-[4] LC_NUMERIC=C                           
-[5] LC_TIME=English_United Kingdom.utf8    
+[1] LC_COLLATE=English_United States.utf8 
+[2] LC_CTYPE=English_United States.utf8   
+[3] LC_MONETARY=English_United States.utf8
+[4] LC_NUMERIC=C                          
+[5] LC_TIME=English_United States.utf8    
 
-time zone: Europe/Madrid
+time zone: Europe/Paris
 tzcode source: internal
 
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
+other attached packages:
+ [1] lubridate_1.9.3 forcats_1.0.0   stringr_1.5.1   dplyr_1.1.4    
+ [5] purrr_1.0.2     readr_2.1.5     tidyr_1.3.1     tibble_3.2.1   
+ [9] ggplot2_3.5.0   tidyverse_2.0.0
+
 loaded via a namespace (and not attached):
- [1] htmlwidgets_1.6.4 compiler_4.4.1    fastmap_1.2.0     cli_3.6.3        
- [5] tools_4.4.1       htmltools_0.5.8.1 rstudioapi_0.16.0 yaml_2.3.9       
- [9] rmarkdown_2.27    knitr_1.48        jsonlite_1.8.8    xfun_0.45        
-[13] digest_0.6.36     rlang_1.1.4       evaluate_0.24.0  </code></pre>
+ [1] bit_4.0.5         gtable_0.3.4      jsonlite_1.8.8    crayon_1.5.2     
+ [5] compiler_4.3.1    tidyselect_1.2.1  parallel_4.3.1    scales_1.3.0     
+ [9] yaml_2.3.8        fastmap_1.1.1     R6_2.5.1          generics_0.1.3   
+[13] knitr_1.45        htmlwidgets_1.6.4 munsell_0.5.0     pillar_1.9.0     
+[17] tzdb_0.4.0        rlang_1.1.3       utf8_1.2.4        stringi_1.8.3    
+[21] xfun_0.42         bit64_4.0.5       timechange_0.3.0  cli_3.6.1        
+[25] withr_3.0.0       magrittr_2.0.3    digest_0.6.35     grid_4.3.1       
+[29] vroom_1.6.5       rstudioapi_0.15.0 hms_1.1.3         lifecycle_1.0.4  
+[33] vctrs_0.6.5       evaluate_0.23     glue_1.7.0        fansi_1.0.6      
+[37] colorspace_2.1-0  rmarkdown_2.26    tools_4.3.1       pkgconfig_2.0.3  
+[41] htmltools_0.5.7  </code></pre>
 </div>
 </div>
 </details>

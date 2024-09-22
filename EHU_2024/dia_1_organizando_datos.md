@@ -1,131 +1,350 @@
 # Ciencia de datos en R
 <img src="images/Escuela%20de%20Doctorado_trilingue_positivo.png" />
 
-Julen Astigarraga and Verónica Cruz-Alonso
-13/09/2024
+Verónica Cruz-Alonso and Julen Astigarraga
+22/09/2024
 
-- [<span class="toc-section-number">1</span> Funciones básicas de
-  filtrado y selección](#funciones-básicas-de-filtrado-y-selección)
-  - [<span class="toc-section-number">1.1</span> Slice: filtrar filas
-    según el índice
-    numérico](#slice-filtrar-filas-según-el-índice-numérico)
+- [<span class="toc-section-number">1</span> Importar y renombrar
+  datos](#importar-y-renombrar-datos)
+  - [<span class="toc-section-number">1.1</span> Read_delim: leer datos
+    desde fuera de R](#read_delim-leer-datos-desde-fuera-de-r)
   - [<span class="toc-section-number">1.2</span> Rename: cambiar nombres
     de variables
     (columnas)](#rename-cambiar-nombres-de-variables-columnas)
-  - [<span class="toc-section-number">1.3</span> Arrange: ordenar filas
+- [<span class="toc-section-number">2</span> Funciones básicas de
+  filtrado y selección](#funciones-básicas-de-filtrado-y-selección)
+  - [<span class="toc-section-number">2.1</span> Slice: filtrar filas
+    según el índice
+    numérico](#slice-filtrar-filas-según-el-índice-numérico)
+  - [<span class="toc-section-number">2.2</span> Arrange: ordenar filas
     por los valores de una o más variables
     (columnas)](#arrange-ordenar-filas-por-los-valores-de-una-o-más-variables-columnas)
-  - [<span class="toc-section-number">1.4</span> Filter: filtrar filas
+  - [<span class="toc-section-number">2.3</span> Filter: filtrar filas
     utilizando
     condiciones](#filter-filtrar-filas-utilizando-condiciones)
-  - [<span class="toc-section-number">1.5</span> Select: seleccionar
+    - [<span class="toc-section-number">2.3.1</span>
+      Ejercicio](#ejercicio)
+  - [<span class="toc-section-number">2.4</span> Select: seleccionar
     columnas utilizando
     condiciones](#select-seleccionar-columnas-utilizando-condiciones)
-- [<span class="toc-section-number">2</span> Transformar los datos y
+    - [<span class="toc-section-number">2.4.1</span>
+      Ejercicio](#ejercicio-1)
+- [<span class="toc-section-number">3</span> Transformar los datos y
   calcular nuevas
   variables](#transformar-los-datos-y-calcular-nuevas-variables)
-  - [<span class="toc-section-number">2.1</span> Mutate: crear,
+  - [<span class="toc-section-number">3.1</span> Mutate: crear,
     modificar o eliminar
     columnas](#mutate-crear-modificar-o-eliminar-columnas)
-  - [<span class="toc-section-number">2.2</span> Summarise: genera un
-    nuevo `data.frame` resumiendo cada grupo a una
-    fila](#summarise-genera-un-nuevo-dataframe-resumiendo-cada-grupo-a-una-fila)
-  - [<span class="toc-section-number">2.3</span> Group by: agrupa por
-    una o más variables](#group-by-agrupa-por-una-o-más-variables)
-- [<span class="toc-section-number">3</span> Unir
-  `data.frames`](#unir-dataframes)
-  - [<span class="toc-section-number">3.1</span>
-    Ejercicio](#ejercicio-4)
-  - [<span class="toc-section-number">3.2</span>
-    Ejercicio](#ejercicio-5)
-- [<span class="toc-section-number">4</span> Enlaces de
+    - [<span class="toc-section-number">3.1.1</span>
+      Ejercicio](#ejercicio-2)
+  - [<span class="toc-section-number">3.2</span> Summarise y group by:
+    generar un nuevo `data.frame` resumiendo cada grupo a una
+    fila](#summarise-y-group-by-generar-un-nuevo-dataframe-resumiendo-cada-grupo-a-una-fila)
+    - [<span class="toc-section-number">3.2.1</span>
+      Ejercicio](#ejercicio-3)
+  - [<span class="toc-section-number">3.3</span> Pivot: transformar
+    datos a formato largo o
+    ancho](#pivot-transformar-datos-a-formato-largo-o-ancho)
+- [<span class="toc-section-number">4</span> Joins: unir
+  data.frames](#joins-unir-dataframes)
+- [<span class="toc-section-number">5</span> Write_delim: guardar
+  datos](#write_delim-guardar-datos)
+- [<span class="toc-section-number">6</span> Enlaces de
   interés](#enlaces-de-interés)
 
-En este curso realizaremos las distintas tareas que forman parte de la
-ciencia de datos utilizando *tidyverse*, aunque también se podrían
-llevar a cabo con R base. Consideramos que los cuatro pilares básicos de
-*tidyverse* (centrado en humanos, consistencia, componibilidad e
-inclusividad) facilitan tanto el aprendizaje como el trabajo diario,
-permitiendo realizar las mismas acciones de manera más sencilla, aunque
-reconocemos que esto puede variar según la persona.
+## Importar y renombrar datos
+
+### [Read_delim](https://readr.tidyverse.org/reference/read_delim.html): leer datos desde fuera de R
 
 ``` r
-taludes_bien <- read_delim(file = "DatosCursoR/taludes.csv", delim = ",", col_types = list(Luz = "f", Agua = "f"))
+library(tidyverse)
+
+taludes <- read_delim(file = "taludes.csv", delim = ",")
+
+taludes
+```
+
+    # A tibble: 91 × 3
+       Biomasa Luz     Agua          
+         <dbl> <chr>   <chr>         
+     1    3.04 Nivel 1 Sequia estival
+     2    3.57 Nivel 1 Sequia estival
+     3    3.67 Nivel 1 Sequia estival
+     4    4.59 Nivel 1 Sequia estival
+     5    4.34 Nivel 1 Sequia estival
+     6    2.25 Nivel 1 Sequia estival
+     7    4.12 Nivel 1 Sequia estival
+     8    2.45 Nivel 1 Sequia estival
+     9    4.46 Nivel 1 Sequia estival
+    10    3.51 Nivel 1 Sequia estival
+    # ℹ 81 more rows
+
+``` r
+taludes_bien <- read_delim(file = "taludes.csv", 
+  delim = ",", col_types = list(Luz = "f", Agua = "f"))
 
 taludes_bien
+```
+
+    # A tibble: 91 × 3
+       Biomasa Luz     Agua          
+         <dbl> <fct>   <fct>         
+     1    3.04 Nivel 1 Sequia estival
+     2    3.57 Nivel 1 Sequia estival
+     3    3.67 Nivel 1 Sequia estival
+     4    4.59 Nivel 1 Sequia estival
+     5    4.34 Nivel 1 Sequia estival
+     6    2.25 Nivel 1 Sequia estival
+     7    4.12 Nivel 1 Sequia estival
+     8    2.45 Nivel 1 Sequia estival
+     9    4.46 Nivel 1 Sequia estival
+    10    3.51 Nivel 1 Sequia estival
+    # ℹ 81 more rows
+
+``` r
 View(taludes_bien)
 summary(taludes_bien)
+```
+
+        Biomasa           Luz                 Agua   
+     Min.   :2.120   Nivel 1:30   Sequia estival:46  
+     1st Qu.:3.531   Nivel 2:31   Lluvia estival:45  
+     Median :4.053   Nivel 3:30                      
+     Mean   :3.993                                   
+     3rd Qu.:4.609                                   
+     Max.   :5.347                                   
+
+``` r
 glimpse(taludes_bien)
 ```
 
-## Funciones básicas de filtrado y selección
+    Rows: 91
+    Columns: 3
+    $ Biomasa <dbl> 3.039767, 3.573515, 3.669172, 4.592334, 4.337278, 2.254230, 4.…
+    $ Luz     <fct> Nivel 1, Nivel 1, Nivel 1, Nivel 1, Nivel 1, Nivel 1, Nivel 1,…
+    $ Agua    <fct> Sequia estival, Sequia estival, Sequia estival, Sequia estival…
 
-<!--# ja: pondria el link a la viñeta de cada main function que explicamos -->
+### [Rename](https://dplyr.tidyverse.org/reference/rename.html): cambiar nombres de variables (columnas)
+
+``` r
+names(taludes_bien)
+```
+
+    [1] "Biomasa" "Luz"     "Agua"   
+
+``` r
+taludes_bien <- taludes_bien |>    
+  rename(biomasa = Biomasa, # nombre nuevo = nombre viejo          
+         nivel_luz = Luz, 
+         agua_estival = Agua)
+```
+
+📝 Ajustar sangría de código: Ctrl + i; Reformatear código: Ctrl +
+Shift + a
+
+## Funciones básicas de filtrado y selección
 
 ### [Slice](https://dplyr.tidyverse.org/reference/slice.html): filtrar filas según el índice numérico
 
 ``` r
 taludes_bien |> 
   slice(1) # shortcut para el pipe: CTRL + SHIFT + M 
+```
 
+    # A tibble: 1 × 3
+      biomasa nivel_luz agua_estival  
+        <dbl> <fct>     <fct>         
+    1    3.04 Nivel 1   Sequia estival
+
+``` r
 taludes_bien |>
   slice(1, 5)
+```
 
+    # A tibble: 2 × 3
+      biomasa nivel_luz agua_estival  
+        <dbl> <fct>     <fct>         
+    1    3.04 Nivel 1   Sequia estival
+    2    4.34 Nivel 1   Sequia estival
+
+``` r
 taludes_bien |> 
   slice(1:6)
+```
 
+    # A tibble: 6 × 3
+      biomasa nivel_luz agua_estival  
+        <dbl> <fct>     <fct>         
+    1    3.04 Nivel 1   Sequia estival
+    2    3.57 Nivel 1   Sequia estival
+    3    3.67 Nivel 1   Sequia estival
+    4    4.59 Nivel 1   Sequia estival
+    5    4.34 Nivel 1   Sequia estival
+    6    2.25 Nivel 1   Sequia estival
+
+``` r
 taludes_bien |>
   slice(-c(1:5))
 ```
 
-### [Rename](https://dplyr.tidyverse.org/reference/rename.html): cambiar nombres de variables (columnas)
-
-``` r
-taludes_bien |> 
-  rename(biomasa = Biomasa, # nombre nuevo = nombre viejo
-         luz = Luz, agua = Agua)
-```
-
-📝 Ajustar sangría de código: CTRL + I; Reformatear código: CTRL +
-MAYÚS + A
+    # A tibble: 86 × 3
+       biomasa nivel_luz agua_estival  
+         <dbl> <fct>     <fct>         
+     1    2.25 Nivel 1   Sequia estival
+     2    4.12 Nivel 1   Sequia estival
+     3    2.45 Nivel 1   Sequia estival
+     4    4.46 Nivel 1   Sequia estival
+     5    3.51 Nivel 1   Sequia estival
+     6    3.49 Nivel 1   Sequia estival
+     7    2.80 Nivel 1   Sequia estival
+     8    3.91 Nivel 1   Sequia estival
+     9    3.16 Nivel 1   Sequia estival
+    10    3.81 Nivel 1   Sequia estival
+    # ℹ 76 more rows
 
 ### [Arrange](https://dplyr.tidyverse.org/reference/arrange.html): ordenar filas por los valores de una o más variables (columnas)
 
 ``` r
 taludes_bien |>
-  arrange(Biomasa)
-
-taludes_bien |> 
-  arrange(desc(Biomasa))
+  arrange(biomasa)
 ```
+
+    # A tibble: 91 × 3
+       biomasa nivel_luz agua_estival  
+         <dbl> <fct>     <fct>         
+     1    2.12 Nivel 2   Lluvia estival
+     2    2.25 Nivel 1   Sequia estival
+     3    2.35 Nivel 3   Lluvia estival
+     4    2.45 Nivel 1   Sequia estival
+     5    2.49 Nivel 3   Lluvia estival
+     6    2.54 Nivel 3   Lluvia estival
+     7    2.70 Nivel 3   Lluvia estival
+     8    2.73 Nivel 3   Lluvia estival
+     9    2.80 Nivel 1   Sequia estival
+    10    2.86 Nivel 3   Lluvia estival
+    # ℹ 81 more rows
+
+``` r
+taludes_bien |> 
+  arrange(desc(biomasa))
+```
+
+    # A tibble: 91 × 3
+       biomasa nivel_luz agua_estival  
+         <dbl> <fct>     <fct>         
+     1    5.35 Nivel 3   Sequia estival
+     2    5.30 Nivel 3   Sequia estival
+     3    5.21 Nivel 1   Lluvia estival
+     4    5.17 Nivel 2   Lluvia estival
+     5    5.16 Nivel 1   Lluvia estival
+     6    5.13 Nivel 2   Sequia estival
+     7    5.10 Nivel 2   Lluvia estival
+     8    5.06 Nivel 3   Sequia estival
+     9    4.98 Nivel 2   Lluvia estival
+    10    4.94 Nivel 1   Lluvia estival
+    # ℹ 81 more rows
 
 ### [Filter](https://dplyr.tidyverse.org/reference/filter.html): filtrar filas utilizando condiciones
 
+Se necesita un vector de filtrado que contenga valores lógicos
+(TRUE/FALSE).
+
 ``` r
-# se necesita un vector de filtrado que contenga valores TRUE/FALSE
-
-taludes_bien
-
 taludes_bien |>
-  filter(Luz == "Nivel 1") # seleccionar variables que tienen un patrón 
-
-taludes_bien |>
-  filter(Luz == "Nivel 1" & Biomasa > 4) # combinar criterios: AND
-
-taludes_bien |>
-  filter(Luz == "Nivel 1" | Biomasa > 5) # combinar criterios: OR
-
-taludes_bien |>
-  filter(Luz %in% c("Nivel 1", "Nivel 3")) # combinar criterios: %in% 
+  filter(nivel_luz == "Nivel 1") # filtrar por filas que cumplen un patrón 
 ```
+
+    # A tibble: 30 × 3
+       biomasa nivel_luz agua_estival  
+         <dbl> <fct>     <fct>         
+     1    3.04 Nivel 1   Sequia estival
+     2    3.57 Nivel 1   Sequia estival
+     3    3.67 Nivel 1   Sequia estival
+     4    4.59 Nivel 1   Sequia estival
+     5    4.34 Nivel 1   Sequia estival
+     6    2.25 Nivel 1   Sequia estival
+     7    4.12 Nivel 1   Sequia estival
+     8    2.45 Nivel 1   Sequia estival
+     9    4.46 Nivel 1   Sequia estival
+    10    3.51 Nivel 1   Sequia estival
+    # ℹ 20 more rows
+
+``` r
+taludes_bien |>
+  filter(nivel_luz == "Nivel 1" & biomasa > 4) # combinar criterios: AND
+```
+
+    # A tibble: 16 × 3
+       biomasa nivel_luz agua_estival  
+         <dbl> <fct>     <fct>         
+     1    4.59 Nivel 1   Sequia estival
+     2    4.34 Nivel 1   Sequia estival
+     3    4.12 Nivel 1   Sequia estival
+     4    4.46 Nivel 1   Sequia estival
+     5    4.73 Nivel 1   Lluvia estival
+     6    4.94 Nivel 1   Lluvia estival
+     7    4.37 Nivel 1   Lluvia estival
+     8    4.79 Nivel 1   Lluvia estival
+     9    5.16 Nivel 1   Lluvia estival
+    10    4.55 Nivel 1   Lluvia estival
+    11    4.72 Nivel 1   Lluvia estival
+    12    4.23 Nivel 1   Lluvia estival
+    13    4.83 Nivel 1   Lluvia estival
+    14    4.48 Nivel 1   Lluvia estival
+    15    4.58 Nivel 1   Lluvia estival
+    16    5.21 Nivel 1   Lluvia estival
+
+``` r
+taludes_bien |>
+  filter(nivel_luz == "Nivel 1" | biomasa > 5) # combinar criterios: OR
+```
+
+    # A tibble: 36 × 3
+       biomasa nivel_luz agua_estival  
+         <dbl> <fct>     <fct>         
+     1    3.04 Nivel 1   Sequia estival
+     2    3.57 Nivel 1   Sequia estival
+     3    3.67 Nivel 1   Sequia estival
+     4    4.59 Nivel 1   Sequia estival
+     5    4.34 Nivel 1   Sequia estival
+     6    2.25 Nivel 1   Sequia estival
+     7    4.12 Nivel 1   Sequia estival
+     8    2.45 Nivel 1   Sequia estival
+     9    4.46 Nivel 1   Sequia estival
+    10    3.51 Nivel 1   Sequia estival
+    # ℹ 26 more rows
+
+``` r
+taludes_bien |>
+  filter(nivel_luz %in% c("Nivel 1", "Nivel 3")) # combinar criterios: %in% 
+```
+
+    # A tibble: 60 × 3
+       biomasa nivel_luz agua_estival  
+         <dbl> <fct>     <fct>         
+     1    3.04 Nivel 1   Sequia estival
+     2    3.57 Nivel 1   Sequia estival
+     3    3.67 Nivel 1   Sequia estival
+     4    4.59 Nivel 1   Sequia estival
+     5    4.34 Nivel 1   Sequia estival
+     6    2.25 Nivel 1   Sequia estival
+     7    4.12 Nivel 1   Sequia estival
+     8    2.45 Nivel 1   Sequia estival
+     9    4.46 Nivel 1   Sequia estival
+    10    3.51 Nivel 1   Sequia estival
+    # ℹ 50 more rows
 
 #### Ejercicio
 
 - Lee el data.frame “Macrobenthos.txt”. Pista: el delimitador entre
   datos es el tabulador (“).
 
-- Crea un subset que contenga las filas de la 1 a la 10 y de la 390 a la
-  400.
+💡“Macrobenthos.txt” es una base de datos sobre la abundancia de
+distintos grupos taxonómicos de macroinvertebrados marinos ([Zuur et
+al. 2009](https://link.springer.com/book/10.1007/978-0-387-93837-0)).
+
+- Crea un subset de datos que contenga las filas de la 1 a la 10 y de la
+  390 a la 400.
 
 - Crea un subset que NO contenga el Taxon número 1. Pista: revisa los
   [operadores de
@@ -139,42 +358,89 @@ taludes_bien |>
 
 ### [Select](https://dplyr.tidyverse.org/reference/select.html): seleccionar columnas utilizando condiciones
 
+Se necesita un vector de selección que contenga valores lógicos
+(TRUE/FALSE).
+
 ``` r
-# se necesita un vector de selección que contenga valores TRUE/FALSE
-
 taludes_bien |>
-  select(Biomasa, Agua)
+  select(biomasa, agua_estival)
+```
 
+    # A tibble: 91 × 2
+       biomasa agua_estival  
+         <dbl> <fct>         
+     1    3.04 Sequia estival
+     2    3.57 Sequia estival
+     3    3.67 Sequia estival
+     4    4.59 Sequia estival
+     5    4.34 Sequia estival
+     6    2.25 Sequia estival
+     7    4.12 Sequia estival
+     8    2.45 Sequia estival
+     9    4.46 Sequia estival
+    10    3.51 Sequia estival
+    # ℹ 81 more rows
+
+``` r
 # ?select 
 
 taludes_bien |>
   select(contains("a"))
+```
 
+    # A tibble: 91 × 2
+       biomasa agua_estival  
+         <dbl> <fct>         
+     1    3.04 Sequia estival
+     2    3.57 Sequia estival
+     3    3.67 Sequia estival
+     4    4.59 Sequia estival
+     5    4.34 Sequia estival
+     6    2.25 Sequia estival
+     7    4.12 Sequia estival
+     8    2.45 Sequia estival
+     9    4.46 Sequia estival
+    10    3.51 Sequia estival
+    # ℹ 81 more rows
+
+``` r
 # se pueden utilizar todo tipo de patrones de texto: https://rstudio.github.io/cheatsheets/strings.pdf
 
 taludes_bien |>
-  select(Luz, everything()) # se puede usar para reordenar variables
+  select(nivel_luz, everything()) # se puede usar para reordenar variables
 ```
+
+    # A tibble: 91 × 3
+       nivel_luz biomasa agua_estival  
+       <fct>       <dbl> <fct>         
+     1 Nivel 1      3.04 Sequia estival
+     2 Nivel 1      3.57 Sequia estival
+     3 Nivel 1      3.67 Sequia estival
+     4 Nivel 1      4.59 Sequia estival
+     5 Nivel 1      4.34 Sequia estival
+     6 Nivel 1      2.25 Sequia estival
+     7 Nivel 1      4.12 Sequia estival
+     8 Nivel 1      2.45 Sequia estival
+     9 Nivel 1      4.46 Sequia estival
+    10 Nivel 1      3.51 Sequia estival
+    # ℹ 81 more rows
 
 #### Ejercicio
 
-- Con el data.frame “Macrobenthos.txt”, crea un nuevo `data.frame` que
-  contenga las variables relacionadas con el medio (de organic matter a
-  temperature). Pista: mira la ayuda de select para ahorrar caracteres.
+- Con el data.frame “Macrobenthos.txt”, crea un nuevo data.frame que
+  contenga las variables relacionadas con el medio (de *organic matter*
+  a *temperature*). Pista: mira la ayuda de select para ahorrar
+  caracteres.
 
 - Crea un nuevo objeto con el taxon al principio y que incluya las demás
-  columnas excepto el esfuerzo de muestreo (effort).
+  columnas excepto el esfuerzo de muestreo (*effort*).
 
 ## Transformar los datos y calcular nuevas variables
 
 ### [Mutate](https://dplyr.tidyverse.org/reference/mutate.html): crear, modificar o eliminar columnas
 
 ``` r
-# renombramos las variables y guardamos un nuevo objeto para trabajar mejor con las funciones de transformación:
-taludes_analisis <- taludes_bien |>
-  rename(biomasa = Biomasa, nivel_luz = Luz, agua_estival = Agua)
-
-taludes_analisis |>
+taludes_bien |>
   mutate(
     ID = 1:nrow(taludes_bien),
     # definir una variable desde cero
@@ -192,8 +458,25 @@ taludes_analisis |>
     )
   ) |> 
   select(ID, everything())
+```
 
-taludes_analisis |>
+    # A tibble: 91 × 6
+          ID biomasa nivel_luz agua_estival   supervivencia carbono
+       <int>   <dbl> <fct>     <fct>          <fct>           <dbl>
+     1     1    3.04 Nivel 1   Sequia estival 1               0.864
+     2     2    3.57 Nivel 1   Sequia estival 1              -0.222
+     3     3    3.67 Nivel 1   Sequia estival 1               2.36 
+     4     4    4.59 Nivel 1   Sequia estival 0               1.22 
+     5     5    4.34 Nivel 1   Sequia estival 0               1.34 
+     6     6    2.25 Nivel 1   Sequia estival 1               1.69 
+     7     7    4.12 Nivel 1   Sequia estival 0               1.64 
+     8     8    2.45 Nivel 1   Sequia estival 1               0.467
+     9     9    4.46 Nivel 1   Sequia estival 1               1.44 
+    10    10    3.51 Nivel 1   Sequia estival 0               0.346
+    # ℹ 81 more rows
+
+``` r
+taludes_bien |>
   mutate(
     # sobreescribir una variable. En concreto fct_recode 
     # sirve para redefinir los niveles de un factor
@@ -206,8 +489,25 @@ taludes_analisis |>
       `3` = "Nivel 3"
     )
   )
+```
 
-taludes_analisis |>
+    # A tibble: 91 × 3
+       biomasa nivel_luz agua_estival
+         <dbl> <fct>     <fct>       
+     1    3.04 1         sequia      
+     2    3.57 1         sequia      
+     3    3.67 1         sequia      
+     4    4.59 1         sequia      
+     5    4.34 1         sequia      
+     6    2.25 1         sequia      
+     7    4.12 1         sequia      
+     8    2.45 1         sequia      
+     9    4.46 1         sequia      
+    10    3.51 1         sequia      
+    # ℹ 81 more rows
+
+``` r
+taludes_bien |>
   mutate(
     estres = case_when(
       # utilizar varias variables para calcular otra nueva
@@ -218,12 +518,27 @@ taludes_analisis |>
       TRUE ~ "intermedio"
     )
   )
+```
 
+    # A tibble: 91 × 4
+       biomasa nivel_luz agua_estival   estres    
+         <dbl> <fct>     <fct>          <chr>     
+     1    3.04 Nivel 1   Sequia estival intermedio
+     2    3.57 Nivel 1   Sequia estival intermedio
+     3    3.67 Nivel 1   Sequia estival intermedio
+     4    4.59 Nivel 1   Sequia estival intermedio
+     5    4.34 Nivel 1   Sequia estival intermedio
+     6    2.25 Nivel 1   Sequia estival intermedio
+     7    4.12 Nivel 1   Sequia estival intermedio
+     8    2.45 Nivel 1   Sequia estival intermedio
+     9    4.46 Nivel 1   Sequia estival intermedio
+    10    3.51 Nivel 1   Sequia estival intermedio
+    # ℹ 81 more rows
+
+``` r
 # repetimos todo lo anterior concatenando todo el proceso:
-taludes_analisis <- taludes_bien |>
-  rename(biomasa = Biomasa,
-         nivel_luz = Luz,
-         agua_estival = Agua) |> mutate(
+
+taludes_trans <- taludes_bien |> mutate(
            ID = 1:nrow(taludes_bien),
            supervivencia = as.factor(sample(
              c(0, 1),
@@ -260,26 +575,36 @@ taludes_analisis <- taludes_bien |>
 
 #### Ejercicio
 
-- Con el `data.frame` macrobenthos genera una nueva columna con la
+- Con el data.frame macrobenthos genera una nueva columna con la
   relación entre la turbidez del agua y la materia orgánica.
 
-### [Summarise](https://dplyr.tidyverse.org/reference/summarise.html): genera un nuevo `data.frame` resumiendo cada grupo a una fila
+### [Summarise](https://dplyr.tidyverse.org/reference/summarise.html) y [group by](https://dplyr.tidyverse.org/reference/group_by.html): generar un nuevo `data.frame` resumiendo cada grupo a una fila
 
 ``` r
-taludes_analisis |> 
+taludes_trans |> 
   summarise(c_min = min(carbono),
             c_max = max(carbono))
 ```
 
-### [Group by](https://dplyr.tidyverse.org/reference/group_by.html): agrupa por una o más variables
+    # A tibble: 1 × 2
+       c_min c_max
+       <dbl> <dbl>
+    1 -0.595  4.63
 
 ``` r
-taludes_analisis |>
-  group_by(estres) |> # este tipo de summary en R base se hace con aggregate() o tapply() 
+taludes_trans |>
+  group_by(estres) |>  
   summarise(biomasa_min = min(biomasa),
             biomasa_mean = mean(biomasa),
             biomasa_max = max(biomasa))
 ```
+
+    # A tibble: 3 × 4
+      estres     biomasa_min biomasa_mean biomasa_max
+      <chr>            <dbl>        <dbl>       <dbl>
+    1 alto              2.25         3.51        4.59
+    2 bajo              2.35         3.30        4.58
+    3 intermedio        2.12         4.32        5.35
 
 #### Ejercicio
 
@@ -290,142 +615,75 @@ taludes_analisis |>
 
 - Calcula la media de la turbidez para cada taxón.
 
-## Unir `data.frames`
+### [Pivot](https://tidyr.tidyverse.org/reference/pivot_longer.html): transformar datos a formato largo o ancho
 
-[Joins](https://dplyr.tidyverse.org/reference/mutate-joins.html): añade
-columnas de `y` a `x`, haciendo coincidir las observaciones en función
-de las claves.
-
-<!--# ja: faltaria añadir algun ejemplo con la base de datos de taludes-->
-<!--# ja: lo de abajo lo he traido del dia de programacion. faltaria incluir el ejemplo del join. el pivot_ lo dejaria para el dia de ggplot si no puede ser demasiado. decidir si tambien queremos hacer los ejercicios con el paquete de penguins-->
+![La variable año está dividida en dos columnas y cada fila representa
+dos observaciones no una. Extraido de [R for Data
+Science](https://r4ds.had.co.nz/tidy-data.html).](images/tidy_pivot_longer.png)
 
 ``` r
-# install.packages("tidyverse")
-library(tidyverse)
+stocks <- tibble(
+  year   = c(2015, 2015, 2016, 2016),
+  half  = c(   1,    2,     1,    2),
+  return = c(1.88, 0.59, 0.92, 0.17)
+)
 
-penguins <- palmerpenguins::penguins
-penguins
-
-summary(penguins)
-glimpse(penguins)
-View(penguins)
-
-# filter
-penguins |> 
-  filter(island == "Dream") 
-penguins |> 
-  filter(island == "Dream" & body_mass_g > 4500) # se pueden combinar criterios
-penguins |> 
-  filter(island == "Dream" | body_mass_g > 4500) 
-penguins |> 
-  filter(island %in% c("Dream", "Torgersen"))
-
-# select
-penguins |> 
-  select(sex, body_mass_g)
-penguins |> 
-  select(ends_with("mm")) # seleccionar variables que tienen un patron
-penguins |> 
-  select(ends_with(c("mm", "g"))) 
-
-# se pueden utilizar todo tipo de patrones de texto: https://rstudio.github.io/cheatsheets/strings.pdf
-
-penguins |> 
-  select(sex, body_mass_g, everything()) # se puede usar para reordenar variables
-
-# arrange
-penguins |> 
-  select(sex, body_mass_g) |> 
-  arrange(body_mass_g)
-penguins |> 
-  select(sex, body_mass_g) |> 
-  arrange(desc(body_mass_g))
+stocks |> 
+  pivot_wider(names_from = year, values_from = return) |> 
+  pivot_longer(`2015`:`2016`, names_to = "year", values_to = "return")
 ```
 
-### Ejercicio
+    # A tibble: 4 × 3
+       half year  return
+      <dbl> <chr>  <dbl>
+    1     1 2015    1.88
+    2     1 2016    0.92
+    3     2 2015    0.59
+    4     2 2016    0.17
 
-1.  Crea un objeto con los pingüinos de la especie Adelie y ordena la
-    tabla según la longitud del ala de los individuos.
+## [Joins](https://dplyr.tidyverse.org/reference/mutate-joins.html): unir data.frames
 
-2.  Crea un objeto a partir del anterior donde selecciones la isla y las
-    variables relacionadas con el pico.
-
-3.  Crea un objeto a partir del creado en el punto 1 donde selecciones
-    todo menos la especie.
+`*_join()` añade columnas de `y` (segundo data.frame) a `x` (primer
+data.frame), haciendo coincidir las observaciones en función de la
+variable común.
 
 ``` r
-# mutate
-penguins |> 
-  mutate(bill_volume_mm2 = (bill_length_mm * bill_depth_mm) / 2) |> 
-  select(bill_volume_mm2, everything())
+# join: left, right, full, inner
 
-penguins |>
-  mutate(female_penguin = case_when(
-    sex == "female" & body_mass_g < 3600 ~ "small female",
-    sex == "female" & body_mass_g >= 3600 ~ "big female",
-    TRUE ~ NA)) |>
-  select(female_penguin, sex, body_mass_g)
+set.seed(123)
 
-# summarise
-# se utiliza con funciones que resumen: n, n_distinct, mean, etc.
-# ver ?summarise
+bloques <- tibble(ID = 1:nrow(taludes_trans), 
+  bloque = sample(x = 1:2, size = nrow(taludes_trans), replace = TRUE))
 
-penguins |> 
-  summarise(
-    body_min = min(body_mass_g, na.rm = TRUE),
-    body_max = max(body_mass_g, na.rm = TRUE)
-  )
-
-penguins |> 
-  group_by(sex) |> 
-  summarise(body_min = min(body_mass_g, na.rm = TRUE),
-  body_max = max(body_mass_g, na.rm = TRUE))
+taludes_trans <- taludes_trans |> 
+  left_join(bloques, by = "ID") |> 
+  select(ID, bloque, everything())
 ```
 
-### Ejercicio
-
-1.  Con el `data.frame` penguins, cuenta el número de casos que hay en
-    cada isla y calcula la media de la longitud del ala en cada isla.
-
-2.  Con el mismo `data.frame` calcula la relación entre el peso en kg y
-    la longitud del ala para cada individuo.
+## [Write_delim](https://readr.tidyverse.org/reference/write_delim.html): guardar datos
 
 ``` r
-mypenguins <- penguins |> 
-  mutate(bill_volume_mm2 = (bill_length_mm * bill_depth_mm) / 2,
-    female_penguin = case_when(
-      sex == "female" & body_mass_g < 3600 ~ "small female",
-      sex == "female" & body_mass_g >= 3600 ~ "big female",
-      TRUE ~ NA)) 
-
-write_delim(mypenguins, file = "mypenguins.csv", delim = ";")
+write_delim(taludes_trans, file = "taludes_trans.csv", delim = ";")
 # en file hay que especificar el directorio donde queremos que se guarde. Si no, se guardará en el directorio de trabajo (getwd())
-
-misdatos <- read_delim(file = "mypenguins.csv")
-View(misdatos)
 ```
 
 ## Enlaces de interés
 
-- [Hands-On Programming with R
-  (basics)](https://rstudio-education.github.io/hopr/basics.html)
+- [Hands-On Programming with
+  R](https://rstudio-education.github.io/hopr/)
 
 - [R for data Science (Data
   transformation)](https://r4ds.had.co.nz/transform.html)
 
 - [Style guide](http://adv-r.had.co.nz/Style.html)
 
-- [RStudio User Guide](https://docs.posit.co/ide/user)
-
-- [Posit Recipes](https://posit.cloud/learn/recipes) y en general [Posit
-  Resources](https://posit.co/resources)
-
 - [Página web de *tidyverse*](https://www.tidyverse.org)
 
-- [*Tidyverse: colección de paquetes de R para la ciencia de
-  datos*](https://revistaecosistemas.net/index.php/ecosistemas/article/view/2745)
+- [Cheat sheet the
+  dplyr](https://nyu-cdsc.github.io/learningr/assets/data-transformation.pdf)
 
-<!--# ja: si se te ocurren mas adelante! -->
+- [Quince consejos para mejorar nuestro código y flujo de trabajo con
+  R](https://www.revistaecosistemas.net/index.php/ecosistemas/article/view/2129)
 
 ------------------------------------------------------------------------
 
@@ -438,36 +696,47 @@ Session Info
 Sys.time()
 ```
 
-    [1] "2024-09-13 16:56:01 CEST"
+    [1] "2024-09-22 21:26:56 CEST"
 
 ``` r
 sessionInfo()
 ```
 
-    R version 4.4.1 (2024-06-14 ucrt)
-    Platform: x86_64-w64-mingw32/x64
-    Running under: Windows 10 x64 (build 19045)
+    R version 4.3.1 (2023-06-16 ucrt)
+    Platform: x86_64-w64-mingw32/x64 (64-bit)
+    Running under: Windows 11 x64 (build 22631)
 
     Matrix products: default
 
 
     locale:
-    [1] LC_COLLATE=English_United Kingdom.utf8 
-    [2] LC_CTYPE=English_United Kingdom.utf8   
-    [3] LC_MONETARY=English_United Kingdom.utf8
-    [4] LC_NUMERIC=C                           
-    [5] LC_TIME=English_United Kingdom.utf8    
+    [1] LC_COLLATE=English_United States.utf8 
+    [2] LC_CTYPE=English_United States.utf8   
+    [3] LC_MONETARY=English_United States.utf8
+    [4] LC_NUMERIC=C                          
+    [5] LC_TIME=English_United States.utf8    
 
-    time zone: Europe/Madrid
+    time zone: Europe/Paris
     tzcode source: internal
 
     attached base packages:
     [1] stats     graphics  grDevices utils     datasets  methods   base     
 
+    other attached packages:
+     [1] lubridate_1.9.3 forcats_1.0.0   stringr_1.5.1   dplyr_1.1.4    
+     [5] purrr_1.0.2     readr_2.1.5     tidyr_1.3.1     tibble_3.2.1   
+     [9] ggplot2_3.5.0   tidyverse_2.0.0
+
     loaded via a namespace (and not attached):
-     [1] compiler_4.4.1    fastmap_1.2.0     cli_3.6.3         tools_4.4.1      
-     [5] htmltools_0.5.8.1 rstudioapi_0.16.0 yaml_2.3.9        rmarkdown_2.27   
-     [9] knitr_1.48        jsonlite_1.8.8    xfun_0.45         digest_0.6.36    
-    [13] rlang_1.1.4       evaluate_0.24.0  
+     [1] bit_4.0.5         gtable_0.3.4      jsonlite_1.8.8    crayon_1.5.2     
+     [5] compiler_4.3.1    tidyselect_1.2.1  parallel_4.3.1    scales_1.3.0     
+     [9] yaml_2.3.8        fastmap_1.1.1     R6_2.5.1          generics_0.1.3   
+    [13] knitr_1.45        munsell_0.5.0     pillar_1.9.0      tzdb_0.4.0       
+    [17] rlang_1.1.3       utf8_1.2.4        stringi_1.8.3     xfun_0.42        
+    [21] bit64_4.0.5       timechange_0.3.0  cli_3.6.1         withr_3.0.0      
+    [25] magrittr_2.0.3    digest_0.6.35     grid_4.3.1        vroom_1.6.5      
+    [29] rstudioapi_0.15.0 hms_1.1.3         lifecycle_1.0.4   vctrs_0.6.5      
+    [33] evaluate_0.23     glue_1.7.0        fansi_1.0.6       colorspace_2.1-0 
+    [37] rmarkdown_2.26    tools_4.3.1       pkgconfig_2.0.3   htmltools_0.5.7  
 
 </details>

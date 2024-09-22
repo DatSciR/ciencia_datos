@@ -621,7 +621,7 @@ ggplot(data = vectorial_df) +
 
 -   [Graphics principles](https://graphicsprinciples.github.io/)
 
--   [ggmap()](https://datanalytics.com/libro_r/0900_ggmap.html) y {geodata} para obtener mapas de fondo para nuestros datos.
+-   [ggmap()](https://datanalytics.com/libro_r/0900_ggmap.html) para obtener mapas de fondo para nuestros datos y {[geodata](https://github.com/rspatial/geodata)} para descargar información geográfica de clima, suelo, etc.
 
 <details>
 

@@ -26,6 +26,8 @@ number-sections: true
 ```{r read}
 #| warning: false
 
+library(tidyverse)
+
 taludes <- read_delim(file = "taludes.csv", delim = ",")
 
 taludes
