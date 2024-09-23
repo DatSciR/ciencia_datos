@@ -1,0 +1,196 @@
+---
+title: | 
+  | Ciencia de datos en R ![](images/Escuela de Doctorado_trilingue_positivo.png){width=80%,fig-align="right"}
+subtitle: "Introducción (Organizando datos: el día a día)"
+author: Julen Astigarraga and Verónica Cruz-Alonso
+date: today
+date-format: "DD/MM/YYYY"
+toc: true
+toc-depth: 4
+toc-title: "Índice"
+format:
+  html:
+    link-external-newwindow: true
+    # css: styles.css
+  gfm: default
+editor: visual
+editor_options: 
+  chunk_output_type: console
+number-sections: true
+---
+
+## Introducción (Organizando datos: el día a día)
+
+### Ejercicio 8.2.2
+
+-   Elije un número y multiplicalo por 3
+
+-   Crea un objeto que contenga 100 valores entre 1900 y 2000
+
+-   Suma un número a tu objeto
+
+-   Multiplica tu objeto por sí mismo
+
+-   Crea un único objeto que contenga el número 5 repetido 9 veces junto con una secuencia de 5 a 50 cada 5 elementos
+
+-   ¿Cuál es la longitud del objeto anterior?
+
+```{r 8.2.2}
+
+# 1
+10 * 3
+
+# 2
+misvalores <- 1901:2000
+
+# 3
+misvalores + 5
+
+# 4
+misvalores * misvalores
+
+# 5
+secuencia <- c(rep(x = 5, times = 9), seq(from = 5, to = 50, by = 5))
+
+# 6
+length(secuencia)
+
+```
+
+### Ejercicio 8.3.1
+
+-   Crea una lista que contenga dos data.frame con dos variables cada uno (variable1 y variable2) y diez observaciones por variable.
+
+-   Accede a la octava observación de variable2 de cada data.frame.
+
+```{r 8.3.1}
+
+# 1
+df1 <- data.frame(
+  variable1 = 1:10,
+  variable2 = rep(T, 10)
+)
+
+df2 <- data.frame(
+  variable1 = 11:20,
+  variable2 = rep(c(T, F), each = 5)
+)
+
+list_df <- list(df1, df2)
+
+# 2
+list_df[[1]][["variable2"]][[8]]
+list_df[[2]][["variable2"]][[8]]
+
+```
+
+## Organizando datos: el día a día
+
+### Ejercicio 2.3.1
+
+-   Lee el data.frame "Macrobenthos.txt". Pista: el delimitador entre datos es el tabulador ("\t").
+
+-   Crea un subset de datos que contenga las filas de la 1 a la 10 y de la 390 a la 400.
+
+-   Crea un subset que NO contenga el Taxon número 1. Pista: revisa los [operadores de R](https://bookdown.org/jboscomendoza/r-principiantes4/operadores-relacionales.html).
+
+-   Crea un subset con las observaciones del Taxon 2 donde se haya registrado una abundancia mayor de 50 o menor o igual a 5. Pista: necesitarás paréntesis para filtrar.
+
+-   ¿Cuántas filas han quedado?
+
+```{r 2.3.1}
+
+library(tidyverse)
+
+# 1
+macro <- read_delim("Macrobenthos.txt", delim = "\t")
+glimpse(macro)
+
+# 2
+macro |> 
+  slice(c(1:10, 390:400))
+
+# 3
+macro |> 
+  filter(TaxonID != 1)
+
+# 4
+macro |> 
+  filter(TaxonID == 2 & (Abundance > 50 | Abundance <= 5))
+
+```
+
+### Ejercicio 2.4.1
+
+-   Con el data.frame "Macrobenthos.txt", crea un nuevo data.frame que contenga las variables relacionadas con el medio (de *organic matter* a *temperature*). Pista: mira la ayuda de select para ahorrar caracteres.
+
+-   Crea un nuevo objeto con el taxon al principio y que incluya las demás columnas excepto el esfuerzo de muestreo (*effort*).
+
+```{r 2.4.1}
+
+# 1
+macro |> 
+  select(o_matter:temperature)
+
+# 2
+macro |> 
+  select(TaxonID, everything(), -effort)
+
+```
+
+### Ejercicio 3.1.1
+
+-   Con el data.frame macrobenthos genera una nueva columna con la relación entre la turbidez del agua y la materia orgánica.
+
+```{r 3.1.1}
+
+macro |> 
+  mutate(
+    tub_o_mat = turbidity / o_matter
+  )
+
+```
+
+### Ejercicio 3.2.1
+
+-   Con el data.frame macrobenthos, cuenta el número de casos que hay en cada periodo de muestreo.
+
+-   Cuenta el número de casos distintos que hay de esfuerzo de muestreo.
+
+-   Calcula la media de la turbidez para cada taxón.
+
+```{r 3.2.1}
+
+# 1
+macro |> 
+  group_by(period) |> 
+  summarise(n = n())
+
+macro |> 
+  count(period)
+
+# 2
+macro |> 
+  summarise(
+    ef_n_dis = n_distinct(effort)
+  )
+
+# 3
+macro |> 
+  group_by(TaxonID) |> 
+  summarise(turb_mean = mean(turbidity, na.rm = T))
+
+```
+
+------------------------------------------------------------------------
+
+<details>
+
+<summary>Session Info</summary>
+
+```{r session_info}
+Sys.time()
+sessionInfo()
+```
+
+</details>
