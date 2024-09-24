@@ -1,0 +1,136 @@
+---
+title: | 
+  | Ciencia de datos en R ![](images/Escuela de Doctorado_trilingue_positivo.png){width=80%,fig-align="right"}
+subtitle: "Visualización: contando historias"
+author: Verónica Cruz-Alonso and Julen Astigarraga
+date: today
+date-format: "DD/MM/YYYY"
+toc: true
+toc-depth: 4
+toc-title: "Índice"
+format:
+  html:
+    link-external-newwindow: true
+    # css: styles.css
+  gfm: default
+editor: visual
+editor_options: 
+  chunk_output_type: console
+number-sections: true
+---
+
+## Visualización: contando historias
+
+### Ejercicio 3.0.1
+
+Representa un gráfico para ver la relación entre el sexo de los pasajeros y la clase.
+
+```{r 3.0.1}
+library(tidyverse)
+library(titanic)
+
+titanic <- titanic::titanic_train 
+
+ggplot(data = titanic, aes(x = Sex, y = Pclass)) + 
+  geom_count(color = "purple")
+  # geom_col()
+```
+
+### Ejercicio 3.1.1
+
+¿Cómo modificarías el siguiente código para representar la puerta de embarque con diferentes formas pero los puntos de color rosa?
+
+```{r 3.1.1}
+ggplot(data = titanic) + 
+  geom_point(aes(x = Age, y = Fare))
+
+ggplot(data = titanic) + 
+  geom_point(aes(x = Age, y = Fare, shape = Embarked), color = "pink")
+```
+
+### Ejercicio 4.2.1
+
+Describe la distribución de las tarifas pagadas por los pasajeros.
+
+```{r 4.2.1}
+
+ggplot(data = titanic, aes(x = Fare)) +
+  geom_histogram()
+
+ggplot(data = titanic) + 
+  geom_density(aes(x = Fare))
+
+ggplot(data = titanic) + 
+  geom_boxplot(aes(y = Fare, fill = as.factor(Pclass), x = as.factor(Pclass), group = as.factor(Pclass)))
+
+```
+
+### Ejercicio 4.3.2
+
+Haz un gráfico para averiguar en qué clase sobrevivieron más personas.
+
+```{r 4.3.2}
+
+ggplot(data = titanic) + 
+  geom_bar(aes(x = as.factor(Survived), fill = as.factor(Pclass), group = as.factor(Pclass)))
+
+ggplot(data = titanic) + 
+  geom_bar(aes(x = as.factor(Pclass), fill = as.factor(Survived)))
+
+```
+
+### Ejercicio 5.2.1
+
+Cambia la posición de los ejes X e Y en el sistema de coordenadas de pnumcat.
+
+```{r 5.2.1}
+pnumcat <- ggplot(data = titanic) + 
+  geom_boxplot(aes(x = as.factor(Pclass), y = Age, group = as.factor(Pclass)))
+
+pnumcat + 
+  coord_flip()
+```
+
+### Ejercicio 5.5.1
+
+¿Qué harías para cambiar la escala de la edad a un degradado de colores de azul a amarillo en el siguiente gráfico?
+
+```{r 5.5.1}
+ggplot(data = titanic, aes(x = Age, y = Fare, color = Age)) + 
+  geom_point()
+
+ggplot(data = titanic, aes(x = Age, y = Fare, color = Age)) + 
+  geom_point() + 
+  scale_color_gradient(low = "blue", high = "yellow")
+```
+
+### Ejercicio 5.7.1
+
+Dibuja una linea negra que represente los ejes de `miplot` y quita el fondo del gráfico.
+
+```{r 5.7.1}
+
+miplot <- ggplot(data = titanic) + 
+  geom_bar(aes(x = Pclass, group = 1)) 
+
+miplot + 
+  theme(
+    panel.background = element_blank(), 
+    # panel.background = element_rect(fill = "transparent"), 
+    axis.line = element_line(color = "black", size = 1)
+    )
+
+```
+
+------------------------------------------------------------------------
+
+<details>
+
+<summary>Session Info</summary>
+
+```{r session_info}
+Sys.time()
+sessionInfo()
+```
+
+</details>
