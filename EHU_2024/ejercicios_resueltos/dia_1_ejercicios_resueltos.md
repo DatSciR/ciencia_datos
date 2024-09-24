@@ -2,7 +2,7 @@
 <img src="images/Escuela%20de%20Doctorado_trilingue_positivo.png" />
 
 Julen Astigarraga and Verónica Cruz-Alonso
-23/09/2024
+24/09/2024
 
 - [<span class="toc-section-number">1</span> Introducción (Organizando
   datos: el día a día)](#introducción-organizando-datos-el-día-a-día)
@@ -411,7 +411,7 @@ Session Info
 Sys.time()
 ```
 
-    [1] "2024-09-23 13:47:44 CEST"
+    [1] "2024-09-24 10:15:59 CEST"
 
 ``` r
 sessionInfo()
