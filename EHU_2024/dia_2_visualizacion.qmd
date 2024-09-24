@@ -290,7 +290,7 @@ Los gráficos interactivos de ggplotly() pueden ser muy útilies también en la 
 # install.packages("plotly")
 library(plotly) 
 
-ggplotly(pnum)
+# ggplotly(pnum)
 ```
 
 #### Variable cualitativa vs. cuantitativa
