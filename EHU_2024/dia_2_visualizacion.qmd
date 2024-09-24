@@ -211,6 +211,7 @@ ggplot(data = titanic) +
 
 ggplot(data = titanic) + 
   geom_bar(aes(x = Pclass, y = ..prop.., group = 1))
+
 ```
 
 ### Exploración de variables cuantitativas
@@ -253,12 +254,7 @@ ggplot(data = titanic) +
 
 table(titanic$Sex, titanic$Survived)
 
-ggplot(data = titanic) + 
-  geom_bar(aes(x = Pclass, fill = Sex))
 
-prueba <- ggplot(data = titanic) + 
-  geom_bar(aes(x = Pclass, fill = Sex)) 
-prueba2 <- ggplot_build(prueba)
 ```
 
 #### Ejercicio
@@ -286,11 +282,12 @@ pnum +
 Los gráficos interactivos de ggplotly() pueden ser muy útilies también en la exploración de datos. Fijate en el siguiente ejemplo.
 
 ```{r plotly}
+#| warning: false
 
 # install.packages("plotly")
 library(plotly) 
 
-# ggplotly(pnum)
+ggplotly(pnum)
 ```
 
 #### Variable cualitativa vs. cuantitativa
@@ -312,13 +309,15 @@ ggplot(data = titanic) +
 
 summ_titanic <- titanic |> 
   group_by(Pclass) |> 
-  summarise(Avg_age = mean(Age, na.rm = TRUE), Sd_age = sd(Age, na.rm = TRUE))
+  summarise(Avg_age = mean(Age, na.rm = TRUE), 
+    Sd_age = sd(Age, na.rm = TRUE))
 
 summ_titanic
 
 ggplot(data = summ_titanic, aes(x = Pclass, y = Avg_age)) + 
   geom_col(color = "black") + 
-  geom_errorbar(aes(ymax = Avg_age + Sd_age, ymin = Avg_age - Sd_age), width = 0.25)
+  geom_errorbar(aes(ymax = Avg_age + Sd_age, 
+    ymin = Avg_age - Sd_age), width = 0.25)
 
 ggplot(data = summ_titanic, aes(x = Pclass, y = Avg_age)) + 
   geom_line(aes(group = 1))
@@ -354,7 +353,7 @@ El sistema de coordenadas por defecto en un gráfico de `ggplot()` es el cartesi
 #| warning: false
 
 pnumcat +
-  coord_cartesian(ylim = c(0, 100))
+  coord_cartesian(ylim = c(0, 100)) 
 
 ```
 
@@ -369,7 +368,8 @@ Los *facets* dividen el gráfico en subgráficos basados en el valor de una o va
 ```{r facet_1}
 #| warning: false
 
-miplot2 <- ggplot(data = titanic, aes(x = Age, y = Fare, color = Sex)) + 
+miplot2 <- ggplot(data = titanic, 
+  aes(x = Age, y = Fare, color = Sex)) + 
   geom_point()
 
 miplot2
@@ -437,6 +437,13 @@ ggplot(data = titanic) +
 
 ¿Qué harías para cambiar la escala de la edad a un degradado de colores de azul a amarillo en el siguiente gráfico?
 
+```{r ejer}
+
+ggplot(data = titanic, aes(x = Age, y = Fare, color = Age)) +
+  geom_point(size = 10) 
+
+```
+
 ### Los colores en R
 
 Las paletas de colores tipo *manual* y *gradient* se personalizan con el nombre o código del color. Con [esta herramienta](https://r-charts.com/colors/) puedes elegir entre cientos de colores.
@@ -499,7 +506,12 @@ miplot2 + theme_classic()
 miplot2 + theme_light() 
 miplot2 + theme_void()
 
-# GgthemeAssist
+```
+
+#### GgthemeAssist
+
+```{r theme_assist}
+
 # install.packages("ggThemeAssist")
 
 miplot2
@@ -519,7 +531,7 @@ miplot + miplot2
 miplot / miplot2
 
 miplot / miplot2 + 
-  plot_annotation(tag_levels = "a", tag_suffix = ")")
+  plot_annotation(tag_levels = "a", tag_suffix = ")") 
 
 ```
 

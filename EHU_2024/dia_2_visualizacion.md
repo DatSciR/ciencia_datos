@@ -55,6 +55,8 @@ Verónica Cruz-Alonso and Julen Astigarraga
   - [<span class="toc-section-number">5.7</span> Temas](#temas)
     - [<span class="toc-section-number">5.7.1</span>
       Ejercicio](#ejercicio-6)
+    - [<span class="toc-section-number">5.7.2</span>
+      GgthemeAssist](#ggthemeassist)
 - [<span class="toc-section-number">6</span>
   Multipaneles](#multipaneles)
 - [<span class="toc-section-number">7</span> Mapas](#mapas)
@@ -415,7 +417,7 @@ ggplot(data = titanic) +
 
 ``` r
 ggplot(data = titanic) + 
-  geom_jitter(aes(x = 1, y = Age))
+  geom_point(aes(x = 1, y = Age))
 ```
 
 ![](dia_2_visualizacion_files/figure-commonmark/num-4.png)
@@ -453,19 +455,6 @@ table(titanic$Sex, titanic$Survived)
              Muerto Vivo
       female     81  233
       male      468  109
-
-``` r
-ggplot(data = titanic) + 
-  geom_bar(aes(x = Pclass, fill = Sex))
-```
-
-![](dia_2_visualizacion_files/figure-commonmark/dos_cat-3.png)
-
-``` r
-prueba <- ggplot(data = titanic) + 
-  geom_bar(aes(x = Pclass, fill = Sex)) 
-prueba2 <- ggplot_build(prueba)
-```
 
 #### Ejercicio
 
@@ -507,26 +496,7 @@ en la exploración de datos. Fijate en el siguiente ejemplo.
 ``` r
 # install.packages("plotly")
 library(plotly) 
-```
 
-    Warning: package 'plotly' was built under R version 4.3.3
-
-
-    Attaching package: 'plotly'
-
-    The following object is masked from 'package:ggplot2':
-
-        last_plot
-
-    The following object is masked from 'package:stats':
-
-        filter
-
-    The following object is masked from 'package:graphics':
-
-        layout
-
-``` r
 # ggplotly(pnum)
 ```
 
@@ -560,7 +530,8 @@ ggplot(data = titanic) +
 
 summ_titanic <- titanic |> 
   group_by(Pclass) |> 
-  summarise(Avg_age = mean(Age, na.rm = TRUE), Sd_age = sd(Age, na.rm = TRUE))
+  summarise(Avg_age = mean(Age, na.rm = TRUE), 
+    Sd_age = sd(Age, na.rm = TRUE))
 
 summ_titanic
 ```
@@ -575,7 +546,8 @@ summ_titanic
 ``` r
 ggplot(data = summ_titanic, aes(x = Pclass, y = Avg_age)) + 
   geom_col(color = "black") + 
-  geom_errorbar(aes(ymax = Avg_age + Sd_age, ymin = Avg_age - Sd_age), width = 0.25)
+  geom_errorbar(aes(ymax = Avg_age + Sd_age, 
+    ymin = Avg_age - Sd_age), width = 0.25)
 ```
 
 ![](dia_2_visualizacion_files/figure-commonmark/cat_num-4.png)
@@ -625,7 +597,7 @@ cambiar los límites del sistema de coordenadas.
 
 ``` r
 pnumcat +
-  coord_cartesian(ylim = c(0, 100))
+  coord_cartesian(ylim = c(0, 100)) 
 ```
 
 ![](dia_2_visualizacion_files/figure-commonmark/coords-1.png)
@@ -643,7 +615,8 @@ exploración de datos. Hay dos funciones para facetar: `facet_grid()` y
 `facet_wrap()`.
 
 ``` r
-miplot2 <- ggplot(data = titanic, aes(x = Age, y = Fare, color = Sex)) + 
+miplot2 <- ggplot(data = titanic, 
+  aes(x = Age, y = Fare, color = Sex)) + 
   geom_point()
 
 miplot2
@@ -744,6 +717,16 @@ ggplot(data = titanic) +
 
 ¿Qué harías para cambiar la escala de la edad a un degradado de colores
 de azul a amarillo en el siguiente gráfico?
+
+``` r
+ggplot(data = titanic, aes(x = Age, y = Fare, color = Age)) +
+  geom_point(size = 10) 
+```
+
+    Warning: Removed 177 rows containing missing values or values outside the scale range
+    (`geom_point()`).
+
+![](dia_2_visualizacion_files/figure-commonmark/ejer-1.png)
 
 ### Los colores en R
 
@@ -1003,14 +986,18 @@ miplot2 + theme_void()
 
 ![](dia_2_visualizacion_files/figure-commonmark/temas_defecto-3.png)
 
+#### GgthemeAssist
+
 ``` r
-# GgthemeAssist
 # install.packages("ggThemeAssist")
 
 miplot2
 ```
 
-![](dia_2_visualizacion_files/figure-commonmark/temas_defecto-4.png)
+    Warning: Removed 177 rows containing missing values or values outside the scale range
+    (`geom_point()`).
+
+![](dia_2_visualizacion_files/figure-commonmark/theme_assist-1.png)
 
 ## Multipaneles
 
@@ -1035,7 +1022,7 @@ miplot / miplot2
 
 ``` r
 miplot / miplot2 + 
-  plot_annotation(tag_levels = "a", tag_suffix = ")")
+  plot_annotation(tag_levels = "a", tag_suffix = ")") 
 ```
 
 ![](dia_2_visualizacion_files/figure-commonmark/patchwork-3.png)
@@ -1072,11 +1059,7 @@ raster <- get_daily_climate(
   output = "raster")
 
 plot(raster)
-```
 
-![](dia_2_visualizacion_files/figure-commonmark/raster-1.png)
-
-``` r
 tidy_raster <- terra::as.data.frame(raster, xy = TRUE) 
 head(tidy_raster)
 ```
@@ -1094,18 +1077,12 @@ rastermap <- ggplot(data = tidy_raster) +
   geom_raster(aes(x = x, y = y, fill = `2020-12-31`), interpolate = TRUE) 
 
 rastermap
-```
 
-![](dia_2_visualizacion_files/figure-commonmark/raster-2.png)
-
-``` r
 rastermap + 
   scale_fill_viridis_c(name = "Temperatura\nmáxima (ºC)\n31 Dic. 2020") +
   labs(y = "Latitude", x = "Longitude") + 
   theme_bw()
 ```
-
-![](dia_2_visualizacion_files/figure-commonmark/raster-3.png)
 
 ### Vectorial
 
@@ -1228,7 +1205,7 @@ Session Info
 Sys.time()
 ```
 
-    [1] "2024-09-24 09:57:43 CEST"
+    [1] "2024-09-24 13:58:25 CEST"
 
 ``` r
 sessionInfo()
