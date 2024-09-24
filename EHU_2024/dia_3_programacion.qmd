@@ -100,7 +100,7 @@ Según el tipo de output generado hay dos tipos de funciones:
 
 En general, sintácticamente, las funciones tienen tres componentes:
 
--   Función `function()` (primitiva)
+-   Función `function()`
 -   Argumentos: lista de entradas.
 -   Cuerpo: trozo de código que sigue a `function()`, tradicionalmente entre llaves.
 
@@ -467,6 +467,8 @@ names(penguins_list) <- c("p1", "p2", "p3")
 💡Se puede iterar sobre más de dos entradas con [`pmap()`](https://github.com/DatSciR/intro_prog_fun/blob/main/lleida/intro_prog_fun.md#nuestro-cuarto-funcional-m%C3%BAltiples-entradas-pmap), iterar cuando no hay un objeto de salida con [`walk()`](https://github.com/DatSciR/intro_prog_fun/blob/main/lleida/intro_prog_fun.md#iteraciones-sin-salida) e iterar sobre índices con [`imap()`](https://github.com/DatSciR/intro_prog_fun/blob/main/lleida/intro_prog_fun.md#m%C3%A1s-variantes-de-map-modify-e-imap), entre otras opciones.
 
 ### Enlaces de interés
+
+-   [Introducción a la programación funcional (DatSciR)](https://github.com/DatSciR/intro_prog_fun)
 
 -   [R for data Science (functions)](https://r4ds.had.co.nz/functions.html)
 
