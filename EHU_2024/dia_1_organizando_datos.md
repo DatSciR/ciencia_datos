@@ -2,7 +2,7 @@
 <img src="images/Escuela%20de%20Doctorado_trilingue_positivo.png" />
 
 Verónica Cruz-Alonso and Julen Astigarraga
-22/09/2024
+24/09/2024
 
 - [<span class="toc-section-number">1</span> Importar y renombrar
   datos](#importar-y-renombrar-datos)
@@ -463,16 +463,16 @@ taludes_bien |>
     # A tibble: 91 × 6
           ID biomasa nivel_luz agua_estival   supervivencia carbono
        <int>   <dbl> <fct>     <fct>          <fct>           <dbl>
-     1     1    3.04 Nivel 1   Sequia estival 1               0.864
-     2     2    3.57 Nivel 1   Sequia estival 1              -0.222
-     3     3    3.67 Nivel 1   Sequia estival 1               2.36 
-     4     4    4.59 Nivel 1   Sequia estival 0               1.22 
-     5     5    4.34 Nivel 1   Sequia estival 0               1.34 
-     6     6    2.25 Nivel 1   Sequia estival 1               1.69 
-     7     7    4.12 Nivel 1   Sequia estival 0               1.64 
-     8     8    2.45 Nivel 1   Sequia estival 1               0.467
-     9     9    4.46 Nivel 1   Sequia estival 1               1.44 
-    10    10    3.51 Nivel 1   Sequia estival 0               0.346
+     1     1    3.04 Nivel 1   Sequia estival 1               0.667
+     2     2    3.57 Nivel 1   Sequia estival 0               1.76 
+     3     3    3.67 Nivel 1   Sequia estival 1               1.48 
+     4     4    4.59 Nivel 1   Sequia estival 1               1.67 
+     5     5    4.34 Nivel 1   Sequia estival 1               1.31 
+     6     6    2.25 Nivel 1   Sequia estival 1               1.00 
+     7     7    4.12 Nivel 1   Sequia estival 0               1.69 
+     8     8    2.45 Nivel 1   Sequia estival 0               1.04 
+     9     9    4.46 Nivel 1   Sequia estival 0               1.43 
+    10    10    3.51 Nivel 1   Sequia estival 0               2.08 
     # ℹ 81 more rows
 
 ``` r
@@ -539,20 +539,19 @@ taludes_bien |>
 # repetimos todo lo anterior concatenando todo el proceso:
 
 taludes_trans <- taludes_bien |> mutate(
-           ID = 1:nrow(taludes_bien),
-           supervivencia = as.factor(sample(
-             c(0, 1),
-             size = nrow(taludes_bien),
-             prob = c(0.4, 0.6),
-             replace = TRUE
-           )),
-           carbono = biomasa * rnorm(
-             n = nrow(taludes_bien),
-             mean = 0.4,
-             sd = 0.2
-           )
-         ) |>
-  select(ID, everything()) |> 
+  ID = 1:nrow(taludes_bien),
+  supervivencia = as.factor(sample(
+    c(0, 1),
+    size = nrow(taludes_bien),
+    prob = c(0.4, 0.6),
+    replace = TRUE
+  )),
+  carbono = biomasa * rnorm(
+    n = nrow(taludes_bien),
+    mean = 0.4,
+    sd = 0.2
+  )
+) |>
   mutate(
     agua_estival = fct_recode(agua_estival, sequia = "Sequia estival", lluvia = "Lluvia estival"),
     nivel_luz = fct_recode(
@@ -589,7 +588,7 @@ taludes_trans |>
     # A tibble: 1 × 2
        c_min c_max
        <dbl> <dbl>
-    1 -0.595  4.63
+    1 -0.338  3.73
 
 ``` r
 taludes_trans |>
@@ -630,7 +629,7 @@ stocks <- tibble(
 
 stocks |> 
   pivot_wider(names_from = year, values_from = return) |> 
-  pivot_longer(`2015`:`2016`, names_to = "year", values_to = "return")
+  pivot_longer(cols = `2015`:`2016`, names_to = "year", values_to = "return")
 ```
 
     # A tibble: 4 × 3
@@ -696,7 +695,7 @@ Session Info
 Sys.time()
 ```
 
-    [1] "2024-09-22 21:26:56 CEST"
+    [1] "2024-09-24 08:57:59 CEST"
 
 ``` r
 sessionInfo()
