@@ -208,20 +208,19 @@ taludes_bien |>
 # repetimos todo lo anterior concatenando todo el proceso:
 
 taludes_trans <- taludes_bien |> mutate(
-           ID = 1:nrow(taludes_bien),
-           supervivencia = as.factor(sample(
-             c(0, 1),
-             size = nrow(taludes_bien),
-             prob = c(0.4, 0.6),
-             replace = TRUE
-           )),
-           carbono = biomasa * rnorm(
-             n = nrow(taludes_bien),
-             mean = 0.4,
-             sd = 0.2
-           )
-         ) |>
-  select(ID, everything()) |> 
+  ID = 1:nrow(taludes_bien),
+  supervivencia = as.factor(sample(
+    c(0, 1),
+    size = nrow(taludes_bien),
+    prob = c(0.4, 0.6),
+    replace = TRUE
+  )),
+  carbono = biomasa * rnorm(
+    n = nrow(taludes_bien),
+    mean = 0.4,
+    sd = 0.2
+  )
+) |>
   mutate(
     agua_estival = fct_recode(agua_estival, sequia = "Sequia estival", lluvia = "Lluvia estival"),
     nivel_luz = fct_recode(
@@ -292,7 +291,7 @@ stocks <- tibble(
 
 stocks |> 
   pivot_wider(names_from = year, values_from = return) |> 
-  pivot_longer(`2015`:`2016`, names_to = "year", values_to = "return")
+  pivot_longer(cols = `2015`:`2016`, names_to = "year", values_to = "return")
 ```
 
 ## [Joins](https://dplyr.tidyverse.org/reference/mutate-joins.html): unir data.frames

@@ -133,7 +133,7 @@ El directorio de trabajo es la carpeta de nuestro ordenador donde estamos trabaj
 #| eval: false
 
 getwd() # saber directorio de trabajo 
-setwd("C:/Users/veruk/Desktop/Disco/curso_ciencia_datos") # ojo con la ruta / o \\
+setwd("C:/Users/veruk/Desktop/Disco/Curso Ciencia de Datos/ciencia_datos") # ojo con la ruta / o \\
 ```
 
 No es recomendable establecer el directorio de trabajo manualmente porque el trabajo deja de ser reproducible. Es mejor crear desde el principio un proyecto en R ligado a un directorio relativo que contenga todos los datos de entrada, los scripts y los resultados del script. Al abrir el proyecto, se sincroniza con pestaña Files.
@@ -243,7 +243,7 @@ c(v1, rep(0, 3), v1)
 
 -   Multiplica tu objeto por sí mismo
 
--   Crea un único objeto que contenga el número 5 repetido 9 veces junto con una secuencia de 5 a 50 cada 5 elementos
+-   Crea un objeto que contenga el número 5 repetido 9 veces junto con una secuencia de 5 a 50 cada 5 elementos
 
 -   ¿Cuál es la longitud del objeto anterior?
 
@@ -282,8 +282,7 @@ d <- c("hi", "hola", "hola", "hi")
 mimatriz_num <- matrix(c(a, b), nrow = 4, ncol = 2) 
 mimatriz_num
 
-mimatriz_car <- matrix(c(a, b, d), nrow = 4, ncol = 3) 
-mimatriz_car
+mimatriz_car <- matrix(c(a, b, d), nrow = 4, ncol = 3) mimatriz_car
 
 summary(mimatriz_num) 
 summary(mimatriz_car)
@@ -376,15 +375,15 @@ mean(rnorm(10,mean=50,sd=25)/12,trim=0.2)
 
 #### Ejercicio
 
--   Crea una lista que contenga dos `data.frame` con dos variables cada uno (`variable1` y `variable2`) y diez observaciones por variable.
+-   Crea una lista que contenga dos data.frame con dos variables cada uno (variable1 y variable2) y diez observaciones por variable.
 
--   Accede a la octava observación de variable2 de cada `data.frame`.
+-   Accede a la octava observación de variable2 de cada data.frame.
 
 ### Tidyverse
 
 [*Tidyverse*](https://www.tidyverse.org/) es una colección de paquetes (meta-paquete) de R. El núcleo contiene ocho paquetes principales (`readr`, `tibble`, `dplyr`, `tidyr`, `stringr`, `forcats`, `ggplot2` y `purrr`), que comparten el diseño, la gramática y la estructura de los datos que necesitan. En el centro de la filosofía de tidyverse se encuentra la noción de “datos ordenados” (*tidy data*). Hadley Wickham (principal desarrollador de *tidyverse*) los define como “fáciles de manipular, modelar y visualizar, y que tienen una estructura específica: cada variable es una columna, cada observación es una fila y cada valor es una celda”. *Tidyverse* puede considerarse un dialecto del lenguaje de programación R que discretiza funciones amplias de R base (p. ej. `merge`) en diversas funciones específicas (p. ej. `left_join`, `right_join`).
 
-Los [cuatro principios básicos](https://design.tidyverse.org/unifying.html) de este meta-paquete son:
+Los [tres principios básicos](https://design.tidyverse.org/unifying.html) de este meta-paquete son:
 
 -   Centrado en humanos: tiene un diseño intuitivo que facilita su uso y accesibilidad para el usuario, ya que está diseñado específicamente para respaldar las actividades de un analista de datos humano.
 
@@ -400,10 +399,9 @@ Los [cuatro principios básicos](https://design.tidyverse.org/unifying.html) de 
 
 ```{r pipe}
 
-mivector <- c(6, 4)
-mean(mivector)
-mivector |> 
-  mean() # Ctrl + Shift + M para poner un pipe
+length(unique(d))
+
+d |> unique() |> length() # Ctrl + Shift + M para poner un pipe
 
 ```
 
@@ -428,6 +426,8 @@ En este curso realizaremos las distintas tareas que forman parte de la ciencia d
 -   [ChatGPT](https://chatgpt.com) y similares
 
 -   Slack del [Grupo de Ecoinformática de la AEET](https://ecoinfaeet.github.io/website/index.html)
+
+-   [Discusiones del repositorio del curso de GitHub](https://github.com/DatSciR/ciencia_datos/discussions/2)
 
 -   Para dudas relacionadas con errores de paquetes: repositorio de GitHub del paquete en cuestión (p. ej. <https://github.com/tidyverse/dplyr/issues>)
 
