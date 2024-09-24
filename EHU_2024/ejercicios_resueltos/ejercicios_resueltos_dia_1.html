@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.555">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Julen Astigarraga and Verónica Cruz-Alonso">
+
+<title>quarto-input5fa73c67</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="ejercicios_resueltos_dia_1_files/libs/clipboard/clipboard.min.js"></script>
+<script src="ejercicios_resueltos_dia_1_files/libs/quarto-html/quarto.js"></script>
+<script src="ejercicios_resueltos_dia_1_files/libs/quarto-html/popper.min.js"></script>
+<script src="ejercicios_resueltos_dia_1_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="ejercicios_resueltos_dia_1_files/libs/quarto-html/anchor.min.js"></script>
+<link href="ejercicios_resueltos_dia_1_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="ejercicios_resueltos_dia_1_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="ejercicios_resueltos_dia_1_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="ejercicios_resueltos_dia_1_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="ejercicios_resueltos_dia_1_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Índice</h2>
+   
+  <ul>
+  <li><a href="#introducción-organizando-datos-el-día-a-día" id="toc-introducción-organizando-datos-el-día-a-día" class="nav-link active" data-scroll-target="#introducción-organizando-datos-el-día-a-día"><span class="header-section-number">1</span> Introducción (Organizando datos: el día a día)</a>
+  <ul>
+  <li><a href="#ejercicio-8.2.2" id="toc-ejercicio-8.2.2" class="nav-link" data-scroll-target="#ejercicio-8.2.2"><span class="header-section-number">1.1</span> Ejercicio 8.2.2</a></li>
+  <li><a href="#ejercicio-8.3.1" id="toc-ejercicio-8.3.1" class="nav-link" data-scroll-target="#ejercicio-8.3.1"><span class="header-section-number">1.2</span> Ejercicio 8.3.1</a></li>
+  </ul></li>
+  <li><a href="#organizando-datos-el-día-a-día" id="toc-organizando-datos-el-día-a-día" class="nav-link" data-scroll-target="#organizando-datos-el-día-a-día"><span class="header-section-number">2</span> Organizando datos: el día a día</a>
+  <ul>
+  <li><a href="#ejercicio-2.3.1" id="toc-ejercicio-2.3.1" class="nav-link" data-scroll-target="#ejercicio-2.3.1"><span class="header-section-number">2.1</span> Ejercicio 2.3.1</a></li>
+  <li><a href="#ejercicio-2.4.1" id="toc-ejercicio-2.4.1" class="nav-link" data-scroll-target="#ejercicio-2.4.1"><span class="header-section-number">2.2</span> Ejercicio 2.4.1</a></li>
+  <li><a href="#ejercicio-3.1.1" id="toc-ejercicio-3.1.1" class="nav-link" data-scroll-target="#ejercicio-3.1.1"><span class="header-section-number">2.3</span> Ejercicio 3.1.1</a></li>
+  <li><a href="#ejercicio-3.2.1" id="toc-ejercicio-3.2.1" class="nav-link" data-scroll-target="#ejercicio-3.2.1"><span class="header-section-number">2.4</span> Ejercicio 3.2.1</a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="ejercicios_resueltos_dia_1.md"><i class="bi bi-file-code"></i>Github (GFM)</a></li></ul></div></nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><div class="line-block">Ciencia de datos en R <img src="images/Escuela%20de%20Doctorado_trilingue_positivo.png" class="img-fluid"></div></h1>
+<p class="subtitle lead">Introducción (Organizando datos: el día a día)</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Julen Astigarraga and Verónica Cruz-Alonso </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">23/09/2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introducción-organizando-datos-el-día-a-día" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="introducción-organizando-datos-el-día-a-día"><span class="header-section-number">1</span> Introducción (Organizando datos: el día a día)</h2>
+<section id="ejercicio-8.2.2" class="level3" data-number="1.1">
+<h3 data-number="1.1" class="anchored" data-anchor-id="ejercicio-8.2.2"><span class="header-section-number">1.1</span> Ejercicio 8.2.2</h3>
+<ul>
+<li><p>Elije un número y multiplicalo por 3</p></li>
+<li><p>Crea un objeto que contenga 100 valores entre 1900 y 2000</p></li>
+<li><p>Suma un número a tu objeto</p></li>
+<li><p>Multiplica tu objeto por sí mismo</p></li>
+<li><p>Crea un único objeto que contenga el número 5 repetido 9 veces junto con una secuencia de 5 a 50 cada 5 elementos</p></li>
+<li><p>¿Cuál es la longitud del objeto anterior?</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> <span class="sc">*</span> <span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 30</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>misvalores <span class="ot">&lt;-</span> <span class="dv">1901</span><span class="sc">:</span><span class="dv">2000</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 3</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>misvalores <span class="sc">+</span> <span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  [1] 1906 1907 1908 1909 1910 1911 1912 1913 1914 1915 1916 1917 1918 1919 1920
+ [16] 1921 1922 1923 1924 1925 1926 1927 1928 1929 1930 1931 1932 1933 1934 1935
+ [31] 1936 1937 1938 1939 1940 1941 1942 1943 1944 1945 1946 1947 1948 1949 1950
+ [46] 1951 1952 1953 1954 1955 1956 1957 1958 1959 1960 1961 1962 1963 1964 1965
+ [61] 1966 1967 1968 1969 1970 1971 1972 1973 1974 1975 1976 1977 1978 1979 1980
+ [76] 1981 1982 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995
+ [91] 1996 1997 1998 1999 2000 2001 2002 2003 2004 2005</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 4</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>misvalores <span class="sc">*</span> misvalores</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  [1] 3613801 3617604 3621409 3625216 3629025 3632836 3636649 3640464 3644281
+ [10] 3648100 3651921 3655744 3659569 3663396 3667225 3671056 3674889 3678724
+ [19] 3682561 3686400 3690241 3694084 3697929 3701776 3705625 3709476 3713329
+ [28] 3717184 3721041 3724900 3728761 3732624 3736489 3740356 3744225 3748096
+ [37] 3751969 3755844 3759721 3763600 3767481 3771364 3775249 3779136 3783025
+ [46] 3786916 3790809 3794704 3798601 3802500 3806401 3810304 3814209 3818116
+ [55] 3822025 3825936 3829849 3833764 3837681 3841600 3845521 3849444 3853369
+ [64] 3857296 3861225 3865156 3869089 3873024 3876961 3880900 3884841 3888784
+ [73] 3892729 3896676 3900625 3904576 3908529 3912484 3916441 3920400 3924361
+ [82] 3928324 3932289 3936256 3940225 3944196 3948169 3952144 3956121 3960100
+ [91] 3964081 3968064 3972049 3976036 3980025 3984016 3988009 3992004 3996001
+[100] 4000000</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 5</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>secuencia <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="at">x =</span> <span class="dv">5</span>, <span class="at">times =</span> <span class="dv">9</span>), <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">5</span>, <span class="at">to =</span> <span class="dv">50</span>, <span class="at">by =</span> <span class="dv">5</span>))</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 6</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(secuencia)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 19</code></pre>
+</div>
+</div>
+</section>
+<section id="ejercicio-8.3.1" class="level3" data-number="1.2">
+<h3 data-number="1.2" class="anchored" data-anchor-id="ejercicio-8.3.1"><span class="header-section-number">1.2</span> Ejercicio 8.3.1</h3>
+<ul>
+<li><p>Crea una lista que contenga dos data.frame con dos variables cada uno (variable1 y variable2) y diez observaciones por variable.</p></li>
+<li><p>Accede a la octava observación de variable2 de cada data.frame.</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">variable1 =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">variable2 =</span> <span class="fu">rep</span>(T, <span class="dv">10</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">variable1 =</span> <span class="dv">11</span><span class="sc">:</span><span class="dv">20</span>,</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">variable2 =</span> <span class="fu">rep</span>(<span class="fu">c</span>(T, F), <span class="at">each =</span> <span class="dv">5</span>)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>list_df <span class="ot">&lt;-</span> <span class="fu">list</span>(df1, df2)</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 2</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>list_df[[<span class="dv">1</span>]][[<span class="st">"variable2"</span>]][[<span class="dv">8</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>list_df[[<span class="dv">2</span>]][[<span class="st">"variable2"</span>]][[<span class="dv">8</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="organizando-datos-el-día-a-día" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="organizando-datos-el-día-a-día"><span class="header-section-number">2</span> Organizando datos: el día a día</h2>
+<section id="ejercicio-2.3.1" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="ejercicio-2.3.1"><span class="header-section-number">2.1</span> Ejercicio 2.3.1</h3>
+<ul>
+<li><p>Lee el data.frame “Macrobenthos.txt”. Pista: el delimitador entre datos es el tabulador (“).</p></li>
+<li><p>Crea un subset de datos que contenga las filas de la 1 a la 10 y de la 390 a la 400.</p></li>
+<li><p>Crea un subset que NO contenga el Taxon número 1. Pista: revisa los <a href="https://bookdown.org/jboscomendoza/r-principiantes4/operadores-relacionales.html">operadores de R</a>.</p></li>
+<li><p>Crea un subset con las observaciones del Taxon 2 donde se haya registrado una abundancia mayor de 50 o menor o igual a 5. Pista: necesitarás paréntesis para filtrar.</p></li>
+<li><p>¿Cuántas filas han quedado?</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>macro <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"Macrobenthos.txt"</span>, <span class="at">delim =</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 400 Columns: 12
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: "\t"
+dbl (12): time, period, CT, effort, o_matter, mud, silt, clay, turbidity, te...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(macro)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 400
+Columns: 12
+$ time        &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2…
+$ period      &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…
+$ CT          &lt;dbl&gt; 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1…
+$ effort      &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 0.00, 1.71, 1.71, 1.71, 1.71, 1.71…
+$ o_matter    &lt;dbl&gt; 1.16, 1.38, 1.84, 1.62, 1.62, 2.13, 1.78, 1.87, 1.56, 1.15…
+$ mud         &lt;dbl&gt; 35.27, 34.46, 38.39, 30.71, 32.59, 43.39, 39.42, 43.29, 41…
+$ silt        &lt;dbl&gt; 25.10, 21.94, 23.46, 17.72, 23.31, 29.20, 26.53, 22.98, 22…
+$ clay        &lt;dbl&gt; 10.16, 12.52, 14.94, 12.99, 9.27, 14.19, 12.90, 20.31, 19.…
+$ turbidity   &lt;dbl&gt; 5.71, 9.55, 8.01, 8.01, 8.78, 9.55, 9.55, 7.25, 8.01, 8.01…
+$ temperature &lt;dbl&gt; 10.50, 10.60, 10.59, 10.65, 10.65, 10.79, 10.75, 10.77, 10…
+$ Abundance   &lt;dbl&gt; 11, 18, 15, 39, 24, 19, 17, 27, 5, 18, 18, 15, 16, 15, 17,…
+$ TaxonID     &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>macro <span class="sc">|&gt;</span> </span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="dv">390</span><span class="sc">:</span><span class="dv">400</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 21 × 12
+    time period    CT effort o_matter   mud  silt  clay turbidity temperature
+   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;
+ 1     1      1     0   0        1.16  35.3  25.1 10.2       5.71        10.5
+ 2     1      1     0   0        1.38  34.5  21.9 12.5       9.55        10.6
+ 3     1      1     0   0        1.84  38.4  23.5 14.9       8.01        10.6
+ 4     1      1     0   0        1.62  30.7  17.7 13.0       8.01        10.6
+ 5     1      1     0   0        1.62  32.6  23.3  9.27      8.78        10.6
+ 6     1      1     1   1.71     2.13  43.4  29.2 14.2       9.55        10.8
+ 7     1      1     1   1.71     1.78  39.4  26.5 12.9       9.55        10.8
+ 8     1      1     1   1.71     1.87  43.3  23.0 20.3       7.25        10.8
+ 9     1      1     1   1.71     1.56  41.3  22.2 19.1       8.01        10.8
+10     1      1     1   1.71     1.15  38.0  26.4 11.6       8.01        10.8
+# ℹ 11 more rows
+# ℹ 2 more variables: Abundance &lt;dbl&gt;, TaxonID &lt;dbl&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>macro <span class="sc">|&gt;</span> </span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(TaxonID <span class="sc">!=</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 320 × 12
+    time period    CT effort o_matter   mud  silt  clay turbidity temperature
+   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;
+ 1     1      1     0   0        1.16  35.3  25.1 10.2       5.71        10.5
+ 2     1      1     0   0        1.38  34.5  21.9 12.5       9.55        10.6
+ 3     1      1     0   0        1.84  38.4  23.5 14.9       8.01        10.6
+ 4     1      1     0   0        1.62  30.7  17.7 13.0       8.01        10.6
+ 5     1      1     0   0        1.62  32.6  23.3  9.27      8.78        10.6
+ 6     1      1     1   1.71     2.13  43.4  29.2 14.2       9.55        10.8
+ 7     1      1     1   1.71     1.78  39.4  26.5 12.9       9.55        10.8
+ 8     1      1     1   1.71     1.87  43.3  23.0 20.3       7.25        10.8
+ 9     1      1     1   1.71     1.56  41.3  22.2 19.1       8.01        10.8
+10     1      1     1   1.71     1.15  38.0  26.4 11.6       8.01        10.8
+# ℹ 310 more rows
+# ℹ 2 more variables: Abundance &lt;dbl&gt;, TaxonID &lt;dbl&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 4</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>macro <span class="sc">|&gt;</span> </span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(TaxonID <span class="sc">==</span> <span class="dv">2</span> <span class="sc">&amp;</span> (Abundance <span class="sc">&gt;</span> <span class="dv">50</span> <span class="sc">|</span> Abundance <span class="sc">&lt;=</span> <span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 21 × 12
+    time period    CT effort o_matter   mud  silt  clay turbidity temperature
+   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;
+ 1     2      1     0    0       1.62  33.7  18.0  15.7      7.25        11.6
+ 2     2      1     0    0       1.41  34.2  19.5  14.7      8.01        11.6
+ 3     2      1     1    1.1     1.13  43.9  23.0  21.0     11.9         11.5
+ 4     2      1     1    1.1     1.54  38.7  23.1  15.6     10.3         11.4
+ 5     2      1     1    1.1     1.42  50.1  23.8  26.3      8.78        11.4
+ 6     2      1     1    1.1     1.62  44.5  22.2  22.2     10.3         11.4
+ 7     3      2     0    0       1.4   35.2  18.9  16.3      8.78        12.7
+ 8     3      2     1    0.2     1.59  36.3  22.0  14.3      0.33        12.9
+ 9     4      2     0    0       1.47  37.9  17.7  20.2     NA           NA  
+10     5      2     0    0       1.41  32.8  19.5  13.3      2.64        14.0
+# ℹ 11 more rows
+# ℹ 2 more variables: Abundance &lt;dbl&gt;, TaxonID &lt;dbl&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="ejercicio-2.4.1" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="ejercicio-2.4.1"><span class="header-section-number">2.2</span> Ejercicio 2.4.1</h3>
+<ul>
+<li><p>Con el data.frame “Macrobenthos.txt”, crea un nuevo data.frame que contenga las variables relacionadas con el medio (de <em>organic matter</em> a <em>temperature</em>). Pista: mira la ayuda de select para ahorrar caracteres.</p></li>
+<li><p>Crea un nuevo objeto con el taxon al principio y que incluya las demás columnas excepto el esfuerzo de muestreo (<em>effort</em>).</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>macro <span class="sc">|&gt;</span> </span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(o_matter<span class="sc">:</span>temperature)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 400 × 6
+   o_matter   mud  silt  clay turbidity temperature
+      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;
+ 1     1.16  35.3  25.1 10.2       5.71        10.5
+ 2     1.38  34.5  21.9 12.5       9.55        10.6
+ 3     1.84  38.4  23.5 14.9       8.01        10.6
+ 4     1.62  30.7  17.7 13.0       8.01        10.6
+ 5     1.62  32.6  23.3  9.27      8.78        10.6
+ 6     2.13  43.4  29.2 14.2       9.55        10.8
+ 7     1.78  39.4  26.5 12.9       9.55        10.8
+ 8     1.87  43.3  23.0 20.3       7.25        10.8
+ 9     1.56  41.3  22.2 19.1       8.01        10.8
+10     1.15  38.0  26.4 11.6       8.01        10.8
+# ℹ 390 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>macro <span class="sc">|&gt;</span> </span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(TaxonID, <span class="fu">everything</span>(), <span class="sc">-</span>effort)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 400 × 11
+   TaxonID  time period    CT o_matter   mud  silt  clay turbidity temperature
+     &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;
+ 1       1     1      1     0     1.16  35.3  25.1 10.2       5.71        10.5
+ 2       1     1      1     0     1.38  34.5  21.9 12.5       9.55        10.6
+ 3       1     1      1     0     1.84  38.4  23.5 14.9       8.01        10.6
+ 4       1     1      1     0     1.62  30.7  17.7 13.0       8.01        10.6
+ 5       1     1      1     0     1.62  32.6  23.3  9.27      8.78        10.6
+ 6       1     1      1     1     2.13  43.4  29.2 14.2       9.55        10.8
+ 7       1     1      1     1     1.78  39.4  26.5 12.9       9.55        10.8
+ 8       1     1      1     1     1.87  43.3  23.0 20.3       7.25        10.8
+ 9       1     1      1     1     1.56  41.3  22.2 19.1       8.01        10.8
+10       1     1      1     1     1.15  38.0  26.4 11.6       8.01        10.8
+# ℹ 390 more rows
+# ℹ 1 more variable: Abundance &lt;dbl&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="ejercicio-3.1.1" class="level3" data-number="2.3">
+<h3 data-number="2.3" class="anchored" data-anchor-id="ejercicio-3.1.1"><span class="header-section-number">2.3</span> Ejercicio 3.1.1</h3>
+<ul>
+<li>Con el data.frame macrobenthos genera una nueva columna con la relación entre la turbidez del agua y la materia orgánica.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>macro <span class="sc">|&gt;</span> </span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">tub_o_mat =</span> turbidity <span class="sc">/</span> o_matter</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 400 × 13
+    time period    CT effort o_matter   mud  silt  clay turbidity temperature
+   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;
+ 1     1      1     0   0        1.16  35.3  25.1 10.2       5.71        10.5
+ 2     1      1     0   0        1.38  34.5  21.9 12.5       9.55        10.6
+ 3     1      1     0   0        1.84  38.4  23.5 14.9       8.01        10.6
+ 4     1      1     0   0        1.62  30.7  17.7 13.0       8.01        10.6
+ 5     1      1     0   0        1.62  32.6  23.3  9.27      8.78        10.6
+ 6     1      1     1   1.71     2.13  43.4  29.2 14.2       9.55        10.8
+ 7     1      1     1   1.71     1.78  39.4  26.5 12.9       9.55        10.8
+ 8     1      1     1   1.71     1.87  43.3  23.0 20.3       7.25        10.8
+ 9     1      1     1   1.71     1.56  41.3  22.2 19.1       8.01        10.8
+10     1      1     1   1.71     1.15  38.0  26.4 11.6       8.01        10.8
+# ℹ 390 more rows
+# ℹ 3 more variables: Abundance &lt;dbl&gt;, TaxonID &lt;dbl&gt;, tub_o_mat &lt;dbl&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="ejercicio-3.2.1" class="level3" data-number="2.4">
+<h3 data-number="2.4" class="anchored" data-anchor-id="ejercicio-3.2.1"><span class="header-section-number">2.4</span> Ejercicio 3.2.1</h3>
+<ul>
+<li><p>Con el data.frame macrobenthos, cuenta el número de casos que hay en cada periodo de muestreo.</p></li>
+<li><p>Cuenta el número de casos distintos que hay de esfuerzo de muestreo.</p></li>
+<li><p>Calcula la media de la turbidez para cada taxón.</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>macro <span class="sc">|&gt;</span> </span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(period) <span class="sc">|&gt;</span> </span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  period     n
+   &lt;dbl&gt; &lt;int&gt;
+1      1   100
+2      2   150
+3      3   150</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>macro <span class="sc">|&gt;</span> </span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(period)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  period     n
+   &lt;dbl&gt; &lt;int&gt;
+1      1   100
+2      2   150
+3      3   150</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>macro <span class="sc">|&gt;</span> </span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">ef_n_dis =</span> <span class="fu">n_distinct</span>(effort)</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  ef_n_dis
+     &lt;int&gt;
+1        7</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>macro <span class="sc">|&gt;</span> </span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(TaxonID) <span class="sc">|&gt;</span> </span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">turb_mean =</span> <span class="fu">mean</span>(turbidity, <span class="at">na.rm =</span> T))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 2
+  TaxonID turb_mean
+    &lt;dbl&gt;     &lt;dbl&gt;
+1       1      4.75
+2       2      4.75
+3       3      4.75
+4       4      4.75
+5       5      4.75</code></pre>
+</div>
+</div>
+<hr>
+<details>
+<summary>
+Session Info
+</summary>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.time</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2024-09-23 13:47:39 CEST"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>R version 4.4.1 (2024-06-14 ucrt)
+Platform: x86_64-w64-mingw32/x64
+Running under: Windows 10 x64 (build 19045)
+
+Matrix products: default
+
+
+locale:
+[1] LC_COLLATE=English_United Kingdom.utf8 
+[2] LC_CTYPE=English_United Kingdom.utf8   
+[3] LC_MONETARY=English_United Kingdom.utf8
+[4] LC_NUMERIC=C                           
+[5] LC_TIME=English_United Kingdom.utf8    
+
+time zone: Europe/Madrid
+tzcode source: internal
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] lubridate_1.9.3 forcats_1.0.0   stringr_1.5.1   dplyr_1.1.4    
+ [5] purrr_1.0.2     readr_2.1.5     tidyr_1.3.1     tibble_3.2.1   
+ [9] ggplot2_3.5.1   tidyverse_2.0.0
+
+loaded via a namespace (and not attached):
+ [1] bit_4.0.5         gtable_0.3.5      jsonlite_1.8.8    crayon_1.5.3     
+ [5] compiler_4.4.1    tidyselect_1.2.1  parallel_4.4.1    scales_1.3.0     
+ [9] yaml_2.3.9        fastmap_1.2.0     R6_2.5.1          generics_0.1.3   
+[13] knitr_1.48        htmlwidgets_1.6.4 munsell_0.5.1     pillar_1.9.0     
+[17] tzdb_0.4.0        rlang_1.1.4       utf8_1.2.4        stringi_1.8.4    
+[21] xfun_0.45         bit64_4.0.5       timechange_0.3.0  cli_3.6.3        
+[25] withr_3.0.1       magrittr_2.0.3    digest_0.6.36     grid_4.4.1       
+[29] vroom_1.6.5       rstudioapi_0.16.0 hms_1.1.3         lifecycle_1.0.4  
+[33] vctrs_0.6.5       evaluate_0.24.0   glue_1.7.0        fansi_1.0.6      
+[37] colorspace_2.1-1  rmarkdown_2.27    tools_4.4.1       pkgconfig_2.0.3  
+[41] htmltools_0.5.8.1</code></pre>
+</div>
+</div>
+</details>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
