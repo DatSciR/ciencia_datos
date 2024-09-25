@@ -2,7 +2,11 @@
 <img src="images/Escuela%20de%20Doctorado_trilingue_positivo.png" />
 
 Julen Astigarraga and Verónica Cruz-Alonso
+<<<<<<< HEAD
 25/09/2024
+=======
+24/09/2024
+>>>>>>> 35bb1f7d965988f04312dd0539cfe6e3b553af4c
 
 - [<span class="toc-section-number">1</span> Objetivos del día
   3](#objetivos-del-día-3)
@@ -157,7 +161,7 @@ Según el tipo de output generado hay dos tipos de funciones:
 
 En general, sintácticamente, las funciones tienen tres componentes:
 
-- Función `function()` (primitiva)
+- Función `function()`
 - Argumentos: lista de entradas.
 - Cuerpo: trozo de código que sigue a `function()`, tradicionalmente
   entre llaves.
@@ -887,6 +891,9 @@ entre otras opciones.
 
 ### Enlaces de interés
 
+- [Introducción a la programación funcional
+  (DatSciR)](https://github.com/DatSciR/intro_prog_fun)
+
 - [R for data Science
   (functions)](https://r4ds.had.co.nz/functions.html)
 
@@ -913,7 +920,11 @@ Session Info
 Sys.time()
 ```
 
+<<<<<<< HEAD
     [1] "2024-09-25 13:58:13 CEST"
+=======
+    [1] "2024-09-24 21:17:07 CEST"
+>>>>>>> 35bb1f7d965988f04312dd0539cfe6e3b553af4c
 
 ``` r
 sessionInfo()

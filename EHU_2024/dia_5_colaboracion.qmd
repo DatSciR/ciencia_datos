@@ -314,8 +314,6 @@ Para solucionarlo hay que escoger los cambios de la rama principal o de la rama 
 2.  Un integrante del equipo combina la rama del ejercicio anterior con la rama principal (*main*) del proyecto.
 3.  Resolved el conflicto (es decir, quedaos con los cambios que sirvan y subid los cambios al repositorio remoto).
 
-La información mostrada en el día de hoy está resumida en la nota ecoinformática [¡Se puede entender cómo funcionan Git y GitHub!](https://www.revistaecosistemas.net/index.php/ecosistemas/article/view/2332)
-
 ## Enlaces de interés
 
 **Ciencia reproducible**
@@ -339,6 +337,10 @@ La información mostrada en el día de hoy está resumida en la nota ecoinformá
 **Integrar Git, GitHub y RStudio**
 
 -   [Happy Git and GitHub for the useR](https://happygitwithr.com/)
+
+-   [¡Se puede entender cómo funcionan Git y GitHub!](https://www.revistaecosistemas.net/index.php/ecosistemas/article/view/2332)
+
+-   [Ciencia reproducible y colaborativa con R, Git y GitHub (DatSciR)](https://github.com/DatSciR/intro_git-github)
 
 **Enseñar y aprender con GitHub**
 

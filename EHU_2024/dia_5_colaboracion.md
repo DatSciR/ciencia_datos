@@ -2,7 +2,7 @@
 <img src="images/Escuela%20de%20Doctorado_trilingue_positivo.png" />
 
 Julen Astigarraga and Verónica Cruz-Alonso
-22/09/2024
+24/09/2024
 
 - [<span class="toc-section-number">1</span> Objetivos del día
   5](#objetivos-del-día-5)
@@ -593,10 +593,6 @@ frecuentemente con GitHub.
 3.  Resolved el conflicto (es decir, quedaos con los cambios que sirvan
     y subid los cambios al repositorio remoto).
 
-La información mostrada en el día de hoy está resumida en la nota
-ecoinformática [¡Se puede entender cómo funcionan Git y
-GitHub!](https://www.revistaecosistemas.net/index.php/ecosistemas/article/view/2332)
-
 ## Enlaces de interés
 
 **Ciencia reproducible**
@@ -623,6 +619,12 @@ GitHub!](https://www.revistaecosistemas.net/index.php/ecosistemas/article/view/2
 
 - [Happy Git and GitHub for the useR](https://happygitwithr.com/)
 
+- [¡Se puede entender cómo funcionan Git y
+  GitHub!](https://www.revistaecosistemas.net/index.php/ecosistemas/article/view/2332)
+
+- [Ciencia reproducible y colaborativa con R, Git y GitHub
+  (DatSciR)](https://github.com/DatSciR/intro_git-github)
+
 **Enseñar y aprender con GitHub**
 
 - [GitHub Education para profesores e
@@ -639,7 +641,7 @@ Session Info
 Sys.time()
 ```
 
-    [1] "2024-09-22 13:51:20 CEST"
+    [1] "2024-09-24 21:12:21 CEST"
 
 ``` r
 sessionInfo()
