@@ -2,11 +2,7 @@
 <img src="images/Escuela%20de%20Doctorado_trilingue_positivo.png" />
 
 Julen Astigarraga and Verónica Cruz-Alonso
-<<<<<<< HEAD
 25/09/2024
-=======
-24/09/2024
->>>>>>> 35bb1f7d965988f04312dd0539cfe6e3b553af4c
 
 - [<span class="toc-section-number">1</span> Objetivos del día
   3](#objetivos-del-día-3)
@@ -920,11 +916,7 @@ Session Info
 Sys.time()
 ```
 
-<<<<<<< HEAD
-    [1] "2024-09-25 13:58:13 CEST"
-=======
-    [1] "2024-09-24 21:17:07 CEST"
->>>>>>> 35bb1f7d965988f04312dd0539cfe6e3b553af4c
+    [1] "2024-09-25 18:21:43 CEST"
 
 ``` r
 sessionInfo()
