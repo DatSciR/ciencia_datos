@@ -2,34 +2,45 @@
 <img src="images/Escuela%20de%20Doctorado_trilingue_positivo.png" />
 
 Julen Astigarraga and Verónica Cruz-Alonso
-17/09/2024
+25/09/2024
 
-- [<span class="toc-section-number">1</span> Objetivos](#objetivos)
+- [<span class="toc-section-number">1</span> Objetivos del día
+  4](#objetivos-del-día-4)
 - [<span class="toc-section-number">2</span> R Markdown](#r-markdown)
   - [<span class="toc-section-number">2.1</span> Fundamentos básicos de
     R Markdown](#fundamentos-básicos-de-r-markdown)
+    - [<span class="toc-section-number">2.1.1</span>
+      Ejercicio](#ejercicio)
 - [<span class="toc-section-number">3</span> Quarto](#quarto)
   - [<span class="toc-section-number">3.1</span> R Markdown
     vs. Quarto](#r-markdown-vs-quarto)
   - [<span class="toc-section-number">3.2</span> ¿Por qué utilizar
     Quarto en lugar de R
     Markdown?](#por-qué-utilizar-quarto-en-lugar-de-r-markdown)
+    - [<span class="toc-section-number">3.2.1</span>
+      Ejercicio](#ejercicio-1)
   - [<span class="toc-section-number">3.3</span>
     Renderización](#renderización)
   - [<span class="toc-section-number">3.4</span> ¿Qué hago con mi `.Rmd`
     o `.ipynb` existentes?](#qué-hago-con-mi-rmd-o-ipynb-existentes)
+    - [<span class="toc-section-number">3.4.1</span>
+      Ejercicio](#ejercicio-2)
 - [<span class="toc-section-number">4</span> Generando el documento
   final](#generando-el-documento-final)
   - [<span class="toc-section-number">4.1</span> Formato](#formato)
   - [<span class="toc-section-number">4.2</span>
     Referencias](#referencias)
+    - [<span class="toc-section-number">4.2.1</span>
+      Ejercicio](#ejercicio-3)
 - [<span class="toc-section-number">5</span> Automatizar varias
   versiones con
   parámetros](#automatizar-varias-versiones-con-parámetros)
+  - [<span class="toc-section-number">5.0.1</span>
+    Ejercicio](#ejercicio-4)
 - [<span class="toc-section-number">6</span> Enlaces de
   interés](#enlaces-de-interés)
 
-## Objetivos
+## Objetivos del día 4
 
 - Aprender las bases de la programación literaria en R
 
@@ -37,6 +48,8 @@ Julen Astigarraga and Verónica Cruz-Alonso
   diferencias
 
 - Generar documentos reproducibles en R
+
+![](images/datascience.png)
 
 ## R Markdown
 
@@ -95,7 +108,7 @@ RStudio (atajo: `Ctrl + Shift + K`; OS X `Cmd + Shift + K`), que llama a
 Quarto/R Markdown render en un trabajo de fondo. Esto evita que el
 renderizado abarrote la consola de R, y así es fácil de detener.
 
-📝 Con el editor visual de RStudio puedes ves en tiempo real cómo es la
+💡 Con el editor visual de RStudio puedes ves en tiempo real cómo es la
 conversión a word, HTML…
 
 Opciones de chunk: <https://bookdown.org/yihui/rmarkdown/r-code.html>
@@ -324,8 +337,14 @@ Quarto es compatible con versiones anteriores de R Markdown.
 
 #### Ejercicio
 
-Convierte todos los archivos del ejercicio 4.1 a `.qmd` y renderizalo a
-HTML y word mediante la opción de renderización que más te guste.
+Convierte todos los archivos del ejercicio 2.1.1 a `.qmd` y renderizalo
+a HTML y word mediante la opción de renderización que más te guste.
+
+💡Para crear PDFs necesitarás instalar una distribución reciente de TeX.
+Recomendamos el uso de {TinyTeX}, que se puede instalar con el siguiente
+comando en la terminal:
+
+`quarto install tinytex`
 
 ## Generando el documento final
 
@@ -362,7 +381,7 @@ los autores cambiar los estilos de las referencias sin tener que
 reformatear nada manualmente (por ejemplo, si hay que enviar un
 manuscrito a una revista diferente para su publicación).
 
-📝 Recomendamos utilizar [Zotero](https://www.zotero.org/) como gestor
+💡 Recomendamos utilizar [Zotero](https://www.zotero.org/) como gestor
 bibliográfico porque está incluido en RStudio, lo que facilita la
 inclusión de citas y referencias, pero se puede utilizar cualquier otro
 gestor.
@@ -414,7 +433,13 @@ render_mi_doc <- function(species_arg) {
 purrr::walk(as.vector(c("Fagus sylvatica", "Quercus ilex")), render_mi_doc)
 ```
 
-📝
+#### Ejercicio
+
+Modifica el código del chunk anterior y el YAML para que el documento
+renderizado en vez de nombres de especies nos de tu nombre y el nombre
+de uno de tus compañeros.
+
+💡
 [Aquí](https://github.com/Julenasti/tree_species_density/blob/main/02_analyses/01_species_modelling/input_sp_modelling.Rmd)
 tenéis un ejemplo real un poco más avanzado.
 
@@ -446,7 +471,7 @@ Session Info
 Sys.time()
 ```
 
-    [1] "2024-09-17 11:59:29 CEST"
+    [1] "2024-09-25 21:38:39 CEST"
 
 ``` r
 sessionInfo()
@@ -483,10 +508,10 @@ sessionInfo()
     [17] generics_0.1.3    tibble_3.2.1      munsell_0.5.1     rprojroot_2.0.4  
     [21] pillar_1.9.0      rlang_1.1.4       utf8_1.2.4        xfun_0.45        
     [25] cli_3.6.3         withr_3.0.1       magrittr_2.0.3    mgcv_1.9-1       
-    [29] digest_0.6.36     grid_4.4.1        rstudioapi_0.16.0 rappdirs_0.3.3   
-    [33] nlme_3.1-164      lifecycle_1.0.4   vctrs_0.6.5       evaluate_0.24.0  
-    [37] glue_1.7.0        farver_2.1.2      fansi_1.0.6       colorspace_2.1-1 
-    [41] rmarkdown_2.27    tools_4.4.1       pkgconfig_2.0.3   htmltools_0.5.8.1
+    [29] digest_0.6.36     grid_4.4.1        rstudioapi_0.16.0 lifecycle_1.0.4  
+    [33] nlme_3.1-164      vctrs_0.6.5       evaluate_0.24.0   glue_1.7.0       
+    [37] farver_2.1.2      fansi_1.0.6       colorspace_2.1-1  rmarkdown_2.27   
+    [41] tools_4.4.1       pkgconfig_2.0.3   htmltools_0.5.8.1
 
 </details>
 

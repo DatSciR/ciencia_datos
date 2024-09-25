@@ -8,7 +8,7 @@
 
 <meta name="author" content="Julen Astigarraga and Verónica Cruz-Alonso">
 
-<title>quarto-input4dacb77d</title>
+<title>quarto-input0e5f99c6</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -128,24 +128,39 @@ window.Quarto = {
     <h2 id="toc-title">Índice</h2>
    
   <ul>
-  <li><a href="#objetivos" id="toc-objetivos" class="nav-link active" data-scroll-target="#objetivos"><span class="header-section-number">1</span> Objetivos</a></li>
+  <li><a href="#objetivos-del-día-4" id="toc-objetivos-del-día-4" class="nav-link active" data-scroll-target="#objetivos-del-día-4"><span class="header-section-number">1</span> Objetivos del día 4</a></li>
   <li><a href="#r-markdown" id="toc-r-markdown" class="nav-link" data-scroll-target="#r-markdown"><span class="header-section-number">2</span> R Markdown</a>
+  <ul>
+  <li><a href="#fundamentos-básicos-de-r-markdown" id="toc-fundamentos-básicos-de-r-markdown" class="nav-link" data-scroll-target="#fundamentos-básicos-de-r-markdown"><span class="header-section-number">2.1</span> Fundamentos básicos de R Markdown</a>
   <ul class="collapse">
-  <li><a href="#fundamentos-básicos-de-r-markdown" id="toc-fundamentos-básicos-de-r-markdown" class="nav-link" data-scroll-target="#fundamentos-básicos-de-r-markdown"><span class="header-section-number">2.1</span> Fundamentos básicos de R Markdown</a></li>
+  <li><a href="#ejercicio" id="toc-ejercicio" class="nav-link" data-scroll-target="#ejercicio"><span class="header-section-number">2.1.1</span> Ejercicio</a></li>
+  </ul></li>
   </ul></li>
   <li><a href="#quarto" id="toc-quarto" class="nav-link" data-scroll-target="#quarto"><span class="header-section-number">3</span> Quarto</a>
-  <ul class="collapse">
+  <ul>
   <li><a href="#r-markdown-vs.-quarto" id="toc-r-markdown-vs.-quarto" class="nav-link" data-scroll-target="#r-markdown-vs.-quarto"><span class="header-section-number">3.1</span> R Markdown vs.&nbsp;Quarto</a></li>
-  <li><a href="#por-qué-utilizar-quarto-en-lugar-de-r-markdown" id="toc-por-qué-utilizar-quarto-en-lugar-de-r-markdown" class="nav-link" data-scroll-target="#por-qué-utilizar-quarto-en-lugar-de-r-markdown"><span class="header-section-number">3.2</span> ¿Por qué utilizar Quarto en lugar de R Markdown?</a></li>
+  <li><a href="#por-qué-utilizar-quarto-en-lugar-de-r-markdown" id="toc-por-qué-utilizar-quarto-en-lugar-de-r-markdown" class="nav-link" data-scroll-target="#por-qué-utilizar-quarto-en-lugar-de-r-markdown"><span class="header-section-number">3.2</span> ¿Por qué utilizar Quarto en lugar de R Markdown?</a>
+  <ul class="collapse">
+  <li><a href="#ejercicio-1" id="toc-ejercicio-1" class="nav-link" data-scroll-target="#ejercicio-1"><span class="header-section-number">3.2.1</span> Ejercicio</a></li>
+  </ul></li>
   <li><a href="#renderización" id="toc-renderización" class="nav-link" data-scroll-target="#renderización"><span class="header-section-number">3.3</span> Renderización</a></li>
-  <li><a href="#qué-hago-con-mi-.rmd-o-.ipynb-existentes" id="toc-qué-hago-con-mi-.rmd-o-.ipynb-existentes" class="nav-link" data-scroll-target="#qué-hago-con-mi-.rmd-o-.ipynb-existentes"><span class="header-section-number">3.4</span> ¿Qué hago con mi <code>.Rmd</code> o <code>.ipynb</code> existentes?</a></li>
+  <li><a href="#qué-hago-con-mi-.rmd-o-.ipynb-existentes" id="toc-qué-hago-con-mi-.rmd-o-.ipynb-existentes" class="nav-link" data-scroll-target="#qué-hago-con-mi-.rmd-o-.ipynb-existentes"><span class="header-section-number">3.4</span> ¿Qué hago con mi <code>.Rmd</code> o <code>.ipynb</code> existentes?</a>
+  <ul class="collapse">
+  <li><a href="#ejercicio-2" id="toc-ejercicio-2" class="nav-link" data-scroll-target="#ejercicio-2"><span class="header-section-number">3.4.1</span> Ejercicio</a></li>
+  </ul></li>
   </ul></li>
   <li><a href="#generando-el-documento-final" id="toc-generando-el-documento-final" class="nav-link" data-scroll-target="#generando-el-documento-final"><span class="header-section-number">4</span> Generando el documento final</a>
-  <ul class="collapse">
+  <ul>
   <li><a href="#formato" id="toc-formato" class="nav-link" data-scroll-target="#formato"><span class="header-section-number">4.1</span> Formato</a></li>
-  <li><a href="#referencias" id="toc-referencias" class="nav-link" data-scroll-target="#referencias"><span class="header-section-number">4.2</span> Referencias</a></li>
+  <li><a href="#referencias" id="toc-referencias" class="nav-link" data-scroll-target="#referencias"><span class="header-section-number">4.2</span> Referencias</a>
+  <ul class="collapse">
+  <li><a href="#ejercicio-3" id="toc-ejercicio-3" class="nav-link" data-scroll-target="#ejercicio-3"><span class="header-section-number">4.2.1</span> Ejercicio</a></li>
   </ul></li>
-  <li><a href="#automatizar-varias-versiones-con-parámetros" id="toc-automatizar-varias-versiones-con-parámetros" class="nav-link" data-scroll-target="#automatizar-varias-versiones-con-parámetros"><span class="header-section-number">5</span> Automatizar varias versiones con parámetros</a></li>
+  </ul></li>
+  <li><a href="#automatizar-varias-versiones-con-parámetros" id="toc-automatizar-varias-versiones-con-parámetros" class="nav-link" data-scroll-target="#automatizar-varias-versiones-con-parámetros"><span class="header-section-number">5</span> Automatizar varias versiones con parámetros</a>
+  <ul>
+  <li><a href="#ejercicio-4" id="toc-ejercicio-4" class="nav-link" data-scroll-target="#ejercicio-4"><span class="header-section-number">5.0.1</span> Ejercicio</a></li>
+  </ul></li>
   <li><a href="#enlaces-de-interés" id="toc-enlaces-de-interés" class="nav-link" data-scroll-target="#enlaces-de-interés"><span class="header-section-number">6</span> Enlaces de interés</a></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="dia_4_comunicacion.md"><i class="bi bi-file-code"></i>Github (GFM)</a></li></ul></div></nav>
@@ -172,7 +187,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">17/09/2024</p>
+      <p class="date">25/09/2024</p>
     </div>
   </div>
   
@@ -184,13 +199,23 @@ window.Quarto = {
 </header>
 
 
-<section id="objetivos" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="objetivos"><span class="header-section-number">1</span> Objetivos</h2>
+<section id="objetivos-del-día-4" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="objetivos-del-día-4"><span class="header-section-number">1</span> Objetivos del día 4</h2>
 <ul>
 <li><p>Aprender las bases de la programación literaria en R</p></li>
 <li><p>Aprender los fundamentos básicos de R Markdown y Quarto, así como sus diferencias</p></li>
 <li><p>Generar documentos reproducibles en R</p></li>
 </ul>
+<div id="fig-datascience" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-datascience-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/datascience.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-datascience-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Modelo de ciencia de datos de Hadley Wickham, Mine Çetinkaya-Rundel y Garrett Grolemund. Traducido de https://r4ds.hadley.nz/intro#fig-ds-diagram
+</figcaption>
+</figure>
+</div>
 </section>
 <section id="r-markdown" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="r-markdown"><span class="header-section-number">2</span> R Markdown</h2>
@@ -209,7 +234,7 @@ window.Quarto = {
 </ul></li>
 </ul>
 <p>Para compilar un archivo, se ejecuta el botón de <code>Render</code> o <code>Knit</code> en RStudio (atajo: <code>Ctrl + Shift + K</code>; OS X <code>Cmd + Shift + K</code>), que llama a Quarto/R Markdown render en un trabajo de fondo. Esto evita que el renderizado abarrote la consola de R, y así es fácil de detener.</p>
-<p>📝 Con el editor visual de RStudio puedes ves en tiempo real cómo es la conversión a word, HTML…</p>
+<p>💡 Con el editor visual de RStudio puedes ves en tiempo real cómo es la conversión a word, HTML…</p>
 <p>Opciones de chunk: <a href="https://bookdown.org/yihui/rmarkdown/r-code.html" class="uri">https://bookdown.org/yihui/rmarkdown/r-code.html</a></p>
 <p>Son compatibles con muchos lenguajes de programación:</p>
 <div class="cell">
@@ -310,7 +335,7 @@ window.Quarto = {
 </iframe>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-repro-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1
+Figure&nbsp;2
 </figcaption>
 </figure>
 </div>
@@ -410,7 +435,9 @@ Figure&nbsp;1
 <p>No tienes que convertir la sintaxis de todos tus documentos antiguos. Quarto es compatible con versiones anteriores de R Markdown.</p>
 <section id="ejercicio-2" class="level4" data-number="3.4.1">
 <h4 data-number="3.4.1" class="anchored" data-anchor-id="ejercicio-2"><span class="header-section-number">3.4.1</span> Ejercicio</h4>
-<p>Convierte todos los archivos del ejercicio 4.1 a <code>.qmd</code> y renderizalo a HTML y word mediante la opción de renderización que más te guste.</p>
+<p>Convierte todos los archivos del ejercicio 2.1.1 a <code>.qmd</code> y renderizalo a HTML y word mediante la opción de renderización que más te guste.</p>
+<p>💡Para crear PDFs necesitarás instalar una distribución reciente de TeX. Recomendamos el uso de {TinyTeX}, que se puede instalar con el siguiente comando en la terminal:</p>
+<p><code>quarto install tinytex</code></p>
 </section>
 </section>
 </section>
@@ -434,7 +461,7 @@ Figure&nbsp;1
 <section id="referencias" class="level3" data-number="4.2">
 <h3 data-number="4.2" class="anchored" data-anchor-id="referencias"><span class="header-section-number">4.2</span> Referencias</h3>
 <p>Para introducir citas y referencias en nuestro texto en Quarto utilizaremos BibTeX y así evitaremos tener que hacerlo manualmente. Con BibTex, en lugar de escribir la cita se escribe una “clave” única (clave de citación: <span class="citation" data-cites="cita">@cita</span>) cada vez que se cita una referencia. Esto permite a los autores cambiar los estilos de las referencias sin tener que reformatear nada manualmente (por ejemplo, si hay que enviar un manuscrito a una revista diferente para su publicación).</p>
-<p>📝 Recomendamos utilizar <a href="https://www.zotero.org/">Zotero</a> como gestor bibliográfico porque está incluido en RStudio, lo que facilita la inclusión de citas y referencias, pero se puede utilizar cualquier otro gestor.</p>
+<p>💡 Recomendamos utilizar <a href="https://www.zotero.org/">Zotero</a> como gestor bibliográfico porque está incluido en RStudio, lo que facilita la inclusión de citas y referencias, pero se puede utilizar cualquier otro gestor.</p>
 <ul>
 <li>Si queremos añadir las referencias en algún lugar concreto del archivo (ver código fuente)</li>
 </ul>
@@ -465,7 +492,11 @@ Figure&nbsp;1
 <span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>purrr<span class="sc">::</span><span class="fu">walk</span>(<span class="fu">as.vector</span>(<span class="fu">c</span>(<span class="st">"Fagus sylvatica"</span>, <span class="st">"Quercus ilex"</span>)), render_mi_doc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>📝 <a href="https://github.com/Julenasti/tree_species_density/blob/main/02_analyses/01_species_modelling/input_sp_modelling.Rmd">Aquí</a> tenéis un ejemplo real un poco más avanzado.</p>
+<section id="ejercicio-4" class="level4" data-number="5.0.1">
+<h4 data-number="5.0.1" class="anchored" data-anchor-id="ejercicio-4"><span class="header-section-number">5.0.1</span> Ejercicio</h4>
+<p>Modifica el código del chunk anterior y el YAML para que el documento renderizado en vez de nombres de especies nos de tu nombre y el nombre de uno de tus compañeros.</p>
+<p>💡 <a href="https://github.com/Julenasti/tree_species_density/blob/main/02_analyses/01_species_modelling/input_sp_modelling.Rmd">Aquí</a> tenéis un ejemplo real un poco más avanzado.</p>
+</section>
 </section>
 <section id="enlaces-de-interés" class="level2" data-number="6">
 <h2 data-number="6" class="anchored" data-anchor-id="enlaces-de-interés"><span class="header-section-number">6</span> Enlaces de interés</h2>
@@ -485,7 +516,7 @@ Session Info
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.time</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "2024-09-17 11:58:56 CEST"</code></pre>
+<pre><code>[1] "2024-09-25 21:38:29 CEST"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -521,10 +552,9 @@ loaded via a namespace (and not attached):
 [21] rprojroot_2.0.4   pillar_1.9.0      rlang_1.1.4       utf8_1.2.4       
 [25] xfun_0.45         cli_3.6.3         withr_3.0.1       magrittr_2.0.3   
 [29] mgcv_1.9-1        digest_0.6.36     grid_4.4.1        rstudioapi_0.16.0
-[33] rappdirs_0.3.3    nlme_3.1-164      lifecycle_1.0.4   vctrs_0.6.5      
-[37] evaluate_0.24.0   glue_1.7.0        farver_2.1.2      fansi_1.0.6      
-[41] colorspace_2.1-1  rmarkdown_2.27    tools_4.4.1       pkgconfig_2.0.3  
-[45] htmltools_0.5.8.1</code></pre>
+[33] lifecycle_1.0.4   nlme_3.1-164      vctrs_0.6.5       evaluate_0.24.0  
+[37] glue_1.7.0        farver_2.1.2      fansi_1.0.6       colorspace_2.1-1 
+[41] rmarkdown_2.27    tools_4.4.1       pkgconfig_2.0.3   htmltools_0.5.8.1</code></pre>
 </div>
 </div>
 </details>

@@ -34,7 +34,7 @@ params:
 
 -   Generar documentos reproducibles en R
 
-![Modelo de ciencia de datos de Hadley Wickham, Mine Çetinkaya-Rundel y Garrett Grolemund. Traducido de https://r4ds.hadley.nz/intro#fig-ds-diagram](images/datascience.png){#fig-datascience alt="Modelo de ciencia de datos de Hadley Wickham, Mine Çetinkaya-Rundel y Garrett Grolemund. Traducido de https://r4ds.hadley.nz/intro#fig-ds-diagram"}
+![Modelo de ciencia de datos de Hadley Wickham, Mine Çetinkaya-Rundel y Garrett Grolemund. Traducido de https://r4ds.hadley.nz/intro#fig-ds-diagram](images/datascience.png){#fig-datascience}
 
 ## R Markdown
 
@@ -238,7 +238,11 @@ No tienes que convertir la sintaxis de todos tus documentos antiguos. Quarto es 
 
 #### Ejercicio
 
-Convierte todos los archivos del ejercicio 4.1 a `.qmd` y renderizalo a HTML y word mediante la opción de renderización que más te guste.
+Convierte todos los archivos del ejercicio 2.1.1 a `.qmd` y renderizalo a HTML y word mediante la opción de renderización que más te guste.
+
+💡Para crear PDFs necesitarás instalar una distribución reciente de TeX. Recomendamos el uso de {TinyTeX}, que se puede instalar con el siguiente comando en la terminal:
+
+`quarto install tinytex`
 
 ## Generando el documento final
 
@@ -301,6 +305,10 @@ render_mi_doc <- function(species_arg) {
 purrr::walk(as.vector(c("Fagus sylvatica", "Quercus ilex")), render_mi_doc)
 
 ```
+
+#### Ejercicio
+
+Modifica el código del chunk anterior y el YAML para que el documento renderizado en vez de nombres de especies nos de tu nombre y el nombre de uno de tus compañeros.
 
 💡 [Aquí](https://github.com/Julenasti/tree_species_density/blob/main/02_analyses/01_species_modelling/input_sp_modelling.Rmd) tenéis un ejemplo real un poco más avanzado.
 
