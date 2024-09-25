@@ -2,7 +2,7 @@
 <img src="images/Escuela%20de%20Doctorado_trilingue_positivo.png" />
 
 Julen Astigarraga and Verónica Cruz-Alonso
-23/09/2024
+25/09/2024
 
 - [<span class="toc-section-number">1</span> Objetivos del día
   3](#objetivos-del-día-3)
@@ -146,6 +146,8 @@ Según el tipo de output generado hay dos tipos de funciones:
   modificado. Los funcionales son tipos especiales de funciones de
   transformación.
 
+  ![](images/function.png)
+
 - Las **funciones secundarias** (*side-effect functions*) tienen efectos
   colaterales y ejecutan una acción, como guardar un archivo o dibujar
   un plot. Algunos ejemplos de funciones secundarias que se usan
@@ -195,6 +197,34 @@ En general las funciones tienen un nombre que se ejecuta cuando se
 necesita como hemos visto hasta ahora, pero esto no es obligatorio.
 Algunos paquetes como {purrr} o las funciones de la familia `apply`
 permiten el uso de **funciones anónimas** para iterar.
+
+``` r
+map(penguins, function(x) length(unique(x)))
+```
+
+    $species
+    [1] 3
+
+    $island
+    [1] 3
+
+    $bill_length_mm
+    [1] 165
+
+    $bill_depth_mm
+    [1] 81
+
+    $flipper_length_mm
+    [1] 56
+
+    $body_mass_g
+    [1] 95
+
+    $sex
+    [1] 3
+
+    $year
+    [1] 3
 
 ``` r
 penguins |> 
@@ -342,6 +372,13 @@ utilizar una función intermedia que sí los acepte. Para resolver
 problemas comunes de programación funcional derivados de la
 *non-standard evaluation* de *tidyverse* [mira este
 enlace](https://dplyr.tidyverse.org/articles/programming.html#introduction).
+
+![tidyverse permite usar data-variables (juguetes dentro de la caja –el
+data.frame) como si fueran env-variables (juguetes sobre las alfombras).
+Cuando Monchi usa las tidygafas puede acceder también fácilmente a los
+juguetes de la caja. Las tidygafas hacen que Monchi evalúe la función en
+un entorno diferente al que sería habitual. Ilustración de Cristina
+Grajera](images/data_masking.png)
 
 3.  Elegir un nombre para la función (📝). Idealmente tiene que ser
     corto y evocar lo que la función hace. En general, debe ser un verbo
@@ -719,6 +756,22 @@ map_df(.x = penguins, .f = \(x) length(unique(x)))
 Generad un vector, una función y aplicadle la función a cada uno de los
 elementos del vector utilizando `map()`.
 
+Los argumentos que varían para cada ejecución se ponen antes de la
+función y los argumentos que son los mismos para cada ejecución se ponen
+después (p. ej. `na.rm = T`).
+
+![](images/map+fix.png)
+
+Para incluir argumentos adicionales a la función que estamos utilizando
+dentro de `map()`, una opción es decrararlo dentro de la función. Sin
+embargo, puesto que `map()` incluye `...` entre sus argumentos, también
+podemos incluir los argumentos adicionales después de la función y
+dentro de `map()` de una forma mucho más sencilla. Hay una pequeña
+diferencia entre incluir argumentos adicionales dentro de una función e
+incluirlos directamente dentro del `map()`. Incluirlo en una función
+significa que se evaluará cada vez que se ejecute la función, pero al
+incluirlo dentro de `map()` sólo se evaluará una vez.
+
 ### Nuestro segundo funcional: generando vectores, `map_*()`
 
 #### Ejercicio
@@ -860,27 +913,27 @@ Session Info
 Sys.time()
 ```
 
-    [1] "2024-09-23 11:01:51 CEST"
+    [1] "2024-09-25 13:58:13 CEST"
 
 ``` r
 sessionInfo()
 ```
 
-    R version 4.4.1 (2024-06-14 ucrt)
-    Platform: x86_64-w64-mingw32/x64
-    Running under: Windows 10 x64 (build 19045)
+    R version 4.3.1 (2023-06-16 ucrt)
+    Platform: x86_64-w64-mingw32/x64 (64-bit)
+    Running under: Windows 11 x64 (build 22631)
 
     Matrix products: default
 
 
     locale:
-    [1] LC_COLLATE=English_United Kingdom.utf8 
-    [2] LC_CTYPE=English_United Kingdom.utf8   
-    [3] LC_MONETARY=English_United Kingdom.utf8
-    [4] LC_NUMERIC=C                           
-    [5] LC_TIME=English_United Kingdom.utf8    
+    [1] LC_COLLATE=English_United States.utf8 
+    [2] LC_CTYPE=English_United States.utf8   
+    [3] LC_MONETARY=English_United States.utf8
+    [4] LC_NUMERIC=C                          
+    [5] LC_TIME=English_United States.utf8    
 
-    time zone: Europe/Madrid
+    time zone: Europe/Paris
     tzcode source: internal
 
     attached base packages:
@@ -889,19 +942,19 @@ sessionInfo()
     other attached packages:
      [1] lubridate_1.9.3      forcats_1.0.0        stringr_1.5.1       
      [4] dplyr_1.1.4          purrr_1.0.2          readr_2.1.5         
-     [7] tidyr_1.3.1          tibble_3.2.1         ggplot2_3.5.1       
+     [7] tidyr_1.3.1          tibble_3.2.1         ggplot2_3.5.0       
     [10] tidyverse_2.0.0      palmerpenguins_0.1.1
 
     loaded via a namespace (and not attached):
-     [1] gtable_0.3.5      jsonlite_1.8.8    compiler_4.4.1    tidyselect_1.2.1 
-     [5] scales_1.3.0      yaml_2.3.9        fastmap_1.2.0     R6_2.5.1         
-     [9] labeling_0.4.3    generics_0.1.3    knitr_1.48        munsell_0.5.1    
-    [13] pillar_1.9.0      tzdb_0.4.0        rlang_1.1.4       utf8_1.2.4       
-    [17] stringi_1.8.4     xfun_0.45         timechange_0.3.0  cli_3.6.3        
-    [21] withr_3.0.1       magrittr_2.0.3    digest_0.6.36     grid_4.4.1       
-    [25] rstudioapi_0.16.0 hms_1.1.3         lifecycle_1.0.4   vctrs_0.6.5      
-    [29] evaluate_0.24.0   glue_1.7.0        farver_2.1.2      fansi_1.0.6      
-    [33] colorspace_2.1-1  rmarkdown_2.27    tools_4.4.1       pkgconfig_2.0.3  
-    [37] htmltools_0.5.8.1
+     [1] gtable_0.3.4      jsonlite_1.8.8    compiler_4.3.1    tidyselect_1.2.1 
+     [5] scales_1.3.0      yaml_2.3.8        fastmap_1.1.1     R6_2.5.1         
+     [9] labeling_0.4.3    generics_0.1.3    knitr_1.45        munsell_0.5.0    
+    [13] pillar_1.9.0      tzdb_0.4.0        rlang_1.1.3       utf8_1.2.4       
+    [17] stringi_1.8.3     xfun_0.42         timechange_0.3.0  cli_3.6.1        
+    [21] withr_3.0.0       magrittr_2.0.3    digest_0.6.35     grid_4.3.1       
+    [25] rstudioapi_0.15.0 hms_1.1.3         lifecycle_1.0.4   vctrs_0.6.5      
+    [29] evaluate_0.23     glue_1.7.0        farver_2.1.1      fansi_1.0.6      
+    [33] colorspace_2.1-0  rmarkdown_2.26    tools_4.3.1       pkgconfig_2.0.3  
+    [37] htmltools_0.5.7  
 
 </details>

@@ -1,0 +1,146 @@
+---
+title: | 
+  | Ciencia de datos en R ![](images/Escuela de Doctorado_trilingue_positivo.png){width=80%,fig-align="right"}
+subtitle: "Programación: aprendiendo a programar con funciones"
+author: Verónica Cruz-Alonso and Julen Astigarraga
+date: today
+date-format: "DD/MM/YYYY"
+toc: true
+toc-depth: 4
+toc-title: "Índice"
+format:
+  html:
+    link-external-newwindow: true
+    # css: styles.css
+  gfm: default
+editor: visual
+editor_options: 
+  chunk_output_type: console
+number-sections: true
+---
+
+### Ejercicio 4.0.1
+
+Genera tu primera función que divida un valor siempre entre 100.
+
+```{r 4.0.1}
+
+dividirpor100 <- function(x) {
+  x / 100
+}
+
+dividirpor100(30)
+
+```
+
+## Ejercicio 4.0.2
+
+Genera una función para estandarizar (es decir, restar la media y dividir por la desviación típica) las variables numéricas de penguins.
+
+```{r 4.0.2}
+
+library(palmerpenguins)
+library(tidyverse)
+
+# R base
+estandarizar <- function(x, na.rm) {
+  (x - mean(x, na.rm = na.rm)) / sd(x, na.rm = na.rm)
+}
+
+estandarizar(penguins$bill_length_mm, na.rm = T)
+
+# Tidyverse
+estandarizar_tidy <- function(x, na.rm) {
+  ({{ x }} - mean({{ x }}, na.rm = na.rm)) / sd({{ x }}, na.rm = na.rm)
+} 
+
+penguins |> 
+  mutate(st_bill_length = estandarizar_tidy(x = bill_length_mm, na.rm = T)) |> 
+  select(bill_length_mm, st_bill_length)
+
+```
+
+## Ejercicio 6.1.1
+
+Generad un vector, una función y aplicadle la función a cada uno de los elementos del vector utilizando `map()`.
+
+```{r 6.1.1}
+
+v1 <- 1:4
+
+sum_10 <- function(x) {
+  x + 10
+}
+
+map(v1, sum_10)
+
+```
+
+
+## Ejercicio 6.2.1
+
+Dedicadle un par de minutos a entender lo que hacen las siguientes funciones:
+
+```{r 6.2.1}
+
+map_lgl(penguins, is.numeric)
+penguins_num <- penguins[ , map_lgl(penguins, is.numeric)] 
+map_dbl(penguins_num, median, na.rm = T)
+map_chr(penguins, class)
+map_int(penguins, \(x) length(unique(x)))
+1:4 |> 
+  map_vec(\(x) as.Date(ISOdate(x + 2024, 05, 13)))
+
+```
+
+`map_lgl()` nos devuelve un vector lógico que nos indica si cada una de las columnas de penguins es numérico o no.
+
+En la siguiente linea utilizamos el vector lógico generado con `map_lgl()` para seleccionar las variables númericas de penguins.
+
+`map_dbl()` nos devuelve un vector numérico calculando la mediana de cada variable númerica de penguins.
+
+`map_chr()` nos devuelve un vector de caracteres que nos indica la clase de cada una de las columnas de penguins.
+
+`map_int()` nos devuelve un vector de números enteros que nos muestra el número de observaciones únicas que hay en cada variable de penguins contando los `NA`.
+
+`map_vec()` determina automáticamente el tipo de salida que en este caso nos devuelve un vector de tipo fecha.
+
+
+## Ejercicio 6.3.1
+
+A partir del código que se muestra a continuación generad un `data.frame`, agregando una columna al `data.frame` con el nombre que le hemos asignado a cada lista.
+
+```{r 6.3.1}
+
+penguins_list <- penguins |>
+  group_split(species)
+
+# asignamos nombres a las listas
+names(penguins_list) <- c("p1", "p2", "p3")
+
+# solucion al ejercicio
+map2(penguins_list, names(penguins_list), \(x, y)
+        mutate(x, nombre = y))
+
+```
+
+
+
+
+
+
+
+
+
+------------------------------------------------------------------------
+
+<details>
+
+<summary>Session Info</summary>
+
+```{r session_info}
+Sys.time()
+sessionInfo()
+```
+
+</details>

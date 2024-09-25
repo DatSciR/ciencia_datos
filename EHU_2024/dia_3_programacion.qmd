@@ -96,6 +96,8 @@ Según el tipo de output generado hay dos tipos de funciones:
 
 -   Las **funciones de transformación** transforman el objeto que entra en la función (primer argumento) y devuelven otro objeto o el anterior modificado. Los funcionales son tipos especiales de funciones de transformación.
 
+    ![](images/function.png)
+
 -   Las **funciones secundarias** (*side-effect functions*) tienen efectos colaterales y ejecutan una acción, como guardar un archivo o dibujar un plot. Algunos ejemplos de funciones secundarias que se usan comunmente son: `library()`, `setwd()`, `plot()`, `write_delim()`... Estas funciones retornan *de forma invisible* el primer argumento, que no se guarda, pero puede ser usado en un *pipeline*.
 
 En general, sintácticamente, las funciones tienen tres componentes:
@@ -125,6 +127,8 @@ nombre1_v3("Vero", "Cruz")
 En general las funciones tienen un nombre que se ejecuta cuando se necesita como hemos visto hasta ahora, pero esto no es obligatorio. Algunos paquetes como {purrr} o las funciones de la familia `apply` permiten el uso de **funciones anónimas** para iterar.
 
 ```{r funciones_anonimas}
+
+map(penguins, function(x) length(unique(x)))
 
 penguins |> 
   map(function(x) length(unique(x)))
@@ -216,6 +220,8 @@ ggplot(penguins_num, aes(x = species, y = .data[[var]], color = sex)) +
 ```
 
 👀 La función `ggplot` necesita argumentos (data-variable) que estén dentro del `data.frame` que va a representar. Para poder generalizar la función hemos guardado el nombre de la variable en un objeto (tipo `character`), pero `ggplot` no acepta `characters`. Por ello necesitamos utilizar una función intermedia que sí los acepte. Para resolver problemas comunes de programación funcional derivados de la *non-standard evaluation* de *tidyverse* [mira este enlace](https://dplyr.tidyverse.org/articles/programming.html#introduction).
+
+![*tidyverse* permite usar data-variables (juguetes dentro de la caja –el data.frame) como si fueran env-variables (juguetes sobre las alfombras). Cuando Monchi usa las *tidygafas* puede acceder también fácilmente a los juguetes de la caja. Las *tidygafas* hacen que Monchi *evalúe* la función en un entorno diferente al que sería habitual. Ilustración de Cristina Grajera](images/data_masking.png){alt="tidyverse permite usar data-variables (juguetes dentro de la caja –el data.frame) como si fueran env-variables (juguetes sobre las alfombras). Cuando Monchi usa las tidygafas puede acceder también fácilmente a los juguetes de la caja. Las tidygafas hacen que Monchi evalúe la función en un entorno diferente al que sería habitual. Ilustración de Cristina Grajera"}
 
 3.  Elegir un nombre para la función (📝). Idealmente tiene que ser corto y evocar lo que la función hace. En general, debe ser un verbo (p. ej. imputar_valores) mientras que los argumentos son sustantivos (p. ej. data, variable, etc.). Usar un sustantivo para una función está permitido si la función calcula algo muy conocido (p. ej. `mean()`) o si sirve para acceder a partes de un objeto (p. ej. `residuals()`). También se recomienda evitar verbos muy genéricos (p. ej. calcular) y si el nombre tiene varias palabras separarlas con guión bajo o mayúsculas, pero ser consistente. Si programas varias funciones que hacen cosas parecidas se recomienda usar el mismo prefijo para todas (p. ej. "str\_" en el paquete {stringr}).
 
@@ -408,6 +414,12 @@ map_df(.x = penguins, .f = \(x) length(unique(x)))
 #### Ejercicio
 
 Generad un vector, una función y aplicadle la función a cada uno de los elementos del vector utilizando `map()`.
+
+Los argumentos que varían para cada ejecución se ponen antes de la función y los argumentos que son los mismos para cada ejecución se ponen después (p. ej. `na.rm = T`).
+
+![](images/map+fix.png)
+
+Para incluir argumentos adicionales a la función que estamos utilizando dentro de `map()`, una opción es decrararlo dentro de la función. Sin embargo, puesto que `map()` incluye `...` entre sus argumentos, también podemos incluir los argumentos adicionales después de la función y dentro de `map()` de una forma mucho más sencilla. Hay una pequeña diferencia entre incluir argumentos adicionales dentro de una función e incluirlos directamente dentro del `map()`. Incluirlo en una función significa que se evaluará cada vez que se ejecute la función, pero al incluirlo dentro de `map()` sólo se evaluará una vez.
 
 ### Nuestro segundo funcional: generando vectores, `map_*()`
 
