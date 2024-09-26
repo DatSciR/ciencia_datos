@@ -2,7 +2,7 @@
 <img src="images/Escuela%20de%20Doctorado_trilingue_positivo.png" />
 
 Julen Astigarraga and Verónica Cruz-Alonso
-25/09/2024
+26/09/2024
 
 - [<span class="toc-section-number">1</span> Objetivos del día
   4](#objetivos-del-día-4)
@@ -77,8 +77,8 @@ calidad.
 Para crear un archivo R Markdown: *File -\> New File -\> R Markdown*.
 Debemos cambiar el modelo mental: ahora tendremos un documento fuente de
 texto plano y a partir de dicho documento generamos un documento
-renderizado. Estos archivos tienen 3 componentes principales: (i)
-metadatos, (ii) texto, (iii) código
+renderizado. Estos archivos tienen tres componentes principales: (i)
+metadatos, (ii) texto, (iii) código.
 
 - Metadatos: se escriben entre `` `---` `` al comienzo del archivo.
   Utiliza la sintaxis de [YAML](https://en.wikipedia.org/wiki/YAML) (Yet
@@ -91,7 +91,7 @@ metadatos, (ii) texto, (iii) código
   está diseñado para ser fácil de escribir y, aún más importante, fácil
   de leer.
 
-- Código (2 tipos):
+- Código (dos tipos):
 
   - Code chunk (bloque de código): se escribe
     ```` ```{r} codigo aqui``` ````; entre corchetes se indica el
@@ -101,15 +101,15 @@ metadatos, (ii) texto, (iii) código
     utilizar la paleta de comandos `Ctrl + Shift + P` (OS X
     `Cmd + Shift + P`).
 
-  - Inline (en línea): se escribe `codigo aqui`
+  - Inline (en línea): se escribe código aquí.
 
 Para compilar un archivo, se ejecuta el botón de `Render` o `Knit` en
 RStudio (atajo: `Ctrl + Shift + K`; OS X `Cmd + Shift + K`), que llama a
 Quarto/R Markdown render en un trabajo de fondo. Esto evita que el
 renderizado abarrote la consola de R, y así es fácil de detener.
 
-💡 Con el editor visual de RStudio puedes ves en tiempo real cómo es la
-conversión a word, HTML…
+💡 Con el editor visual de RStudio puedes ver en tiempo real cómo es la
+conversión a word, HTML, etc.
 
 Opciones de chunk: <https://bookdown.org/yihui/rmarkdown/r-code.html>
 
@@ -135,6 +135,11 @@ print(x.split(" "))
 
 ``` r
 library(ggplot2)
+```
+
+    Warning: package 'ggplot2' was built under R version 4.3.3
+
+``` r
 names(cars)
 ```
 
@@ -154,7 +159,7 @@ Para buscar ayuda: *Help -\> Markdown Quick Reference* (italics, bold,
 headers, lists, links, images, R codes, tables, page break,
 superscripts…)
 
-\[@blischak2016\]
+Referencias: \[@blischak2016\]
 
 Formato: **negrita**, *cursiva*, subíndice<sub>1</sub>,
 superíndice<sup>2</sup>, codes,
@@ -243,9 +248,12 @@ para las tareas básicas se volvía incoherente.
 ![Diagramas de funcionamiento de Quarto. Figura de
 jthomasmock.github.io/quarto-2hr-webinar](images/knitr-diagram-qmd-jupyter.png)
 
-Algunas diferencias entre Quarto y R Markdown en cuanto al código:
+Algunas diferencias entre Quarto y R Markdown en cuanto al código
+(chunks):
 
-- Estructura `key: value`
+- Estructura de las opciones tipo `key: value`. Las [opciones de los
+  chunks](https://quarto.org/docs/computations/execution-options.html)
+  son similares a las de R Markdown.
 
 - `#|` sintaxis *(hash pipe)*. Esta es la sintaxis preferida de Quarto,
   aunque es compatible con la sintaxis anterior de R Markdown. El *hash
@@ -300,7 +308,9 @@ Existen tres formas para renderizar un documento en Quarto:
 
 `quarto --help`
 
-Sobre la importancia del YAML:
+💡Sobre la importancia del YAML: las especificaciones del YAML se puede
+incluir también en el shell, pero si las hemos incluido en el YAML no
+tendremos que escribirlas cada vez.
 
 `quarto render archivo.qmd --to html`
 
@@ -471,47 +481,47 @@ Session Info
 Sys.time()
 ```
 
-    [1] "2024-09-25 21:38:39 CEST"
+    [1] "2024-09-26 21:38:43 CEST"
 
 ``` r
 sessionInfo()
 ```
 
-    R version 4.4.1 (2024-06-14 ucrt)
-    Platform: x86_64-w64-mingw32/x64
-    Running under: Windows 10 x64 (build 19045)
+    R version 4.3.1 (2023-06-16 ucrt)
+    Platform: x86_64-w64-mingw32/x64 (64-bit)
+    Running under: Windows 11 x64 (build 22631)
 
     Matrix products: default
 
 
     locale:
-    [1] LC_COLLATE=English_United Kingdom.utf8 
-    [2] LC_CTYPE=English_United Kingdom.utf8   
-    [3] LC_MONETARY=English_United Kingdom.utf8
-    [4] LC_NUMERIC=C                           
-    [5] LC_TIME=English_United Kingdom.utf8    
+    [1] LC_COLLATE=English_United States.utf8 
+    [2] LC_CTYPE=English_United States.utf8   
+    [3] LC_MONETARY=English_United States.utf8
+    [4] LC_NUMERIC=C                          
+    [5] LC_TIME=English_United States.utf8    
 
-    time zone: Europe/Madrid
+    time zone: Europe/Paris
     tzcode source: internal
 
     attached base packages:
     [1] stats     graphics  grDevices utils     datasets  methods   base     
 
     other attached packages:
-    [1] ggplot2_3.5.1     reticulate_1.39.0 knitr_1.48       
+    [1] ggplot2_3.5.0     reticulate_1.39.0 knitr_1.45       
 
     loaded via a namespace (and not attached):
-     [1] Matrix_1.7-0      gtable_0.3.5      jsonlite_1.8.8    dplyr_1.1.4      
-     [5] compiler_4.4.1    tidyselect_1.2.1  Rcpp_1.0.12       splines_4.4.1    
-     [9] scales_1.3.0      png_0.1-8         yaml_2.3.9        fastmap_1.2.0    
-    [13] lattice_0.22-6    here_1.0.1        R6_2.5.1          labeling_0.4.3   
-    [17] generics_0.1.3    tibble_3.2.1      munsell_0.5.1     rprojroot_2.0.4  
-    [21] pillar_1.9.0      rlang_1.1.4       utf8_1.2.4        xfun_0.45        
-    [25] cli_3.6.3         withr_3.0.1       magrittr_2.0.3    mgcv_1.9-1       
-    [29] digest_0.6.36     grid_4.4.1        rstudioapi_0.16.0 lifecycle_1.0.4  
-    [33] nlme_3.1-164      vctrs_0.6.5       evaluate_0.24.0   glue_1.7.0       
-    [37] farver_2.1.2      fansi_1.0.6       colorspace_2.1-1  rmarkdown_2.27   
-    [41] tools_4.4.1       pkgconfig_2.0.3   htmltools_0.5.8.1
+     [1] Matrix_1.6-5      gtable_0.3.4      jsonlite_1.8.8    dplyr_1.1.4      
+     [5] compiler_4.3.1    tidyselect_1.2.1  Rcpp_1.0.12       splines_4.3.1    
+     [9] scales_1.3.0      png_0.1-8         yaml_2.3.8        fastmap_1.1.1    
+    [13] lattice_0.21-8    here_1.0.1        R6_2.5.1          labeling_0.4.3   
+    [17] generics_0.1.3    tibble_3.2.1      munsell_0.5.0     rprojroot_2.0.4  
+    [21] pillar_1.9.0      rlang_1.1.3       utf8_1.2.4        xfun_0.42        
+    [25] cli_3.6.1         withr_3.0.0       magrittr_2.0.3    mgcv_1.9-1       
+    [29] digest_0.6.35     grid_4.3.1        rstudioapi_0.15.0 lifecycle_1.0.4  
+    [33] nlme_3.1-162      vctrs_0.6.5       evaluate_0.23     glue_1.7.0       
+    [37] farver_2.1.1      fansi_1.0.6       colorspace_2.1-0  rmarkdown_2.26   
+    [41] tools_4.3.1       pkgconfig_2.0.3   htmltools_0.5.7  
 
 </details>
 
