@@ -2,7 +2,7 @@
 <img src="images/Escuela%20de%20Doctorado_trilingue_positivo.png" />
 
 Julen Astigarraga and Verónica Cruz-Alonso
-24/09/2024
+27/09/2024
 
 - [<span class="toc-section-number">1</span> Objetivos del día
   5](#objetivos-del-día-5)
@@ -423,6 +423,9 @@ cambios realizados en tu directorio de trabajo).
 En el proyecto generado en el ejercicio anterior, guardad y subid los
 cambios realizados a GitHub (`git add` + `git commit` + `git push`)
 
+💡`git status`: muestra la rama en la que estamos y los cambios hechos y
+añadidos desde el último commit.
+
 💡Usar `git commit` es para el proyecto como usar anclajes cuando
 estamos escalando una pared de roca. Desarrollar un script sin commits
 es como escalar sin asegurarse: puedes avanzar mucho más rápido a corto
@@ -467,6 +470,12 @@ través de RStudio (🕒).
 un estado concreto del proyecto entrando en el archivo en la pestaña
 *Code* y clickando en el número de línea que se quiere comentar, o un
 *commit* entero copiando el SHA.
+
+💡Si quiero volver atrás en el tiempo o si hago un cambio que no quiero
+¿cómo lo puedo resolver? Hay múltiples opciones pero
+[aquí](https://github.com/DatSciR/intro_git-github/blob/main/centra/dia3_comandos.md)(en
+la sección de “La he liado ¿cómo deshago los cambios?”) detallamos tres:
+*restore*, *reset* y *revert*.
 
 ## Trabajo colaborativo
 
@@ -593,6 +602,10 @@ frecuentemente con GitHub.
 3.  Resolved el conflicto (es decir, quedaos con los cambios que sirvan
     y subid los cambios al repositorio remoto).
 
+💡[Aquí](https://github.com/DatSciR/intro_git-github/blob/main/centra/dia3_comandos.md)
+(en la sección de “Otros comandos útiles”) podéis ver cómo borrar ramas
+y otros comandos útiles
+
 ## Enlaces de interés
 
 **Ciencia reproducible**
@@ -641,7 +654,7 @@ Session Info
 Sys.time()
 ```
 
-    [1] "2024-09-24 21:12:21 CEST"
+    [1] "2024-09-27 13:41:16 CEST"
 
 ``` r
 sessionInfo()

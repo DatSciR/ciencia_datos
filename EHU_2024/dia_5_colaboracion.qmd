@@ -221,6 +221,8 @@ Además, en la pestaña Git de RStudio podemos observar el botón "*Diff*" que m
 
 En el proyecto generado en el ejercicio anterior, guardad y subid los cambios realizados a GitHub (`git add` + `git commit` + `git push`)
 
+💡`git status`: muestra la rama en la que estamos y los cambios hechos y añadidos desde el último commit.
+
 💡Usar `git commit` es para el proyecto como usar anclajes cuando estamos escalando una pared de roca. Desarrollar un script sin commits es como escalar sin asegurarse: puedes avanzar mucho más rápido a corto plazo, pero a largo plazo las probabilidades de fallo catastrófico son altas. Por otro lado, hacer muchos commits va a ralentizar tu progreso. Lo mejor: usar más commits cuando estás en un territorio incierto o peligroso.
 
 ![Lineas de trabajo (cuerdas) aseguradas con varios commits (anclajes)](images/climbing.png)
@@ -242,6 +244,8 @@ El historial del proyecto y de los archivos también es accesible a través de R
 ![Historial de un repositorio](images/hist.jpg)
 
 💡En los *issues* se puede referenciar a una línea concreta de código de un estado concreto del proyecto entrando en el archivo en la pestaña *Code* y clickando en el número de línea que se quiere comentar, o un *commit* entero copiando el SHA.
+
+💡Si quiero volver atrás en el tiempo o si hago un cambio que no quiero ¿cómo lo puedo resolver? Hay múltiples opciones pero [aquí](https://github.com/DatSciR/intro_git-github/blob/main/centra/dia3_comandos.md)(en la sección de "La he liado ¿cómo deshago los cambios?") detallamos tres: *restore*, *reset* y *revert*.
 
 ## Trabajo colaborativo
 
@@ -313,6 +317,8 @@ Para solucionarlo hay que escoger los cambios de la rama principal o de la rama 
 1.  Un integrante del equipo modifica también la primera frase del archivo README.txt en la rama main y sube los cambios al repositorio remoto. Esta frase había sido previamente modificada en una rama en el ejercicio anterior.
 2.  Un integrante del equipo combina la rama del ejercicio anterior con la rama principal (*main*) del proyecto.
 3.  Resolved el conflicto (es decir, quedaos con los cambios que sirvan y subid los cambios al repositorio remoto).
+
+💡[Aquí](https://github.com/DatSciR/intro_git-github/blob/main/centra/dia3_comandos.md) (en la sección de "Otros comandos útiles") podéis ver cómo borrar ramas y otros comandos útiles
 
 ## Enlaces de interés
 
