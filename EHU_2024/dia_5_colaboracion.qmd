@@ -86,7 +86,7 @@ En este punto es necesario que tengas instalada la versión más reciente de R (
     # También puedes hacerlo utilizando el paquete usethis
     # install.packages("usethis")
     # library(usethis)
-    # use_git_config(user.name = "Jane Doe", user.email = "jane@example.org")
+    # use_git_config(user.name = "Monchi", user.email = "monchi@example.org")
     ```
 
 ![Terminal](images/terminal.png)\
@@ -125,10 +125,6 @@ Para la resolución de problemas durante la instalación recomendamos mirar aqu�
 ```
 
 💡Conviene describir el propósito del token en el campo *Note*, porque se pueden tener varios PATs. No podrás volver a ver este token, así que no cierres ni salgas de la ventana del navegador hasta que almacenes el PAT localmente. ¡Trata este PAT como una contraseña!
-
-Una vez finalizada la instalación podrás ver la pestaña de Git en RStudio.
-
-![Git en RStudio](images/RStudio.JPG)
 
 ## Repositorios y proyectos
 
@@ -175,6 +171,10 @@ En la página principal del repositorio en GitHub podemos encontrar las siguient
 2.  Crea un nuevo script de R en el directorio de trabajo (es decir, crea un script de R y guárdalo dentro del repositorio que has creado)
 
 3.  En RStudio ve a la pestaña Git para ver todos los documentos que han sido identificados por Git
+
+Una vez finalizada la instalación podrás ver la pestaña de Git en RStudio.
+
+![Git en RStudio](images/RStudio.JPG)
 
 ### Git ignore
 
