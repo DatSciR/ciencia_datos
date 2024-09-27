@@ -2,7 +2,7 @@
 <img src="images/Escuela%20de%20Doctorado_trilingue_positivo.png" />
 
 Julen Astigarraga and Verónica Cruz-Alonso
-24/09/2024
+27/09/2024
 
 - [<span class="toc-section-number">1</span> Objetivos del día
   5](#objetivos-del-día-5)
@@ -96,7 +96,7 @@ vez
 
 ![Ediciones sin control de cambios](images/tracker.png)
 
-### [Qué es Git](https://git-scm.com/)
+### Qué es Git
 
 Git es un sistema avanzado de control de versiones (como el “control de
 cambios” de Microsoft Word) distribuido (Blischak, Davenport, and Wilson
@@ -124,7 +124,7 @@ los cambios (¿quién?), el momento en que se han registrado (¿cuándo?),
 en qué documentos o líneas se han producido cambios (¿dónde?) y qué ha
 cambiado (¿qué?)](images/git.jpg)
 
-### [Qué es GitHub](https://github.com/)
+### Qué es GitHub
 
 GitHub es un servidor de alojamiento en línea o repositorio remoto para
 albergar proyectos basados en Git que permite la colaboración entre
@@ -170,6 +170,9 @@ de R (<https://cloud.r-project.org/>), RStudio
     GitHub**
 
     ``` r
+    #|eval: false
+
+    # También puedes hacerlo utilizando el paquete usethis
     # install.packages("usethis")
     # library(usethis)
     # use_git_config(user.name = "Jane Doe", user.email = "jane@example.org")
@@ -199,11 +202,13 @@ mirar aquí: <https://happygitwithr.com/troubleshooting.html>
 3.  Genera un PAT (*Personal Access Token*) para HTTPS
 
     Git puede comunicarse con un servidor remoto utilizando uno de los
-    dos protocolos: HTTPS o SSH. Nosotros utilzaremos HTTPS con
+    dos protocolos: HTTPS o SSH. Nosotros utilizaremos HTTPS con
     *personal access token* (PAT,
     <https://happygitwithr.com/https-pat.html>).
 
 ``` r
+#|eval: false
+
 # install.packages("usethis")
 # install.packages("gitcreds")
 # library(usethis)
@@ -216,6 +221,9 @@ mirar aquí: <https://happygitwithr.com/troubleshooting.html>
 se pueden tener varios PATs. No podrás volver a ver este token, así que
 no cierres ni salgas de la ventana del navegador hasta que almacenes el
 PAT localmente. ¡Trata este PAT como una contraseña!
+
+Una vez finalizada la instalación podrás ver la pestaña de Git en
+RStudio.
 
 ![Git en RStudio](images/RStudio.JPG)
 
@@ -231,7 +239,7 @@ cualquier información esencial para el uso del repositorio (estructura,
 descripción más detallada del contenido, etc.).
 
 En RStudio, creamos un nuevo proyecto y lo conectamos al repositorio:
-File -\> New project -\> Version control -\> Git -\> copiar el URL del
+File \> New project \> Version control \> Git \> copiar el URL del
 repositorio que hemos creado de GitHub (está en la página principal de
 nuestro repositorio, en “*clone or download*”). Seleccionamos el
 directorio local donde queremos guardar el proyecto y pulsamos en
@@ -306,7 +314,7 @@ Al crear un repositorio se recomienda crear un archivo “*.gitignore*”.
 Este archivo contendrá los nombres o extensiones de los archivos del
 proyecto que por defecto no queremos compartir aunque estén en el
 repositorio local (p. ej., el archivo “*.Rhistory*” que RStudio crea por
-defecto). Es una buena práctica ignorar archivos que no sean útiles pare
+defecto). Es una buena práctica ignorar archivos que no sean útiles para
 el resto de colaboradores así como archivos muy pesados (p. ej., una
 base de datos resultado de correr un script) para no subirlos y
 descargarlos continuamente de GitHub. Para añadir archivos al
@@ -416,8 +424,6 @@ modificados mediante “*Open file*” y con el botón “*Revert*” volvemos a
 estado del último commit (⚠️cuidado con esto porque te borrará los
 cambios realizados en tu directorio de trabajo).
 
-<img src="images/git_RStudio.png" data-fig-align="center" width="486" />
-
 #### Ejercicio
 
 En el proyecto generado en el ejercicio anterior, guardad y subid los
@@ -465,7 +471,7 @@ través de RStudio (🕒).
 
 💡En los *issues* se puede referenciar a una línea concreta de código de
 un estado concreto del proyecto entrando en el archivo en la pestaña
-*Code* y clickando en el número de línea que se quiere comentar, o un
+*Code* y clickando en el número de línea que se quiere comentar, o a un
 *commit* entero copiando el SHA.
 
 ## Trabajo colaborativo
@@ -580,7 +586,8 @@ la rama a unir según corresponda. Una vez solucionados, Git permite
 completar el *merge* (es decir, un nuevo *commit* que contendrá las
 ramas fusionadas). La mejor manera de evitar conflictos o por lo menos
 reducir su dificultad es realizar cambios pequeños y sincronizar
-frecuentemente con GitHub.
+frecuentemente con GitHub, y tener una comunicación fluida con los
+colaboradores.
 
 #### Ejercicio
 
@@ -641,37 +648,37 @@ Session Info
 Sys.time()
 ```
 
-    [1] "2024-09-24 21:12:21 CEST"
+    [1] "2024-09-27 09:58:05 CEST"
 
 ``` r
 sessionInfo()
 ```
 
-    R version 4.4.1 (2024-06-14 ucrt)
-    Platform: x86_64-w64-mingw32/x64
-    Running under: Windows 10 x64 (build 19045)
+    R version 4.3.1 (2023-06-16 ucrt)
+    Platform: x86_64-w64-mingw32/x64 (64-bit)
+    Running under: Windows 11 x64 (build 22631)
 
     Matrix products: default
 
 
     locale:
-    [1] LC_COLLATE=English_United Kingdom.utf8 
-    [2] LC_CTYPE=English_United Kingdom.utf8   
-    [3] LC_MONETARY=English_United Kingdom.utf8
-    [4] LC_NUMERIC=C                           
-    [5] LC_TIME=English_United Kingdom.utf8    
+    [1] LC_COLLATE=English_United States.utf8 
+    [2] LC_CTYPE=English_United States.utf8   
+    [3] LC_MONETARY=English_United States.utf8
+    [4] LC_NUMERIC=C                          
+    [5] LC_TIME=English_United States.utf8    
 
-    time zone: Europe/Madrid
+    time zone: Europe/Paris
     tzcode source: internal
 
     attached base packages:
     [1] stats     graphics  grDevices utils     datasets  methods   base     
 
     loaded via a namespace (and not attached):
-     [1] compiler_4.4.1    fastmap_1.2.0     cli_3.6.3         tools_4.4.1      
-     [5] htmltools_0.5.8.1 rstudioapi_0.16.0 yaml_2.3.9        rmarkdown_2.27   
-     [9] knitr_1.48        jsonlite_1.8.8    xfun_0.45         digest_0.6.36    
-    [13] rlang_1.1.4       evaluate_0.24.0  
+     [1] compiler_4.3.1    fastmap_1.1.1     cli_3.6.1         tools_4.3.1      
+     [5] htmltools_0.5.7   rstudioapi_0.15.0 yaml_2.3.8        rmarkdown_2.26   
+     [9] knitr_1.45        jsonlite_1.8.8    xfun_0.42         digest_0.6.35    
+    [13] rlang_1.1.3       evaluate_0.23    
 
 </details>
 

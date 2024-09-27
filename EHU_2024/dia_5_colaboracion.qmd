@@ -50,13 +50,13 @@ Aunque existen multitud de manuales disponibles gratuitamente sobre cómo utiliz
 
 ![Ediciones sin control de cambios](images/tracker.png)
 
-### [Qué es Git](https://git-scm.com/)
+### Qué es Git
 
 Git es un sistema avanzado de control de versiones (como el "control de cambios" de Microsoft Word) distribuido [@blischak2016; @ram2013]. Git permite "rastrear" el progreso de un proyecto a lo largo del tiempo ya que hace "capturas" del mismo a medida que evoluciona y los cambios se van registrando. Este sistema permite ver qué cambios se hicieron, quién los hizo y por qué, e incluso volver a versiones anteriores. Además, Git facilita el trabajo en paralelo de varios participantes. Mientras que en otros sistemas de control de versiones (p. ej. Subversion (SVN, <https://subversion.apache.org/>) o Concurrent Versions System (CVS, <http://cvs.nongnu.org/>)) hay un servidor central y cualquier cambio hecho por un usuario se sincroniza con este servidor y de ahí con el resto de usuarios, Git es un control de versiones distribuido que permite a todos los usuarios trabajar en el proyecto paralelamente e ir haciendo "capturas" del trabajo de cada uno para luego unirlos. Otras alternativas de control de versiones distribuido comparables a Git son Mercurial (<https://www.mercurial-scm.org/>) o Bazaar (<https://bazaar.canonical.com/>), pero Git es con diferencia el más utilizado.
 
 ![Ejemplo de un proyecto rastreado por Git con indicaciones de cómo se registran los cambios y la evolución del proyecto, el autor o autora de los cambios (¿quién?), el momento en que se han registrado (¿cuándo?), en qué documentos o líneas se han producido cambios (¿dónde?) y qué ha cambiado (¿qué?)](images/git.jpg)
 
-### [Qué es GitHub](https://github.com/)
+### Qué es GitHub
 
 GitHub es un servidor de alojamiento en línea o repositorio remoto para albergar proyectos basados en Git que permite la colaboración entre diferentes usuarios o con uno mismo [@galeano2018; @perez-riverol2016]. Un repositorio es un directorio donde desarrollar un proyecto que contiene todos los archivos necesarios para el mismo. Aunque existen distintos repositorios remotos (p. ej. GitLab, <https://gitlab.com/>, o Bitbucket, <https://bitbucket.org/>) con funcionalidad similar, GitHub es hoy en día el más utilizado. GitHub registra el desarrollo de los proyectos de manera remota, permite compartir proyectos entre distintos usuarios y proporciona la seguridad de la nube entre otras funciones. Cuando se trabaja en proyectos colaborativos, la base de la interacción entre Git y GitHub es que todos los colaboradores de un proyecto están de acuerdo en que GitHub contiene la copia principal del proyecto, es decir, GitHub contiene la copia centralizada del control de versiones distribuido o descentralizado.
 
@@ -80,7 +80,10 @@ En este punto es necesario que tengas instalada la versión más reciente de R (
 
     💡**Este debe ser el correo electrónico asociado a tu cuenta de GitHub**
 
-    ```{r config, eval = F}
+    ```{r config}
+    #|eval: false
+
+    # También puedes hacerlo utilizando el paquete usethis
     # install.packages("usethis")
     # library(usethis)
     # use_git_config(user.name = "Jane Doe", user.email = "jane@example.org")
@@ -108,9 +111,11 @@ Para la resolución de problemas durante la instalación recomendamos mirar aqu�
 
 3.  Genera un PAT (*Personal Access Token*) para HTTPS
 
-    Git puede comunicarse con un servidor remoto utilizando uno de los dos protocolos: HTTPS o SSH. Nosotros utilzaremos HTTPS con *personal access token* (PAT, <https://happygitwithr.com/https-pat.html>).
+    Git puede comunicarse con un servidor remoto utilizando uno de los dos protocolos: HTTPS o SSH. Nosotros utilizaremos HTTPS con *personal access token* (PAT, <https://happygitwithr.com/https-pat.html>).
 
-```{r token, eval = F}
+```{r token}
+#|eval: false
+
 # install.packages("usethis")
 # install.packages("gitcreds")
 # library(usethis)
@@ -121,6 +126,8 @@ Para la resolución de problemas durante la instalación recomendamos mirar aqu�
 
 💡Conviene describir el propósito del token en el campo *Note*, porque se pueden tener varios PATs. No podrás volver a ver este token, así que no cierres ni salgas de la ventana del navegador hasta que almacenes el PAT localmente. ¡Trata este PAT como una contraseña!
 
+Una vez finalizada la instalación podrás ver la pestaña de Git en RStudio.
+
 ![Git en RStudio](images/RStudio.JPG)
 
 ## Repositorios y proyectos
@@ -129,7 +136,7 @@ Un repositorio es como un "contenedor" donde desarrollar un proyecto.
 
 Para crear un repositorio en GitHub damos a "*+ New repository*". Aquí se indica el nombre, una pequeña descripción, y si quieres que sea público o privado. Se recomienda iniciar el repositorio con un archivo "README" (*Initialize this repository with a README*) para recoger cualquier información esencial para el uso del repositorio (estructura, descripción más detallada del contenido, etc.).
 
-En RStudio, creamos un nuevo proyecto y lo conectamos al repositorio: File -\> New project -\> Version control -\> Git -\> copiar el URL del repositorio que hemos creado de GitHub (está en la página principal de nuestro repositorio, en "*clone or download*"). Seleccionamos el directorio local donde queremos guardar el proyecto y pulsamos en "*Create project*".
+En RStudio, creamos un nuevo proyecto y lo conectamos al repositorio: File \> New project \> Version control \> Git \> copiar el URL del repositorio que hemos creado de GitHub (está en la página principal de nuestro repositorio, en "*clone or download*"). Seleccionamos el directorio local donde queremos guardar el proyecto y pulsamos en "*Create project*".
 
 Si vamos al directorio local seleccionado, encontraremos la carpeta conectada a Git y GitHub que hemos creado en nuestro ordenador. Podemos copiar aquí todos los archivos que nos interesan para el proyecto (datos, imágenes, etc).
 
@@ -171,7 +178,7 @@ En la página principal del repositorio en GitHub podemos encontrar las siguient
 
 ### Git ignore
 
-Al crear un repositorio se recomienda crear un archivo "*.gitignore*". Este archivo contendrá los nombres o extensiones de los archivos del proyecto que por defecto no queremos compartir aunque estén en el repositorio local (p. ej., el archivo "*.Rhistory*" que RStudio crea por defecto). Es una buena práctica ignorar archivos que no sean útiles pare el resto de colaboradores así como archivos muy pesados (p. ej., una base de datos resultado de correr un script) para no subirlos y descargarlos continuamente de GitHub. Para añadir archivos al *gitignore* se puede utilizar el botón derecho del ratón sobre el archivo en la pestaña Git de RStudio pero también se puede añadir el nombre del archivo que desamos ignorar en el archivo "*.gitignore*" manualmente.
+Al crear un repositorio se recomienda crear un archivo "*.gitignore*". Este archivo contendrá los nombres o extensiones de los archivos del proyecto que por defecto no queremos compartir aunque estén en el repositorio local (p. ej., el archivo "*.Rhistory*" que RStudio crea por defecto). Es una buena práctica ignorar archivos que no sean útiles para el resto de colaboradores así como archivos muy pesados (p. ej., una base de datos resultado de correr un script) para no subirlos y descargarlos continuamente de GitHub. Para añadir archivos al *gitignore* se puede utilizar el botón derecho del ratón sobre el archivo en la pestaña Git de RStudio pero también se puede añadir el nombre del archivo que desamos ignorar en el archivo "*.gitignore*" manualmente.
 
 ### GitHub: la red social
 
@@ -215,8 +222,6 @@ Cuando se retoma un proyecto tras horas, días o incluso meses, con `git pull` s
 
 Además, en la pestaña Git de RStudio podemos observar el botón "*Diff*" que muestra los cambios que se han hecho a cada archivo desde el último commit y las ramas (que lo explicaremos más abajo). Clickando con el botón derecho del ratón podemos abrir los archivos que han sido modificados mediante "*Open file*" y con el botón "*Revert*" volvemos al estado del último commit (⚠️cuidado con esto porque te borrará los cambios realizados en tu directorio de trabajo).
 
-![](images/git_RStudio.png){fig-align="center" width="486"}
-
 #### Ejercicio
 
 En el proyecto generado en el ejercicio anterior, guardad y subid los cambios realizados a GitHub (`git add` + `git commit` + `git push`)
@@ -241,7 +246,7 @@ El historial del proyecto y de los archivos también es accesible a través de R
 
 ![Historial de un repositorio](images/hist.jpg)
 
-💡En los *issues* se puede referenciar a una línea concreta de código de un estado concreto del proyecto entrando en el archivo en la pestaña *Code* y clickando en el número de línea que se quiere comentar, o un *commit* entero copiando el SHA.
+💡En los *issues* se puede referenciar a una línea concreta de código de un estado concreto del proyecto entrando en el archivo en la pestaña *Code* y clickando en el número de línea que se quiere comentar, o a un *commit* entero copiando el SHA.
 
 ## Trabajo colaborativo
 
@@ -306,7 +311,7 @@ Git muestra dónde están los conflictos así:
 
 ![](images/cant_merge3.png)
 
-Para solucionarlo hay que escoger los cambios de la rama principal o de la rama a unir según corresponda. Una vez solucionados, Git permite completar el *merge* (es decir, un nuevo *commit* que contendrá las ramas fusionadas). La mejor manera de evitar conflictos o por lo menos reducir su dificultad es realizar cambios pequeños y sincronizar frecuentemente con GitHub.
+Para solucionarlo hay que escoger los cambios de la rama principal o de la rama a unir según corresponda. Una vez solucionados, Git permite completar el *merge* (es decir, un nuevo *commit* que contendrá las ramas fusionadas). La mejor manera de evitar conflictos o por lo menos reducir su dificultad es realizar cambios pequeños y sincronizar frecuentemente con GitHub, y tener una comunicación fluida con los colaboradores.
 
 #### Ejercicio
 
