@@ -1,0 +1,37 @@
+---
+title: | 
+  | Programación y análisis estadístico en R
+subtitle: "Análisis de datos: modelos lineales habituales en ecología"
+author: 
+  - name: Verónica Cruz-Alonso 
+    role: Profesora y autora del material
+  - name: Enrique Andivia
+    role: Autor del material
+date: today
+date-format: "DD/MM/YYYY"
+toc: true
+toc-depth: 4
+toc-title: "Índice"
+format:
+  html:
+    link-external-newwindow: true
+    # css: styles.css
+  gfm: default
+editor: visual
+editor_options: 
+  chunk_output_type: console
+number-sections: true
+---
+
+## Objetivos del día 4
+
+Los objetivos del día de hoy son:
+
+-   Aprender funciones básicas que nos permitan importar, explorar, limpiar, transformar y manejar datos.
+
+-   Aprender estilos de código que facilitan su comprensión (📝)
+
+-   Aprender a escribir funciones
+
+-   Aplicar funciones en programación iterativa mediante el paquete {purrr} de {tidyverse}
+

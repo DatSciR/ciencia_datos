@@ -1,0 +1,651 @@
+---
+title: | 
+  | Programación y análisis estadístico en R
+subtitle: "Visualización y análisis exploratorio de datos"
+author: 
+  - name: Verónica Cruz-Alonso 
+    role: Profesora y autora del material
+  - name: Julen Astigarraga
+    role: Autor del material
+date: today
+date-format: "DD/MM/YYYY"
+toc: true
+toc-depth: 4
+toc-title: "Índice"
+format:
+  html:
+    link-external-newwindow: true
+    # css: styles.css
+  gfm: default
+editor: visual
+editor_options: 
+  chunk_output_type: console
+number-sections: true
+---
+
+## Objetivos del día 3
+
+-   Aprender la filosofía y funciones básicas del paquete de visualización de datos {ggplot2}.
+
+-   Entender y aplicar funciones avanzadas de {ggplot2}.
+
+-   Ser capaces de generar gráficos publicables en un artículo científico.
+
+![Modelo de ciencia de datos de Hadley Wickham, Mine Çetinkaya-Rundel y Garrett Grolemund. Traducido de https://r4ds.hadley.nz/intro#fig-ds-diagram](images/datascience.png){#fig-datascience}
+
+## Introducción
+
+La visualización de datos es una disciplina cuyo fin es mapear datos de forma gráfica para comunicar un mensaje. En investigación se usa principalmente en los análisis exploratorios (durante la fase de entendimiento de los datos) y en la comunicación de los resultados.
+
+La representación gráfica de nuestras ideas o resultados de investigación es esencial para comunicar de forma efectiva nuestra interpretación de los datos y es clave si queremos causar cierto impacto en el interlocutor. El hombre de Vitruvio de Leonardo Da Vinci, el árbol de la vida de Charles Darwin o la primera foto de la doble hélice del ADN de Rosalind Franklin son visualizaciones de conceptos que han cambiado profundamente nuestro entendimiento del mundo y ejemplos de la importancia de la visualización de las ideas.
+
+Algunos estudios sugieren que el tiempo medio que el usuario emplea en ojear una página web es de unos segundos, pero si hay algo que consigue atraer su atención entonces el tiempo se incrementa exponencialmente. Este atractor en el mundo científico puede ser un buen gráfico de resultados o un buen resumen gráfico.
+
+![Esquema conceptual de un "buen gráfico" considerando la ejecución (cómo de bien está constituido) y la adecuación (qué estoy tratando de decir, a quién, dónde, por qué). Modificado de [Good Charts de Scott Berinato](https://scottberinato.com/good-charts-book/).](images/buen-grafico.png){width="469"}
+
+En este bloque vamos a aprender como representar de manera efectiva muestros datos utilizando el paquete {[ggplot2](https://ggplot2.tidyverse.org/)} de *tidyverse*. {ggplot2} permite hacer gráficos razonablemente claros y estéticamente bonitos (es decir, bien ejecutados) con poco tiempo y un esfuerzo pequeño. Es extremadamente flexible y potente por lo que ha alcanzado gran popularidad.
+
+{ggplot2} está escrito en R siguiendo la [gramática de gráficos (gg)](https://www.amazon.com/Grammar-Graphics-Statistics-Computing/dp/0387245448/ref=as_li_ss_tl). Por ello, al utilizarlo, el usuario tiene que pensar como cuando está haciendo un dibujo a mano y pensar en ir añadiendo diferentes capas a la creación. El flujo de trabajo es crear un gráfico vacío, añadir una capa con los datos, añadir una capa con las etiquetas, etc.
+
+![Creación de una pintura por capas, como en la gramática de gráficos. https://www.donnacowan.ca/category/animated-gifs/](images/Buckley-Bay-Oil-Painting-Animation-6x8-2.gif){width="441"}
+
+Otra característica de {ggplot2} además del trabajo por capas es que precisa de datos ordenados para que se ejecute de forma óptima.
+
+💡Recordamos que en una tabla de datos ordenados (*Tidy data*) cada columna representa una variable, cada fila es una observación y cada celda contiene un único valor.
+
+## Elementos básicos en un gráfico de {[ggplot2](https://ggplot2.tidyverse.org/)}
+
+Se necesitan tres capas básicas para crear un gráfico con {ggplot2}:
+
+-   Los datos (*data*).
+
+-   Las geometrías (*geom*): definen el tipo de gráfico (de puntos, de barras, etc.).
+
+-   Los *aesthetics*: características visuales de las geometrías (p. ej. la posición, el color) definidas por las variables de nuestros datos.
+
+Las capas se conectan entre sí con el símbolo `+`, que siempre debe ir colocado al final de la línea de código si queremos seguir añadiendo capas al gráfico. Todas las capas que se pueden incluir están recogidas en la [guía de {ggplot2} de Posit](https://diegokoz.github.io/intro_ds/fuentes/ggplot2-cheatsheet-2.1-Spanish.pdf).
+
+💡 Se utiliza el símbolo `+` porque {ggplot2} es anterior al *pipe* (`|>`) y cambiar `+` por el *pipe* requeríría muchos reajustes en un montón de paquetes.
+
+```{r capas_basicas}
+#| warning: false
+
+library(tidyverse)
+# install.packages("titanic")
+
+#Cargamos los datos
+titanic <- titanic::titanic_train 
+
+head(titanic)
+# PassengerId: Id del pasajero
+# Survived: 1-si, 0-no
+# Pclass: clase del pasajero
+# Name: nombre Name
+# Sex: sexo
+# Age: edad
+# SibSp: numero de hermanos + parejas a bordo
+# Parch: numero de progenitores + hijos a bordo
+# Ticket: numero de billete
+# Fare: tarifa
+# Cabin: camarote
+# Embarked: puerta de embarque
+
+ggplot(data = titanic)
+
+ggplot(data = titanic, aes(x = Age, y = Fare)) 
+
+ggplot() + 
+  geom_point(data = titanic, aes(x = Age, y = Fare)) #Los datos se pueden colocar dentro de la funcion ggplot si se van a usar los mismos en todas las geometrias
+
+ggplot() + 
+  geom_jitter(data = titanic, aes(x = Pclass, y = Fare))
+
+# Como guardar plots satisfactorios
+
+plotqmegusta <- ggplot() + 
+  geom_point(data = titanic, aes(x = Age, y = Fare))
+
+ggsave(filename = "farebyage.jpg", plot = plotqmegusta, width = 12, height = 9, units = "cm", dpi = 300)
+
+ggsave(filename = "farebyage.pdf", plot = plotqmegusta, width = 12, height = 9, units = "cm")
+```
+
+💡Algunas revistas científicas dan especificaciones muy detalladas sobre cómo tienen que ser los gráficos (p. ej. [Science](https://www.science.org/content/page/instructions-preparing-initial-manuscript#preparation-of-figures)). Cuando no tenemos una referencia clara recomendamos pensar en formato A4 (21 x 29,7 cm) y que todos los elementos visuales del gráfico queden visibles cuando se guarda dentro de estos límites de tamaño.
+
+#### Ejercicio
+
+Representa un gráfico para ver la relación entre el sexo de los pasajeros y la clase.
+
+### Aesthetics vs. argumentos
+
+Los aesthetics cambian cada elemento de las geometrías. Los argumentos estéticos cambian toda la geometría en conjunto.
+
+```{r aes_arguments}
+#| warning: false
+
+ggplot(data = titanic) + 
+  geom_point(aes(x = Age, y = Fare, color = Sex))
+
+# No es lo mismo que... 
+
+ggplot(data = titanic) + 
+  geom_point(aes(x = Age, y = Fare), color = "darkred") 
+```
+
+En la ayuda de las funciones de {ggplot2} aparece una lista de los *aesthetics* y los argumentos estéticos que acepta esa función. Se pueden incluir tantos *aesthetics* como se deseen.
+
+```{r aes}
+#| warning: false
+
+ggplot(data = titanic) + 
+  geom_point(aes(x = Age, y = Fare, size = Pclass, shape = Sex, color = Embarked))
+
+summary(titanic$Pclass)
+
+titanic <- titanic |> 
+  mutate(Pclass = factor(Pclass, levels = c(3, 2, 1), 
+    labels = c("Tercera", "Segunda", "Primera")))
+
+summary(titanic$Pclass)
+
+ggplot(data = titanic) + 
+  geom_point(aes(x = Age, y = Fare, size = Pclass, shape = Sex, color = Embarked), alpha = 0.5)
+```
+
+#### Ejercicio
+
+¿Cómo modificarías el siguiente código para representar la puerta de embarque con diferentes formas pero los puntos de color rosa?
+
+```{r ejer_2}
+#| warning: false
+
+ggplot(data = titanic) + 
+  geom_point(aes(x = Age, y = Fare))
+
+```
+
+## Tipos de gráfico (geoms)
+
+El tipo de gráfico que escojamos va a depender del tipo de variable y del mensaje que queramos transmitir (es decir, del propósito).
+
+![Tipos de variables](images/tipos_variables.png)
+
+💡Para elegir qué tipo de gráfico nos conviene según el propósito una herrramienta muy útil es la [chuleta sobre los principios de los gráficos](https://graphicsprinciples.github.io/cheatsheet.html).
+
+```{r geoms}
+#| warning: false
+
+ggplot(data = titanic) + 
+  geom_point(aes(x = Age, y = Fare, color = Sex)) + 
+  geom_smooth(aes(x = Age, y = Fare, color = Sex, fill = Sex))
+
+```
+
+A continuación vamos a ver algunos tipos de gráficos útiles en exploración de datos para diferentes tipos de variables.
+
+### Exploración de variables cualitativas
+
+#### Conteo
+
+```{r conteo}
+#| warning: false
+
+summary(titanic$Pclass)
+
+ggplot(data = titanic) + 
+  geom_bar(aes(x = Pclass))
+
+```
+
+#### Proporciones
+
+```{r prop}
+#| warning: false
+
+miplot <- ggplot(data = titanic) + 
+  geom_bar(aes(x = Pclass, group = 1)) 
+
+miplot # group = 1 hace que considere toda la variable como un todo
+
+miplot_data <- ggplot_build(miplot) 
+head(miplot_data$data)
+
+ggplot(data = titanic) + 
+  geom_bar(aes(x = Pclass, y = ..count.., group = 1))
+
+ggplot(data = titanic) + 
+  geom_bar(aes(x = Pclass, y = ..prop.., group = 1))
+
+```
+
+### Exploración de variables cuantitativas
+
+```{r num}
+#| warning: false
+
+ggplot(data = titanic) + 
+  geom_histogram(aes(x = Age))
+
+ggplot(data = titanic) + 
+  geom_density(aes(x = Age))
+
+ggplot(data = titanic) + 
+  geom_boxplot(aes(y = Age))
+
+ggplot(data = titanic) + 
+  geom_jitter(aes(x = 1, y = Age))
+```
+
+#### Ejercicio
+
+Describe la distribución de las tarifas pagadas por los pasajeros.
+
+### Relaciones entre variables
+
+#### Variables cualitativas
+
+```{r dos_cat}
+#| warning: false
+
+ggplot(data = titanic) + 
+  geom_count(aes(x = Sex, y = Survived))
+
+titanic <- titanic |> 
+  mutate(Survived = factor(Survived, levels = c(0, 1), labels = c("Muerto", "Vivo")))
+
+ggplot(data = titanic) + 
+  geom_count(aes(x = Sex, y = Survived))
+
+table(titanic$Sex, titanic$Survived)
+
+
+```
+
+#### Ejercicio
+
+Haz un gráfico para averiguar en qué clase sobrevivieron más personas.
+
+#### Variables cuantitativas
+
+```{r dos_num}
+#| warning: false
+
+pnum <- ggplot(data = titanic, aes(x = Age, y = Fare)) + 
+  geom_point(alpha = 0.5)
+
+pnum
+
+pnum + 
+  geom_smooth()
+```
+
+💡[ggpairs()](https://ggobi.github.io/ggally/reference/ggpairs.html) de {GGally} permite hacer gráficos multipanel donde, de un vistazo, se ve la distribución de cada variable dentro de una base de datos y la relación de las variables todas entre sí. Es muy útil en exploración de datos.
+
+💡Los correlogramas, gráficos cuadrados o triangulares que representan matrices de correlaciones entre variables, son muy útiles para resumir en un vistazo las relaciones entre las variables de una base de datos. En [este artículo](https://rpubs.com/Alema/1000474) encontrarás tutoriales para realizarlos utilizando diferente paquetes.
+
+Los gráficos interactivos de ggplotly() pueden ser muy útilies también en la exploración de datos. Fijate en el siguiente ejemplo.
+
+```{r plotly}
+#| warning: false
+
+# install.packages("plotly")
+library(plotly) 
+
+ggplotly(pnum)
+```
+
+#### Variable cualitativa vs. cuantitativa
+
+```{r cat_num}
+#| warning: false
+
+ggplot(data = titanic) + 
+  geom_boxplot(aes(x = Pclass, y = Age))
+
+ggplot(data = titanic) + 
+  geom_violin(aes(x = Pclass, y = Age), draw_quantiles = 0.5) #+ 
+# geom_jitter(aes(x = Pclass, y = Age), alpha = 0.3, width = 0.2)
+
+ggplot(data = titanic) + 
+  geom_violin(aes(x = Pclass, y = Age, fill = Sex), draw_quantiles = 0.5)
+
+# Haciendo calculos previos
+
+summ_titanic <- titanic |> 
+  group_by(Pclass) |> 
+  summarise(Avg_age = mean(Age, na.rm = TRUE), 
+    Sd_age = sd(Age, na.rm = TRUE))
+
+summ_titanic
+
+ggplot(data = summ_titanic, aes(x = Pclass, y = Avg_age)) + 
+  geom_col(color = "black") + 
+  geom_errorbar(aes(ymax = Avg_age + Sd_age, 
+    ymin = Avg_age - Sd_age), width = 0.25)
+
+ggplot(data = summ_titanic, aes(x = Pclass, y = Avg_age)) + 
+  geom_line(aes(group = 1))
+```
+
+💡Echa un vistazo al paquete {[ggdist](https://mjskay.github.io/ggdist/)} y los [raincloud plots](https://www.cedricscherer.com/2021/06/06/visualizing-distributions-with-raincloud-plots-and-how-to-create-them-with-ggplot2/) para combinar diferentes geoms relacionadas con la distribución de los datos.
+
+## {Ggplot2}: funciones avanzadas
+
+<!--# ver la chuleta de ggplot2 -->
+
+### Etiquetas
+
+```{r etiquetas}
+#| warning: false
+
+pnumcat <- ggplot(data = titanic) + 
+  geom_boxplot(aes(x = Pclass, y = Age))
+
+pnumcat
+
+pnumcat + 
+  labs(title = "Edad de los pasajeros según su clase", 
+    x = "Clase", 
+    y = "Edad (años)") #title, subtitle, x, y, caption
+```
+
+### Sistema de coordenadas
+
+El sistema de coordenadas por defecto en un gráfico de `ggplot()` es el cartesiano. Si queremos hacer zoom en nuestro gráfico tendremos que cambiar los límites del sistema de coordenadas.
+
+```{r coords}
+#| warning: false
+
+pnumcat +
+  coord_cartesian(ylim = c(0, 100)) 
+
+```
+
+#### Ejercicio
+
+Cambia la posición de los ejes X e Y en el sistema de coordenadas de pnumcat.
+
+### Faceting
+
+Los *facets* dividen el gráfico en subgráficos basados en el valor de una o varias variables categóricas. Las facetas son muy útiles en exploración de datos. Hay dos funciones para facetar: `facet_grid()` y `facet_wrap()`.
+
+```{r facet_1}
+#| warning: false
+
+miplot2 <- ggplot(data = titanic, 
+  aes(x = Age, y = Fare, color = Sex)) + 
+  geom_point()
+
+miplot2
+
+miplot2 + 
+  facet_grid(rows = vars(Pclass), scales = "free") 
+
+miplot2 + 
+  facet_grid(rows = vars(Pclass), cols = vars(Embarked)) 
+
+miplot2 + 
+  facet_wrap(facets = vars(Embarked), ncol=3)
+```
+
+### Posición
+
+Con las funciones y argumenos de posición podemos recolocar geometrias que de otro modo ocuparían el mismo espacio.
+
+```{r posicion}
+#| warning: false
+
+ggplot(data = titanic) + 
+  geom_bar(aes(x = Pclass, fill = Sex))
+
+ggplot(data = titanic) + 
+  geom_bar(aes(x = Pclass, fill = Sex), position = "dodge") #esquivar
+
+ggplot(data = titanic) + 
+  geom_bar(aes(x = Pclass, fill = Sex), position = "fill") #rellenar
+
+```
+
+### Escalas
+
+Sirven para personalizar los *aesthetics*. Las funciones de la familia `scale` siempre tienen la misma estructura: `scale_aesthetic` que se personaliza con \_ tipo de escala (p. ej. continua, discreta, manual, etc.).
+
+```{r escala}
+#| warning: false
+
+miplot2 +
+  scale_color_manual(values = c("darkgreen", "chartreuse")) + 
+  scale_y_sqrt(breaks = c(9,16,25), labels = c("a", "b","c")) 
+
+```
+
+Un error muy común es cambiar los ejes del gráfico con las funciones `scale_x_continuous()` o `scale_y_continuous()` cuando lo que queremos es hacer zoom. Fijate en las diferencias en el siguiente ejemplo.
+
+```{r plot_limits}
+#| warning: false
+
+ggplot(data = titanic) + 
+  geom_boxplot(aes(x = Pclass, y = Age))
+
+ggplot(data = titanic) + 
+  geom_boxplot(aes(x = Pclass, y = Age)) +
+  scale_y_continuous(limits = c(10, 80))
+
+ggplot(data = titanic) + 
+  geom_boxplot(aes(x = Pclass, y = Age)) +
+  coord_cartesian(ylim = c(10, 80))
+
+```
+
+#### Ejercicio
+
+¿Qué harías para cambiar la escala de la edad a un degradado de colores de azul a amarillo en el siguiente gráfico?
+
+```{r ejer}
+
+ggplot(data = titanic, aes(x = Age, y = Fare, color = Age)) +
+  geom_point(size = 10) 
+
+```
+
+### Los colores en R
+
+Las paletas de colores tipo *manual* y *gradient* se personalizan con el nombre o código del color. Con [esta herramienta](https://r-charts.com/colors/) puedes elegir entre cientos de colores.
+
+Las paletas tipo *brewer* y *distiller* utilizan paletas de colores que pueden ser secuenciales, cualitativas o divergentes, que aunque tienen utilidad en gran variedad de situaciones, están diseñadas para trabajar [con mapas o a escalas pequeñas](https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3).
+
+Las paletas HCL (*hue-chroma-luminance*) son paletas muy populares que tienen su propia función (p. ej. colores para representar batimetría). De entre ellas, *Viridis* se he vuelto muy popular porque está diseñada para que personas con distintos tipos de daltonismo puedan distinguir los colores.
+
+```{r paletas}
+#| warning: false
+
+RColorBrewer::display.brewer.all() 
+
+RColorBrewer::brewer.pal(name = "Set3", n = 6) # para crear paleta
+
+grDevices::hcl.pals() # HCL Palettes 
+
+X11()
+example("hcl.colors")
+
+hcl.colors(n = 6, palette = "Lajolla") # para crear paleta
+
+# Viridis 
+
+ggplot(data = titanic, aes(x = Age, y = Fare, color = Age)) + 
+  geom_point() + 
+  scale_color_gradientn(colours = hcl.colors(12, "viridis"))
+
+ggplot(data = titanic, aes(x = Age, y = Fare, color = Age)) + 
+  geom_point() + 
+  scale_color_viridis_c()
+```
+
+💡[Aquí](https://ggplot2-book.org/scales-colour) puedes encontrar más información sobre cómo utilizar colores en {ggplot2}.
+
+### Temas
+
+`theme()` permite la personalización completa de todos los elementos del gráfico. Los argumentos dentro de la función definen la parte del gráfico a cambiar. Se les asigna una función de cambio según el elemento a cambiar dentro de esa parte (parte.del.gráfico = elemento_a_cambiar(...)): *line*, *rect*, *text*.
+
+```{r theme}
+#| warning: false
+
+?theme
+
+miplot2 + 
+  theme(axis.title.x = element_text(color = "red", face = "bold")) 
+
+```
+
+#### Ejercicio
+
+Dibuja una linea negra que represente los ejes de miplot y quita el fondo del gráfico.
+
+Existen temas configurados por defecto y un asistente que te ayuda a personalizar el gráfico.
+
+```{r temas_defecto}
+#| warning: false
+
+miplot2 + theme_classic() 
+miplot2 + theme_light() 
+miplot2 + theme_void()
+
+```
+
+#### GgthemeAssist
+
+```{r theme_assist}
+
+# install.packages("ggThemeAssist")
+
+miplot2
+```
+
+## Multipaneles
+
+La librería {patchwork} permite añadir gráficos ([y también tablas](https://www.tidyverse.org/blog/2024/09/patchwork-1-3-0/)) entre sí como si fueran diferentes capas.
+
+```{r patchwork}
+#| warning: false
+
+# install.packages("patchwork")
+library(patchwork)
+
+miplot + miplot2 
+miplot / miplot2
+
+miplot / miplot2 + 
+  plot_annotation(tag_levels = "a", tag_suffix = ")") 
+
+```
+
+En [este enlace](https://patchwork.data-imaginist.com/articles/guides/layout.html) puedes ver cómo personalizar mucho más la disposición de los diferentes elementos de la composición.
+
+## Mapas
+
+La representación de mapas es sencilla con {ggplot2} si conseguimos transformar los datos espaciales en una tabla de datos ordenada.
+
+![Mapas en formato vectorial y en formato raster. https://commons.wikimedia.org/wiki/File:Vectores_vs_rasters.png](https://upload.wikimedia.org/wikipedia/commons/0/02/Vectores_vs_rasters.png?20180402154102)
+
+![](https://jcheshire.com/wp-content/uploads/2012/02/bike_ggplot-800x529.png)
+
+### Raster
+
+```{r raster}
+#| warning: false
+
+#install.packages(c("terra", "easyclimate))
+
+library(terra)
+library(easyclimate)
+
+# Obtenemos datos de temperatura máxima para el 31 de diciembre de 2020 en una zona de España 
+
+raster <- get_daily_climate(
+  coords = vect("POLYGON ((-4.5 41, -4.5 40.5, -5 40.5, -5 41))"), 
+  period = "2020-12-31", 
+  climatic_var = "Tmax", 
+  output = "raster")
+
+plot(raster)
+
+tidy_raster <- terra::as.data.frame(raster, xy = TRUE) 
+head(tidy_raster)
+
+rastermap <- ggplot(data = tidy_raster) + 
+  geom_raster(aes(x = x, y = y, fill = `2020-12-31`), interpolate = TRUE) 
+
+rastermap
+
+rastermap + 
+  scale_fill_viridis_c(name = "Temperatura\nmáxima (ºC)\n31 Dic. 2020") +
+  labs(y = "Latitude", x = "Longitude") + 
+  theme_bw()
+
+```
+
+### Vectorial
+
+En general, se recomienda usar [`geom_sf()`](https://ggplot2.tidyverse.org/reference/ggsf.html). Cuando el mapa contiene puntos es sencillo transformarlo en formato ordenado con `terra::as.data.frame()` y tratarlo con `geom_point()`. Para líneas y polígonos es mas dificil, pero se puede como veremos en el ejemplo debajo.
+
+```{r vect}
+
+# install.packages("sf")
+library(sf)
+
+vect_terra <- vect(system.file("ex/lux.shp", package = "terra"))
+vectorial <- st_as_sf(vect_terra)
+
+vectorial
+
+vecmap <- ggplot(data = vectorial) + 
+  geom_sf(aes(fill = NAME_2), color = "white")
+
+vecmap
+
+vecmap + 
+  coord_sf() + 
+  scale_fill_brewer(palette = "Set3", 
+    name = "Cantones de\nLuxemburgo") + 
+  labs(y = "Latitude", x = "Longitude") + 
+  theme_bw()
+
+vectorial_df <- vect_terra |> 
+  geom() |> 
+  as.data.frame()
+
+ggplot(data = vectorial_df) + 
+  geom_polygon(aes(x = x, y = y, group = geom, fill = as.factor(geom)), color = "white") +
+  scale_fill_brewer(palette = "Set3", 
+    name = "Cantones de\nLuxemburgo") + 
+  labs(y = "Latitude", x = "Longitude") + 
+  theme_bw()
+
+```
+
+## Enlaces de interés
+
+-   [Guía de {ggplot2} de Posit](https://diegokoz.github.io/intro_ds/fuentes/ggplot2-cheatsheet-2.1-Spanish.pdf)
+
+-   [Construye un gráfico capa a capa](https://rpubs.com/hadley/ggplot2-layers)
+
+-   [Elegant graphics for data analysis](https://ggplot2-book.org/)
+
+-   [Tutorial de {ggplot2} de Cedric Scherer](https://www.cedricscherer.com/2019/08/05/a-ggplot2-tutorial-for-beautiful-plotting-in-r/)
+
+-   [Effective Visual Communication for the Quantitative Scientist](https://ascpt.onlinelibrary.wiley.com/doi/full/10.1002/psp4.12455)
+
+-   [Graphics principles](https://graphicsprinciples.github.io/)
+
+-   [ggmap()](https://datanalytics.com/libro_r/0900_ggmap.html) para obtener mapas de fondo para nuestros datos y {[geodata](https://github.com/rspatial/geodata)} para descargar información geográfica de clima, suelo, etc.
+
+<details>
+
+<summary>Session Info</summary>
+
+```{r session_info}
+Sys.time()
+sessionInfo()
+```
+
+</details>

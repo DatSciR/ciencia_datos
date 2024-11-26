@@ -1,0 +1,600 @@
+---
+title: | 
+  | Programación y análisis estadístico en R
+subtitle: "Organización de datos y bases de programación funcional"
+author: 
+  - name: Verónica Cruz-Alonso 
+    role: Profesora y autora del material
+  - name: Julen Astigarraga
+    role: Autor del material
+date: today
+date-format: "DD/MM/YYYY"
+toc: true
+toc-depth: 4
+toc-title: "Índice"
+format:
+  html:
+    link-external-newwindow: true
+    # css: styles.css
+  gfm: default
+editor: visual
+editor_options: 
+  chunk_output_type: console
+number-sections: true
+---
+
+## Objetivos del día 2
+
+Los objetivos del día de hoy son:
+
+-   Aprender funciones básicas que nos permitan importar, explorar, limpiar, transformar y manejar datos.
+
+-   Aprender estilos de código que facilitan su comprensión (📝)
+
+-   Aprender a escribir funciones
+
+-   Aplicar funciones en programación iterativa mediante el paquete {purrr} de {tidyverse}
+
+## Importar y renombrar datos
+
+### [Read_delim](https://readr.tidyverse.org/reference/read_delim.html): leer datos desde fuera de R
+
+```{r read}
+#| warning: false
+
+library(tidyverse)
+
+taludes <- read_delim(file = "taludes.csv", delim = ",")
+
+taludes
+
+taludes_bien <- read_delim(file = "taludes.csv", 
+  delim = ",", col_types = list(Luz = "f", Agua = "f"))
+
+taludes_bien
+View(taludes_bien)
+summary(taludes_bien)
+glimpse(taludes_bien)
+```
+
+### [Rename](https://dplyr.tidyverse.org/reference/rename.html): cambiar nombres de variables (columnas)
+
+```{r rename}
+#| warning: false  
+
+names(taludes_bien)
+
+taludes_bien <- taludes_bien |>    
+  rename(biomasa = Biomasa, # nombre nuevo = nombre viejo          
+         nivel_luz = Luz, 
+         agua_estival = Agua)
+```
+
+📝 Ajustar sangría de código: Ctrl + i; Reformatear código: Ctrl + Shift + a
+
+## Funciones básicas de filtrado y selección
+
+### [Slice](https://dplyr.tidyverse.org/reference/slice.html): filtrar filas según el índice numérico
+
+```{r slice}
+#| warning: false
+
+taludes_bien |> 
+  slice(1) # shortcut para el pipe: CTRL + SHIFT + M 
+
+taludes_bien |>
+  slice(1, 5)
+
+taludes_bien |> 
+  slice(1:6)
+
+taludes_bien |>
+  slice(-c(1:5))
+
+```
+
+### [Arrange](https://dplyr.tidyverse.org/reference/arrange.html): ordenar filas por los valores de una o más variables (columnas)
+
+```{r arrange}
+#| warning: false
+
+taludes_bien |>
+  arrange(biomasa)
+
+taludes_bien |> 
+  arrange(desc(biomasa))
+
+```
+
+### [Filter](https://dplyr.tidyverse.org/reference/filter.html): filtrar filas utilizando condiciones
+
+Se necesita un vector de filtrado que contenga valores lógicos (TRUE/FALSE).
+
+```{r filter}
+#| warning: false
+
+taludes_bien |>
+  filter(nivel_luz == "Nivel 1") # filtrar por filas que cumplen un patrón 
+
+taludes_bien |>
+  filter(nivel_luz == "Nivel 1" & biomasa > 4) # combinar criterios: AND
+
+taludes_bien |>
+  filter(nivel_luz == "Nivel 1" | biomasa > 5) # combinar criterios: OR
+
+taludes_bien |>
+  filter(nivel_luz %in% c("Nivel 1", "Nivel 3")) # combinar criterios: %in% 
+
+```
+
+#### Ejercicio
+
+-   Lee el data.frame "Macrobenthos.txt". Pista: el delimitador entre datos es el tabulador ("\t").
+
+💡"Macrobenthos.txt" es una base de datos sobre la abundancia de distintos grupos taxonómicos de macroinvertebrados marinos ([Zuur et al. 2009](https://link.springer.com/book/10.1007/978-0-387-93837-0)).
+
+-   Crea un subset de datos que contenga las filas de la 1 a la 10 y de la 390 a la 400.
+
+-   Crea un subset que NO contenga el Taxon número 1. Pista: revisa los [operadores de R](https://bookdown.org/jboscomendoza/r-principiantes4/operadores-relacionales.html).
+
+-   Crea un subset con las observaciones del Taxon 2 donde se haya registrado una abundancia mayor de 50 o menor o igual a 5. Pista: necesitarás paréntesis para filtrar.
+
+-   ¿Cuántas filas han quedado?
+
+### [Select](https://dplyr.tidyverse.org/reference/select.html): seleccionar columnas utilizando condiciones
+
+Se necesita un vector de selección que contenga valores lógicos (TRUE/FALSE).
+
+```{r select}
+#| warning: false
+
+taludes_bien |>
+  select(biomasa, agua_estival)
+
+# ?select 
+
+taludes_bien |>
+  select(contains("a"))
+
+# se pueden utilizar todo tipo de patrones de texto: https://rstudio.github.io/cheatsheets/strings.pdf
+
+taludes_bien |>
+  select(nivel_luz, everything()) # se puede usar para reordenar variables
+
+```
+
+#### Ejercicio
+
+-   Con el data.frame "Macrobenthos.txt", crea un nuevo data.frame que contenga las variables relacionadas con el medio (de *organic matter* a *temperature*). Pista: mira la ayuda de select para ahorrar caracteres.
+
+-   Crea un nuevo objeto con el taxon al principio y que incluya las demás columnas excepto el esfuerzo de muestreo (*effort*).
+
+## Transformar los datos y calcular nuevas variables
+
+### [Mutate](https://dplyr.tidyverse.org/reference/mutate.html): crear, modificar o eliminar columnas
+
+```{r mutate}
+#| warning: false
+
+taludes_bien |>
+  mutate(
+    ID = 1:nrow(taludes_bien),
+    # definir una variable desde cero
+    supervivencia = as.factor(sample(
+      c(0, 1),
+      size = nrow(taludes_bien),
+      prob = c(0.4, 0.6),
+      replace = TRUE
+    )),
+    # utilizar una variable para calcular otra
+    carbono = biomasa * rnorm(
+      n = nrow(taludes_bien),
+      mean = 0.4,
+      sd = 0.2
+    )
+  ) |> 
+  select(ID, everything())
+
+taludes_bien |>
+  mutate(
+    # sobreescribir una variable. En concreto fct_recode 
+    # sirve para redefinir los niveles de un factor
+    agua_estival = fct_recode(
+      agua_estival, sequia = "Sequia estival", lluvia = "Lluvia estival"),
+    nivel_luz = fct_recode(
+      nivel_luz,
+      `1` = "Nivel 1",
+      `2` = "Nivel 2",
+      `3` = "Nivel 3"
+    )
+  )
+
+taludes_bien |>
+  mutate(
+    estres = case_when(
+      # utilizar varias variables para calcular otra nueva
+      nivel_luz == 1 &
+        agua_estival == "sequia" ~ "alto",
+      # "Si el nivel de luz es 1 y hay sequia, el estrés será alto"
+      nivel_luz == 3 & agua_estival == "lluvia" ~ "bajo",
+      TRUE ~ "intermedio"
+    )
+  )
+
+# repetimos todo lo anterior concatenando todo el proceso:
+
+taludes_trans <- taludes_bien |> mutate(
+  ID = 1:nrow(taludes_bien),
+  supervivencia = as.factor(sample(
+    c(0, 1),
+    size = nrow(taludes_bien),
+    prob = c(0.4, 0.6),
+    replace = TRUE
+  )),
+  carbono = biomasa * rnorm(
+    n = nrow(taludes_bien),
+    mean = 0.4,
+    sd = 0.2
+  )
+) |>
+  mutate(
+    agua_estival = fct_recode(agua_estival, sequia = "Sequia estival", lluvia = "Lluvia estival"),
+    nivel_luz = fct_recode(
+      nivel_luz,
+      `1` = "Nivel 1",
+      `2` = "Nivel 2",
+      `3` = "Nivel 3"
+    )
+  ) |>
+  mutate(
+    estres = case_when(
+      nivel_luz == 1 &
+        agua_estival == "sequia" ~ "alto",
+      nivel_luz == 3 &
+        agua_estival == "lluvia" ~ "bajo",
+      TRUE ~ "intermedio"
+    )
+  )
+
+```
+
+#### Ejercicio
+
+-   Con el data.frame macrobenthos genera una nueva columna con la relación entre la turbidez del agua y la materia orgánica.
+
+### [Summarise](https://dplyr.tidyverse.org/reference/summarise.html) y [group by](https://dplyr.tidyverse.org/reference/group_by.html): generar un nuevo `data.frame` resumiendo cada grupo a una fila
+
+```{r summarise}
+#| warning: false
+
+taludes_trans |> 
+  summarise(c_min = min(carbono),
+            c_max = max(carbono))
+
+```
+
+```{r group_by}
+#| warning: false
+
+taludes_trans |>
+  group_by(estres) |>  
+  summarise(biomasa_min = min(biomasa),
+            biomasa_mean = mean(biomasa),
+            biomasa_max = max(biomasa))
+
+```
+
+#### Ejercicio
+
+-   Con el data.frame macrobenthos, cuenta el número de casos que hay en cada periodo de muestreo.
+
+-   Cuenta el número de casos distintos que hay de esfuerzo de muestreo.
+
+-   Calcula la media de la turbidez para cada taxón.
+
+### [Pivot](https://tidyr.tidyverse.org/reference/pivot_longer.html): transformar datos a formato largo o ancho
+
+![La variable año está dividida en dos columnas y cada fila representa dos observaciones no una. Extraido de [R for Data Science](https://r4ds.had.co.nz/tidy-data.html).](images/tidy_pivot_longer.png)
+
+```{r pivot}
+#| warning: false
+
+stocks <- tibble(
+  year   = c(2015, 2015, 2016, 2016),
+  half  = c(   1,    2,     1,    2),
+  return = c(1.88, 0.59, 0.92, 0.17)
+)
+
+stocks |> 
+  pivot_wider(names_from = year, values_from = return) |> 
+  pivot_longer(cols = `2015`:`2016`, names_to = "year", values_to = "return")
+```
+
+## [Joins](https://dplyr.tidyverse.org/reference/mutate-joins.html): unir data.frames
+
+`*_join()` añade columnas de `y` (segundo data.frame) a `x` (primer data.frame), haciendo coincidir las observaciones en función de la variable común.
+
+```{r joins}
+#| warning: false
+
+# join: left, right, full, inner
+
+set.seed(123)
+
+bloques <- tibble(ID = 1:nrow(taludes_trans), 
+  bloque = sample(x = 1:2, size = nrow(taludes_trans), replace = TRUE))
+
+taludes_trans <- taludes_trans |> 
+  left_join(bloques, by = "ID") |> 
+  select(ID, bloque, everything())
+
+```
+
+## [Write_delim](https://readr.tidyverse.org/reference/write_delim.html): guardar datos
+
+```{r export}
+#| warning: false
+
+write_delim(taludes_trans, file = "taludes_trans.csv", delim = ";")
+# en file hay que especificar el directorio donde queremos que se guarde. Si no, se guardará en el directorio de trabajo (getwd())
+```
+
+## Enlaces de interés
+
+-   [Hands-On Programming with R](https://rstudio-education.github.io/hopr/)
+
+-   [R for data Science (Data transformation)](https://r4ds.had.co.nz/transform.html)
+
+-   [Style guide](http://adv-r.had.co.nz/Style.html)
+
+-   [Página web de *tidyverse*](https://www.tidyverse.org)
+
+-   [Cheat sheet the dplyr](https://nyu-cdsc.github.io/learningr/assets/data-transformation.pdf)
+
+-   [Quince consejos para mejorar nuestro código y flujo de trabajo con R](https://www.revistaecosistemas.net/index.php/ecosistemas/article/view/2129)
+
+## Introducción a la programación funcional
+
+La creciente disponibilidad de datos y de versatilidad de los programas de análisis han provocado el incremento en la cantidad y complejidad de los análisis que realizamos. Esto hace cada vez más necesaria la eficiencia en el proceso de gestión y análisis de datos. Una de las posibles formas para optimizar estos procesos y acortar los tiempos de trabajo para los usuarios de R es la programación basada en funciones. Las funciones permiten automatizar tareas comunes (por ejemplo, leer diferentes bases de datos) simplificando el código.
+
+Como las funciones en R son objetos, es posible llamarlas a través de otras funciones e iterar este proceso, lo que constituye la base de la programación funcional y convierte a R en una herramienta muy poderosa. Las iteraciones sirven para realizar la misma acción a múltiples entradas.
+
+```{r ejemplo_importancia_PF} #| warning: false  # install.packages("palmerpenguins") library(palmerpenguins) library(tidyverse)  df <- penguins |>    select(bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g)  df_rescaled1 <- df |>    mutate(bill_length_mm = (bill_length_mm - min(bill_length_mm, na.rm = TRUE)) / (max(bill_length_mm, na.rm = TRUE) - min(bill_length_mm, na.rm = TRUE)),     bill_depth_mm = (bill_depth_mm - min(bill_depth_mm, na.rm = TRUE)) / (max(bill_depth_mm, na.rm = TRUE) - min(bill_length_mm, na.rm = TRUE)),     flipper_length_mm = (flipper_length_mm - min(flipper_length_mm, na.rm = TRUE)) / (max(flipper_length_mm, na.rm = TRUE) - min(flipper_length_mm, na.rm = TRUE)),     body_mass_g = (body_mass_g - min(body_mass_g, na.rm = TRUE)) / (max(body_mass_g, na.rm = TRUE) - min(body_mass_g, na.rm = TRUE)))      View(df_rescaled1)  # rescale01 <- function(x) {   rng <- range(x, na.rm = TRUE)      (x - rng[1]) / (rng[2] - rng[1])  }   df_rescaled2 <- df |>    mutate(bill_length_mm = rescale01(bill_length_mm),          bill_depth_mm = rescale01(bill_depth_mm),          flipper_length_mm = rescale01(flipper_length_mm),           body_mass_g = rescale01(body_mass_g))    View(df_rescaled2)  # df_rescaled3 <- lapply(df, rescale01)  View(df_rescaled3)}
+```
+
+Las principales **ventajas de la programación funcional** (uso de funciones e iteraciones) son:
+
+-   Facilidad para ver la intención del código y, por tanto, mejorar la **comprensión** para uno mismo, colaboradores y revisores:
+    -   Las funciones tienen un nombre evocativo.
+    -   El código queda más ordenado.
+-   **Rapidez** si se necesitan hacer cambios ya que las funciones son piezas independientes que resuelven un problema concreto.
+-   **Disminuye la probabilidad de error**.
+
+### ¿Cuándo hay que usar una función?
+
+Se recomienda seguir el principio "do not repeat yourself" ([DRY principle](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself#:~:text=%22Don't%20repeat%20yourself%22,redundancy%20in%20the%20first%20place.)): cada unidad de conocimiento o información debe tener una representación única, inequívoca y autoritativa en un sistema.
+
+Escribir una función ya merece la pena cuando has copiado y pegado más de dos veces lo mismo (don't be WET! - Write Everything Twice). Cuantas más veces esté repetido un código, en más sitios necesitarás actualizarlo si hay algun cambio y más aumenta la probabilidad de error.
+
+## Teoría sobre funciones en R
+
+Según el tipo de output generado hay dos tipos de funciones:
+
+-   Las **funciones de transformación** transforman el objeto que entra en la función (primer argumento) y devuelven otro objeto o el anterior modificado. Los funcionales son tipos especiales de funciones de transformación.
+
+    ![](images/function.png)
+
+-   Las **funciones secundarias** (*side-effect functions*) tienen efectos colaterales y ejecutan una acción, como guardar un archivo o dibujar un plot. Algunos ejemplos de funciones secundarias que se usan comunmente son: `library()`, `setwd()`, `plot()`, `write_delim()`... Estas funciones retornan *de forma invisible* el primer argumento, que no se guarda, pero puede ser usado en un *pipeline*.
+
+En general, sintácticamente, las funciones tienen tres componentes:
+
+-   Función `function()`
+-   Argumentos: lista de entradas.
+-   Cuerpo: trozo de código que sigue a `function()`, tradicionalmente entre llaves.
+
+```{r notaciones}  nombre1_v1 <- function(x, y) {   paste(x, y, sep = "_") }    nombre1_v2 <- function(x, y) paste(x, y, sep = "_")    nombre1_v3 <- \(x, y) paste(x, y, sep = "_")  nombre1_v1("Vero", "Cruz")  nombre1_v2("Vero", "Cruz")  nombre1_v3("Vero", "Cruz")}
+```
+
+📝 Si la función tiene más de dos lineas es mejor usar llaves siempre para que quede bien delimitada. La llave de apertura nunca debe ir sola pero sí la de cierre (excepto con *else*). Las sangrías también ayudan mucho a entender la jerarquía del código dentro de las funciones.
+
+En general las funciones tienen un nombre que se ejecuta cuando se necesita como hemos visto hasta ahora, pero esto no es obligatorio. Algunos paquetes como {purrr} o las funciones de la familia `apply` permiten el uso de **funciones anónimas** para iterar.
+
+```{r funciones_anonimas}  map(penguins, function(x) length(unique(x)))  penguins |>    map(function(x) length(unique(x)))}
+```
+
+📝 Mejor reservar el uso de funciones anónimas para funciones cortas y simples. Si la función es larga, ocupa varias líneas o tenemos que usarla con frecuencia mejor darle un nombre.
+
+## Cómo escribir funciones {#sec-writefun}
+
+#### Ejercicio
+
+Genera tu primera función que divida un valor siempre entre 100.
+
+💡Atajo para escribir funciones: escribir la palabra fun + tabulador
+
+Imaginad que para un set de datos quisieramos hacer un gráfico de distribución de cada variable numérica, en función de otra variable categórica que nos interese especialmente, para ver cómo se distribuye.
+
+```{r codigo_repetido_avanzado} #| warning: false  penguins_num <- penguins |>    select(species, sex, where(is.numeric))  # nos interesan las diferencias entre especie y sexo  ggplot(penguins_num, aes(x = species, y = bill_length_mm, color = sex)) +   geom_point(position = position_jitterdodge(), alpha = 0.3) +   geom_boxplot(alpha = 0.5) +   scale_color_manual(values = c("turquoise", "goldenrod1")) +   theme_light()  ggplot(penguins_num, aes(x = species, y = bill_depth_mm, color = sex)) +   geom_point(position = position_jitterdodge(), alpha = 0.3) +   geom_boxplot(alpha = 0.5) +   scale_color_manual(values = c("turquoise", "goldenrod1")) +   theme_light()  ggplot(penguins_num, aes(x = species, y = flipper_length_mm, color = sex)) +   geom_point(position = position_jitterdodge(), alpha = 0.3) +   geom_boxplot(alpha = 0.5) +   scale_color_manual(values = c("turquoise", "goldenrod1")) +   theme_light()  # etc}
+```
+
+Hemos copiado un código más de dos veces para realizar una misma acción (es decir, un gráfico para ver como se distribuye una variable en función de otras dos que se mantienen constantes) así que hay que considerar la posibilidad de que estemos necesitando una función. A continuación vamos a seguir unos sencillos pasos para transformar cualquier código repetido en función.
+
+1.  Analizar el código: ¿cuáles son las partes replicadas? ¿cuantas entradas tenemos? ¿cuáles varían y cuáles no?
+
+2.  Simplificar y reanalizar duplicaciones
+
+```{r funcion_simplificar} #| warning: false  var <- penguins_num$bill_length_mm  ggplot(penguins_num, aes(x = species, y = var, color = sex)) +   geom_point(position = position_jitterdodge(), alpha = 0.3) +   geom_boxplot(alpha = 0.5) +   scale_color_manual(values = c("turquoise", "goldenrod1")) +   theme_light()}
+```
+
+```{r funcion_simplificar_2} #| warning: false #| error: true  var <- body_mass_g var <- "body_mass_g"  ggplot(penguins_num, aes(x = species, y = var, color = sex)) +   geom_point(position = position_jitterdodge(), alpha = 0.3) +   geom_boxplot(alpha = 0.5) +   scale_color_manual(values = c("turquoise", "goldenrod1")) +   theme_light() +   ylab(var) # grafico erroneo  ggplot(penguins_num, aes(x = species, y = .data[[var]], color = sex)) +   geom_point(position = position_jitterdodge(), alpha = 0.3) +   geom_boxplot(alpha = 0.5) +   scale_color_manual(values = c("turquoise", "goldenrod1")) +   theme_light() +   ylab(var) # grafico correcto}
+```
+
+👀 La función `ggplot` necesita argumentos (data-variable) que estén dentro del `data.frame` que va a representar. Para poder generalizar la función hemos guardado el nombre de la variable en un objeto (tipo `character`), pero `ggplot` no acepta `characters`. Por ello necesitamos utilizar una función intermedia que sí los acepte. Para resolver problemas comunes de programación funcional derivados de la *non-standard evaluation* de *tidyverse* [mira este enlace](https://dplyr.tidyverse.org/articles/programming.html#introduction).
+
+![tidyverse permite usar data-variables (juguetes dentro de la caja –el data.frame) como si fueran env-variables (juguetes sobre las alfombras). Cuando Monchi usa las tidygafas puede acceder también fácilmente a los juguetes de la caja. Las tidygafas hacen que Monchi evalúe la función en un entorno diferente al que sería habitual. Ilustración de Cristina Grajera](images/data_masking.png){alt="tidyverse permite usar data-variables (juguetes dentro de la caja –el data.frame) como si fueran env-variables (juguetes sobre las alfombras). Cuando Monchi usa las tidygafas puede acceder también fácilmente a los juguetes de la caja. Las tidygafas hacen que Monchi evalúe la función en un entorno diferente al que sería habitual. Ilustración de Cristina Grajera"}
+
+3.  Elegir un nombre para la función (📝). Idealmente tiene que ser corto y evocar lo que la función hace. En general, debe ser un verbo (p. ej. imputar_valores) mientras que los argumentos son sustantivos (p. ej. data, variable, etc.). Usar un sustantivo para una función está permitido si la función calcula algo muy conocido (p. ej. `mean()`) o si sirve para acceder a partes de un objeto (p. ej. `residuals()`). También se recomienda evitar verbos muy genéricos (p. ej. calcular) y si el nombre tiene varias palabras separarlas con guión bajo o mayúsculas, pero ser consistente. Si programas varias funciones que hacen cosas parecidas se recomienda usar el mismo prefijo para todas (p. ej. "str\_" en el paquete {stringr}).
+
+4.  Enumerar los argumentos dentro de `function()` y poner el código simplificado dentro de las llaves.
+
+```{r funcion_escribir}  explorar_penguins <- function (var) {   ggplot(penguins_num, aes(x = species, y = .data[[var]], color = sex)) +     geom_point(position = position_jitterdodge(), alpha = 0.3) +     geom_boxplot(alpha = 0.5) +     scale_color_manual(values = c("turquoise", "goldenrod1")) +     theme_light() +     ylab(var)  }
+```
+
+📝 Utiliza comentarios (#) para explicar el razonamiento detrás de tus funciones. Se debe evitar explicar qué se está haciendo o cómo, ya que el propio código ya lo comunica. También se recomienda usar \# para separar apartados (Cmd/Ctrl + Shift + R).
+
+5.  Probar con entradas diferentes
+
+```{r funcion_pruebas}  explorar_penguins(var = "body_mass_g")  explorar_penguins(var = "flipper_length_mm")  explorar_penguins(var = "bill_depth_mm")}
+```
+
+#### Ejercicio
+
+Genera una función para estandarizar (es decir, restar la media y dividir por la desviación típica) las variables numéricas de penguins.
+
+### Argumentos
+
+En general hay dos grupos: los que especifican los **datos** y los que especifican **detalles** de la ejecución de la función. Normalmente los que especifican datos se colocan primero y los de detalle después. Estos últimos suelen tener valores por defecto (los más comunes), para cuando no se especifique nada.
+
+<!--# Ver ayuda de quantile -->
+
+📝 Los nombres de los argumentos deben ser cortos y descriptivos. Hay algunos comunes pero poco descriptivos que ya son conocidos para la mayoría de los usuarios y está bien aprovecharlos:
+
+`x, y, z`: vectores
+
+`w`: vector de pesos
+
+`df`: data frame
+
+`i, j`: indices numericos, filas y columnas respectivamente
+
+`n`: longitud o número de filas
+
+`p`: numero de columnas
+
+`na.rm`: valores faltantes
+
+### Valores de retorno
+
+La última expresión ejecutada en una función es el valor de retorno.
+
+📝 La función `return()` se usa para indicar explicitamente qué se quiere obtener en una función. Se recomienda su uso cuando el retorno no se espera al final de la función. P. ej. en las ramas de una estructura `if-else`, sobre todo cuando hay alguna rama larga y compleja.
+
+## Iteraciones con bucles *for*
+
+Los bucles son recomendables para adentrarse en el mundo de las iteraciones porque hacen cada iteración muy explícita para que quede claro lo que está pasando.
+
+![Representación gráfica del funcionamiento de los bucles *for* donde se ve claramente que se está realizando una iteración. Ilustración de Allison Horst obtenido de la charla de Hadley Wickham The Joy of Functional Programming (para ciencia de datos)](images/forloops.png){alt="Representación gráfica del funcionamiento de los bucles for donde se ve claramente que se está realizando una iteración. Ilustración de Allison Horst obtenido de la charla de Hadley Wickham The Joy of Functional Programming (para ciencia de datos)"}
+
+Para programar un bucle es necesario definir tres partes diferentes: la salida, la secuencia y el cuerpo.
+
+```{r for}  set.seed(123)  df_ej <- data.frame(   a = sample(1:5),   b = sample(1:5),   c = sample(1:5) )  salida <- vector("double", 3)           # 1. salida for (i in 1:3) {                        # 2. secuencia   salida[[i]] <- first(df_ej[[i]])      # 3. cuerpo }  salida  # podriamos generalizar el for salida <- vector("double", ncol(df_ej))   # 1. salida for (i in seq_along(df_ej)) {             # 2. secuencia   salida[[i]] <- first(df_ej[[i]])        # 3. cuerpo }  salida  # tambien podriamos iterar sobre filas salida <- vector("double", nrow(df_ej))  for(i in 1:nrow(df_ej)) {     salida[[i]] <- sum(df_ej[i, ]) }  salida}
+```
+
+1.  Salida: aquí determinamos el espacio de la salida, es decir, primero tenemos que crear la libreta donde vamos a ir apuntando todos los resultados.
+
+2.  Secuencia: aquí determinamos sobre lo que queremos iterar. Cada ejecución del bucle *for* asignará un valor diferente de `seq_along(y)` a `i`.
+
+3.  Cuerpo: aquí determinamos lo que queremos que haga cada iteración. Se ejecuta repetidamente, cada vez con un valor diferente para `i`.
+
+Existe la creencia de que los bucles *for* son lentos, pero la desventaja real de *los bucles for es que son demasiado flexibles* y pueden realizar muchas tareas diferentes. En cambio, cada funcional ({[purrr](https://purrr.tidyverse.org/)}, [`apply`](https://www.r-bloggers.com/2022/03/complete-tutorial-on-using-apply-functions-in-r/)) está diseñado para una tarea específica, por lo que en cuanto lo ves en el código, inmediatamente sabes por qué se está utilizando. Es decir, la principal ventaja es su claridad al hacer que el código sea más fácil de escribir y de leer.
+
+Los bucles pueden ser más explícitos en cuanto a que se ve claramente la iteración, pero se necesita más tiempo para entender qué se está haciendo. Por el contrario, los funcionales necesitan un paso más de abstracción y pueden requerir tiempo hasta que los comprendamos. Lo más importante es que soluciones el problema y poco a poco ir escribiendo código cada vez más sencillo y elegante.
+
+> Para ser significativamente más fiable, el código debe ser más transparente. En particular, las condiciones anidadas y los bucles deben considerarse con gran recelo. Las esctructuras de control complicados confunden a los programadores. El código desordenado suele ocultar errores.
+>
+> --- Bjarne Stroustrup ([Advanced R](https://adv-r.hadley.nz/index.html))
+
+## Iteraciones con funcionales
+
+![Representación gráfica del funcionamiento de `map()` donde el foco está en la operación realizada. Ilustración de Allison Horst obtenido de la charla de Hadley Wickham The Joy of Functional Programming (para ciencia de datos)](images/map_frosting.png){alt="Representación gráfica del funcionamiento de map() donde el foco está en la operación realizada. Ilustración de Allison Horst obtenido de la charla de Hadley Wickham The Joy of Functional Programming (para ciencia de datos)"}
+
+Un funcional es una función que toma una función como entrada y devuelve un vector u otro tipo de objeto como salida.
+
+```{r ejemplo_funcional}  aleatorizacion <- function(f) {   f(rnorm(5)) }  aleatorizacion(f = median)}
+```
+
+Para programar un funcional, primero, solucionamos el problema para un elemento. Después, generamos una función que nos permita envolver la solución en una función (como lo hicimos en @sec-writefun). Por último, *aplicamos la función a todos los elementos que estamos interesados.* Es decir, dividimos los problemas grandes en problemas más pequeños y resolvemos cada tarea con una o más funciones.
+
+En *tidyverse* se iteran procesos mediante el paquete {purrr}. Comparando los funcionales con los bucles, el foco está en la operación que se está ejecutando, y no en el código necesario para iterar sobre cada elemento y guardar la salida.
+
+```{r map_foco}  map(df_ej, first)  df_ej |>    map(first)  salida <- vector("list", length = 3) for (i in 1:3) {   salida[[i]] <- first(df_ej[[i]]) } salida}
+```
+
+### Nuestro primer funcional: generando listas, `map()`
+
+`map_*()` está vectorizado sobre un argumento, p. ej. `(x)`. La función operará en todos los elementos de `x`, es decir, cada valor si `x` es un vector, cada columna si `x` es un `data.frame`, o cada elemento si `x` es una lista.
+
+Toma un vector y una función, llama a la función una vez por cada elemento del vector y devuelve los resultados en una lista. `map(1:3, f)` es equivalente a `list(f(1), f(2), f(3))`. Es el equivalente de `lapply()` de R base.
+
+```{r map_ejemplo}  cuadratica <- function(x) {   x ^ 2 }  map_ouput_list <- map(.x = 1:4, .f = cuadratica)  lapply_ouput_list <- lapply(X = 1:4, FUN = cuadratica)  # seleccionar cada elemento de la lista map_ouput_list[[1]]  map_ouput_list |>   pluck(1)  # algun uso mas interesante  glimpse(penguins)  # atajo para generar una funcion anonima:  \(nombre_del_argumento) map(.x = penguins, .f = \(x) length(unique(x)))  # salida dataframe map_df(.x = penguins, .f = \(x) length(unique(x)))}
+```
+
+![](images/map.png)
+
+#### Ejercicio
+
+Generad un vector, una función y aplicadle la función a cada uno de los elementos del vector utilizando `map()`.
+
+Los argumentos que varían para cada ejecución se ponen antes de la función y los argumentos que son los mismos para cada ejecución se ponen después (p. ej. `na.rm = T`).
+
+![](images/map+fix.png)
+
+Para incluir argumentos adicionales a la función que estamos utilizando dentro de `map()`, una opción es decrararlo dentro de la función. Sin embargo, puesto que `map()` incluye `...` entre sus argumentos, también podemos incluir los argumentos adicionales después de la función y dentro de `map()` de una forma mucho más sencilla. Hay una pequeña diferencia entre incluir argumentos adicionales dentro de una función e incluirlos directamente dentro del `map()`. Incluirlo en una función significa que se evaluará cada vez que se ejecute la función, pero al incluirlo dentro de `map()` sólo se evaluará una vez.
+
+### Nuestro segundo funcional: generando vectores, `map_*()`
+
+#### Ejercicio
+
+Dedicadle un par de minutos a entender lo que hacen las siguientes funciones:
+
+```{r map_vectores}  map_lgl(penguins, is.numeric) penguins_num <- penguins[ , map_lgl(penguins, is.numeric)]  map_dbl(penguins_num, median, na.rm = T) map_chr(penguins, class) map_int(penguins, \(x) length(unique(x))) 1:4 |>    map_vec(\(x) as.Date(ISOdate(x + 2024, 09, 25)))}
+```
+
+### Nuestro tercer funcional: dos entradas, `map2()`
+
+`map2()` está vectorizado sobre dos argumentos, p. ej. `(x, y)`
+
+```{r map2_ejemplo}  potencia <- function(base, exponente) {   base ^ exponente }  set.seed(123)  x <- sample(5) y <- sample(5)  map2(x, y, potencia)}
+```
+
+⚡¡Importante! La primera iteración corresponde al primer valor del vector `x` y al primer valor del vector `y`. La segunda iteración corresponde al segundo valor del vector `x` y al segundo valor del vector `y`. No se hacen todas las combinaciones posibles entre ambos vectores.
+
+![](images/map2.png)
+
+#### Ejercicio {#sec-ejercicio-map2}
+
+A partir del código que se muestra a continuación generad un `data.frame`, agregando una columna al `data.frame` con el nombre que le hemos asignado a cada lista.
+
+```{r map_2_ejercicio}  penguins_list <- penguins |>   group_split(species)  # asignamos nombres a las listas names(penguins_list) <- c("p1", "p2", "p3")}
+```
+
+💡Se puede iterar sobre más de dos entradas con [`pmap()`](https://github.com/DatSciR/intro_prog_fun/blob/main/lleida/intro_prog_fun.md#nuestro-cuarto-funcional-m%C3%BAltiples-entradas-pmap), iterar cuando no hay un objeto de salida con [`walk()`](https://github.com/DatSciR/intro_prog_fun/blob/main/lleida/intro_prog_fun.md#iteraciones-sin-salida) e iterar sobre índices con [`imap()`](https://github.com/DatSciR/intro_prog_fun/blob/main/lleida/intro_prog_fun.md#m%C3%A1s-variantes-de-map-modify-e-imap), entre otras opciones.
+
+### Enlaces de interés
+
+-   [Introducción a la programación funcional (DatSciR)](https://github.com/DatSciR/intro_prog_fun)
+
+-   [R for data Science (functions)](https://r4ds.had.co.nz/functions.html)
+
+-   [Advanced R (functions)](https://adv-r.hadley.nz/functions.html)
+
+-   [R for data Science (iteration)](https://r4ds.had.co.nz/iteration.html)
+
+-   [Advanced R (functionals)](https://adv-r.hadley.nz/functionals.html)
+
+-   [purrr 1.0.0](https://www.tidyverse.org/blog/2022/12/purrr-1-0-0/)
+
+-   [Learn to purrr (Rebecca Barter)](https://www.rebeccabarter.com/blog/2019-08-19_purrr)
+
+------------------------------------------------------------------------
+
+<details>
+
+<summary>Session Info</summary>
+
+```{r session_info}
+Sys.time()
+sessionInfo()
+```
+
+</details>
