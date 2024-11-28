@@ -323,6 +323,79 @@ Modifica el código del chunk anterior y el YAML para que el documento renderiza
 
 -   [Install TinyTeX to create PDF reports](https://yihui.org/tinytex/)
 
+## Trabajo colaborativo
+
+Aunque Git y GitHub facilitan el control de versiones de nuestros proyectos individuales, su máxima potencialidad se despliega al trabajar en equipo ya que facilitan el seguimiento del trabajo de todos los colaboradores y la integración ordenada de cada parte en un producto final.
+
+Para dar acceso de edición a tus colaboradores, en la página principal de nuestro proyecto en GitHub entramos en "*Settings -\> Access -\> Collaborators -\> Manage Access -\> Add people*". Los colaboradores pueden crear su copia local del proyecto de control de versiones clonando el repositorio remoto.
+
+#### Ejercicio
+
+En equipos de 2 o 3 personas:
+
+1.  El dueño del repositorio invita al resto de integrantes del equipo a su proyecto
+2.  Los colaboradores clonan el repositorio al que han sido invitados a su directorio de trabajo
+
+### Ramificación
+
+Git permite crear una "rama" (*branch*) paralela al proyecto si se desea seguir una línea independiente de trabajo, bien por ser diferente de la principal (p. ej. probar un nuevo análisis) o bien para desarrollar específicamente una parte del proyecto (p. ej. trabajar sólo en la escritura de los métodos de un artículo mientras otros colaboradores trabajan en otras secciones). Las ramas permiten trabajar en el proyecto sin interferir con lo que están haciendo los compañeros. En Git, una rama es un *commit* al que le se le da un nombre y que contiene un "enlace" (puntero o *pointer*) a un SHA específico que es el origen de la rama. La rama *main* es la rama por defecto cuando se crea un repositorio y a partir de ella se suelen crear las demás.
+
+Las ramas se pueden generar en la [terminal](https://github.com/DatSciR/intro_git-github/blob/main/centra/dia2_colaboracion.md) y en la pestaña Git de RStudio. En la pestaña Git se generan mediante el botón "*New Branch*". Al lado de "*New Branch"* podemos observar todas las ramas que contiene el repositorio y nos permite cambiar de rama fácilmente clickando en ellas.
+
+![Proceso de creación de la rama PPP y la rama monchi](images/ramas.png){alt="Proceso de creación de la rama PPP y la rama monchi" fig-align="center"}
+
+#### Ejercicio
+
+1.  Un integrante del equipo crea una rama en el proyecto en el que colabora
+
+2.  Modifica la primera frase del archivo README.txt y sube los cambios al repositorio remoto
+
+3.  Vuelve a la rama main y comprueba el archivo README.txt
+
+![](images/github_code.png){fig-align="center" width="543"}
+
+### ¿Cómo se unen distintas ramas?
+
+Cuando el trabajo desarrollado en una rama se da por finalizado hay que hacer la unión a la rama principal ("*main*"). Esto se puede hacer en la [terminal](https://github.com/DatSciR/intro_git-github/blob/main/centra/dia2_colaboracion.md) y con el botón "*pull request*" en la página del proyecto en GitHub siguiendo los pasos que se explican a continuación.
+
+![Proceso de creación y unión de ramas. Ejemplo de unión (merge) de la rama monchi a la rama main](images/merge.jpg){alt="Proceso de creación y unión de ramas. Ejemplo de unión (merge) de la rama monchi a la rama main"}
+
+Una vez que hemos realizado los cambios que queríamos en la rama y están subidos a GitHub (`git add` + `git commit` + `git push`), en GitHub aparece la opción de "Compare & pull request". Aquí se genera el *pull request* ("*Create pull request*") añadiendo un mensaje para saber lo que se está uniendo. GitHub os indicará si existen conflictos o no. Si no existen conflictos, podréis realizar el *pull request* sin problema y, si existen conflictos, hay que resolverlos manualmente.
+
+![](images/pullrequest1.jpg){fig-align="center"}
+
+![](images/pullrequest1.1.jpg)
+
+![Características del merge a realizar](images/pullrequest2.jpg){alt="Características del merge a realizar" fig-align="center"}
+
+![](images/pullrequest3.jpg){fig-align="center"}
+
+![Confirmacion y fin del proceso](images/pullrequest3.1.jpg){alt="Confirmacion y fin del proceso" fig-align="center"}
+
+### Resolución de conflictos
+
+Git puede encontrar conflictos al fusionar ramas que hay que arreglar manualmente (GitHub os indicará "Can't automatically merge"). Esto ocurrirá si en las dos ramas se han cambiado las mismas líneas de un archivo. Hay que generar el pull request y "*Resolve conflicts*".
+
+![Aparición de conflictos](images/cant_merge.png){alt="Aparición de conflictos"}
+
+![Resolución de conflictos](images/cant_merge2.png){alt="Resolución de conflictos"}
+
+Git muestra dónde están los conflictos así:
+
+`<<<<<<código del main=======código de la rama a unir>>>>>>`
+
+![](images/cant_merge3.png)
+
+Para solucionarlo hay que escoger los cambios de la rama principal o de la rama a unir según corresponda. Una vez solucionados, Git permite completar el *merge* (es decir, un nuevo *commit* que contendrá las ramas fusionadas). La mejor manera de evitar conflictos o por lo menos reducir su dificultad es realizar cambios pequeños y sincronizar frecuentemente con GitHub, y tener una comunicación fluida con los colaboradores.
+
+#### Ejercicio
+
+1.  Un integrante del equipo modifica también la primera frase del archivo README.txt en la rama main y sube los cambios al repositorio remoto. Esta frase había sido previamente modificada en una rama en el ejercicio anterior.
+2.  Un integrante del equipo combina la rama del ejercicio anterior con la rama principal (*main*) del proyecto.
+3.  Resolved el conflicto (es decir, quedaos con los cambios que sirvan y subid los cambios al repositorio remoto).
+
+💡[Aquí](https://github.com/DatSciR/intro_git-github/blob/main/centra/dia3_comandos.md) (en la sección de "Otros comandos útiles") podéis ver cómo borrar ramas y otros comandos útiles
+
 ------------------------------------------------------------------------
 
 <details>

@@ -35,6 +35,27 @@ Los objetivos del día de hoy son:
 
 -   Aplicar funciones en programación iterativa mediante el paquete {purrr} de {tidyverse}
 
+## Tidyverse
+
+[*Tidyverse*](https://www.tidyverse.org/) es una colección de paquetes (meta-paquete) de R. El núcleo contiene ocho paquetes principales (`readr`, `tibble`, `dplyr`, `tidyr`, `stringr`, `forcats`, `ggplot2` y `purrr`), que comparten el diseño, la gramática y la estructura de los datos que necesitan. En el centro de la filosofía de tidyverse se encuentra la noción de “datos ordenados” (*tidy data*). Hadley Wickham (principal desarrollador de *tidyverse*) los define como “fáciles de manipular, modelar y visualizar, y que tienen una estructura específica: cada variable es una columna, cada observación es una fila y cada valor es una celda”. *Tidyverse* puede considerarse un dialecto del lenguaje de programación R que discretiza funciones amplias de R base (p. ej. `merge`) en diversas funciones específicas (p. ej. `left_join`, `right_join`).
+
+Los [tres principios básicos](https://design.tidyverse.org/unifying.html) de este meta-paquete son:
+
+-   Centrado en humanos: tiene un diseño intuitivo que facilita su uso y accesibilidad para el usuario, ya que está diseñado específicamente para respaldar las actividades de un analista de datos humano.
+
+-   Consistencia: todos los paquetes están diseñados para trabajar con datos ordenados (*tidy data*), y las funciones de los paquetes tienen una nomenclatura común y congruente. Esto permite que un usuario que aprende sobre una función o paquete pueda aplicar ese conocimiento a otros, facilitando así la tarea de recordar y deducir código.
+
+-   Componiblidad: permite al usuario resolver problemas complejos dividiéndolos en pequeñas partes, que pueden combinarse utilizando el operador *pipe*, ya sea el del paquete `magrittr` (`%>%`) o el creado recientemente en R base (`|>`).
+
+💡Los dos operador *pipe* tienen pequeñas [diferencias](https://www.tidyverse.org/blog/2023/04/base-vs-magrittr-pipe/) pero en general el comportamiento es el mismo.
+
+💡Para más información sobre *tidyverse* y las diferencias con R base te recomendamos leer [*Tidyverse: colección de paquetes de R para la ciencia de datos*](https://revistaecosistemas.net/index.php/ecosistemas/article/view/2745).
+
+```{r pipe}  length(unique(d))  d |> unique() |> length() # Ctrl + Shift + M para poner un pipe}
+```
+
+En este curso realizaremos las distintas tareas que forman parte de la ciencia de datos utilizando *tidyverse*, aunque también se podrían llevar a cabo con R base. Consideramos que los cuatro pilares básicos de *tidyverse* (centrado en humanos, consistencia y componibilidad) facilitan tanto el aprendizaje como el trabajo diario, permitiendo realizar las mismas acciones de manera más sencilla, aunque reconocemos que esto puede variar según la persona.
+
 ## Importar y renombrar datos
 
 ### [Read_delim](https://readr.tidyverse.org/reference/read_delim.html): leer datos desde fuera de R
@@ -71,6 +92,13 @@ taludes_bien <- taludes_bien |>
 ```
 
 📝 Ajustar sangría de código: Ctrl + i; Reformatear código: Ctrl + Shift + a
+
+📝 Usar espacios antes y después de `=` y después de `,` hace mucho más fácil identificar los argumentos de la función y, en general, todos los componentes.
+
+```{r espacios}  set.seed(123) mean(rnorm(10, mean = 50, sd = 25) / 12, trim = 0.2)  set.seed(123) mean(rnorm(10,mean=50,sd=25)/12,trim=0.2)}
+```
+
+#### 
 
 ## Funciones básicas de filtrado y selección
 
@@ -431,7 +459,7 @@ Hemos copiado un código más de dos veces para realizar una misma acción (es d
 
 👀 La función `ggplot` necesita argumentos (data-variable) que estén dentro del `data.frame` que va a representar. Para poder generalizar la función hemos guardado el nombre de la variable en un objeto (tipo `character`), pero `ggplot` no acepta `characters`. Por ello necesitamos utilizar una función intermedia que sí los acepte. Para resolver problemas comunes de programación funcional derivados de la *non-standard evaluation* de *tidyverse* [mira este enlace](https://dplyr.tidyverse.org/articles/programming.html#introduction).
 
-![tidyverse permite usar data-variables (juguetes dentro de la caja –el data.frame) como si fueran env-variables (juguetes sobre las alfombras). Cuando Monchi usa las tidygafas puede acceder también fácilmente a los juguetes de la caja. Las tidygafas hacen que Monchi evalúe la función en un entorno diferente al que sería habitual. Ilustración de Cristina Grajera](images/data_masking.png){alt="tidyverse permite usar data-variables (juguetes dentro de la caja –el data.frame) como si fueran env-variables (juguetes sobre las alfombras). Cuando Monchi usa las tidygafas puede acceder también fácilmente a los juguetes de la caja. Las tidygafas hacen que Monchi evalúe la función en un entorno diferente al que sería habitual. Ilustración de Cristina Grajera"}
+![tidyverse permite usar data-variables (juguetes dentro de la caja –el data.frame) como si fueran env-variables (juguetes sobre las alfombras). Cuando Monchi usa las tidygafas puede acceder también fácilmente a los juguetes de la caja. Las tidygafas hacen que Monchi evalúe la función en un entorno diferente al que sería habitual. Ilustración de Cristina Grajera](images/data_masking.png)
 
 3.  Elegir un nombre para la función (📝). Idealmente tiene que ser corto y evocar lo que la función hace. En general, debe ser un verbo (p. ej. imputar_valores) mientras que los argumentos son sustantivos (p. ej. data, variable, etc.). Usar un sustantivo para una función está permitido si la función calcula algo muy conocido (p. ej. `mean()`) o si sirve para acceder a partes de un objeto (p. ej. `residuals()`). También se recomienda evitar verbos muy genéricos (p. ej. calcular) y si el nombre tiene varias palabras separarlas con guión bajo o mayúsculas, pero ser consistente. Si programas varias funciones que hacen cosas parecidas se recomienda usar el mismo prefijo para todas (p. ej. "str\_" en el paquete {stringr}).
 
@@ -483,7 +511,7 @@ La última expresión ejecutada en una función es el valor de retorno.
 
 Los bucles son recomendables para adentrarse en el mundo de las iteraciones porque hacen cada iteración muy explícita para que quede claro lo que está pasando.
 
-![Representación gráfica del funcionamiento de los bucles *for* donde se ve claramente que se está realizando una iteración. Ilustración de Allison Horst obtenido de la charla de Hadley Wickham The Joy of Functional Programming (para ciencia de datos)](images/forloops.png){alt="Representación gráfica del funcionamiento de los bucles for donde se ve claramente que se está realizando una iteración. Ilustración de Allison Horst obtenido de la charla de Hadley Wickham The Joy of Functional Programming (para ciencia de datos)"}
+![Representación gráfica del funcionamiento de los bucles for donde se ve claramente que se está realizando una iteración. Ilustración de Allison Horst obtenido de la charla de Hadley Wickham The Joy of Functional Programming (para ciencia de datos)](images/forloops.png)
 
 Para programar un bucle es necesario definir tres partes diferentes: la salida, la secuencia y el cuerpo.
 
@@ -506,7 +534,7 @@ Los bucles pueden ser más explícitos en cuanto a que se ve claramente la itera
 
 ## Iteraciones con funcionales
 
-![Representación gráfica del funcionamiento de `map()` donde el foco está en la operación realizada. Ilustración de Allison Horst obtenido de la charla de Hadley Wickham The Joy of Functional Programming (para ciencia de datos)](images/map_frosting.png){alt="Representación gráfica del funcionamiento de map() donde el foco está en la operación realizada. Ilustración de Allison Horst obtenido de la charla de Hadley Wickham The Joy of Functional Programming (para ciencia de datos)"}
+![Representación gráfica del funcionamiento de map() donde el foco está en la operación realizada. Ilustración de Allison Horst obtenido de la charla de Hadley Wickham The Joy of Functional Programming (para ciencia de datos)](images/map_frosting.png)
 
 Un funcional es una función que toma una función como entrada y devuelve un vector u otro tipo de objeto como salida.
 
