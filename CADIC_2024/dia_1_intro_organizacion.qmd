@@ -48,27 +48,19 @@ El objetivo principal es que tanto aquellos con conocimientos básicos en cienci
 +--------------------------------------------------------------------------+--------------------------------------------------------------------+
 | Bloques                                                                  | Contenido                                                          |
 +==========================================================================+====================================================================+
-| Introducción al lenguaje de R y organización del trabajo en Git y GitHub | Introducción a la programación en R                                |
+| Introducción al lenguaje de R y organización del trabajo en Git y GitHub | Introducción al curso                                              |
 |                                                                          |                                                                    |
-|                                                                          | Introducción a Git                                                 |
+|                                                                          | Introducción a la programación en R                                |
 |                                                                          |                                                                    |
-|                                                                          | Introducción a GitHub                                              |
+|                                                                          | Introducción a Git y GitHub                                        |
 |                                                                          |                                                                    |
 |                                                                          | Flujo de trabajo en Git y GitHub                                   |
-|                                                                          |                                                                    |
-|                                                                          | Trabajos colaborativos                                             |
 +--------------------------------------------------------------------------+--------------------------------------------------------------------+
 | Organización de datos y bases de programación funcional                  | Tidyverse                                                          |
 |                                                                          |                                                                    |
 |                                                                          | Importar, filtrar, seleccionar, transformar, unir y exportar datos |
 |                                                                          |                                                                    |
-|                                                                          | Funciones                                                          |
-|                                                                          |                                                                    |
-|                                                                          | Estilo de código                                                   |
-|                                                                          |                                                                    |
-|                                                                          | Iteraciones                                                        |
-|                                                                          |                                                                    |
-|                                                                          | Programación funcional                                             |
+|                                                                          | Programación funcional: funciones e iteraciones                    |
 +--------------------------------------------------------------------------+--------------------------------------------------------------------+
 | Visualización y análisis exploratorio de datos                           | Fundamentos de visualización                                       |
 |                                                                          |                                                                    |
@@ -76,15 +68,17 @@ El objetivo principal es que tanto aquellos con conocimientos básicos en cienci
 |                                                                          |                                                                    |
 |                                                                          | Visualización avanzada                                             |
 +--------------------------------------------------------------------------+--------------------------------------------------------------------+
-| Análisis de datos: modelos lineales habituales en ecología               |                                                                    |
-+--------------------------------------------------------------------------+--------------------------------------------------------------------+
-| Comunicación de resultados en Quarto                                     | Introducción a R Markdown                                          |
+| Análisis de datos: modelos lineales habituales en ecología               | Modelos lineales                                                   |
 |                                                                          |                                                                    |
-|                                                                          | Introducción a Quarto                                              |
+|                                                                          | Modelos lineales generalizados                                     |
+|                                                                          |                                                                    |
+|                                                                          | Modelos lineales mixtos                                            |
++--------------------------------------------------------------------------+--------------------------------------------------------------------+
+| Comunicación de resultados en Quarto                                     | Introducción a Quarto                                              |
 |                                                                          |                                                                    |
 |                                                                          | R Markdown vs Quarto                                               |
 |                                                                          |                                                                    |
-|                                                                          | Trabajos reproducibles                                             |
+|                                                                          | Trabajos colaborativos                                             |
 +--------------------------------------------------------------------------+--------------------------------------------------------------------+
 
 ## Dinámica del curso
@@ -387,7 +381,15 @@ milista[[4]][4]
 
 -   Accede a la octava observación de variable2 de cada data.frame.
 
-## ¿Quién responde a mis dudas en R?
+## Enlaces de interés para empezar
+
+### Principios básicos de programación
+
+-   [Quince consejos para mejorar nuestro código y flujo de trabajo con R](https://www.revistaecosistemas.net/index.php/ecosistemas/article/view/2129)
+
+-   [Hands-On Programming with R](https://rstudio-education.github.io/hopr/)
+
+### ¿Quién responde a mis dudas en R?
 
 -   [RStudio User Guide](https://docs.posit.co/ide/user)
 
@@ -471,9 +473,8 @@ En este punto es necesario que tengas instalada la versión más reciente de R (
     # use_git_config(user.name = "Monchi", user.email = "monchi@example.org")
     ```
 
-```{=html}
 <!-- -->
-```
+
 2.  En el *shell*, compueba que has instalado Git correctamente:
 
     `git --version`
@@ -529,7 +530,7 @@ Si vamos al directorio local seleccionado, encontraremos la carpeta conectada a 
 
 Una vez finalizada la instalación podrás ver la pestaña de Git en RStudio.
 
-![Git en RStudio](images/RStudio.JPG){alt="Git en RStudio"}
+![Git en RStudio](images/RStudio.JPG)
 
 💡Para más información sobre cómo clonar el repositorio en GitHub (repositorio remoto) en nuestro ordenador (repositorio local) ver <https://happygitwithr.com/rstudio-git-github.html> para hacerlo desde RStudio y @galeano2018 para hacerlo mediante la línea de comandos.
 
@@ -636,7 +637,7 @@ El historial del proyecto y de los archivos también es accesible a través de R
 
 💡Más información sobre como navegar en el pasado del proyecto aquí: <https://happygitwithr.com/time-travel-see-past.html>
 
-![Historial de un repositorio](images/hist.jpg){alt="Historial de un repositorio"}
+![Historial de un repositorio](images/hist.jpg)
 
 💡En los *issues* se puede referenciar a una línea concreta de código de un estado concreto del proyecto entrando en el archivo en la pestaña *Code* y clickando en el número de línea que se quiere comentar, o a un *commit* entero copiando el SHA.
 

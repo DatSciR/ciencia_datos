@@ -342,7 +342,7 @@ Git permite crear una "rama" (*branch*) paralela al proyecto si se desea seguir 
 
 Las ramas se pueden generar en la [terminal](https://github.com/DatSciR/intro_git-github/blob/main/centra/dia2_colaboracion.md) y en la pestaña Git de RStudio. En la pestaña Git se generan mediante el botón "*New Branch*". Al lado de "*New Branch"* podemos observar todas las ramas que contiene el repositorio y nos permite cambiar de rama fácilmente clickando en ellas.
 
-![Proceso de creación de la rama PPP y la rama monchi](images/ramas.png){alt="Proceso de creación de la rama PPP y la rama monchi" fig-align="center"}
+![Proceso de creación de la rama PPP y la rama monchi](images/ramas.png){fig-align="center"}
 
 #### Ejercicio
 
@@ -358,7 +358,7 @@ Las ramas se pueden generar en la [terminal](https://github.com/DatSciR/intro_gi
 
 Cuando el trabajo desarrollado en una rama se da por finalizado hay que hacer la unión a la rama principal ("*main*"). Esto se puede hacer en la [terminal](https://github.com/DatSciR/intro_git-github/blob/main/centra/dia2_colaboracion.md) y con el botón "*pull request*" en la página del proyecto en GitHub siguiendo los pasos que se explican a continuación.
 
-![Proceso de creación y unión de ramas. Ejemplo de unión (merge) de la rama monchi a la rama main](images/merge.jpg){alt="Proceso de creación y unión de ramas. Ejemplo de unión (merge) de la rama monchi a la rama main"}
+![Proceso de creación y unión de ramas. Ejemplo de unión (merge) de la rama monchi a la rama main](images/merge.jpg)
 
 Una vez que hemos realizado los cambios que queríamos en la rama y están subidos a GitHub (`git add` + `git commit` + `git push`), en GitHub aparece la opción de "Compare & pull request". Aquí se genera el *pull request* ("*Create pull request*") añadiendo un mensaje para saber lo que se está uniendo. GitHub os indicará si existen conflictos o no. Si no existen conflictos, podréis realizar el *pull request* sin problema y, si existen conflictos, hay que resolverlos manualmente.
 
@@ -366,19 +366,19 @@ Una vez que hemos realizado los cambios que queríamos en la rama y están subid
 
 ![](images/pullrequest1.1.jpg)
 
-![Características del merge a realizar](images/pullrequest2.jpg){alt="Características del merge a realizar" fig-align="center"}
+![Características del merge a realizar](images/pullrequest2.jpg){fig-align="center"}
 
 ![](images/pullrequest3.jpg){fig-align="center"}
 
-![Confirmacion y fin del proceso](images/pullrequest3.1.jpg){alt="Confirmacion y fin del proceso" fig-align="center"}
+![Confirmacion y fin del proceso](images/pullrequest3.1.jpg){fig-align="center"}
 
 ### Resolución de conflictos
 
 Git puede encontrar conflictos al fusionar ramas que hay que arreglar manualmente (GitHub os indicará "Can't automatically merge"). Esto ocurrirá si en las dos ramas se han cambiado las mismas líneas de un archivo. Hay que generar el pull request y "*Resolve conflicts*".
 
-![Aparición de conflictos](images/cant_merge.png){alt="Aparición de conflictos"}
+![Aparición de conflictos](images/cant_merge.png)
 
-![Resolución de conflictos](images/cant_merge2.png){alt="Resolución de conflictos"}
+![Resolución de conflictos](images/cant_merge2.png)
 
 Git muestra dónde están los conflictos así:
 
