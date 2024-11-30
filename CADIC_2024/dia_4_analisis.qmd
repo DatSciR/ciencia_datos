@@ -23,7 +23,7 @@ editor_options:
 number-sections: true
 ---
 
-## Objetivos del día 4
+## Objetivos del día 5
 
 Los objetivos del día de hoy son:
 
@@ -35,3 +35,257 @@ Los objetivos del día de hoy son:
 
 -   Aplicar funciones en programación iterativa mediante el paquete {purrr} de {tidyverse}
 
+```{r}
+
+# Modelos mixtos y generalizados
+
+# Instalar paquetes (aquellos que no tengais) y cargadlos en R
+library(tidyverse)
+library(GGally)
+library(performance)
+library(sjPlot)
+library(lme4)
+library(lmerTest)
+library(nlme)
+library(AER)
+library(MuMIn)
+
+#setwd("C:\\Users\\user\\OneDrive - Universidad Complutense de Madrid (UCM)\\Data analysis\\CursoR")
+
+#### 1. Conteo Poisson ####
+
+# Importar datos
+# Base de datos para estudiar el efecto de la composicion forestal y la disponibilidad
+# de alimento sobre la abundacia de la ardilla roja en Escocia
+# SqCones= n pinas comidas (variable dep)
+# Ntrees= n trees per plot; DBH= mean tree DBH; TreeHeight= mean tree height; CanopyCover
+SQ <- read_delim(file = "RedSquirrels.txt", delim = "\t") 
+SQ
+
+# Exploratory
+outliers <- list(NULL)
+for (i in 2:6){
+  midf <- data.frame(a = SQ[[i]])
+  outliers[[i-1]] <- ggplot(midf) +
+    geom_boxplot(aes(y = a)) +
+    labs(y = names(SQ)[i], x = "")
+}
+
+outliersplot <- patchwork::wrap_plots(outliers, nrow = 2)
+outliersplot
+
+# outlier en DBH
+SQ2 <- SQ |> 
+  filter(DBH < 0.7)
+
+ggpairs(
+  SQ |> select(SqCones, Ntrees, DBH, TreeHeight, CanopyCover),
+  lower = list(
+    continuous = wrap("smooth", method = "loess", color = "darkslategrey", alpha = 0.1)),
+  diag = list(continuous = wrap("barDiag"))
+)
+
+SQ2 <- SQ2 %>% 
+  mutate(Ntreess = as.vector(scale(Ntrees)),
+         TreeHeights = as.vector(scale(TreeHeight)),
+         CanopyCovers = as.vector(scale(CanopyCover)),
+         DBHs = as.vector(scale(DBH)))
+
+summary(SQ2)
+
+# Modelo
+mod <- lm(SqCones ~ Ntreess + DBHs + TreeHeights + CanopyCovers, 
+  data = SQ2)
+summary(mod)
+check_model(mod)
+
+# Ajustamos el modelo (conteo - poisson)
+M1 <- glm(SqCones ~ Ntreess + DBHs + TreeHeights + CanopyCovers,
+  family = "poisson", data = SQ2)
+summary(M1)
+(882.20 - 647.35) / 882.20 # devianza explicada
+
+# Predicciones (Para una de las covariables)
+plot_model(M1, terms = "Ntreess", show.data = TRUE, type = "pred")
+plot_model(M1, terms = "DBHs", show.data = TRUE, type = "pred")
+plot_model(M1, terms = "TreeHeights", show.data = TRUE, type = "pred")
+plot_model(M1, terms = "CanopyCovers", show.data = TRUE, type = "pred")
+
+# Check overdispersion 
+summary(M1)
+647.35/46
+dispersiontest(M1)
+check_overdispersion(M1)
+
+# Zero-inflated, missing covariate, wrong error distribution, wrong link function???
+x11()
+check_model(M1)
+
+# Residuals vs fitted
+# Hay dos observaciones que influyen mucho y muchas cercanas a 1, demasiadas para quitarlas
+# Cuando hay sobredispersion en poisson se suele usar una binomial negativa
+M2 <- MASS::glm.nb(
+  SqCones ~ Ntreess + DBHs + TreeHeights + CanopyCovers,
+  data = SQ2,
+  na.action = na.fail
+)
+summary(M2)
+
+# Hay un nuevo parametro para la varianza theta
+59.027/46 # Sin sobredispersión
+
+x11()
+check_model(M2)
+
+# Model selection
+dredge(M2)
+M3 <- MASS::glm.nb(SqCones ~ CanopyCovers, data = SQ2, na.action = na.fail)
+
+# Predicciones
+p <- plot_model(M3, type = "pred", terms = c("CanopyCovers")) +
+  geom_ribbon(aes(ymin = conf.low, ymax = conf.high), alpha=0.3, fill="purple3")+
+  geom_line(size = 0.8) +
+  geom_point(data = SQ2, aes(y = SqCones, x = CanopyCovers), alpha = 0.5) +
+  labs(y = "Nº de piñas comidas", x = "Cobertura de copa") +
+  theme_bw() +
+  theme(plot.title = element_blank(),
+        axis.title = element_text(size = 16, 
+                                  face = "bold"),
+        axis.text = element_text(size = 14)) +
+  theme(panel.grid = element_blank())
+
+p
+
+ggsave(filename="miGGplot.jpg", dpi = 1200, 
+       plot = p, width = 100, height = 100, 
+       units = "mm")
+
+#### 2. Modelo presencia-ausencia ####
+
+# Importar datos
+# Heteromastus similis es un gusano marino, 
+# modelamos su presencia (Hsimilis) en funcion de
+# MedSand= porcentaje de arena
+# Level = preferencia profundidad sustrato 
+# Location= 3 areas con distintas condiciones ambientales
+PO <- read_delim(file = "PolychaetaV3.txt", delim = "\t",
+  col_types = list(Level = "f",
+    Location = "f"))
+
+PO
+
+# Modelo
+M1 <- glm(Hsimilis ~ MedSand * Level, data = PO, family = "binomial")
+summary(M1)
+M1.1 <- glm(Hsimilis ~ MedSand + Level, data = PO, family = "binomial")
+AIC(M1, M1.1)
+# Validacion modelo
+x11()
+check_model(M1)
+
+# Predicciones
+range(PO$MedSand)
+
+plot_model(M1, terms = c("MedSand","Level"), show.data = TRUE, type = "pred")
+plot_model(M1, terms = c("Level"), show.data = TRUE, type = "pred")
+
+#### 3. Modelos mixtos ####
+
+# Matriz de sitios x abundancias de especie
+rikz <- read_delim(file = "DatosCursoR/RIKZ.txt", delim = "\t", 
+  col_types = list(Beach = "f"))
+rikz
+
+# Calculamos la riqueza de especie, convirtiendo las abundancias en presencia y sumando
+rikz$Richness <- apply(rikz[, 2:76] > 0, 1, sum)
+
+# Modelo lineal
+M1 <- lm(Richness ~ NAP, data = rikz)
+summary(M1)
+
+plot_model(M1, type = "pred", terms = "NAP", show.data = TRUE) +
+  labs(x = "NAP", y = "Richness", title = "")
+  
+# Plots intercepto y pendiente distintas
+M1.1 <- lm(Richness ~ NAP + Beach, data = rikz)
+summary(M1.1)
+
+rikz <- rikz |> 
+  mutate(fit = M1.1$fitted.values)
+
+ggplot(rikz) +
+  geom_point(aes(x = NAP, y = Richness, color = Beach)) +
+  geom_line(aes(x = NAP, y = fit, color = Beach))
+
+M1.2 <- lm(Richness ~ NAP * Beach, data = rikz)
+summary(M1.2)
+
+rikz <- rikz |> 
+  mutate(fit = M1.2$fitted.values)
+
+ggplot(rikz) +
+  geom_point(aes(x = NAP, y = Richness, color = Beach)) +
+  geom_line(aes(x = NAP, y = fit, color = Beach))
+
+summary(M1.1) # 10 parametros
+summary(M1.2) # 18 parametros
+AIC(M1,M1.1,M1.2)
+
+# Modelo mixto
+M2 <- lmer(Richness ~ NAP + (1|Beach), data = rikz)
+summary(M2)
+anova(M2)
+# No p values si no cargamos el paquete lmerTest
+
+# Usar lme
+M2 <- lme(Richness ~ NAP, random = ~1|Beach, data = rikz)
+summary(M2)
+anova(M2)
+
+# Simplificación del modelo
+M2.1 <- lme(Richness ~ NAP, random = ~1|Beach, data = rikz, method = "REML")
+M2.2 <- lme(Richness ~ 1, random = ~1|Beach, data = rikz, method = "REML")
+AIC(M2.1,M2.2)
+
+# Con efecto sobre la pendiente
+M3 <- lme(Richness ~ NAP, random = ~NAP|Beach, data = rikz)
+summary(M3)
+anova(M3)
+
+M3.1 <- lme(Richness ~ NAP, random = ~NAP|Beach, data = rikz, method = "REML")
+AIC(M2.1, M3.1)
+
+# Residuos
+check_model(M3)
+
+M3.2 <- lmer(Richness ~ NAP + (NAP|Beach), data = rikz)
+check_model(M3.2)
+
+#### 4. Modelo mixto generalizado ####
+
+M4 <- glmer(Richness ~ NAP + (NAP|Beach), data = rikz, family=poisson)
+summary(M4)
+
+x11()
+check_model(M4)
+
+plot_model(M4, terms = "NAP", show.data = TRUE, type = "pred")
+
+# Múltiples covariables - distancias de Cook
+
+ggplot(data = wclam) + 
+  geom_point(aes(x = log10(LENGTH), y = log10(AFD))) +
+  labs(y = "Peso", x = "Longitud") 
+
+m1 <- lm(log10(AFD) ~ log10(LENGTH), data = wclam) 
+m2 <- lm(log10(AFD) ~ log10(LENGTH), data = wclam |> slice(-108)) # Otro sin 108
+
+plot(m1, which = 4) # mayor de 1
+plot(m2, which = 4)
+
+check_outliers(m1)
+x11()
+check_outliers(m1) |> plot()
+check_outliers(m2)
+
+```
