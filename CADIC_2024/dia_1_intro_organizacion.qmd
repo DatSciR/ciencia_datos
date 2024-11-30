@@ -67,6 +67,8 @@ El objetivo principal es que tanto aquellos con conocimientos básicos en cienci
 |                                                                          | Bases: gráficos por capas                                          |
 |                                                                          |                                                                    |
 |                                                                          | Visualización avanzada                                             |
+|                                                                          |                                                                    |
+|                                                                          | Análisis exploratorio de datos                                     |
 +--------------------------------------------------------------------------+--------------------------------------------------------------------+
 | Análisis de datos: modelos lineales habituales en ecología               | Modelos lineales                                                   |
 |                                                                          |                                                                    |
@@ -74,7 +76,7 @@ El objetivo principal es que tanto aquellos con conocimientos básicos en cienci
 |                                                                          |                                                                    |
 |                                                                          | Modelos lineales mixtos                                            |
 +--------------------------------------------------------------------------+--------------------------------------------------------------------+
-| Comunicación de resultados en Quarto                                     | Introducción a Quarto                                              |
+| Comunicación de resultados y trabajo colaborativo                        | Introducción a Quarto                                              |
 |                                                                          |                                                                    |
 |                                                                          | R Markdown vs Quarto                                               |
 |                                                                          |                                                                    |

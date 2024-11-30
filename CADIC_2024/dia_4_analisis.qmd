@@ -289,3 +289,5 @@ check_outliers(m1) |> plot()
 check_outliers(m2)
 
 ```
+
+VIF root of 1 / (1 Rj ), also called the variance inflation factor (VIF), whichmeans that the P-values get largermaking it more difficult to detect an effect
