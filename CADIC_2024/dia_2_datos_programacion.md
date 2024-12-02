@@ -1,7 +1,7 @@
-# Programación y análisis estadístico en R
+# Organización de datos y bases de programación funcional
 
 Verónica Cruz-Alonso, Julen Astigarraga
-29/11/2024
+02/12/2024
 
 - [<span class="toc-section-number">1</span> Objetivos del día
   2](#objetivos-del-día-2)
@@ -53,8 +53,8 @@ Verónica Cruz-Alonso, Julen Astigarraga
 - [<span class="toc-section-number">7</span> Write_delim: guardar
   datos](#write_delim-guardar-datos)
 - [<span class="toc-section-number">8</span> Enlaces de interés sobre
-  sobre manipulación de
-  datos](#enlaces-de-interés-sobre-sobre-manipulación-de-datos)
+  manipulación de
+  datos](#enlaces-de-interés-sobre-manipulación-de-datos)
 - [<span class="toc-section-number">9</span> Introducción a la
   programación funcional](#introducción-a-la-programación-funcional)
   - [<span class="toc-section-number">9.1</span> ¿Cuándo hay que usar
@@ -69,8 +69,6 @@ Verónica Cruz-Alonso, Julen Astigarraga
     Ejercicio](#ejercicio-5)
   - [<span class="toc-section-number">11.1</span>
     Argumentos](#argumentos)
-  - [<span class="toc-section-number">11.2</span> Valores de
-    retorno](#valores-de-retorno)
 - [<span class="toc-section-number">12</span> Iteraciones con bucles
   *for*](#iteraciones-con-bucles-for)
 - [<span class="toc-section-number">13</span> Iteraciones con
@@ -91,15 +89,15 @@ Verónica Cruz-Alonso, Julen Astigarraga
 
 ## Objetivos del día 2
 
-Los objetivos del día de hoy son:
+- Entender la filosofía de {tidyverse}.
 
 - Aprender funciones básicas que nos permitan importar, explorar,
   limpiar, transformar y manejar datos.
 
-- Aprender a escribir funciones
+- Aprender a escribir funciones.
 
 - Entender la programación iterativa mediante el paquete {purrr} de
-  {tidyverse}
+  {tidyverse}.
 
 ## Introducción a tidyverse
 
@@ -121,17 +119,17 @@ Los [tres principios
 básicos](https://design.tidyverse.org/unifying.html) de este
 meta-paquete son:
 
-- Centrado en humanos: tiene un diseño intuitivo que facilita su uso y
-  accesibilidad para el usuario, ya que está diseñado específicamente
+- **Centrado en humanos**: tiene un diseño intuitivo que facilita su uso
+  y accesibilidad para el usuario, ya que está diseñado específicamente
   para respaldar las actividades de un analista de datos humano.
 
-- Consistencia: todos los paquetes están diseñados para trabajar con
+- **Consistencia**: todos los paquetes están diseñados para trabajar con
   datos ordenados (*tidy data*), y las funciones de los paquetes tienen
   una nomenclatura común y congruente. Esto permite que un usuario que
   aprende sobre una función o paquete pueda aplicar ese conocimiento a
   otros, facilitando así la tarea de recordar y deducir código.
 
-- Componiblidad: permite al usuario resolver problemas complejos
+- **Componiblidad**: permite al usuario resolver problemas complejos
   dividiéndolos en pequeñas partes, que pueden combinarse utilizando el
   operador *pipe*, ya sea el del paquete `magrittr` (`%>%`) o el creado
   recientemente en R base (`|>`).
@@ -156,7 +154,7 @@ length(unique(d))
     [1] 2
 
 ``` r
-d |> unique() |> length() # Ctrl + Shift + M para poner un pipe}
+d |> unique() |> length() # Ctrl + Shift + M para poner un pipe
 ```
 
     [1] 2
@@ -787,7 +785,7 @@ data.frame), haciendo coincidir las observaciones en función de la
 variable común.
 
 <img src="images/clipboard-920719998.png" width="250"
-alt="Tipos de uniones. Extraido de Cheat sheet de dplyr." />
+alt="Tipos de uniones. Extraido del Cheat sheet de dplyr." />
 
 ``` r
 # join: left, right, full, inner
@@ -810,7 +808,7 @@ write_delim(taludes_trans, file = "taludes_trans.csv", delim = ";")
 # en file hay que especificar el directorio donde queremos que se guarde. Si no, se guardará en el directorio de trabajo (getwd())
 ```
 
-## Enlaces de interés sobre sobre manipulación de datos
+## Enlaces de interés sobre manipulación de datos
 
 - [Cheat sheet de
   dplyr](https://nyu-cdsc.github.io/learningr/assets/data-transformation.pdf)
@@ -907,7 +905,8 @@ actualizarlo si hay algun cambio y más aumenta la probabilidad de error.
 
 ## Teoría sobre funciones en R
 
-Según el tipo de output generado hay dos tipos de funciones:
+Según el tipo de output generado (última expresión ejecutada dentro de
+la función) hay dos tipos de funciones:
 
 - Las **funciones de transformación** transforman el objeto que entra en
   la función (primer argumento) y devuelven otro objeto o el anterior
@@ -934,8 +933,9 @@ En general, sintácticamente, las funciones tienen tres componentes:
 nombre1_v1 <- function(x, y) {
   paste(x, y, sep = "_")
 }
-nombre1_v2 <- function(x, y)
-  paste(x, y, sep = "_")
+
+nombre1_v2 <- function(x, y) paste(x, y, sep = "_")
+
 nombre1_v3 <- \(x, y) paste(x, y, sep = "_")
 
 nombre1_v1("Vero", "Cruz")
@@ -1072,8 +1072,8 @@ Hemos copiado un código más de dos veces para realizar una misma acción
 (es decir, un gráfico para ver como se distribuye una variable en
 función de otras dos que se mantienen constantes) así que hay que
 considerar la posibilidad de que estemos necesitando una función. A
-continuación vamos a seguir unos sencillos pasos para transformar
-cualquier código repetido en función.
+continuación vamos a seguir unos **sencillos pasos para transformar
+cualquier código repetido en función**.
 
 1.  Analizar el código: ¿cuáles son las partes replicadas? ¿cuantas
     entradas tenemos? ¿cuáles varían y cuáles no?
@@ -1231,15 +1231,6 @@ mayoría de los usuarios y está bien aprovecharlos:
 
 `na.rm`: valores faltantes
 
-### Valores de retorno
-
-La última expresión ejecutada en una función es el valor de retorno.
-
-📝 La función `return()` se usa para indicar explicitamente qué se
-quiere obtener en una función. Se recomienda su uso cuando el retorno no
-se espera al final de la función. P. ej. en las ramas de una estructura
-`if-else`, sobre todo cuando hay alguna rama larga y compleja.
-
 ## Iteraciones con bucles *for*
 
 Los bucles son recomendables para adentrarse en el mundo de las
@@ -1327,14 +1318,6 @@ iteración, pero se necesita más tiempo para entender qué se está
 haciendo. Por el contrario, los funcionales necesitan un paso más de
 abstracción. Lo más importante es que soluciones el problema y poco a
 poco ir escribiendo código cada vez más sencillo y elegante.
-
-> Para ser significativamente más fiable, el código debe ser más
-> transparente. En particular, las condiciones anidadas y los bucles
-> deben considerarse con gran recelo. Las esctructuras de control
-> complicados confunden a los programadores. El código desordenado suele
-> ocultar errores.
->
-> — Bjarne Stroustrup ([Advanced R](https://adv-r.hadley.nz/index.html))
 
 ## Iteraciones con funcionales
 
@@ -1522,14 +1505,14 @@ Session Info
 Sys.time()
 ```
 
-    [1] "2024-11-29 13:03:52 CET"
+    [1] "2024-12-02 23:21:02 CET"
 
 ``` r
 sessionInfo()
 ```
 
-    R version 4.3.1 (2023-06-16 ucrt)
-    Platform: x86_64-w64-mingw32/x64 (64-bit)
+    R version 4.4.2 (2024-10-31 ucrt)
+    Platform: x86_64-w64-mingw32/x64
     Running under: Windows 11 x64 (build 22631)
 
     Matrix products: default
@@ -1555,16 +1538,16 @@ sessionInfo()
     [10] ggplot2_3.5.1        tidyverse_2.0.0     
 
     loaded via a namespace (and not attached):
-     [1] bit_4.5.0         gtable_0.3.5      jsonlite_1.8.9    crayon_1.5.3     
-     [5] compiler_4.3.1    tidyselect_1.2.1  parallel_4.3.1    scales_1.3.0     
-     [9] yaml_2.3.8        fastmap_1.2.0     R6_2.5.1          labeling_0.4.3   
-    [13] generics_0.1.3    knitr_1.48        munsell_0.5.1     pillar_1.9.0     
-    [17] tzdb_0.4.0        rlang_1.1.3       utf8_1.2.4        stringi_1.8.4    
-    [21] xfun_0.49         bit64_4.5.2       timechange_0.3.0  cli_3.6.1        
-    [25] withr_3.0.1       magrittr_2.0.3    digest_0.6.35     grid_4.3.1       
+     [1] bit_4.5.0         gtable_0.3.6      jsonlite_1.8.9    crayon_1.5.3     
+     [5] compiler_4.4.2    tidyselect_1.2.1  parallel_4.4.2    scales_1.3.0     
+     [9] yaml_2.3.10       fastmap_1.2.0     R6_2.5.1          labeling_0.4.3   
+    [13] generics_0.1.3    knitr_1.49        munsell_0.5.1     pillar_1.9.0     
+    [17] tzdb_0.4.0        rlang_1.1.4       utf8_1.2.4        stringi_1.8.4    
+    [21] xfun_0.49         bit64_4.5.2       timechange_0.3.0  cli_3.6.3        
+    [25] withr_3.0.2       magrittr_2.0.3    digest_0.6.37     grid_4.4.2       
     [29] vroom_1.6.5       rstudioapi_0.17.1 hms_1.1.3         lifecycle_1.0.4  
-    [33] vctrs_0.6.5       evaluate_1.0.1    glue_1.7.0        farver_2.1.2     
-    [37] fansi_1.0.6       colorspace_2.1-0  rmarkdown_2.28    tools_4.3.1      
-    [41] pkgconfig_2.0.3   htmltools_0.5.7  
+    [33] vctrs_0.6.5       evaluate_1.0.1    glue_1.8.0        farver_2.1.2     
+    [37] fansi_1.0.6       colorspace_2.1-1  rmarkdown_2.29    tools_4.4.2      
+    [41] pkgconfig_2.0.3   htmltools_0.5.8.1
 
 </details>

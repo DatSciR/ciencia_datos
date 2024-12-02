@@ -352,7 +352,7 @@ stocks |>
 
 `*_join()` añade columnas de `y` (segundo data.frame) a `x` (primer data.frame), haciendo coincidir las observaciones en función de la variable común.
 
-![Tipos de uniones. Extraido de [Cheat sheet de dplyr](https://nyu-cdsc.github.io/learningr/assets/data-transformation.pdf).](images/clipboard-920719998.png){width="250"}
+![Tipos de uniones. Extraido del [Cheat sheet de dplyr](https://nyu-cdsc.github.io/learningr/assets/data-transformation.pdf).](images/clipboard-920719998.png){width="250"}
 
 ```{r joins}
 #| warning: false
@@ -458,7 +458,7 @@ Escribir una función ya merece la pena cuando has copiado y pegado más de dos 
 
 ## Teoría sobre funciones en R
 
-Según el tipo de output generado hay dos tipos de funciones:
+Según el tipo de output generado (última expresión ejecutada dentro de la función) hay dos tipos de funciones:
 
 -   Las **funciones de transformación** transforman el objeto que entra en la función (primer argumento) y devuelven otro objeto o el anterior modificado. Los funcionales son tipos especiales de funciones de transformación.
 
@@ -628,12 +628,6 @@ En general hay dos grupos: los que especifican los **datos** y los que especific
 
 `na.rm`: valores faltantes
 
-### Valores de retorno
-
-La última expresión ejecutada en una función es el valor de retorno.
-
-📝 La función `return()` se usa para indicar explicitamente qué se quiere obtener en una función. Se recomienda su uso cuando el retorno no se espera al final de la función. P. ej. en las ramas de una estructura `if-else`, sobre todo cuando hay alguna rama larga y compleja.
-
 ## Iteraciones con bucles *for*
 
 Los bucles son recomendables para adentrarse en el mundo de las iteraciones porque hacen cada iteración muy explícita para que quede claro lo que está pasando.
@@ -689,10 +683,6 @@ salida
 Existe la creencia de que los bucles *for* son lentos, pero la desventaja real de *los bucles for es que son demasiado flexibles* y pueden realizar muchas tareas diferentes. En cambio, cada funcional ({[purrr](https://purrr.tidyverse.org/)}, [`apply`](https://www.r-bloggers.com/2022/03/complete-tutorial-on-using-apply-functions-in-r/)) está diseñado para una tarea específica, por lo que en cuanto lo ves en el código, inmediatamente sabes por qué se está utilizando. Es decir, la principal ventaja es su claridad al hacer que el código sea más fácil de escribir y de leer.
 
 Los bucles pueden ser más explícitos en cuanto a que se ve claramente la iteración, pero se necesita más tiempo para entender qué se está haciendo. Por el contrario, los funcionales necesitan un paso más de abstracción. Lo más importante es que soluciones el problema y poco a poco ir escribiendo código cada vez más sencillo y elegante.
-
-> Para ser significativamente más fiable, el código debe ser más transparente. En particular, las condiciones anidadas y los bucles deben considerarse con gran recelo. Las esctructuras de control complicados confunden a los programadores. El código desordenado suele ocultar errores.
->
-> --- Bjarne Stroustrup ([Advanced R](https://adv-r.hadley.nz/index.html))
 
 ## Iteraciones con funcionales
 
