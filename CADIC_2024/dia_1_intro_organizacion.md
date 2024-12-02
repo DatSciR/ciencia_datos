@@ -1,7 +1,7 @@
 # Introducción al lenguaje R y organización del trabajo en Git y GitHub
 
-Josiah Carberry
-01/12/2024
+Verónica Cruz-Alonso, Julen Astigarraga
+02/12/2024
 
 - [<span class="toc-section-number">1</span> Quiénes
   somos](#quiénes-somos)
@@ -60,10 +60,10 @@ Josiah Carberry
   - [<span class="toc-section-number">10.2</span> Qué es
     GitHub](#qué-es-github)
 - [<span class="toc-section-number">11</span> Instalación](#instalación)
-  - [<span class="toc-section-number">11.1</span>
+  - [<span class="toc-section-number">11.0.1</span>
     Ejercicio](#ejercicio-4)
-- [<span class="toc-section-number">12</span> Repositorios y
-  proyectos](#repositorios-y-proyectos)
+- [<span class="toc-section-number">12</span> Repositorios y proyectos
+  de R](#repositorios-y-proyectos-de-r)
   - [<span class="toc-section-number">12.0.1</span>
     Ejercicio](#ejercicio-5)
   - [<span class="toc-section-number">12.1</span> Git
@@ -111,7 +111,7 @@ comunes con las que nos enfrentamos en nuestro día a día, como la
 limpieza, visualiación y transformación de datos, hasta nociones más
 avanzadas de programación y análisis estadístico. Además, aprenderemos a
 utilizar herramientas para generar documentos reproducibles y
-colaborativos.
+colaborativos con R.
 
 El objetivo principal es que tanto aquellos con conocimientos básicos en
 ciencia de datos y análisis estadístico como aquellos con un nivel más
@@ -160,8 +160,7 @@ datos</p>
 </tr>
 <tr class="odd">
 <td>Visualización y análisis exploratorio de datos</td>
-<td><p>Fundamentos de visualización</p>
-<p>Bases: gráficos por capas</p>
+<td><p>Fundamentos de visualización de datos</p>
 <p>Visualización avanzada</p>
 <p>Análisis exploratorio de datos</p></td>
 </tr>
@@ -205,9 +204,7 @@ alt="El proceso de aprendizaje en R, por Allison Horst. https://allisonhorst.com
 
 - Comprender la funcionalidad de Git y GitHub en análisis científicos.
 
-- Comprender el flujo de trabajo entre Git, GitHub y RStudio
-
-- Aprender a trabajar colaborativamente con Git y GitHub
+- Comprender el flujo de trabajo entre Git, GitHub y RStudio.
 
 ## Conceptos básicos
 
@@ -252,7 +249,7 @@ alt="El proceso de aprendizaje en R, por Allison Horst. https://allisonhorst.com
 
 ### El espacio de trabajo
 
-El directorio de trabajo es la carpeta de nuestro ordenador donde
+El **directorio de trabajo** es la carpeta de nuestro ordenador donde
 estamos trabajando, de donde se leeran los archivos de entrada y donde
 se guardarán los de salida a menos que especifiquemos lo contrario.
 
@@ -260,6 +257,9 @@ se guardarán los de salida a menos que especifiquemos lo contrario.
 getwd() # saber directorio de trabajo 
 # setwd("C:/Users/veruk/Desktop/Disco/Curso Ciencia de Datos/ciencia_datos") # ojo con la ruta / o \\
 ```
+
+💡Para ejecutar un comando: Ctrl + Enter (Ctrl + R) en el editor de
+código; Enter en la consola.
 
 No es recomendable establecer el directorio de trabajo manualmente
 porque el trabajo deja de ser reproducible. Es mejor crear desde el
@@ -279,8 +279,6 @@ Crea un proyecto para realizar los ejercicios del curso de programación
 en R y guardalo en curso_R \> ejercicios.
 
 ### Instalar y cargar paquetes
-
-💡Para ejecutar un comando: Ctrl + Enter (Ctrl + R)
 
 ``` r
 # install.packages("tidyverse", dep = T) # dep = T significa instalar dependencias
@@ -620,8 +618,8 @@ rep(x = c("gato", "perro", "pez"), times = c(5, 3, 1))
 rnorm(10, mean = 4, sd = 2.2)
 ```
 
-     [1]  2.8535639  3.6592880  2.8906665  5.1049570  7.7211645  3.6691881
-     [7]  3.4529596  1.9262943  2.8231946 -0.1115736
+     [1]  2.4963370  1.5520760  1.7359145  6.2610658  0.6694833  6.6854124
+     [7]  5.1608693  1.4053254  4.8977742 -2.2448129
 
 #### Matrices
 
@@ -637,44 +635,44 @@ mimatriz <- matrix(mivector, nrow = 100, ncol = 10) # matrix: función para conv
 str(mivector) # mostrar estructura datos 
 ```
 
-     int [1:1000] 8 10 7 5 3 9 4 5 10 7 ...
+     int [1:1000] 7 6 5 2 7 4 1 6 3 4 ...
 
 ``` r
 str(mimatriz)
 ```
 
-     int [1:100, 1:10] 8 10 7 5 3 9 4 5 10 7 ...
+     int [1:100, 1:10] 7 6 5 2 7 4 1 6 3 4 ...
 
 ``` r
 summary(mivector) # resumen de los datos 
 ```
 
        Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-      1.000   3.000   5.000   5.366   8.000  10.000 
+      1.000   3.000   6.000   5.514   8.000  10.000 
 
 ``` r
 summary(mimatriz)
 ```
 
-           V1              V2              V3              V4       
+           V1             V2              V3              V4              V5       
+     Min.   : 1.0   Min.   : 1.00   Min.   : 1.00   Min.   : 1.00   Min.   : 1.00  
+     1st Qu.: 3.0   1st Qu.: 3.00   1st Qu.: 3.00   1st Qu.: 3.00   1st Qu.: 3.00  
+     Median : 6.0   Median : 6.00   Median : 6.00   Median : 5.00   Median : 6.00  
+     Mean   : 5.4   Mean   : 5.67   Mean   : 5.52   Mean   : 5.59   Mean   : 5.61  
+     3rd Qu.: 7.0   3rd Qu.: 8.00   3rd Qu.: 8.00   3rd Qu.: 8.00   3rd Qu.: 8.00  
+     Max.   :10.0   Max.   :10.00   Max.   :10.00   Max.   :10.00   Max.   :10.00  
+           V6              V7              V8              V9       
      Min.   : 1.00   Min.   : 1.00   Min.   : 1.00   Min.   : 1.00  
-     1st Qu.: 3.00   1st Qu.: 3.00   1st Qu.: 3.00   1st Qu.: 3.00  
-     Median : 5.00   Median : 6.00   Median : 5.00   Median : 6.00  
-     Mean   : 5.49   Mean   : 5.68   Mean   : 5.23   Mean   : 5.66  
+     1st Qu.: 2.75   1st Qu.: 4.00   1st Qu.: 3.00   1st Qu.: 3.00  
+     Median : 5.00   Median : 6.00   Median : 5.00   Median : 5.00  
+     Mean   : 5.07   Mean   : 6.04   Mean   : 5.24   Mean   : 5.39  
      3rd Qu.: 8.00   3rd Qu.: 8.00   3rd Qu.: 7.00   3rd Qu.: 8.00  
      Max.   :10.00   Max.   :10.00   Max.   :10.00   Max.   :10.00  
-           V5              V6             V7              V8              V9       
-     Min.   : 1.00   Min.   : 1.0   Min.   : 1.00   Min.   : 1.00   Min.   : 1.00  
-     1st Qu.: 3.00   1st Qu.: 3.0   1st Qu.: 3.00   1st Qu.: 3.00   1st Qu.: 3.00  
-     Median : 5.50   Median : 5.0   Median : 5.00   Median : 5.00   Median : 5.00  
-     Mean   : 5.44   Mean   : 5.2   Mean   : 5.34   Mean   : 5.22   Mean   : 5.07  
-     3rd Qu.: 8.00   3rd Qu.: 8.0   3rd Qu.: 7.00   3rd Qu.: 8.00   3rd Qu.: 7.00  
-     Max.   :10.00   Max.   :10.0   Max.   :10.00   Max.   :10.00   Max.   :10.00  
           V10       
      Min.   : 1.00  
      1st Qu.: 3.00  
-     Median : 5.00  
-     Mean   : 5.33  
+     Median : 6.00  
+     Mean   : 5.61  
      3rd Qu.: 8.00  
      Max.   :10.00  
 
@@ -865,8 +863,8 @@ str(milista2)
      $ : num [1:4] 1 2 3 4
      $ : chr [1:4] "hi" "hola" "hola" "hi"
      $ : logi [1:5] TRUE TRUE TRUE FALSE FALSE
-     $ : int [1:1000] 8 10 7 5 3 9 4 5 10 7 ...
-     $ : int [1:100, 1:10] 8 10 7 5 3 9 4 5 10 7 ...
+     $ : int [1:1000] 7 6 5 2 7 4 1 6 3 4 ...
+     $ : int [1:100, 1:10] 7 6 5 2 7 4 1 6 3 4 ...
      $ :'data.frame':   4 obs. of  3 variables:
       ..$ mivariable1: num [1:4] 1 2 3 4
       ..$ mivariable2: num [1:4] 1 2 3 4
@@ -878,181 +876,181 @@ str(milista2)
 mivector 
 ```
 
-       [1]  8 10  7  5  3  9  4  5 10  7  2  5  6  3  2  8  4  5  5  9 10  9  2  3
-      [25]  7  3  7  6  3  3  3  3  4  4  6 10  4  5  3  8  3  3  6  2  7  7  4  7
-      [49]  7 10  8 10  3  1  3 10  1  4  4  5 10  6  6  4  2  2 10  8  4  3  4  9
-      [73]  2  9  1  4  5  8  3  6 10  5  5 10  8  5  7  1  6  9  7  8  2  6  5 10
-      [97]  4  3  1  6  6  4  9  9  8  7  5  2  6  6  5  6  4  4  8  8  1  1  2  1
-     [121]  5 10 10  1  1 10  2  8 10 10  2  3  5  8 10  9  6  6  8  3  2  9  4  8
-     [145]  9  8  9  5  1  4  6  9  2  5  6 10  1  9  5  7  6  5  1 10  2  7  5  6
-     [169] 10  1  8  7  5  2  2 10 10  8  3 10  8  8  5  2  9  7  7  2  7  7  4  2
-     [193]  1  8  1  9  6  4  2  3  6  4  9  2  5  4  5 10  5  6  6  4  9  2  4  5
-     [217]  2  6  2  5  6 10  7  4  9  6  2  9 10  6  7  3  3  5  3  3 10  6  6  1
-     [241]  7  5  3  3 10  2  5  3  2  4  7  4 10  5  9  8  9  4 10  4  2  1  7  7
-     [265]  5  2  6  8  4  2  3  1  5  3  5  2  8  7  6  9  2  7  9  6  8 10  8  1
-     [289]  5  4  7  3  6  2  1  4  5  6  2  3 10  3  3  1  4  8  6  9  3  5  1  5
-     [313] 10  7  1  4  4  7 10  4  6  4  5 10  9  1  7  8  1  1  4  6  6 10  3  5
-     [337] 10  6  4  4 10  9  3  2  8  8  5  6  9  4  8  8  1  7 10  8  3 10  4  3
-     [361]  3  6  2  2  5  7 10  8  2  6  8  8  7  2  5  8  6  7  6  7  1  4  4  6
-     [385]  8  3  8  5  3  5 10  2 10  5  2  3  9  7  6  9  2  6  6  7  2  6 10  1
-     [409]  9  3  9  2  8  2  9  7  9  3 10  4  4  8  5  9  6  7  3  8  2  9  9  4
-     [433]  7  3  8  2  2  4  5  9  3  7  2  3 10  8  4  5 10  2  4  5  7  7  5  9
-     [457]  1  2  7  6  1  6  3  2  8  1  8  5  9  7  3  9  3  1  6  2  4  2 10  5
-     [481] 10  8  6  8  1  8  1  1 10  4  6  3  3  8  7  2  8  4  5 10  2  2  3  9
-     [505]  2  5  4 10  7  4  8  9  9  8  3  4  8  8  1 10  6  5  7  2  3  4  5  6
-     [529]  2  2  2  3  5  1  6  7  3  6  2  2  5  9  8  4  1  9  4  7  1  6  2  6
-     [553] 10  5  9  7  6  3  2  8  1  8  4  1 10  3  9  8  9  6  9  3  8  6  2  4
-     [577]  6 10  3  7  4  3  5  9  2  8  5  2  4  7  2  4  1  6  1  5  9  7  8  4
-     [601]  5  9  7  7  3  7  8  6  8  4  4  6  4  5  4  2  4  4  3  6  8  4  4  7
-     [625]  9  5 10  1  7  3  8  8 10  3  1  9  8  1  7  4  8  2  6  6  1  8  8  6
-     [649]  5  2  8  6  5  5 10  2 10  2  3  8  3  6  4 10  1  5  7  4  3  1  9 10
-     [673]  9  6  4  7  1  5  5  7  9  6  7  5  2  9  7  4  2  3  3  1  6  5  5  1
-     [697]  5  7  2  4  1  4  3  2  5  2  1  9  8  2  1  6  4  7  6  6  5  2  6 10
-     [721]  1  6  1  3  9  8  8 10  5  5  5  2  3 10  2  6  3  3  5  5  8  8  3  6
-     [745]  1  9  2  6  6 10  7  6  4  3  6  5  2  4  1  3  8  1  8  2  1 10  8  7
-     [769]  5  5  1 10  3  9  9  2  9 10  9  4  7  5  5  7  2  8  4  3  8  8  4  3
-     [793]  7  6  4  8  4  3  9  6  7  9  2  9  1  8  8  7  3  4  9  7  4  7  8  2
-     [817]  5  5  6  5  9  6  6  1  2  6  4  5  3  2  5  8  8 10  8  2  3  2  2  6
-     [841]  6  5  6  7  7  2  8  7  4  4  1  4  6  8  2  1  4  9  4  3  9  1  2  5
-     [865]  1  1  6  4  8 10  9  4  6  7  6  5  3  2  2  3  2  7  2  4  7  5  4  8
-     [889] 10  1  3  7  6  6  7  7  7  2  5  1  8  8 10  5  6  3  2  8  3  7  7  3
-     [913]  4  5  2  3  5  2  5  2  6  2  2  5  1  2 10  4 10  3  5  3 10  1  8  5
-     [937]  5  1  2  4  4  1  8  9  1  7  4  3  9  1  4  2  7  7  8  7  5  4  7  2
-     [961]  5  3  1  9  6  5  2 10  6  7  9  3  3 10  3  2  5 10  9  3  5 10  9  8
-     [985]  8  5  9  9  3 10 10  5  8  4  4 10  9  2  1  6
+       [1]  7  6  5  2  7  4  1  6  3  4  3  3  3  2  4  5  3  4  2  6  7  5  7  3
+      [25]  4  2  8  1  3  3  5  6  6 10  2  9  9  5  4  7  9  8  7  9  3  7  4  9
+      [49]  9  6  1  9  5  9  6  9 10  8  2  4  3  1  9  3  7  4 10  2  6  8  4  4
+      [73]  6  8  2  1  7  2  6  7  1  6  2  9  6  5  2  7  4  9  4  6  3  9  6  8
+      [97]  7 10  7  9  8 10  3  6  9  5  2  6  1 10  6  7  5  5 10  4  5 10  1  6
+     [121]  6  2  7  7  2  5  2  9 10  1  8  6  9  1  9  9  7  2  1  8  9  5  4  1
+     [145]  8  8  6  7  1  9  6  9  1  3  8  8  4  5  6  1  9  8  6  4  9  7  8  1
+     [169]  1  2  4  7  7  3  2  8  1  4  5  3  4  7  6 10  5  8  1  1 10  1  8  9
+     [193] 10  5  9  9 10  6  5  5  6  8  7  8  9  2  1 10  5  6  7  9  4  1  4  9
+     [217]  5  5  3  8  2  2  9  7  2  4  8  4 10 10  6  7  3  1  5  5  5  6  1  6
+     [241]  2  5  4  4  3 10  1  5  2  8  4  8  3  9  2  4  1  8 10  3  9  8  7  2
+     [265]  3  7  8  6  9  1  5  9  8 10  7  7  7  9  4  5  6  6  1  3  3  3  6  7
+     [289]  4  3  2  6 10  7  7  7  1  9  5  9 10  8  4 10  6  2  5  8  8  5  7  8
+     [313]  7 10  6  4  5  7  9  2  3  2  7  6  3  4  3  2  4  8  3  5  1  3  9  8
+     [337]  5  5  3 10 10  5  2  3 10  7  7  7  4  8  7  1  6  4  5  3  3  2  4  8
+     [361]  5  4  2  8  8 10  9  4  7 10  7  9  1  5  3  9  4  5  4  2  6  6 10  6
+     [385]  5  9  1  6  1  5 10 10  8  7  1  4  2  9  1  5  2  3  8  4  6  6  6  5
+     [409]  6  8  6 10  2  2  8  9  5  3  7  9  6  5  6  1 10  7  6 10  4  3  8  7
+     [433]  7  3  3  8  7  8  2  2  9  6  2  6  9  1  9  2 10  7  4  2  9  1  7  8
+     [457]  9  3  5  2  7  4  7  8  4  3  7  1  6  4  4  6  8  1 10  9  9  4  4  8
+     [481]  7  2  7  1  3  2  3  2  3  2 10 10  6 10 10  3  9  9  3  6  9  3  4  4
+     [505]  6 10  2  5  7  1  7 10  3  3  5  1  2  1  5  9  8  1  2  9  6  9  2  6
+     [529]  7  9  5  4  3  6  1  5  2  8 10  4  1  3  8  2  5  4  6  6  6  6  1  4
+     [553]  3  7  2  3  2 10  6  6  8  8  1  6  4  1  8  1  6  6  1  3  3  8  5  5
+     [577]  4  9 10  1  2  5  8  4 10  8  9  1 10  2  4  8  8  6  8  4  9  1  2  5
+     [601]  9  4  6  3  8  9  8 10  9  3  6  3  2  3  3  4 10  6 10 10  9  2 10  7
+     [625]  5  7  5  4  2  5  4  1  8  7  1  5  6  5  8  5  2  6 10  8  7  7  5  9
+     [649]  8  2  4  8  9  8  6  6  5  7  8  8  4  1  8  8 10  5 10  1  5 10  3  1
+     [673]  4  2  8  8  4  4  8  9  8  7  2 10  9  9  7  5  7  6  6  6  2  6  4  9
+     [697]  8  5  7  3  2  4  6  3  1  6  5 10  1  8  5  1  7  6  4  9  7  8  5  8
+     [721]  8 10  2  4  9  5  3 10  9  3  5  7  3  9  4  2  9  4  3  5  1  5 10  4
+     [745]  2  4  7  1  3  7  5 10  7  1  9  4  2  5  7  5  5  6  7  7  2  1  8  3
+     [769]  5  5 10 10  2  4  1  3  5  5  3  6  6  7  3  5  3  7  3  2  4 10  9  5
+     [793]  2  5 10  9  9  3  4  1  3  3  5  3  9  8  5  9  2  3  3  9  6  5  8  5
+     [817]  9  4  7  6  8  7  5  6 10  3  5  1  3 10  1 10  3  9  6  5  5  8 10  1
+     [841] 10  2  2  6  4  3  2  1  8  7  8  7  1  2 10  8  2  8  6  3  7  2  8  1
+     [865]  1  5  9  1  2  5  2  9  2  2  7  2  9  9  4  7 10  3  7 10  5  6  9  8
+     [889]  7  5  7  1  6  3  6  8  9  4  2  1  2  6  7  1  5  4  8 10  5  4  1  1
+     [913]  3  4  9  9  9 10  9  7  1  8  1  8  6  4  1 10  3  3  9  6  9  6  2 10
+     [937]  7  1  6  8  9 10  1  6  2  6  4  8  6  4  9  1  1  2  3  9  6  1  8  4
+     [961]  7  4  9  5 10  6  6  2  8  7  2  6 10  3  3  2  5  3  3  9  4  8  3  1
+     [985]  8  9  5  5 10 10  3  8  2  5  8  2  9 10 10  8
 
 ``` r
 mivector[505]
 ```
 
-    [1] 2
+    [1] 6
 
 ``` r
 mimatriz 
 ```
 
            [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
-      [1,]    8    6    6   10    2    2    5    1    7     8
-      [2,]   10    4    4    3    6    2    9    4    9     8
-      [3,]    7    9    9    3    6    3    7    3    2    10
-      [4,]    5    9    2    1    7    9    7    2    9     5
-      [5,]    3    8    5    4    2    2    3    5    1     6
-      [6,]    9    7    4    8    6    5    7    2    8     3
-      [7,]    4    5    5    6   10    4    8    1    8     2
-      [8,]    5    2   10    9    1   10    6    9    7     8
-      [9,]   10    6    5    3    9    7    8    8    3     3
-     [10,]    7    6    6    5    3    4    4    2    4     7
-     [11,]    2    5    6    1    9    8    4    1    9     7
-     [12,]    5    6    4    5    2    9    6    6    7     3
-     [13,]    6    4    9   10    8    9    4    4    4     4
-     [14,]    3    4    2    7    2    8    5    7    7     5
-     [15,]    2    8    4    1    9    3    4    6    8     2
-     [16,]    8    8    5    4    7    4    2    6    2     3
-     [17,]    4    1    2    4    9    8    4    5    5     5
-     [18,]    5    1    6    7    3    8    4    2    5     2
-     [19,]    5    2    2   10   10    1    3    6    6     5
-     [20,]    9    1    5    4    4   10    6   10    5     2
-     [21,]   10    5    6    6    4    6    8    1    9     6
-     [22,]    9   10   10    4    8    5    4    6    6     2
-     [23,]    2   10    7    5    5    7    4    1    6     2
-     [24,]    3    1    4   10    9    2    7    3    1     5
-     [25,]    7    1    9    9    6    3    9    9    2     1
-     [26,]    3   10    6    1    7    4    5    8    6     2
-     [27,]    7    2    2    7    3    5   10    8    4    10
-     [28,]    6    8    9    8    8    6    1   10    5     4
-     [29,]    3   10   10    1    2    2    7    5    3    10
-     [30,]    3   10    6    1    9    2    3    5    2     3
-     [31,]    3    2    7    4    9    2    8    5    5     5
-     [32,]    3    3    3    6    4    3    8    2    8     3
-     [33,]    4    5    3    6    7    5   10    3    8    10
-     [34,]    4    8    5   10    3    1    3   10   10     1
-     [35,]    6   10    3    3    8    6    1    2    8     8
-     [36,]   10    9    3    5    2    7    9    6    2     5
-     [37,]    4    6   10   10    2    3    8    3    3     5
-     [38,]    5    6    6    6    4    6    1    3    2     1
-     [39,]    3    8    6    4    5    2    7    5    2     2
-     [40,]    8    3    1    4    9    2    4    5    6     4
-     [41,]    3    2    7   10    3    5    8    8    6     4
-     [42,]    3    9    5    9    7    9    2    8    5     1
-     [43,]    6    4    3    3    2    8    6    3    6     8
-     [44,]    2    8    3    2    3    4    6    6    7     9
-     [45,]    7    9   10    8   10    1    1    1    7     1
-     [46,]    7    8    2    8    8    9    8    9    2     7
-     [47,]    4    9    5    5    4    4    8    2    8     4
-     [48,]    7    5    3    6    5    7    6    6    7     3
-     [49,]    7    1    2    9   10    1    5    6    4     9
-     [50,]   10    4    4    4    2    6    2   10    4     1
-     [51,]    8    6    7    8    4    2    8    7    1     4
-     [52,]   10    9    4    8    5    6    6    6    4     2
-     [53,]    3    2   10    1    7   10    5    4    6     7
-     [54,]    1    5    5    7    7    5    5    3    8     7
-     [55,]    3    6    9   10    5    9   10    6    2     8
-     [56,]   10   10    8    8    9    7    2    5    1     7
-     [57,]    1    1    9    3    1    6   10    2    4     5
-     [58,]    4    9    4   10    2    3    2    4    9     4
-     [59,]    4    5   10    4    7    2    3    1    4     7
-     [60,]    5    7    4    3    6    8    8    3    3     2
-     [61,]   10    6    2    3    1    1    3    8    9     5
-     [62,]    6    5    1    6    6    8    6    1    1     3
-     [63,]    6    1    7    2    3    4    4    8    2     1
-     [64,]    4   10    7    2    2    1   10    2    5     9
-     [65,]    2    2    5    5    8   10    1    1    1     6
-     [66,]    2    7    2    7    1    3    5   10    1     5
-     [67,]   10    5    6   10    8    9    7    8    6     2
-     [68,]    8    6    8    8    5    8    4    7    4    10
-     [69,]    4   10    4    2    9    9    3    5    8     6
-     [70,]    3    1    2    6    7    6    1    5   10     7
-     [71,]    4    8    3    8    3    9    9    1    9     9
-     [72,]    9    7    1    8    9    3   10   10    4     3
-     [73,]    2    5    5    7    3    8    9    3    6     3
-     [74,]    9    2    3    2    1    6    6    9    7    10
-     [75,]    1    2    5    5    6    2    4    9    6     3
-     [76,]    4   10    2    8    2    4    7    2    5     2
-     [77,]    5   10    8    6    4    6    1    9    3     5
-     [78,]    8    8    7    7    2   10    5   10    2    10
-     [79,]    3    3    6    6   10    3    5    9    2     9
-     [80,]    6   10    9    7    5    7    7    4    3     3
-     [81,]   10    8    2    1   10    4    9    7    2     5
-     [82,]    5    8    7    4    8    3    6    5    7    10
-     [83,]    5    5    9    4    6    5    7    5    2     9
-     [84,]   10    2    6    6    8    9    5    7    4     8
-     [85,]    8    9    8    8    1    2    2    2    7     8
-     [86,]    5    7   10    3    8    8    9    8    5     5
-     [87,]    7    7    8    8    1    5    7    4    4     9
-     [88,]    1    2    1    5    1    2    4    3    8     9
-     [89,]    6    7    5    3   10    4    2    8   10     3
-     [90,]    9    7    4    5    4    7    3    8    1    10
-     [91,]    7    4    7   10    6    2    3    4    3    10
-     [92,]    8    2    3    2    3    4    1    3    7     5
-     [93,]    2    1    6   10    3    1    6    7    6     8
-     [94,]    6    8    2    5    8    6    5    6    6     4
-     [95,]    5    1    1    2    7    1    5    4    7     4
-     [96,]   10    9    4    3    2    5    1    8    7    10
-     [97,]    4    6    5    9    8    9    5    4    7     9
-     [98,]    3    4    6    7    4    7    7    3    2     2
-     [99,]    1    2    2    6    5    8    2    9    5     1
-    [100,]    6    3    3    9   10    4    4    6    1     6
+      [1,]    7    8    6   10    2    9    9    2    3     2
+      [2,]    6   10    8    8    3    3    4    4    3     6
+      [3,]    5    3    7    4    8    4    6    6    5     7
+      [4,]    2    6    8   10    4    4    3    3    3     1
+      [5,]    7    9    9    6    6    6    8    1    9     5
+      [6,]    4    5    2    2    6   10    9    6    8     4
+      [7,]    1    2    1    5    6    2    8    5    5     8
+      [8,]    6    6   10    8    5    5   10   10    9    10
+      [9,]    3    1    5    8    6    7    9    1    2     5
+     [10,]    4   10    6    5    8    1    3    8    3     4
+     [11,]    3    6    7    7    6    7    6    5    3     1
+     [12,]    3    7    9    8   10   10    3    1    9     1
+     [13,]    3    5    4    7    2    3    2    7    6     3
+     [14,]    2    5    1   10    2    3    3    6    5     4
+     [15,]    4   10    4    6    8    5    3    4    8     9
+     [16,]    5    4    9    4    9    1    4    9    5     9
+     [17,]    3    5    5    5    5    2   10    7    9     9
+     [18,]    4   10    5    7    3    1    6    8    4    10
+     [19,]    2    1    3    9    7    5   10    5    7     9
+     [20,]    6    6    8    2    9    9   10    8    6     7
+     [21,]    7    6    2    3    6    8    9    8    8     1
+     [22,]    5    2    2    2    5    1    2   10    7     8
+     [23,]    7    7    9    7    6    2   10    2    5     1
+     [24,]    3    7    7    6    1    9    7    4    6     8
+     [25,]    4    2    2    3   10    6    5    9   10     6
+     [26,]    2    5    4    4    7    9    7    5    3     4
+     [27,]    8    2    8    3    6    2    5    3    5     1
+     [28,]    1    9    4    2   10    6    4   10    1    10
+     [29,]    3   10   10    4    4    7    2    9    3     3
+     [30,]    3    1   10    8    3    9    5    3   10     3
+     [31,]    5    8    6    3    8    5    4    5    1     9
+     [32,]    6    6    7    5    7    4    1    7   10     6
+     [33,]    6    9    3    1    7    3    8    3    3     9
+     [34,]   10    1    1    3    3    6    7    9    9     6
+     [35,]    2    9    5    9    3    1    1    4    6     2
+     [36,]    9    9    5    8    8    5    5    2    5    10
+     [37,]    9    7    5    5    7    2    6    9    5     7
+     [38,]    5    2    6    5    8    8    5    4    8     1
+     [39,]    4    1    1    3    2   10    8    3   10     6
+     [40,]    7    8    6   10    2    4    5    5    1     8
+     [41,]    9    9    2   10    9    1    2    1   10     9
+     [42,]    8    5    5    5    6    3    6    5    2    10
+     [43,]    7    4    4    2    2    8   10   10    2     1
+     [44,]    9    1    4    3    6    2    8    4    6     6
+     [45,]    3    8    3   10    9    5    7    2    4     2
+     [46,]    7    8   10    7    1    4    7    4    3     6
+     [47,]    4    6    1    7    9    6    5    7    2     4
+     [48,]    9    7    5    7    2    6    9    1    1     8
+     [49,]    9    1    2    4   10    6    8    3    8     6
+     [50,]    6    9    8    8    7    6    2    7    7     4
+     [51,]    1    6    4    7    4    1    4    5    8     9
+     [52,]    9    9    8    1    2    4    8   10    7     1
+     [53,]    5    1    3    6    9    3    9    7    1     1
+     [54,]    9    3    9    4    1    7    8    1    2     2
+     [55,]    6    8    2    5    7    2    6    9   10     3
+     [56,]    9    8    4    3    8    3    6    4    8     9
+     [57,]   10    4    1    3    9    2    5    2    2     6
+     [58,]    8    5    8    2    3   10    7    5    8     1
+     [59,]    2    6   10    4    5    6    8    7    6     8
+     [60,]    4    1    3    8    2    6    8    5    3     4
+     [61,]    3    9    9    5    7    8    4    5    7     7
+     [62,]    1    8    8    4    4    8    1    6    2     4
+     [63,]    9    6    7    2    7    1    8    7    8     9
+     [64,]    3    4    2    8    8    6    8    7    1     5
+     [65,]    7    9    3    8    4    4   10    2    1    10
+     [66,]    4    7    7   10    3    1    5    1    5     6
+     [67,]   10    8    8    9    7    8   10    8    9     6
+     [68,]    2    1    6    4    1    1    1    3    1     2
+     [69,]    6    1    9    7    6    6    5    5    2     8
+     [70,]    8    2    1   10    4    6   10    5    5     7
+     [71,]    4    4    5    7    4    1    3   10    2     2
+     [72,]    4    7    9    9    6    3    1   10    9     6
+     [73,]    6    7    8    1    8    3    4    2    2    10
+     [74,]    8    3   10    5    1    8    2    4    2     3
+     [75,]    2    2    7    3   10    5    8    1    7     3
+     [76,]    1    8    7    9    9    5    8    3    2     2
+     [77,]    7    1    7    4    9    4    4    5    9     5
+     [78,]    2    4    9    5    4    9    4    5    9     3
+     [79,]    6    5    4    4    4   10    8    3    4     3
+     [80,]    7    3    5    2    8    1    9    6    7     9
+     [81,]    1    4    6    6    7    2    8    6   10     4
+     [82,]    6    7    6    6    2    5    7    7    3     8
+     [83,]    2    6    1   10    7    8    2    3    7     3
+     [84,]    9   10    3    6    1    4   10    5   10     1
+     [85,]    6    5    3    5    3   10    9    3    5     8
+     [86,]    5    8    3    9    2    8    9    7    6     9
+     [87,]    2    1    6    1    3    9    7    3    9     5
+     [88,]    7    1    7    6    2    1    5    2    8     5
+     [89,]    4   10    4    1    3   10    7    4    7    10
+     [90,]    9    1    3    5    2    2    6   10    5    10
+     [91,]    4    8    2   10   10    4    6    9    7     3
+     [92,]    6    9    6   10   10    8    6    5    1     8
+     [93,]    3   10   10    8    6    8    2    2    6     2
+     [94,]    9    5    7    7   10    6    6    5    3     5
+     [95,]    6    9    7    1   10    8    4   10    6     8
+     [96,]    8    9    7    4    3    4    9    9    8     2
+     [97,]    7   10    1    2    9    9    8    9    9     9
+     [98,]   10    6    9    9    9    1    5    3    4    10
+     [99,]    7    5    5    1    3    2    7    4    2    10
+    [100,]    9    5    9    5    6    5    3    1    1     8
 
 ``` r
 mimatriz[20, 9] # [filas, columnas] 
 ```
 
-    [1] 5
+    [1] 6
 
 ``` r
 mimatriz[20, ] # selecciono todas las columnas de la fila 20
 ```
 
-     [1]  9  1  5  4  4 10  6 10  5  2
+     [1]  6  6  8  2  9  9 10  8  6  7
 
 ``` r
 mimatriz[, 9] # selecciono todas las filas de la columna 9
 ```
 
-      [1]  7  9  2  9  1  8  8  7  3  4  9  7  4  7  8  2  5  5  6  5  9  6  6  1  2
-     [26]  6  4  5  3  2  5  8  8 10  8  2  3  2  2  6  6  5  6  7  7  2  8  7  4  4
-     [51]  1  4  6  8  2  1  4  9  4  3  9  1  2  5  1  1  6  4  8 10  9  4  6  7  6
-     [76]  5  3  2  2  3  2  7  2  4  7  5  4  8 10  1  3  7  6  6  7  7  7  2  5  1
+      [1]  3  3  5  3  9  8  5  9  2  3  3  9  6  5  8  5  9  4  7  6  8  7  5  6 10
+     [26]  3  5  1  3 10  1 10  3  9  6  5  5  8 10  1 10  2  2  6  4  3  2  1  8  7
+     [51]  8  7  1  2 10  8  2  8  6  3  7  2  8  1  1  5  9  1  2  5  2  9  2  2  7
+     [76]  2  9  9  4  7 10  3  7 10  5  6  9  8  7  5  7  1  6  3  6  8  9  4  2  1
 
 ``` r
 midataframe 
@@ -1209,12 +1207,13 @@ vez
 
 ### Qué es Git
 
-Git es un sistema avanzado de control de versiones (como el “control de
-cambios” de Microsoft Word) distribuido \[@blischak2016; @ram2013\]. Git
-permite rastrear el progreso de un proyecto a lo largo del tiempo ya que
-hace “capturas” del mismo a medida que evoluciona y los cambios se van
-registrando. Este sistema permite ver qué cambios se hicieron, quién los
-hizo y por qué, e incluso volver a versiones anteriores.
+Git es un sistema avanzado de **control de versiones** (como el “control
+de cambios” de Microsoft Word) **distribuido** \[@blischak2016;
+@ram2013\]. Git permite rastrear el progreso de un proyecto a lo largo
+del tiempo ya que hace “capturas” del mismo a medida que evoluciona y
+los cambios se van registrando. Este sistema permite ver qué cambios se
+hicieron, quién los hizo y por qué, e incluso volver a versiones
+anteriores.
 
 ![Ejemplo de un proyecto rastreado por Git con indicaciones de cómo se
 registran los cambios y la evolución del proyecto, el autor o autora de
@@ -1230,15 +1229,15 @@ cualquier cambio hecho por un usuario se sincroniza con este servidor y
 de ahí con el resto de usuarios, Git es un control de versiones
 distribuido que permite a todos los usuarios trabajar en el proyecto
 paralelamente e ir haciendo “capturas” del trabajo de cada uno para
-luego unirlos. Otras alternativas de control de versiones distribuido
+luego unirlas. Otras alternativas de control de versiones distribuido
 comparables a Git son Mercurial (<https://www.mercurial-scm.org/>) o
 Bazaar (<https://bazaar.canonical.com/>), pero Git es con diferencia el
 más utilizado.
 
 ### Qué es GitHub
 
-GitHub es un servidor de alojamiento en línea o repositorio remoto para
-albergar proyectos basados en Git que permite la colaboración entre
+GitHub es un **servidor de alojamiento en línea o repositorio remoto**
+para albergar proyectos basados en Git que permite la colaboración entre
 diferentes usuarios o con uno mismo \[@galeano2018;
 @perez-riverol2016\]. Un repositorio es un directorio donde desarrollar
 un proyecto que contiene todos los archivos necesarios para el mismo.
@@ -1262,7 +1261,7 @@ alt="Interacción entre Git y GitHub. Git, al ser un control de versiones distri
 
 ## Instalación
 
-### Ejercicio
+#### Ejercicio
 
 En este punto es necesario que tengas instalada la versión más reciente
 de R (<https://cloud.r-project.org/>), RStudio
@@ -1283,9 +1282,7 @@ de R (<https://cloud.r-project.org/>), RStudio
     # use_git_config(user.name = "Monchi", user.email = "monchi@example.org")
     ```
 
-<!-- -->
-
-2.  En el *shell*, compueba que has instalado Git correctamente:
+2.  En la *terminal*, compueba que has instalado Git correctamente:
 
     `git --version`
 
@@ -1328,9 +1325,9 @@ se pueden tener varios PATs. No podrás volver a ver este token, así que
 no cierres ni salgas de la ventana del navegador hasta que almacenes el
 PAT localmente. ¡Trata este PAT como una contraseña!
 
-## Repositorios y proyectos
+## Repositorios y proyectos de R
 
-Un repositorio es un directorio donde desarrollar un proyecto que
+Un repositorio es un directorio remoto donde desarrollar un proyecto que
 contiene todos los archivos necesarios para el mismo. Es como un
 “contenedor” donde desarrollar un proyecto.
 
@@ -1356,9 +1353,9 @@ copiar aquí todos los archivos que nos interesan para el proyecto
 #### Ejercicio
 
 1.  Crea un repositorio de prueba en GitHub y conéctalo a un nuevo
-    proyecto de RStudio (esto generará un repositorio (carpeta) en tu
-    ordenador en la ubicación que hayas especificado). Incluir un
-    archivo “*.gitignore”*
+    proyecto de RStudio en la carpeta del curso (esto generará un
+    repositorio local (carpeta) en tu ordenador). Incluir un archivo
+    “*.gitignore”*
 
 2.  Crea un nuevo script de R en el directorio de trabajo (es decir,
     crea un script de R y guárdalo dentro del repositorio que has
@@ -1367,8 +1364,8 @@ copiar aquí todos los archivos que nos interesan para el proyecto
 3.  En RStudio ve a la pestaña Git para ver todos los documentos que han
     sido identificados por Git
 
-Una vez finalizada la instalación podrás ver la pestaña de Git en
-RStudio.
+Una vez finalizada la instalación y conectado el repositorio remoto y el
+proyecto podrás ver la pestaña de Git en RStudio.
 
 ![Git en RStudio](images/RStudio.JPG)
 
@@ -1537,7 +1534,7 @@ alt="Commit en RStudio" />
 
 Además, en la pestaña Git de RStudio podemos observar el botón “*Diff*”
 que muestra los cambios que se han hecho a cada archivo desde el último
-commit y las ramas (que lo explicaremos más abajo). Clickando con el
+commit y las ramas (que lo explicaremos el último día). Clickando con el
 botón derecho del ratón podemos abrir los archivos que han sido
 modificados mediante “*Open file*” y con el botón “*Revert*” volvemos al
 estado del último commit (⚠️cuidado con esto porque te borrará los
@@ -1652,7 +1649,7 @@ Session Info
 Sys.time()
 ```
 
-    [1] "2024-12-01 23:31:52 CET"
+    [1] "2024-12-02 15:01:35 CET"
 
 ``` r
 sessionInfo()

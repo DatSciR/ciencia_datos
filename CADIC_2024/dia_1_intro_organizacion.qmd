@@ -37,7 +37,7 @@ Y vosotros ¿quiénes sois?
 
 ## Presentación
 
-En este curso exploraremos tanto los fundamentos teóricos como las aplicaciones prácticas de la ciencia de datos. Abordaremos desde tareas comunes con las que nos enfrentamos en nuestro día a día, como la limpieza, visualiación y transformación de datos, hasta nociones más avanzadas de programación y análisis estadístico. Además, aprenderemos a utilizar herramientas para generar documentos reproducibles y colaborativos.
+En este curso exploraremos tanto los fundamentos teóricos como las aplicaciones prácticas de la ciencia de datos. Abordaremos desde tareas comunes con las que nos enfrentamos en nuestro día a día, como la limpieza, visualiación y transformación de datos, hasta nociones más avanzadas de programación y análisis estadístico. Además, aprenderemos a utilizar herramientas para generar documentos reproducibles y colaborativos con R.
 
 El objetivo principal es que tanto aquellos con conocimientos básicos en ciencia de datos y análisis estadístico como aquellos con un nivel más avanzado puedan beneficiarse y llevar consigo nuevos aprendizajes al finalizar el curso.
 
@@ -62,9 +62,7 @@ El objetivo principal es que tanto aquellos con conocimientos básicos en cienci
 |                                                                          |                                                                    |
 |                                                                          | Programación funcional: funciones e iteraciones                    |
 +--------------------------------------------------------------------------+--------------------------------------------------------------------+
-| Visualización y análisis exploratorio de datos                           | Fundamentos de visualización                                       |
-|                                                                          |                                                                    |
-|                                                                          | Bases: gráficos por capas                                          |
+| Visualización y análisis exploratorio de datos                           | Fundamentos de visualización de datos                              |
 |                                                                          |                                                                    |
 |                                                                          | Visualización avanzada                                             |
 |                                                                          |                                                                    |
@@ -99,9 +97,7 @@ Si alguien tiene alguna duda o sugerencia, me puede contactar por correo electr�
 
 -   Comprender la funcionalidad de Git y GitHub en análisis científicos.
 
--   Comprender el flujo de trabajo entre Git, GitHub y RStudio
-
--   Aprender a trabajar colaborativamente con Git y GitHub
+-   Comprender el flujo de trabajo entre Git, GitHub y RStudio.
 
 ## Conceptos básicos
 
@@ -133,7 +129,7 @@ Si alguien tiene alguna duda o sugerencia, me puede contactar por correo electr�
 
 ### El espacio de trabajo
 
-El directorio de trabajo es la carpeta de nuestro ordenador donde estamos trabajando, de donde se leeran los archivos de entrada y donde se guardarán los de salida a menos que especifiquemos lo contrario.
+El **directorio de trabajo** es la carpeta de nuestro ordenador donde estamos trabajando, de donde se leeran los archivos de entrada y donde se guardarán los de salida a menos que especifiquemos lo contrario.
 
 ```{r wd}
 #| eval: false
@@ -141,6 +137,8 @@ El directorio de trabajo es la carpeta de nuestro ordenador donde estamos trabaj
 getwd() # saber directorio de trabajo 
 # setwd("C:/Users/veruk/Desktop/Disco/Curso Ciencia de Datos/ciencia_datos") # ojo con la ruta / o \\
 ```
+
+💡Para ejecutar un comando: Ctrl + Enter (Ctrl + R) en el editor de código; Enter en la consola.
 
 No es recomendable establecer el directorio de trabajo manualmente porque el trabajo deja de ser reproducible. Es mejor crear desde el principio un **proyecto** en R ligado a un directorio relativo que contenga todos los datos de entrada, los scripts y los resultados del script. Al abrir el proyecto, el directorio se sincroniza con pestaña *Files*.
 
@@ -153,8 +151,6 @@ No es recomendable establecer el directorio de trabajo manualmente porque el tra
 Crea un proyecto para realizar los ejercicios del curso de programación en R y guardalo en curso_R \> ejercicios.
 
 ### Instalar y cargar paquetes
-
-💡Para ejecutar un comando: Ctrl + Enter (Ctrl + R)
 
 ```{r instalar}
 
@@ -441,15 +437,15 @@ Aunque existen multitud de manuales disponibles gratuitamente sobre cómo utiliz
 
 ### Qué es Git
 
-Git es un sistema avanzado de control de versiones (como el "control de cambios" de Microsoft Word) distribuido [@blischak2016; @ram2013]. Git permite rastrear el progreso de un proyecto a lo largo del tiempo ya que hace "capturas" del mismo a medida que evoluciona y los cambios se van registrando. Este sistema permite ver qué cambios se hicieron, quién los hizo y por qué, e incluso volver a versiones anteriores.
+Git es un sistema avanzado de **control de versiones** (como el "control de cambios" de Microsoft Word) **distribuido** [@blischak2016; @ram2013]. Git permite rastrear el progreso de un proyecto a lo largo del tiempo ya que hace "capturas" del mismo a medida que evoluciona y los cambios se van registrando. Este sistema permite ver qué cambios se hicieron, quién los hizo y por qué, e incluso volver a versiones anteriores.
 
 ![Ejemplo de un proyecto rastreado por Git con indicaciones de cómo se registran los cambios y la evolución del proyecto, el autor o autora de los cambios (¿quién?), el momento en que se han registrado (¿cuándo?), en qué documentos o líneas se han producido cambios (¿dónde?) y qué ha cambiado (¿qué?)](images/git.jpg)
 
-Además, Git facilita el trabajo en paralelo de varios participantes. Mientras que en otros sistemas de control de versiones (p. ej. Subversion (SVN, <https://subversion.apache.org/>) o Concurrent Versions System (CVS, <http://cvs.nongnu.org/>)) hay un servidor central y cualquier cambio hecho por un usuario se sincroniza con este servidor y de ahí con el resto de usuarios, Git es un control de versiones distribuido que permite a todos los usuarios trabajar en el proyecto paralelamente e ir haciendo "capturas" del trabajo de cada uno para luego unirlos. Otras alternativas de control de versiones distribuido comparables a Git son Mercurial (<https://www.mercurial-scm.org/>) o Bazaar (<https://bazaar.canonical.com/>), pero Git es con diferencia el más utilizado.
+Además, Git facilita el trabajo en paralelo de varios participantes. Mientras que en otros sistemas de control de versiones (p. ej. Subversion (SVN, <https://subversion.apache.org/>) o Concurrent Versions System (CVS, <http://cvs.nongnu.org/>)) hay un servidor central y cualquier cambio hecho por un usuario se sincroniza con este servidor y de ahí con el resto de usuarios, Git es un control de versiones distribuido que permite a todos los usuarios trabajar en el proyecto paralelamente e ir haciendo "capturas" del trabajo de cada uno para luego unirlas. Otras alternativas de control de versiones distribuido comparables a Git son Mercurial (<https://www.mercurial-scm.org/>) o Bazaar (<https://bazaar.canonical.com/>), pero Git es con diferencia el más utilizado.
 
 ### Qué es GitHub
 
-GitHub es un servidor de alojamiento en línea o repositorio remoto para albergar proyectos basados en Git que permite la colaboración entre diferentes usuarios o con uno mismo [@galeano2018; @perez-riverol2016]. Un repositorio es un directorio donde desarrollar un proyecto que contiene todos los archivos necesarios para el mismo. Aunque existen distintos repositorios remotos (p. ej. GitLab, <https://gitlab.com/>, o Bitbucket, <https://bitbucket.org/>) con funcionalidad similar, GitHub es hoy en día el más utilizado. GitHub registra el desarrollo de los proyectos de manera remota, permite compartir proyectos entre distintos usuarios y proporciona la seguridad de la nube entre otras funciones.
+GitHub es un **servidor de alojamiento en línea o repositorio remoto** para albergar proyectos basados en Git que permite la colaboración entre diferentes usuarios o con uno mismo [@galeano2018; @perez-riverol2016]. Un repositorio es un directorio donde desarrollar un proyecto que contiene todos los archivos necesarios para el mismo. Aunque existen distintos repositorios remotos (p. ej. GitLab, <https://gitlab.com/>, o Bitbucket, <https://bitbucket.org/>) con funcionalidad similar, GitHub es hoy en día el más utilizado. GitHub registra el desarrollo de los proyectos de manera remota, permite compartir proyectos entre distintos usuarios y proporciona la seguridad de la nube entre otras funciones.
 
 ![Página inicial de GitHub](images/github_pag_ini.JPG)
 
@@ -459,7 +455,7 @@ Cuando se trabaja en proyectos colaborativos, la base de la interacción entre G
 
 ## Instalación
 
-### Ejercicio
+#### Ejercicio
 
 En este punto es necesario que tengas instalada la versión más reciente de R (<https://cloud.r-project.org/>), RStudio (<https://posit.co/download/rstudio-desktop/>), Git (<https://happygitwithr.com/install-git.html>) y una cuenta en GitHub (<https://github.com/>) creada.
 
@@ -475,9 +471,7 @@ En este punto es necesario que tengas instalada la versión más reciente de R (
     # use_git_config(user.name = "Monchi", user.email = "monchi@example.org")
     ```
 
-<!-- -->
-
-2.  En el *shell*, compueba que has instalado Git correctamente:
+2.  En la *terminal*, compueba que has instalado Git correctamente:
 
     `git --version`
 
@@ -512,9 +506,9 @@ En este punto es necesario que tengas instalada la versión más reciente de R (
 
 💡Conviene describir el propósito del token en el campo *Note*, porque se pueden tener varios PATs. No podrás volver a ver este token, así que no cierres ni salgas de la ventana del navegador hasta que almacenes el PAT localmente. ¡Trata este PAT como una contraseña!
 
-## Repositorios y proyectos
+## Repositorios y proyectos de R
 
-Un repositorio es un directorio donde desarrollar un proyecto que contiene todos los archivos necesarios para el mismo. Es como un "contenedor" donde desarrollar un proyecto.
+Un repositorio es un directorio remoto donde desarrollar un proyecto que contiene todos los archivos necesarios para el mismo. Es como un "contenedor" donde desarrollar un proyecto.
 
 Para crear un repositorio en GitHub damos a "*+ New repository*". Aquí se indica el nombre, una pequeña descripción, y si quieres que sea público o privado. Se recomienda iniciar el repositorio con un archivo "README" (*Initialize this repository with a README*) para recoger cualquier información esencial para el uso del repositorio (estructura, descripción más detallada del contenido, etc.).
 
@@ -524,13 +518,13 @@ Si vamos al directorio local seleccionado, encontraremos la carpeta conectada a 
 
 #### Ejercicio
 
-1.  Crea un repositorio de prueba en GitHub y conéctalo a un nuevo proyecto de RStudio (esto generará un repositorio (carpeta) en tu ordenador en la ubicación que hayas especificado). Incluir un archivo "*.gitignore"*
+1.  Crea un repositorio de prueba en GitHub y conéctalo a un nuevo proyecto de RStudio en la carpeta del curso (esto generará un repositorio local (carpeta) en tu ordenador). Incluir un archivo "*.gitignore"*
 
 2.  Crea un nuevo script de R en el directorio de trabajo (es decir, crea un script de R y guárdalo dentro del repositorio que has creado)
 
 3.  En RStudio ve a la pestaña Git para ver todos los documentos que han sido identificados por Git
 
-Una vez finalizada la instalación podrás ver la pestaña de Git en RStudio.
+Una vez finalizada la instalación y conectado el repositorio remoto y el proyecto podrás ver la pestaña de Git en RStudio.
 
 ![Git en RStudio](images/RStudio.JPG)
 
@@ -613,7 +607,7 @@ Cuando se retoma un proyecto tras horas, días o incluso meses, con `git pull` s
 
 ![Commit en RStudio](images/commit_RStudio.png){fig-align="center" width="545"}
 
-Además, en la pestaña Git de RStudio podemos observar el botón "*Diff*" que muestra los cambios que se han hecho a cada archivo desde el último commit y las ramas (que lo explicaremos más abajo). Clickando con el botón derecho del ratón podemos abrir los archivos que han sido modificados mediante "*Open file*" y con el botón "*Revert*" volvemos al estado del último commit (⚠️cuidado con esto porque te borrará los cambios realizados en tu directorio de trabajo).
+Además, en la pestaña Git de RStudio podemos observar el botón "*Diff*" que muestra los cambios que se han hecho a cada archivo desde el último commit y las ramas (que lo explicaremos el último día). Clickando con el botón derecho del ratón podemos abrir los archivos que han sido modificados mediante "*Open file*" y con el botón "*Revert*" volvemos al estado del último commit (⚠️cuidado con esto porque te borrará los cambios realizados en tu directorio de trabajo).
 
 #### Ejercicio
 
