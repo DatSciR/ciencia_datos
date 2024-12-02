@@ -25,13 +25,13 @@ number-sections: true
 
 ## Objetivos del día 2
 
-Los objetivos del día de hoy son:
+-   Entender la filosofía de {tidyverse}.
 
 -   Aprender funciones básicas que nos permitan importar, explorar, limpiar, transformar y manejar datos.
 
--   Aprender a escribir funciones
+-   Aprender a escribir funciones.
 
--   Entender la programación iterativa mediante el paquete {purrr} de {tidyverse}
+-   Entender la programación iterativa mediante el paquete {purrr} de {tidyverse}.
 
 ## Introducción a tidyverse
 
@@ -39,11 +39,11 @@ Los objetivos del día de hoy son:
 
 Los [tres principios básicos](https://design.tidyverse.org/unifying.html) de este meta-paquete son:
 
--   Centrado en humanos: tiene un diseño intuitivo que facilita su uso y accesibilidad para el usuario, ya que está diseñado específicamente para respaldar las actividades de un analista de datos humano.
+-   **Centrado en humanos**: tiene un diseño intuitivo que facilita su uso y accesibilidad para el usuario, ya que está diseñado específicamente para respaldar las actividades de un analista de datos humano.
 
--   Consistencia: todos los paquetes están diseñados para trabajar con datos ordenados (*tidy data*), y las funciones de los paquetes tienen una nomenclatura común y congruente. Esto permite que un usuario que aprende sobre una función o paquete pueda aplicar ese conocimiento a otros, facilitando así la tarea de recordar y deducir código.
+-   **Consistencia**: todos los paquetes están diseñados para trabajar con datos ordenados (*tidy data*), y las funciones de los paquetes tienen una nomenclatura común y congruente. Esto permite que un usuario que aprende sobre una función o paquete pueda aplicar ese conocimiento a otros, facilitando así la tarea de recordar y deducir código.
 
--   Componiblidad: permite al usuario resolver problemas complejos dividiéndolos en pequeñas partes, que pueden combinarse utilizando el operador *pipe*, ya sea el del paquete `magrittr` (`%>%`) o el creado recientemente en R base (`|>`).
+-   **Componiblidad**: permite al usuario resolver problemas complejos dividiéndolos en pequeñas partes, que pueden combinarse utilizando el operador *pipe*, ya sea el del paquete `magrittr` (`%>%`) o el creado recientemente en R base (`|>`).
 
 💡Los dos operador *pipe* tienen pequeñas [diferencias](https://www.tidyverse.org/blog/2023/04/base-vs-magrittr-pipe/) pero en general el comportamiento es el mismo.
 
@@ -57,7 +57,7 @@ library(tidyverse)
 d <- c("hi", "hola", "hola", "hi")
 
 length(unique(d))  
-d |> unique() |> length() # Ctrl + Shift + M para poner un pipe}
+d |> unique() |> length() # Ctrl + Shift + M para poner un pipe
 ```
 
 En este curso realizaremos las distintas tareas que forman parte de la ciencia de datos utilizando *tidyverse*, aunque también se podrían llevar a cabo con R base.
@@ -380,7 +380,7 @@ write_delim(taludes_trans, file = "taludes_trans.csv", delim = ";")
 # en file hay que especificar el directorio donde queremos que se guarde. Si no, se guardará en el directorio de trabajo (getwd())
 ```
 
-## Enlaces de interés sobre sobre manipulación de datos
+## Enlaces de interés sobre manipulación de datos
 
 -   [Cheat sheet de dplyr](https://nyu-cdsc.github.io/learningr/assets/data-transformation.pdf)
 
@@ -477,8 +477,9 @@ En general, sintácticamente, las funciones tienen tres componentes:
 nombre1_v1 <- function(x, y) {
   paste(x, y, sep = "_")
 }
-nombre1_v2 <- function(x, y)
-  paste(x, y, sep = "_")
+
+nombre1_v2 <- function(x, y) paste(x, y, sep = "_")
+
 nombre1_v3 <- \(x, y) paste(x, y, sep = "_")
 
 nombre1_v1("Vero", "Cruz")
@@ -532,7 +533,7 @@ ggplot(penguins_num, aes(x = species, y = flipper_length_mm, color = sex)) +   g
   theme_light()  # etc
 ```
 
-Hemos copiado un código más de dos veces para realizar una misma acción (es decir, un gráfico para ver como se distribuye una variable en función de otras dos que se mantienen constantes) así que hay que considerar la posibilidad de que estemos necesitando una función. A continuación vamos a seguir unos sencillos pasos para transformar cualquier código repetido en función.
+Hemos copiado un código más de dos veces para realizar una misma acción (es decir, un gráfico para ver como se distribuye una variable en función de otras dos que se mantienen constantes) así que hay que considerar la posibilidad de que estemos necesitando una función. A continuación vamos a seguir unos **sencillos pasos para transformar cualquier código repetido en función**.
 
 1.  Analizar el código: ¿cuáles son las partes replicadas? ¿cuantas entradas tenemos? ¿cuáles varían y cuáles no?
 
