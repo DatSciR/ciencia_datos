@@ -4,9 +4,9 @@ title: |
 subtitle: "Curso: Programación y análisis estadístico en R. CADIC, Ushuaia, Argentina"
 author: 
   - name: Verónica Cruz-Alonso 
-    role: Profesora y autora del material
+    roles: "Profesora y autora del material"
   - name: Julen Astigarraga
-    role: Autor del material
+    roles: "Autor del material"
 date: today
 date-format: "DD/MM/YYYY"
 toc: true

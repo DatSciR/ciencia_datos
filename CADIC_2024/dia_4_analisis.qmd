@@ -1,7 +1,7 @@
 ---
 title: | 
-  | Programación y análisis estadístico en R
-subtitle: "Análisis de datos: modelos lineales habituales en ecología"
+  | Análisis de datos: modelos lineales habituales en ecología
+subtitle: "Curso: Programación y análisis estadístico en R. CADIC, Ushuaia, Argentina"
 author: 
   - name: Verónica Cruz-Alonso 
     role: Profesora y autora del material
@@ -27,16 +27,208 @@ number-sections: true
 
 Los objetivos del día de hoy son:
 
--   Aprender funciones básicas que nos permitan importar, explorar, limpiar, transformar y manejar datos.
+-   Aprender los fundamentos de los modelos lineales en R.
 
--   Aprender estilos de código que facilitan su comprensión (📝)
+-   Aprender qué son los modelos generalizados y mixtos y para qué se usan.
 
--   Aprender a escribir funciones
+-   Aprender a reportar los resultados de los modelos.
 
--   Aplicar funciones en programación iterativa mediante el paquete {purrr} de {tidyverse}
+## Introducción a los modelos de regresión
+
+El objetivo de un análisis estadístico es estimar los parámetros del modelo que conducen al mejor ajuste del mismo a nuestros datos. El mejor modelo es aquel que explica la mayor variabilidad posible de la variable respuesta, siempre que los parámetros del modelo sean estadísticamente significativos. No existe un único modelo sino una gran cantidad de modelos que se ajustan a nuestros datos. De entre dos modelos que expliquen la misma variabilidad debemos quedarnos con el más simple de todos (el más parsimonioso).
+
+El análisis de regresión se usa para explicar o modelar la relación lineal entre una variable Y (variable respuesta o dependiente), y una o más variables explicativas o independientes. Cuando hay una variable explicativa hablamos de regresión simple y cuando hay varias es regresión múltiple. Si la(s) variable(s) explicativas son categóricas estamos ante un análisis de la varianza o ANOVA, que al igual que antes puede ser unifactorial si solo hay una variable explicativa (one-way ANOVA) o multifactorial si hay más. Por último, si las variables explicativas son una combinación de categóricas y continuas estaremos antes un ANCOVA (análisis de la covarianza) <!--# citar apuntes de Luis -->. Todos estos nombres hacen referencia a tipos de análisis de regresión que en R se pueden calcular con una única función (`lm(m)`).
+
+### Supuestos de los modelos lineales
+
+La aplicación de un modelo lineal queda supeditado al cumplimiento de una serie de supuestos.
+
+-   Independencia: las observaciones y, por tanto, los residuos del modelo deben ser independientes entre sí. Las formas más comunes de violar el supuesto de independencia son la autocorrelación espacial, cuando distintas observaciones están más próximas entre sí que otras, y la autocorrelación temporal cuando se realizan distintas mediciones de la variable dependiente en los mismos individuos o parcelas a lo largo del tiempo. El supuesto de independencia está muy relacionado con el diseño del estudio. Se lidiar con la dependencia de las observaciones promediando el valor de las que sean dependientes entre sí o a través de modelos mixtos que tienen en cuenta la no independencia sin perder la variabilidad asociada a ella.
+
+-   Normalidad: Los modelos lineales asumen una distribución normal de los residuos del modelo. El criterio de normalidad se refiere a los residuos del modelo y no a nuestra variable dependiente. Es cierto que, en parte, la distribución de los residuos del modelo viene definida por la distribución de la variable dependiente. Por ejemplo, si nuestra variable dependiente son unos y ceros (presencia/ausencia o vivo/muerto), o bien es un conteo (nº individuos) los residuos de nuestro modelo lineal no van a ser normales. En estos casos específicos utilizaremos modelos lineales generalizados.
+
+-   Homocedasticidad: se asume que la varianza es homogenea en todo el rango de la variable independiente. Esto implica que la varianza residual de nuestro modelo debe ser constante. La violación de este supuesto puede hacernos caer en errores de tipo I (falsos positivos). Para evaluar este aspecto se representan los residuos frente a los valores ajustados por el modelo. Uno de los principales problemas que suele haber es que los residuos aumenten conforme aumentan los valores ajustados por el modelo. Puede deberse a que alguna variable no se ha tenido en cuenta o bien a la presencia de outliers en nuestros datos. Una forma de lidiar con este aspecto es transformar la variable respuesta.
+
+-   Linealidad: la relación entre la variable dependiente y la independiente es lineal o puede expresarse como una combinación lineal de parámetros.
+
+```{r anova}
+
+library(tidyverse)
+# install.packages("performance")
+library(performance)
+# install.packages("emmeans")
+library(emmeans)
+# install.packages("")
+library(sjPlot)
+# install.packages("broom")
+library(broom) #https://broom.tidymodels.org/articles/broom.html
+
+pinos <- read_delim(file = "RxF_growth.csv", delim = ",",
+           col_types = list(Irrig = "f",
+             Fert = "f"))
+
+# pinos contiene datos de un experimento en el que se plantaron 144 plántulas de Pinus pinea en 4 bloques en un campo abandonado y se sometieron a un experimento factorial con 4 niveles de riego (0, 150, 300 y 600 mm año⁻¹) y 3 tratamientos de fertilización nitrogenada (0, 150 y 300 kg N ha⁻¹) distribuidos aleatoriamente dentro de cada uno de los 4 bloques.
+
+# Queremos saber si el incremento en diamétro (DI) estuvo condicionado por la irrigación
+
+pinos
+
+# Exploración de las variables
+
+# Outliers
+
+ggplot(pinos) +
+  geom_boxplot(aes(y = DI)) 
+
+ggplot(pinos) +
+  geom_jitter(aes(y = DI, x = 1)) 
+# no real outliers
+
+# Normalidad y homogeneidad
+
+ggplot(pinos) + #normal
+  geom_histogram(aes(x = DI)) 
+
+ggplot(pinos) +
+  geom_boxplot(aes(x = Irrig, y = DI)) 
+
+pinos |> 
+  group_by(Irrig) |> 
+  summarize(var = var(DI))
+
+# Independencia?
+
+ggplot(pinos) +
+  geom_boxplot(aes(x = as.factor(Block), y = DI)) 
+
+
+# Ajustamos un modelo lineal
+
+m1 <- lm(DI ~ Irrig, data = pinos)
+summary(m1)
+
+# ¿Qué significa cada parámetro?
+# intercept = media del nivel de referencia, variables dummy
+
+pinos <- pinos |> 
+  mutate(f1 = fitted(m1))
+
+ggplot(pinos) +
+  geom_point(aes(x = f1, y = DI)) +
+  labs(y = "Observados", x = "Predichos")
+
+# Tabla del anova
+
+anova(m1)
+
+# Irrig SumSq / (Irrig SumSq + Residuals SumSq) = R2 
+3259.6/(3259.6+6744.8)
+
+# Check residuals
+x11()
+check_model(m1)
+
+# Pero... no hemos acabado
+# Una de las principales razones de usar factores es conocer las diferencias entre los niveles del factor
+
+paircomp <- emmeans::emmeans(m1, specs = pairwise ~ Irrig)
+paircomp
+
+# Representación del modelo
+
+plot_model(m1, type = "pred", terms = "Irrig", show.data = TRUE, jitter = 0.5) +
+  labs(title = "", 
+    x = "Irrigation treatment", y = "Diameter increase (mm/year)") +
+  theme_bw()
+
+# Tablas de resultados
+
+tidy(m1)
+tidy(anova(m1))
+augment(m1)
+glance(m1)
+
+
+```
+
+```{r ancova}
+
+encinas <- read_delim(file = "bellotas.csv", delim = ",",
+           col_types = list(Competition = "f",
+             Fert = "f"))
+
+# encinas contiene información de 40 árboles adultos de encina (Quercus ilex). En alrededor de la mitad de ellos se eliminaron todas las plantas competidoras (herbáceas), dando lugar a dos tratamientos de competencia (sí y no). La mitad de las encinas en cada tratamiento de competencia se sometieron a fertilización durante tres años, mientras que la otra mitad se dejó como control. Después de 3 años, se midió el diámetro y se calculó el crecimiento como el aumento en diámetro (DI). La variable de respuesta fue la producción de bellotas por árbol.
+
+# El nombre "Acorn " tiene un espacio
+encinas <- encinas |> 
+  rename(Acorn = `Acorn `)
+
+# Nuestra hipótesis es que aquellos árboles que crezcan más también mostrarán una mayor producción de bellotas y que esta relación dependerá de la disponibilidad de recursos, es decir, más nutrientes y agua debido a la fertilización y la falta de competencia.
+
+# Detección de outliers
+
+ggplot(encinas) +
+  geom_boxplot(aes(y = Acorn, x = 1)) 
+
+ggplot(encinas) +
+  geom_boxplot(aes(y = Acorn, x = Fert))
+
+ggplot(data = encinas) +
+  geom_boxplot(aes(y = Acorn, x = Competition))
+
+# Normalidad y homogeneidad
+
+ggplot(encinas) +
+  geom_histogram(aes(x = Acorn), bins = 10) 
+
+# Relaciones entre variables
+
+ggplot(encinas) +
+  geom_point(aes(x = Acorn, y = DI))
+
+# Ajustamos un modelo, empezamos por uno sencillo
+
+ancova1 <- lm(Acorn ~ Fert * DI, data = encinas)
+summary(ancova1)
+anova(ancova1)
+check_model(ancova1)
+
+# Interpretación de los parámetros
+
+# Figura con la relación entre las variables continuas para cada nivel del tratamiento
+plot_model(ancova1, type = "pred", terms = c("DI","Fert"), show.data = TRUE) +
+  labs(title = "", 
+    x = "Crecimiento", y = "Producción de bellotas") +
+  theme_bw()
+
+# Nuestra hipótesis es que la competencia también influye
+
+ancova2 <- lm(Acorn ~ Competition * DI, data = encinas)
+summary(ancova2)
+check_model(ancova2)
+
+plot_model(ancova2, type = "pred", terms = c("DI","Competition"), show.data = TRUE) +
+  labs(title = "", 
+    x = "Crecimiento", y = "Producción de bellotas") +
+  theme_bw()
+
+# 
+
+ancova3 <- lm(Acorn ~ Fert * DI + Competition * DI, data = encinas)
+summary(ancova3)
+check_model(ancova3)
+
+AIC(ancova1, ancova2, ancova3)
+
+
+
+
+
+```
+
+VIF root of 1 / (1 Rj ), also called the variance inflation factor (VIF), whichmeans that the P-values get largermaking it more difficult to detect an effect
 
 ```{r}
-
 # Modelos mixtos y generalizados
 
 # Instalar paquetes (aquellos que no tengais) y cargadlos en R
@@ -289,5 +481,3 @@ check_outliers(m1) |> plot()
 check_outliers(m2)
 
 ```
-
-VIF root of 1 / (1 Rj ), also called the variance inflation factor (VIF), whichmeans that the P-values get largermaking it more difficult to detect an effect

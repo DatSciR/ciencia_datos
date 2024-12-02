@@ -1,10 +1,10 @@
 ---
 title: | 
-  | Programación y análisis estadístico en R
-subtitle: "Visualización y análisis exploratorio de datos"
+  | Visualización y análisis exploratorio de datos
+subtitle: "Curso: Programación y análisis estadístico en R. CADIC, Ushuaia, Argentina"
 author: 
   - name: Verónica Cruz-Alonso 
-    role: Profesora y autora del material
+    roles: "Profesora y autora del material"
 date: today
 date-format: "DD/MM/YYYY"
 toc: true
@@ -352,7 +352,7 @@ miplot2
 
 Cuando queremos entender y/o predecir un patrón o un proceso (variable dependiente o respuesta; *y*), lo modelizamos en función de otras variables que pensamos que lo explican o lo predicen (variables independientes, covariables o explicativas; *x*). Todas ellas pueden ser a su vez **cualitativas o cuantitativas**.
 
-![Tipos de variables](images/tipos_variables.png){alt="Tipos de variables"}
+![Tipos de variables](images/tipos_variables.png)
 
 La exploración de datos puede llevar hasta el 50% del tiempo de análisis. Es imprescindible para evitar errores tipo I (determinar que hay relación entre dos variables cuando no existe), errores tipo II (determinar que no hay relación entre dos variables cuando existe), encontrar patrones no lineales o evitar que el resultado esté determinados por unos pocos puntos discordantes (*outliers*). A continuación nos vamos a enfocar en herramientas gráficas para la exploración de variables cualitativas y cuantitativas aunque también mostraremos test estadísticos que pueden servir (de normalidad, homogeneidad, skewness, etc.). Seguiremo el protocolo de análisis exploratorio de datos publicado por @zuur2010.
 
