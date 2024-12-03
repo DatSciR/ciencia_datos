@@ -8,9 +8,9 @@
 
 <meta name="author" content="Verónica Cruz-Alonso">
 <meta name="author" content="Julen Astigarraga">
-<meta name="dcterms.date" content="2024-02-12">
+<meta name="dcterms.date" content="2024-03-12">
 
-<title>quarto-input70e4c53b1b266cfd</title>
+<title>quarto-input51805e55ae17e667</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -135,7 +135,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#ejercicio-6" id="toc-ejercicio-6" class="nav-link" data-scroll-target="#ejercicio-6"><span class="header-section-number">13.1.1</span> Ejercicio</a></li>
   </ul></li>
-  <li><a href="#nuestro-segundo-funcional-generando-vectores-map_" id="toc-nuestro-segundo-funcional-generando-vectores-map_" class="nav-link" data-scroll-target="#nuestro-segundo-funcional-generando-vectores-map_"><span class="header-section-number">13.2</span> Nuestro segundo funcional: generando vectores, <code>map_*()</code></a>
+  <li><a href="#nuestro-segundo-funcional-generando-vectores-y-data.frames-map_" id="toc-nuestro-segundo-funcional-generando-vectores-y-data.frames-map_" class="nav-link" data-scroll-target="#nuestro-segundo-funcional-generando-vectores-y-data.frames-map_"><span class="header-section-number">13.2</span> Nuestro segundo funcional: generando vectores y data.frames, <code>map_*()</code></a>
   <ul class="collapse">
   <li><a href="#ejercicio-7" id="toc-ejercicio-7" class="nav-link" data-scroll-target="#ejercicio-7"><span class="header-section-number">13.2.1</span> Ejercicio</a></li>
   </ul></li>
@@ -167,7 +167,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">02/12/2024</p>
+      <p class="date">03/12/2024</p>
     </div>
   </div>
   
@@ -489,14 +489,13 @@ $ Agua    &lt;fct&gt; Sequia estival, Sequia estival, Sequia estival, Sequia est
 <section id="ejercicio" class="level4" data-number="4.3.1">
 <h4 data-number="4.3.1" class="anchored" data-anchor-id="ejercicio"><span class="header-section-number">4.3.1</span> Ejercicio</h4>
 <ul>
-<li>Lee el data.frame “Macrobenthos.txt”. Pista: el delimitador entre datos es el tabulador (“).</li>
+<li>Lee el data.frame “Macrobenthos.txt”. Pista: el delimitador entre datos es el tabulador (“\t”). <!--# No sale bien el simbolo --></li>
 </ul>
 <p>💡“Macrobenthos.txt” es una base de datos sobre la abundancia de distintos grupos taxonómicos de macroinvertebrados marinos (<a href="https://link.springer.com/book/10.1007/978-0-387-93837-0">Zuur et al.&nbsp;2009</a>).</p>
 <ul>
 <li><p>Crea un subset de datos que contenga las filas de la 1 a la 10 y de la 390 a la 400.</p></li>
-<li><p>Crea un subset que NO contenga el Taxon número 1. Pista: revisa los <a href="https://bookdown.org/jboscomendoza/r-principiantes4/operadores-relacionales.html">operadores de R</a>.</p></li>
-<li><p>Crea un subset con las observaciones del Taxon 2 donde se haya registrado una abundancia mayor de 50 o menor o igual a 5. Pista: necesitarás paréntesis para filtrar.</p></li>
-<li><p>¿Cuántas filas han quedado?</p></li>
+<li><p>De la tabla original, crea un subset que NO contenga el Taxon número 1. Pista: revisa los <a href="https://bookdown.org/jboscomendoza/r-principiantes4/operadores-relacionales.html">operadores de R</a>.</p></li>
+<li><p>Crea un subset con las observaciones del Taxon 2 donde se haya registrado una abundancia mayor de 50 o menor o igual a 5. Pista: necesitarás paréntesis para filtrar. ¿Cuántas filas han quedado?</p></li>
 </ul>
 </section>
 </section>
@@ -584,34 +583,33 @@ $ Agua    &lt;fct&gt; Sequia estival, Sequia estival, Sequia estival, Sequia est
 <span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">supervivencia =</span> <span class="fu">as.factor</span>(<span class="fu">sample</span>(</span>
 <span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
 <span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">size =</span> <span class="fu">nrow</span>(taludes_bien),</span>
-<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.4</span>, <span class="fl">0.6</span>),</span>
-<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">replace =</span> <span class="cn">TRUE</span></span>
-<span id="cb46-10"><a href="#cb46-10" aria-hidden="true" tabindex="-1"></a>    )),</span>
-<span id="cb46-11"><a href="#cb46-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># utilizar una variable para calcular otra</span></span>
-<span id="cb46-12"><a href="#cb46-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">carbono =</span> biomasa <span class="sc">*</span> <span class="fu">rnorm</span>(</span>
-<span id="cb46-13"><a href="#cb46-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">n =</span> <span class="fu">nrow</span>(taludes_bien),</span>
-<span id="cb46-14"><a href="#cb46-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">mean =</span> <span class="fl">0.4</span>,</span>
-<span id="cb46-15"><a href="#cb46-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">sd =</span> <span class="fl">0.2</span></span>
-<span id="cb46-16"><a href="#cb46-16" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb46-17"><a href="#cb46-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
-<span id="cb46-18"><a href="#cb46-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(ID, <span class="fu">everything</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">replace =</span> <span class="cn">TRUE</span></span>
+<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a>    )),</span>
+<span id="cb46-10"><a href="#cb46-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># utilizar una variable para calcular otra</span></span>
+<span id="cb46-11"><a href="#cb46-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">carbono =</span> biomasa <span class="sc">*</span> <span class="fu">rnorm</span>(</span>
+<span id="cb46-12"><a href="#cb46-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">n =</span> <span class="fu">nrow</span>(taludes_bien),</span>
+<span id="cb46-13"><a href="#cb46-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">mean =</span> <span class="fl">0.4</span>,</span>
+<span id="cb46-14"><a href="#cb46-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">sd =</span> <span class="fl">0.2</span></span>
+<span id="cb46-15"><a href="#cb46-15" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb46-16"><a href="#cb46-16" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb46-17"><a href="#cb46-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(ID, <span class="fu">everything</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 91 × 6
       ID biomasa nivel_luz agua_estival   supervivencia carbono
    &lt;int&gt;   &lt;dbl&gt; &lt;fct&gt;     &lt;fct&gt;          &lt;fct&gt;           &lt;dbl&gt;
  1     1    3.04 Nivel 1   Sequia estival 0               0.931
- 2     2    3.57 Nivel 1   Sequia estival 0               0.877
+ 2     2    3.57 Nivel 1   Sequia estival 1               0.877
  3     3    3.67 Nivel 1   Sequia estival 0               3.05 
- 4     4    4.59 Nivel 1   Sequia estival 0               0.611
+ 4     4    4.59 Nivel 1   Sequia estival 1               0.611
  5     5    4.34 Nivel 1   Sequia estival 1               2.17 
- 6     6    2.25 Nivel 1   Sequia estival 1               1.46 
+ 6     6    2.25 Nivel 1   Sequia estival 0               1.46 
  7     7    4.12 Nivel 1   Sequia estival 0               2.17 
- 8     8    2.45 Nivel 1   Sequia estival 1               1.18 
- 9     9    4.46 Nivel 1   Sequia estival 1               2.49 
+ 8     8    2.45 Nivel 1   Sequia estival 0               1.18 
+ 9     9    4.46 Nivel 1   Sequia estival 0               2.49 
 10    10    3.51 Nivel 1   Sequia estival 1               1.30 
 # ℹ 81 more rows</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>taludes_bien <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>taludes_bien <span class="sc">|&gt;</span> </span>
 <span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># sobreescribir una variable. En concreto fct_recode </span></span>
 <span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># sirve para redefinir los niveles de un factor</span></span>
@@ -645,25 +643,25 @@ $ Agua    &lt;fct&gt; Sequia estival, Sequia estival, Sequia estival, Sequia est
 <span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># utilizar varias variables para calcular otra nueva</span></span>
 <span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">estres =</span> <span class="fu">case_when</span>(</span>
 <span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>      <span class="co"># "Si el nivel de luz es 1 y hay sequia, el estrés será alto"</span></span>
-<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>      nivel_luz <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span> agua_estival <span class="sc">==</span> <span class="st">"sequia"</span> <span class="sc">~</span> <span class="st">"alto"</span>,</span>
-<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>      nivel_luz <span class="sc">==</span> <span class="dv">3</span> <span class="sc">&amp;</span> agua_estival <span class="sc">==</span> <span class="st">"lluvia"</span> <span class="sc">~</span> <span class="st">"bajo"</span>,</span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>      nivel_luz <span class="sc">==</span> <span class="st">"Nivel 1"</span> <span class="sc">&amp;</span> agua_estival <span class="sc">==</span> <span class="st">"Sequia estival"</span> <span class="sc">~</span> <span class="st">"alto"</span>,</span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>      nivel_luz <span class="sc">==</span> <span class="st">"Nivel 3"</span> <span class="sc">&amp;</span> agua_estival <span class="sc">==</span> <span class="st">"Lluvia estival"</span> <span class="sc">~</span> <span class="st">"bajo"</span>,</span>
 <span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"intermedio"</span></span>
 <span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 91 × 4
-   biomasa nivel_luz agua_estival   estres    
-     &lt;dbl&gt; &lt;fct&gt;     &lt;fct&gt;          &lt;chr&gt;     
- 1    3.04 Nivel 1   Sequia estival intermedio
- 2    3.57 Nivel 1   Sequia estival intermedio
- 3    3.67 Nivel 1   Sequia estival intermedio
- 4    4.59 Nivel 1   Sequia estival intermedio
- 5    4.34 Nivel 1   Sequia estival intermedio
- 6    2.25 Nivel 1   Sequia estival intermedio
- 7    4.12 Nivel 1   Sequia estival intermedio
- 8    2.45 Nivel 1   Sequia estival intermedio
- 9    4.46 Nivel 1   Sequia estival intermedio
-10    3.51 Nivel 1   Sequia estival intermedio
+   biomasa nivel_luz agua_estival   estres
+     &lt;dbl&gt; &lt;fct&gt;     &lt;fct&gt;          &lt;chr&gt; 
+ 1    3.04 Nivel 1   Sequia estival alto  
+ 2    3.57 Nivel 1   Sequia estival alto  
+ 3    3.67 Nivel 1   Sequia estival alto  
+ 4    4.59 Nivel 1   Sequia estival alto  
+ 5    4.34 Nivel 1   Sequia estival alto  
+ 6    2.25 Nivel 1   Sequia estival alto  
+ 7    4.12 Nivel 1   Sequia estival alto  
+ 8    2.45 Nivel 1   Sequia estival alto  
+ 9    4.46 Nivel 1   Sequia estival alto  
+10    3.51 Nivel 1   Sequia estival alto  
 # ℹ 81 more rows</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># repetimos todo lo anterior concatenando todo el proceso:</span></span>
@@ -705,7 +703,7 @@ $ Agua    &lt;fct&gt; Sequia estival, Sequia estival, Sequia estival, Sequia est
 <section id="ejercicio-2" class="level4" data-number="5.1.1">
 <h4 data-number="5.1.1" class="anchored" data-anchor-id="ejercicio-2"><span class="header-section-number">5.1.1</span> Ejercicio</h4>
 <ul>
-<li>Con el data.frame macrobenthos genera una nueva columna con la relación entre la turbidez del agua y la materia orgánica.</li>
+<li>Con el data.frame macrobenthos genera una nueva columna con la relación (división) entre la turbidez del agua y la materia orgánica.</li>
 </ul>
 </section>
 </section>
@@ -803,7 +801,7 @@ $ Agua    &lt;fct&gt; Sequia estival, Sequia estival, Sequia estival, Sequia est
 <span id="cb61-6"><a href="#cb61-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">bloque =</span> <span class="fu">sample</span>(<span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">size =</span> <span class="fu">nrow</span>(taludes_trans), <span class="at">replace =</span> <span class="cn">TRUE</span>))</span>
 <span id="cb61-7"><a href="#cb61-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb61-8"><a href="#cb61-8" aria-hidden="true" tabindex="-1"></a>taludes_trans <span class="ot">&lt;-</span> taludes_trans <span class="sc">|&gt;</span> </span>
-<span id="cb61-9"><a href="#cb61-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(bloques, <span class="at">by =</span> <span class="st">"ID"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb61-9"><a href="#cb61-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(bloques) <span class="sc">|&gt;</span> </span>
 <span id="cb61-10"><a href="#cb61-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(ID, bloque, <span class="fu">everything</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -851,17 +849,17 @@ $ Agua    &lt;fct&gt; Sequia estival, Sequia estival, Sequia estival, Sequia est
 <span id="cb63-20"><a href="#cb63-20" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb63-21"><a href="#cb63-21" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(df_rescaled1)</span>
 <span id="cb63-22"><a href="#cb63-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-23"><a href="#cb63-23" aria-hidden="true" tabindex="-1"></a>rescale01 <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb63-23"><a href="#cb63-23" aria-hidden="true" tabindex="-1"></a>rescale01 <span class="ot">&lt;-</span> <span class="cf">function</span>(x) { </span>
 <span id="cb63-24"><a href="#cb63-24" aria-hidden="true" tabindex="-1"></a>  rng <span class="ot">&lt;-</span> <span class="fu">range</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)      </span>
 <span id="cb63-25"><a href="#cb63-25" aria-hidden="true" tabindex="-1"></a>  (x <span class="sc">-</span> rng[<span class="dv">1</span>]) <span class="sc">/</span> (rng[<span class="dv">2</span>] <span class="sc">-</span> rng[<span class="dv">1</span>])</span>
 <span id="cb63-26"><a href="#cb63-26" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb63-27"><a href="#cb63-27" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb63-28"><a href="#cb63-28" aria-hidden="true" tabindex="-1"></a>df_rescaled2 <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
 <span id="cb63-29"><a href="#cb63-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb63-30"><a href="#cb63-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">bill_length_mm =</span> <span class="fu">rescale01</span>(bill_length_mm),</span>
-<span id="cb63-31"><a href="#cb63-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">bill_depth_mm =</span> <span class="fu">rescale01</span>(bill_depth_mm),</span>
-<span id="cb63-32"><a href="#cb63-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">flipper_length_mm =</span> <span class="fu">rescale01</span>(flipper_length_mm),</span>
-<span id="cb63-33"><a href="#cb63-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">body_mass_g =</span> <span class="fu">rescale01</span>(body_mass_g)</span>
+<span id="cb63-30"><a href="#cb63-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">bill_length_mm =</span> <span class="fu">rescale01</span>(<span class="at">x =</span> bill_length_mm),</span>
+<span id="cb63-31"><a href="#cb63-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">bill_depth_mm =</span> <span class="fu">rescale01</span>(<span class="at">x =</span> bill_depth_mm),</span>
+<span id="cb63-32"><a href="#cb63-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">flipper_length_mm =</span> <span class="fu">rescale01</span>(<span class="at">x =</span> flipper_length_mm),</span>
+<span id="cb63-33"><a href="#cb63-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">body_mass_g =</span> <span class="fu">rescale01</span>(<span class="at">x =</span> body_mass_g)</span>
 <span id="cb63-34"><a href="#cb63-34" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb63-35"><a href="#cb63-35" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb63-36"><a href="#cb63-36" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(df_rescaled2)</span>
@@ -1299,44 +1297,51 @@ $c
 <p><img src="images/map+fix.png" class="img-fluid"></p>
 </section>
 </section>
-<section id="nuestro-segundo-funcional-generando-vectores-map_" class="level3" data-number="13.2">
-<h3 data-number="13.2" class="anchored" data-anchor-id="nuestro-segundo-funcional-generando-vectores-map_"><span class="header-section-number">13.2</span> Nuestro segundo funcional: generando vectores, <code>map_*()</code></h3>
+<section id="nuestro-segundo-funcional-generando-vectores-y-data.frames-map_" class="level3" data-number="13.2">
+<h3 data-number="13.2" class="anchored" data-anchor-id="nuestro-segundo-funcional-generando-vectores-y-data.frames-map_"><span class="header-section-number">13.2</span> Nuestro segundo funcional: generando vectores y data.frames, <code>map_*()</code></h3>
 <section id="ejercicio-7" class="level4" data-number="13.2.1">
 <h4 data-number="13.2.1" class="anchored" data-anchor-id="ejercicio-7"><span class="header-section-number">13.2.1</span> Ejercicio</h4>
 <p>Dedicadle un par de minutos a entender lo que hacen las siguientes funciones:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map_lgl</span>(penguins, is.numeric) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map_df</span>(df_ej, first)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+      a     b     c
+  &lt;int&gt; &lt;int&gt; &lt;int&gt;
+1     3     3     2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map_lgl</span>(penguins, is.numeric) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          species            island    bill_length_mm     bill_depth_mm 
             FALSE             FALSE              TRUE              TRUE 
 flipper_length_mm       body_mass_g               sex              year 
              TRUE              TRUE             FALSE              TRUE </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a>penguins_num <span class="ot">&lt;-</span> penguins[ , <span class="fu">map_lgl</span>(penguins, is.numeric)]  </span>
-<span id="cb105-2"><a href="#cb105-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb105-3"><a href="#cb105-3" aria-hidden="true" tabindex="-1"></a><span class="fu">map_dbl</span>(penguins_num, median, <span class="at">na.rm =</span> T) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a>penguins_num <span class="ot">&lt;-</span> penguins[ , <span class="fu">map_lgl</span>(penguins, is.numeric)]  </span>
+<span id="cb107-2"><a href="#cb107-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb107-3"><a href="#cb107-3" aria-hidden="true" tabindex="-1"></a><span class="fu">map_dbl</span>(penguins_num, median, <span class="at">na.rm =</span> T) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   bill_length_mm     bill_depth_mm flipper_length_mm       body_mass_g 
             44.45             17.30            197.00           4050.00 
              year 
           2008.00 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map_chr</span>(penguins, class) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map_chr</span>(penguins, class) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          species            island    bill_length_mm     bill_depth_mm 
          "factor"          "factor"         "numeric"         "numeric" 
 flipper_length_mm       body_mass_g               sex              year 
         "integer"         "integer"          "factor"         "integer" </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map_int</span>(penguins, \(x) <span class="fu">length</span>(<span class="fu">unique</span>(x))) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb111"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map_int</span>(penguins, \(x) <span class="fu">length</span>(<span class="fu">unique</span>(x))) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          species            island    bill_length_mm     bill_depth_mm 
                 3                 3               165                81 
 flipper_length_mm       body_mass_g               sex              year 
                56                95                 3                 3 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb111"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">4</span> <span class="sc">|&gt;</span></span>
-<span id="cb111-2"><a href="#cb111-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map_vec</span>(\(x) <span class="fu">as.Date</span>(<span class="fu">ISOdate</span>(x <span class="sc">+</span> <span class="dv">2024</span>, <span class="dv">12</span>, <span class="dv">03</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb113"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">4</span> <span class="sc">|&gt;</span></span>
+<span id="cb113-2"><a href="#cb113-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map_vec</span>(\(x) <span class="fu">as.Date</span>(<span class="fu">ISOdate</span>(x <span class="sc">+</span> <span class="dv">2024</span>, <span class="dv">12</span>, <span class="dv">03</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "2025-12-03" "2026-12-03" "2027-12-03" "2028-12-03"</code></pre>
 </div>
@@ -1360,11 +1365,11 @@ flipper_length_mm       body_mass_g               sex              year
 Session Info
 </summary>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb113"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.time</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb115"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb115-1"><a href="#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.time</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "2024-12-02 23:20:23 CET"</code></pre>
+<pre><code>[1] "2024-12-03 22:46:40 CET"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb115"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb115-1"><a href="#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb117"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb117-1"><a href="#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>R version 4.4.2 (2024-10-31 ucrt)
 Platform: x86_64-w64-mingw32/x64

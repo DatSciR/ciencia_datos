@@ -1,7 +1,7 @@
 # Organización de datos y bases de programación funcional
 
 Verónica Cruz-Alonso, Julen Astigarraga
-02/12/2024
+03/12/2024
 
 - [<span class="toc-section-number">1</span> Objetivos del día
   2](#objetivos-del-día-2)
@@ -79,8 +79,8 @@ Verónica Cruz-Alonso, Julen Astigarraga
     - [<span class="toc-section-number">13.1.1</span>
       Ejercicio](#ejercicio-6)
   - [<span class="toc-section-number">13.2</span> Nuestro segundo
-    funcional: generando vectores,
-    `map_*()`](#nuestro-segundo-funcional-generando-vectores-map_)
+    funcional: generando vectores y data.frames,
+    `map_*()`](#nuestro-segundo-funcional-generando-vectores-y-dataframes-map_)
     - [<span class="toc-section-number">13.2.1</span>
       Ejercicio](#ejercicio-7)
   - [<span class="toc-section-number">13.3</span> Enlaces de interés
@@ -464,7 +464,7 @@ taludes_bien |>
 #### Ejercicio
 
 - Lee el data.frame “Macrobenthos.txt”. Pista: el delimitador entre
-  datos es el tabulador (“).
+  datos es el tabulador (“\t”). <!--# No sale bien el simbolo -->
 
 💡“Macrobenthos.txt” es una base de datos sobre la abundancia de
 distintos grupos taxonómicos de macroinvertebrados marinos ([Zuur et
@@ -473,15 +473,13 @@ al. 2009](https://link.springer.com/book/10.1007/978-0-387-93837-0)).
 - Crea un subset de datos que contenga las filas de la 1 a la 10 y de la
   390 a la 400.
 
-- Crea un subset que NO contenga el Taxon número 1. Pista: revisa los
-  [operadores de
+- De la tabla original, crea un subset que NO contenga el Taxon
+  número 1. Pista: revisa los [operadores de
   R](https://bookdown.org/jboscomendoza/r-principiantes4/operadores-relacionales.html).
 
 - Crea un subset con las observaciones del Taxon 2 donde se haya
   registrado una abundancia mayor de 50 o menor o igual a 5. Pista:
-  necesitarás paréntesis para filtrar.
-
-- ¿Cuántas filas han quedado?
+  necesitarás paréntesis para filtrar. ¿Cuántas filas han quedado?
 
 ### [Select](https://dplyr.tidyverse.org/reference/select.html): seleccionar columnas utilizando condiciones
 
@@ -574,7 +572,6 @@ taludes_bien |>
     supervivencia = as.factor(sample(
       c(0, 1),
       size = nrow(taludes_bien),
-      prob = c(0.4, 0.6),
       replace = TRUE
     )),
     # utilizar una variable para calcular otra
@@ -591,19 +588,19 @@ taludes_bien |>
           ID biomasa nivel_luz agua_estival   supervivencia carbono
        <int>   <dbl> <fct>     <fct>          <fct>           <dbl>
      1     1    3.04 Nivel 1   Sequia estival 0               0.931
-     2     2    3.57 Nivel 1   Sequia estival 0               0.877
+     2     2    3.57 Nivel 1   Sequia estival 1               0.877
      3     3    3.67 Nivel 1   Sequia estival 0               3.05 
-     4     4    4.59 Nivel 1   Sequia estival 0               0.611
+     4     4    4.59 Nivel 1   Sequia estival 1               0.611
      5     5    4.34 Nivel 1   Sequia estival 1               2.17 
-     6     6    2.25 Nivel 1   Sequia estival 1               1.46 
+     6     6    2.25 Nivel 1   Sequia estival 0               1.46 
      7     7    4.12 Nivel 1   Sequia estival 0               2.17 
-     8     8    2.45 Nivel 1   Sequia estival 1               1.18 
-     9     9    4.46 Nivel 1   Sequia estival 1               2.49 
+     8     8    2.45 Nivel 1   Sequia estival 0               1.18 
+     9     9    4.46 Nivel 1   Sequia estival 0               2.49 
     10    10    3.51 Nivel 1   Sequia estival 1               1.30 
     # ℹ 81 more rows
 
 ``` r
-taludes_bien |>
+taludes_bien |> 
   mutate(
     # sobreescribir una variable. En concreto fct_recode 
     # sirve para redefinir los niveles de un factor
@@ -639,26 +636,26 @@ taludes_bien |>
     # utilizar varias variables para calcular otra nueva
     estres = case_when(
       # "Si el nivel de luz es 1 y hay sequia, el estrés será alto"
-      nivel_luz == 1 & agua_estival == "sequia" ~ "alto",
-      nivel_luz == 3 & agua_estival == "lluvia" ~ "bajo",
+      nivel_luz == "Nivel 1" & agua_estival == "Sequia estival" ~ "alto",
+      nivel_luz == "Nivel 3" & agua_estival == "Lluvia estival" ~ "bajo",
       TRUE ~ "intermedio"
     )
   )
 ```
 
     # A tibble: 91 × 4
-       biomasa nivel_luz agua_estival   estres    
-         <dbl> <fct>     <fct>          <chr>     
-     1    3.04 Nivel 1   Sequia estival intermedio
-     2    3.57 Nivel 1   Sequia estival intermedio
-     3    3.67 Nivel 1   Sequia estival intermedio
-     4    4.59 Nivel 1   Sequia estival intermedio
-     5    4.34 Nivel 1   Sequia estival intermedio
-     6    2.25 Nivel 1   Sequia estival intermedio
-     7    4.12 Nivel 1   Sequia estival intermedio
-     8    2.45 Nivel 1   Sequia estival intermedio
-     9    4.46 Nivel 1   Sequia estival intermedio
-    10    3.51 Nivel 1   Sequia estival intermedio
+       biomasa nivel_luz agua_estival   estres
+         <dbl> <fct>     <fct>          <chr> 
+     1    3.04 Nivel 1   Sequia estival alto  
+     2    3.57 Nivel 1   Sequia estival alto  
+     3    3.67 Nivel 1   Sequia estival alto  
+     4    4.59 Nivel 1   Sequia estival alto  
+     5    4.34 Nivel 1   Sequia estival alto  
+     6    2.25 Nivel 1   Sequia estival alto  
+     7    4.12 Nivel 1   Sequia estival alto  
+     8    2.45 Nivel 1   Sequia estival alto  
+     9    4.46 Nivel 1   Sequia estival alto  
+    10    3.51 Nivel 1   Sequia estival alto  
     # ℹ 81 more rows
 
 ``` r
@@ -702,7 +699,7 @@ taludes_trans <- taludes_bien |>
 #### Ejercicio
 
 - Con el data.frame macrobenthos genera una nueva columna con la
-  relación entre la turbidez del agua y la materia orgánica.
+  relación (división) entre la turbidez del agua y la materia orgánica.
 
 ### [Summarise](https://dplyr.tidyverse.org/reference/summarise.html) y [group by](https://dplyr.tidyverse.org/reference/group_by.html): generar un nuevo `data.frame` resumiendo cada grupo a una fila
 
@@ -796,7 +793,7 @@ bloques <- tibble(ID = 1:nrow(taludes_trans),
   bloque = sample(x = 1:2, size = nrow(taludes_trans), replace = TRUE))
 
 taludes_trans <- taludes_trans |> 
-  left_join(bloques, by = "ID") |> 
+  left_join(bloques) |> 
   select(ID, bloque, everything())
 ```
 
@@ -860,17 +857,17 @@ df_rescaled1 <- df |>
 
 View(df_rescaled1)
 
-rescale01 <- function(x) {
+rescale01 <- function(x) { 
   rng <- range(x, na.rm = TRUE)      
   (x - rng[1]) / (rng[2] - rng[1])
 }
 
 df_rescaled2 <- df |>
   mutate(
-    bill_length_mm = rescale01(bill_length_mm),
-    bill_depth_mm = rescale01(bill_depth_mm),
-    flipper_length_mm = rescale01(flipper_length_mm),
-    body_mass_g = rescale01(body_mass_g)
+    bill_length_mm = rescale01(x = bill_length_mm),
+    bill_depth_mm = rescale01(x = bill_depth_mm),
+    flipper_length_mm = rescale01(x = flipper_length_mm),
+    body_mass_g = rescale01(x = body_mass_g)
   )
 
 View(df_rescaled2)
@@ -1422,12 +1419,21 @@ después (p. ej. `na.rm = T`).
 
 ![](images/map+fix.png)
 
-### Nuestro segundo funcional: generando vectores, `map_*()`
+### Nuestro segundo funcional: generando vectores y data.frames, `map_*()`
 
 #### Ejercicio
 
 Dedicadle un par de minutos a entender lo que hacen las siguientes
 funciones:
+
+``` r
+map_df(df_ej, first)
+```
+
+    # A tibble: 1 × 3
+          a     b     c
+      <int> <int> <int>
+    1     3     3     2
 
 ``` r
 map_lgl(penguins, is.numeric) 
@@ -1505,7 +1511,7 @@ Session Info
 Sys.time()
 ```
 
-    [1] "2024-12-02 23:21:02 CET"
+    [1] "2024-12-03 22:47:06 CET"
 
 ``` r
 sessionInfo()

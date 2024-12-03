@@ -57,7 +57,9 @@ library(tidyverse)
 d <- c("hi", "hola", "hola", "hi")
 
 length(unique(d))  
+
 d |> unique() |> length() # Ctrl + Shift + M para poner un pipe
+
 ```
 
 En este curso realizaremos las distintas tareas que forman parte de la ciencia de datos utilizando *tidyverse*, aunque también se podrían llevar a cabo con R base.
@@ -164,17 +166,15 @@ taludes_bien |>
 
 #### Ejercicio
 
--   Lee el data.frame "Macrobenthos.txt". Pista: el delimitador entre datos es el tabulador ("\t").
+-   Lee el data.frame "Macrobenthos.txt". Pista: el delimitador entre datos es el tabulador ("\\t"). <!--# No sale bien el simbolo -->
 
 💡"Macrobenthos.txt" es una base de datos sobre la abundancia de distintos grupos taxonómicos de macroinvertebrados marinos ([Zuur et al. 2009](https://link.springer.com/book/10.1007/978-0-387-93837-0)).
 
 -   Crea un subset de datos que contenga las filas de la 1 a la 10 y de la 390 a la 400.
 
--   Crea un subset que NO contenga el Taxon número 1. Pista: revisa los [operadores de R](https://bookdown.org/jboscomendoza/r-principiantes4/operadores-relacionales.html).
+-   De la tabla original, crea un subset que NO contenga el Taxon número 1. Pista: revisa los [operadores de R](https://bookdown.org/jboscomendoza/r-principiantes4/operadores-relacionales.html).
 
--   Crea un subset con las observaciones del Taxon 2 donde se haya registrado una abundancia mayor de 50 o menor o igual a 5. Pista: necesitarás paréntesis para filtrar.
-
--   ¿Cuántas filas han quedado?
+-   Crea un subset con las observaciones del Taxon 2 donde se haya registrado una abundancia mayor de 50 o menor o igual a 5. Pista: necesitarás paréntesis para filtrar. ¿Cuántas filas han quedado?
 
 ### [Select](https://dplyr.tidyverse.org/reference/select.html): seleccionar columnas utilizando condiciones
 
@@ -218,7 +218,6 @@ taludes_bien |>
     supervivencia = as.factor(sample(
       c(0, 1),
       size = nrow(taludes_bien),
-      prob = c(0.4, 0.6),
       replace = TRUE
     )),
     # utilizar una variable para calcular otra
@@ -230,7 +229,7 @@ taludes_bien |>
   ) |> 
   select(ID, everything())
 
-taludes_bien |>
+taludes_bien |> 
   mutate(
     # sobreescribir una variable. En concreto fct_recode 
     # sirve para redefinir los niveles de un factor
@@ -249,8 +248,8 @@ taludes_bien |>
     # utilizar varias variables para calcular otra nueva
     estres = case_when(
       # "Si el nivel de luz es 1 y hay sequia, el estrés será alto"
-      nivel_luz == 1 & agua_estival == "sequia" ~ "alto",
-      nivel_luz == 3 & agua_estival == "lluvia" ~ "bajo",
+      nivel_luz == "Nivel 1" & agua_estival == "Sequia estival" ~ "alto",
+      nivel_luz == "Nivel 3" & agua_estival == "Lluvia estival" ~ "bajo",
       TRUE ~ "intermedio"
     )
   )
@@ -295,7 +294,7 @@ taludes_trans <- taludes_bien |>
 
 #### Ejercicio
 
--   Con el data.frame macrobenthos genera una nueva columna con la relación entre la turbidez del agua y la materia orgánica.
+-   Con el data.frame macrobenthos genera una nueva columna con la relación (división) entre la turbidez del agua y la materia orgánica.
 
 ### [Summarise](https://dplyr.tidyverse.org/reference/summarise.html) y [group by](https://dplyr.tidyverse.org/reference/group_by.html): generar un nuevo `data.frame` resumiendo cada grupo a una fila
 
@@ -365,7 +364,7 @@ bloques <- tibble(ID = 1:nrow(taludes_trans),
   bloque = sample(x = 1:2, size = nrow(taludes_trans), replace = TRUE))
 
 taludes_trans <- taludes_trans |> 
-  left_join(bloques, by = "ID") |> 
+  left_join(bloques) |> 
   select(ID, bloque, everything())
 
 ```
@@ -421,17 +420,17 @@ df_rescaled1 <- df |>
 
 View(df_rescaled1)
 
-rescale01 <- function(x) {
+rescale01 <- function(x) { 
   rng <- range(x, na.rm = TRUE)      
   (x - rng[1]) / (rng[2] - rng[1])
 }
 
 df_rescaled2 <- df |>
   mutate(
-    bill_length_mm = rescale01(bill_length_mm),
-    bill_depth_mm = rescale01(bill_depth_mm),
-    flipper_length_mm = rescale01(flipper_length_mm),
-    body_mass_g = rescale01(body_mass_g)
+    bill_length_mm = rescale01(x = bill_length_mm),
+    bill_depth_mm = rescale01(x = bill_depth_mm),
+    flipper_length_mm = rescale01(x = flipper_length_mm),
+    body_mass_g = rescale01(x = body_mass_g)
   )
 
 View(df_rescaled2)
@@ -737,13 +736,15 @@ Los argumentos que varían para cada ejecución se ponen antes de la función y 
 
 ![](images/map+fix.png)
 
-### Nuestro segundo funcional: generando vectores, `map_*()`
+### Nuestro segundo funcional: generando vectores y data.frames, `map_*()`
 
 #### Ejercicio
 
 Dedicadle un par de minutos a entender lo que hacen las siguientes funciones:
 
 ```{r map_vectores}
+
+map_df(df_ej, first)
 
 map_lgl(penguins, is.numeric) 
 penguins_num <- penguins[ , map_lgl(penguins, is.numeric)]  
