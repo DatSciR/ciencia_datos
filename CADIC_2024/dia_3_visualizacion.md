@@ -552,10 +552,14 @@ grDevices::hcl.pals() # HCL Palettes
     [113] "Zissou 1"      "Cividis"       "Roma"         
 
 ``` r
-# X11() 
-# example("hcl.colors") 
-# hcl.colors(n = 6, palette = "Lajolla") # para crear paleta 
+# X11()
+# example("hcl.colors")
+hcl.colors(n = 6, palette = "Lajolla") # para crear paleta
+```
 
+    [1] "#FCFFC9" "#EBCE7B" "#DE9529" "#BE5A32" "#7F2B3F" "#1D0B14"
+
+``` r
 # Viridis   
 ggplot(data = titanic, aes(x = Age, y = Fare, color = Age)) +
   geom_point() +    
@@ -565,8 +569,8 @@ ggplot(data = titanic, aes(x = Age, y = Fare, color = Age)) +
 ![](dia_3_visualizacion_files/figure-commonmark/paletas-2.png)
 
 ``` r
-ggplot(data = titanic, aes(x = Age, y = Fare, color = Age)) +    
-  geom_point() +    
+ggplot(data = titanic, aes(x = Age, y = Fare, color = Age)) +
+  geom_point() +
   scale_color_viridis_c()
 ```
 
@@ -600,7 +604,7 @@ Existen temas configurados por defecto y un asistente que te ayuda a
 personalizar el gráfico.
 
 ``` r
-miplot + theme_classic()  
+miplot + theme_classic()   
 ```
 
 ![](dia_3_visualizacion_files/figure-commonmark/temas_defecto-1.png)
@@ -623,9 +627,6 @@ miplot + theme_void()
 # install.packages("ggThemeAssist")  
 miplot
 ```
-
-    Warning: Removed 177 rows containing missing values or values outside the scale range
-    (`geom_point()`).
 
 ![](dia_3_visualizacion_files/figure-commonmark/theme_assist-1.png)
 
@@ -791,8 +792,8 @@ library(plotly)
 titanic |> 
   mutate(orden = 1:nrow(titanic)) |> 
   ggplot() + 
-  geom_point(aes(x = Age, y = Fare)) +
-  geom_text(aes(x = Age, y = Fare, label = orden), col = "red", size = 2) 
+  geom_point(aes(x = Age, y = Fare), alpha = 0.2) +
+  geom_text(aes(x = Age, y = Fare-3, label = orden), col = "red", size = 2) 
 ```
 
 ![](dia_3_visualizacion_files/figure-commonmark/outliers_gestion-1.png)
@@ -994,7 +995,7 @@ shapiro.test(a) # p < 0.05 se rechaza hipótesis nula
         Shapiro-Wilk normality test
 
     data:  a
-    W = 0.99877, p-value = 0.8688
+    W = 0.99545, p-value = 0.01836
 
 ``` r
 # H0: distribución de la variable = distribución normal
@@ -1005,7 +1006,7 @@ shapiro.test(b)
         Shapiro-Wilk normality test
 
     data:  b
-    W = 0.96761, p-value = 0.1848
+    W = 0.98467, p-value = 0.7573
 
 ``` r
 ks.test(a, "pnorm") # Kolmogorow-Smirnoff
@@ -1015,7 +1016,7 @@ ks.test(a, "pnorm") # Kolmogorow-Smirnoff
         Asymptotic one-sample Kolmogorov-Smirnov test
 
     data:  a
-    D = 0.026181, p-value = 0.6432
+    D = 0.025802, p-value = 0.6613
     alternative hypothesis: two-sided
 
 ``` r
@@ -1026,7 +1027,7 @@ ks.test(b, "pnorm")
         Exact one-sample Kolmogorov-Smirnov test
 
     data:  b
-    D = 0.092588, p-value = 0.7499
+    D = 0.12694, p-value = 0.3651
     alternative hypothesis: two-sided
 
 ``` r
@@ -1048,7 +1049,7 @@ ks.test(b, "pnorm")
 
 titanic |> 
   ggplot() + 
-  geom_bar(aes(x = SibSp == 0))
+  geom_bar(aes(x = (SibSp == 0)))
 ```
 
 ![](dia_3_visualizacion_files/figure-commonmark/ceros-1.png)
@@ -1145,11 +1146,11 @@ pnum +
 ![](dia_3_visualizacion_files/figure-commonmark/dos_num-3.png)
 
 Cuando encontramos relaciones no lineales, podemos **transformar la
-variable explicativa** para mejorar la linealidad con `log()`, `sqrt()`,
-etc. Esto puede reducir el peso de los outliers y mejorar también la
-normalidad y homogeneidad de los residuos. Las desventajas son que la
-transformación puede afectar a la relación entre X e Y y entre las
-covariables y sus interacciones y es necesario deshacer la
+variable explicativa** para mejorar la linealidad con `log10()`,
+`sqrt()`, etc. Esto puede reducir el peso de los outliers y mejorar
+también la normalidad y homogeneidad de los residuos. Las desventajas
+son que la transformación puede afectar a la relación entre X e Y y
+entre las covariables y sus interacciones y es necesario deshacer la
 transformación a la hora de representar.
 
 #### Variable cualitativa vs. cuantitativa
@@ -1242,7 +1243,7 @@ Session Info
 Sys.time()
 ```
 
-    [1] "2024-12-04 01:16:42 CET"
+    [1] "2024-12-04 19:11:14 CET"
 
 ``` r
 sessionInfo()

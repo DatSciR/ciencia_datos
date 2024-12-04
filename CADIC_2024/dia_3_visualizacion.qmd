@@ -302,17 +302,17 @@ RColorBrewer::brewer.pal(name = "Set3", n = 6) # para crear paleta
 
 grDevices::hcl.pals() # HCL Palettes   
 
-# X11() 
-# example("hcl.colors") 
-# hcl.colors(n = 6, palette = "Lajolla") # para crear paleta 
+# X11()
+# example("hcl.colors")
+hcl.colors(n = 6, palette = "Lajolla") # para crear paleta
 
 # Viridis   
 ggplot(data = titanic, aes(x = Age, y = Fare, color = Age)) +
   geom_point() +    
   scale_color_gradientn(colours = hcl.colors(12, "viridis")) 
 
-ggplot(data = titanic, aes(x = Age, y = Fare, color = Age)) +    
-  geom_point() +    
+ggplot(data = titanic, aes(x = Age, y = Fare, color = Age)) +
+  geom_point() +
   scale_color_viridis_c()
 ```
 
@@ -339,7 +339,7 @@ Existen temas configurados por defecto y un asistente que te ayuda a personaliza
 ```{r temas_defecto}
 #| warning: false  
 
-miplot + theme_classic()  
+miplot + theme_classic()   
 miplot + theme_light()  
 miplot + theme_void() 
 ```
@@ -347,9 +347,11 @@ miplot + theme_void()
 #### GgthemeAssist
 
 ```{r theme_assist}
+#| warning: false  
 
 # install.packages("ggThemeAssist")  
 miplot
+
 ```
 
 ## Gráficos multipaneles
@@ -466,8 +468,8 @@ library(plotly)
 titanic |> 
   mutate(orden = 1:nrow(titanic)) |> 
   ggplot() + 
-  geom_point(aes(x = Age, y = Fare)) +
-  geom_text(aes(x = Age, y = Fare, label = orden), col = "red", size = 2) 
+  geom_point(aes(x = Age, y = Fare), alpha = 0.2) +
+  geom_text(aes(x = Age, y = Fare-3, label = orden), col = "red", size = 2) 
 
 # Tras su identificación podemos: ¿quitarlos?, ¿ignorarlos?, comprobar los residuos del modelo que ajustemos para estas observaciones, ajustar el modelo con y sin estos datos, transformar la variable.
 
@@ -600,7 +602,7 @@ ks.test(b, "pnorm")
 
 titanic |> 
   ggplot() + 
-  geom_bar(aes(x = SibSp == 0))
+  geom_bar(aes(x = (SibSp == 0)))
 
 # En una variable respecto a la otra
 
@@ -658,7 +660,7 @@ pnum +
   facet_grid(.~Pclass)
 ```
 
-Cuando encontramos relaciones no lineales, podemos **transformar la variable explicativa** para mejorar la linealidad con `log()`, `sqrt()`, etc. Esto puede reducir el peso de los outliers y mejorar también la normalidad y homogeneidad de los residuos. Las desventajas son que la transformación puede afectar a la relación entre X e Y y entre las covariables y sus interacciones y es necesario deshacer la transformación a la hora de representar.
+Cuando encontramos relaciones no lineales, podemos **transformar la variable explicativa** para mejorar la linealidad con `log10()`, `sqrt()`, etc. Esto puede reducir el peso de los outliers y mejorar también la normalidad y homogeneidad de los residuos. Las desventajas son que la transformación puede afectar a la relación entre X e Y y entre las covariables y sus interacciones y es necesario deshacer la transformación a la hora de representar.
 
 #### Variable cualitativa vs. cuantitativa
 
