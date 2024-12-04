@@ -4,9 +4,9 @@ title: |
 subtitle: "Curso: Programación y análisis estadístico en R. CADIC, Ushuaia, Argentina"
 author: 
   - name: Verónica Cruz-Alonso 
-    role: Profesora y autora del material
+    role: "Profesora y autora del material"
   - name: Enrique Andivia
-    role: Autor del material
+    role: "Autor del material"
 date: today
 date-format: "DD/MM/YYYY"
 toc: true
@@ -21,6 +21,7 @@ editor: visual
 editor_options: 
   chunk_output_type: console
 number-sections: true
+bibliography: references.bib
 ---
 
 ## Objetivos del día 5
@@ -35,25 +36,84 @@ Los objetivos del día de hoy son:
 
 ## Introducción a los modelos de regresión
 
-El objetivo de un análisis estadístico es estimar los parámetros del modelo que conducen al mejor ajuste del mismo a nuestros datos. El mejor modelo es aquel que explica la mayor variabilidad posible de la variable respuesta, siempre que los parámetros del modelo sean estadísticamente significativos. No existe un único modelo sino una gran cantidad de modelos que se ajustan a nuestros datos. De entre dos modelos que expliquen la misma variabilidad debemos quedarnos con el más simple de todos (el más parsimonioso).
+El objetivo de un análisis estadístico es estimar los parámetros del modelo que conducen al mejor ajuste del mismo a nuestros datos. El mejor modelo es aquel que explica la mayor variabilidad posible de la variable respuesta, siempre que los parámetros del modelo sean estadísticamente significativos. No existe un único modelo sino una gran cantidad de modelos que se ajustan a nuestros datos en mayor o menor medida. De entre dos modelos que expliquen la misma variabilidad debemos quedarnos con el más simple de todos (el más parsimonioso).
 
-El análisis de regresión se usa para explicar o modelar la relación lineal entre una variable Y (variable respuesta o dependiente), y una o más variables explicativas o independientes. Cuando hay una variable explicativa hablamos de regresión simple y cuando hay varias es regresión múltiple. Si la(s) variable(s) explicativas son categóricas estamos ante un análisis de la varianza o ANOVA, que al igual que antes puede ser unifactorial si solo hay una variable explicativa (one-way ANOVA) o multifactorial si hay más. Por último, si las variables explicativas son una combinación de categóricas y continuas estaremos antes un ANCOVA (análisis de la covarianza) <!--# citar apuntes de Luis -->. Todos estos nombres hacen referencia a tipos de análisis de regresión que en R se pueden calcular con una única función (`lm(m)`).
+> All models are wrong, but some are useful
+>
+> --- George E. P. Box
 
-### Supuestos de los modelos lineales
+El **análisis de regresión** se usa para explicar o predecir la relación lineal entre una variable Y (variable respuesta o dependiente), y una o más variables explicativas o independientes. Cuando hay una variable explicativa hablamos de regresión simple y cuando hay varias es regresión múltiple. Si la(s) variable(s) explicativas son categóricas estamos ante un análisis de la varianza o ANOVA, que al igual que antes puede ser unifactorial si solo hay una variable explicativa (one-way ANOVA) o multifactorial si hay más. Por último, si las variables explicativas son una combinación de categóricas y continuas estaremos antes un ANCOVA (análisis de la covarianza) [@cayuela2016]. Todos estos nombres hacen referencia a tipos de análisis de regresión que en R se pueden calcular con una única función (`lm(m)`).
+
+## Supuestos de los modelos lineales
 
 La aplicación de un modelo lineal queda supeditado al cumplimiento de una serie de supuestos.
 
--   Independencia: las observaciones y, por tanto, los residuos del modelo deben ser independientes entre sí. Las formas más comunes de violar el supuesto de independencia son la autocorrelación espacial, cuando distintas observaciones están más próximas entre sí que otras, y la autocorrelación temporal cuando se realizan distintas mediciones de la variable dependiente en los mismos individuos o parcelas a lo largo del tiempo. El supuesto de independencia está muy relacionado con el diseño del estudio. Se lidiar con la dependencia de las observaciones promediando el valor de las que sean dependientes entre sí o a través de modelos mixtos que tienen en cuenta la no independencia sin perder la variabilidad asociada a ella.
+-   **Independencia**: las observaciones y, por tanto, los residuos del modelo deben ser independientes entre sí. Las formas más comunes de violar el supuesto de independencia son la **autocorrelación** espacial, cuando distintas observaciones están más próximas entre sí que otras, y la autocorrelación temporal cuando se realizan distintas mediciones de la variable dependiente en los mismos individuos o parcelas a lo largo del tiempo. El supuesto de independencia está muy relacionado con el diseño del estudio. Se puede lidiar con la dependencia de las observaciones promediando el valor de las que sean dependientes entre sí o a través de modelos mixtos que tienen en cuenta la no independencia sin perder la variabilidad asociada a ella.
 
--   Normalidad: Los modelos lineales asumen una distribución normal de los residuos del modelo. El criterio de normalidad se refiere a los residuos del modelo y no a nuestra variable dependiente. Es cierto que, en parte, la distribución de los residuos del modelo viene definida por la distribución de la variable dependiente. Por ejemplo, si nuestra variable dependiente son unos y ceros (presencia/ausencia o vivo/muerto), o bien es un conteo (nº individuos) los residuos de nuestro modelo lineal no van a ser normales. En estos casos específicos utilizaremos modelos lineales generalizados.
+-   **Normalidad**: los modelos lineales asumen una distribución normal de los residuos del modelo. El criterio de normalidad se refiere a los residuos del modelo y no a la variable dependiente, aunque en gran parte la distribución de los residuos viene definida por la distribución de la variable dependiente. Por eso, una forma de cumplir el supuesto de normalidad es transformar la variable respuesta. Si nuestra variable dependiente son unos y ceros (presencia/ausencia o vivo/muerto), o bien es un conteo (nº individuos) los residuos de nuestro modelo lineal no van a ser normales. En estos casos específicos utilizaremos modelos lineales generalizados.
 
--   Homocedasticidad: se asume que la varianza es homogenea en todo el rango de la variable independiente. Esto implica que la varianza residual de nuestro modelo debe ser constante. La violación de este supuesto puede hacernos caer en errores de tipo I (falsos positivos). Para evaluar este aspecto se representan los residuos frente a los valores ajustados por el modelo. Uno de los principales problemas que suele haber es que los residuos aumenten conforme aumentan los valores ajustados por el modelo. Puede deberse a que alguna variable no se ha tenido en cuenta o bien a la presencia de outliers en nuestros datos. Una forma de lidiar con este aspecto es transformar la variable respuesta.
+-   **Homocedasticidad**: se asume que la varianza es homogenea en todo el rango de la variable independiente. Esto implica que la varianza residual de nuestro modelo debe ser constante. La violación de este supuesto puede hacernos caer en errores de tipo I (falsos positivos). Para evaluar este aspecto se representan los residuos frente a los valores ajustados por el modelo. Uno de los principales problemas que suele haber es que los residuos aumenten conforme aumentan los valores ajustados por el modelo. Puede deberse a que alguna variable no se ha tenido en cuenta o bien a la presencia de *outliers* en nuestros datos. Una forma de lidiar con este aspecto es transformar la variable respuesta.
 
--   Linealidad: la relación entre la variable dependiente y la independiente es lineal o puede expresarse como una combinación lineal de parámetros.
+-   **Linealidad**: la relación entre la variable dependiente y la independiente es lineal o puede expresarse como una combinación lineal de parámetros.
+
+## Fundamentos matemáticos de una regresión lineal simple
+
+Asumiendo la hipótesis de que y se puede explicar como una función lineal de x, podemos expresar y como:
+
+$$
+Y = a + bX
+$$
+
+Al parámetro a se le denomina **intercepto** y es el valor de la variable respuesta cuando la variable independiente es igual a cero. Al parámetro b se le denomina **pendiente** y representa cuánto aumenta la variable respuesta por unidad de la variable independiente. Basta pues estimar los parámetros a y b para conocer el valor de la variable respuesta para cada valor de la variable independiente.
+
+Para entender cómo se estiman tenemos que recordar que los datos de una regresión son tomados de manera pareada, es decir que en una misma observación tenemos un dato para la variable respuesta (y~i~) y para la variable independiente (x~i~). Sin embargo, los parámetros a y b son los mismos para todos los pares de datos por lo que al menos que nuestro modelo prediga con exactitud cada una de nuestras observaciones tendremos un error asociado al modelo. Dicho error o residuo (𝜀~𝑖~) es la diferencia entre el valor predicho de la variable respuesta (Ŷi) para un determinado valor de la variable independiente y el valor real observado de nuestra variable respuesta (y~i~) en dicha observación. Para cada observación tendremos:
+
+$$
+yi = a + bxi + 𝜀i
+$$
+
+Los “mejores” parámetros del modelo se estiman mediante **máxima verosimilitud**, es decir, dados los datos, el valor de los parámetros será aquel que haga los datos más verosímiles. Si los supuestos de los modelos lineales se cumplen, la máxima verosimilitud viene dada por el **método de los mínimos cuadrados.** El término mínimos cuadrados se refiere a la suma de los residuos al cuadrado. Los mejores parámetros del modelo serán aquellos que minimicen la **suma de los residuos cuadrados** del modelo (RSS - Residual Sum of Squares). La RSS representa la variabilidad que el modelo NO es capaz de explicar.
+
+El **error del modelo** (residuos) es una variable aleatoria que sigue una distribución normal, de ahí el supuesto de normalidad, con media igual a cero y varianza 𝜎^2^ (= cuadrados medios residuales). Como vemos la suma cuadrada de residuos se divide por n-2, esto es debido a que ya hemos usado dos observaciones para calcular los dos parámetros del modelo (a y b). La varianza del error estará más cercana a cero cuando las observaciones estén más cerca de las predicciones, y se estima el valor *medio* de la RSS:
+
+$$𝜎2 = RSS/n-2$$ Asociado a los errores del modelo podemos calcular el grado de ajuste del mismo para lo que se utiliza el **coeficiente de determinación** (R^~2~^), que se define como la fracción de la variabilidad de la variable respuesta explicada por la variación de la variable independiente. Si la variabilidad total de la variable respuesta es SSY (la suma de las diferencias entre y~i~ y la media de Y al cuadrado) y la parte no explicada por el modelo es RSS, definimos el coeficiente de determinación como:
+
+$$R^2 = SSY-RSS / SSY$$ Al ser una proporción, el coeficiente de determinación se define entre 0 y 1, cuanto más se acerque a 1 mayor será la variabilidad explicada y mejor se ajustará nuestro modelo a los datos.
+
+Los parámetros del modelo son realmente una estimación de los verdaderos valores de los parámetros poblacionales. Por ello, estos parámetros llevan asociados una incertidumbre. El siguiente paso es **testar estadísticamente si los parámetros estimados son estadísticamente distintos de cero**. Esto es especialmente importante para la pendiente ya que su significación nos indicaría que hay un efecto de la variable independiente sobre la variable respuesta. La hipótesis nula es que b no es diferente de cero. La significación de estos parámetros se comprueba mediante un t-test en la función `lm()` (evalúa la relación entre cada variable y la variable respuesta mientras se controlan las demás). Mediante F-ratio con `anova()` se evalúa la relación entre la variabilidad expicada por el modelo y la variabilidad explicada por esa variable (que puede tener varios parámetros asociados).
+
+```{r lm_simple}
+
+library(tidyverse)
+
+cars |> 
+  ggplot() +
+  geom_point(aes(x = speed, y = dist)) +
+  labs(x = "Velocidad (millas/h)", y = "Distancia de frenado (pies)")
+
+m_cars <- lm(dist ~ speed, data = cars)
+
+summary(m_cars)
+
+resid(m_cars)
+RSS <- sum(resid(m_cars)^2)
+sigma2 <- RSS/(nrow(cars)-2) 
+sqrt(sigma2)
+
+SSY <- sum((cars$dist - mean(cars$dist))^2)
+R2 <- (SSY-RSS)/SSY
+
+anova(m_cars) 
+# La tabla ANOVA tiene una serie de columnas que resumen la partición de la suma de cuadrados
+# p-valor es de X, quiere decir que X de cada 10 veces obtendremos por azar un F-ratio igual al que hemos obtenido con las observaciones.
+```
+
+## Ajustando modelos lineales en R
+
+### ANOVA
 
 ```{r anova}
 
-library(tidyverse)
 # install.packages("performance")
 library(performance)
 # install.packages("emmeans")
@@ -147,9 +207,9 @@ tidy(m1)
 tidy(anova(m1))
 augment(m1)
 glance(m1)
-
-
 ```
+
+### ANCOVA
 
 ```{r ancova}
 
@@ -220,13 +280,15 @@ check_model(ancova3)
 
 AIC(ancova1, ancova2, ancova3)
 
-
-
-
-
 ```
 
-VIF root of 1 / (1 Rj ), also called the variance inflation factor (VIF), whichmeans that the P-values get largermaking it more difficult to detect an effect
+### Colinealidad en modelos lineales
+
+VIF root of 1 / (1 Rj ), also called the variance inflation factor (VIF), whichmeans that the P-values get largermaking it more difficult to detect an effect El factor de inflación de la varianza proporciona una estimación cuantitativa de la multicolinealidad entre covariables en un análisis de regresión. Este índice mide hasta qué punto la varianza de un coeficiente de regresión estimado se incrementa a causa de la colinealidad. Si echamos un vistazo a la fórmula mediante la que se calcula la varianza asociada a la estimación de un parámetro mediante mínimos cuadrados veremos que a mayor R2 (más cercano a 1) mayor varianza asociada al parámetros. Hay que aclarar que este R2 es el cuadrado del coeficiente de correlación múltiple entre las variables independientes del modelo y no el coeficiente de determinación del mismo. En términos prácticos, si introducimos una variable en el modelo que aumenta la correlación entre las mismas significa que la información proporcionada por esta variable ya está incluida en el resto y además aumentamos la varianza asociada a la estimación de nuestros parámetros por lo que podemos estar influyendo la significación de los mismos. En cuanto a los valores de VIF a partir de los cuales hay que tomar en serio la colinealidad entre nuestras variables no existe un consenso claro. El límite más aceptado es el de 5, aunque algunos autores establecen este límite en 10. Sin embargo cuando nuestras variables no tienen un efecto muy marcada sobre nuestra variable respuesta, tener valores de VIF mayores de 3 podría suponer un problema ya que muchos de los parámetros podrían dejar de ser significativos. El procedimiento a seguir es calcular el VIF sobre las variables independientes presentes en el modelo y en caso de alta colinealidad eliminar aquella con un VIF superior y volver a calcular el VIF para cada covariable.
+
+## Modelos lineales generalizados
+
+## Modelos lineales mixtos
 
 ```{r}
 # Modelos mixtos y generalizados
