@@ -20,7 +20,6 @@ editor_options:
   chunk_output_type: console
 number-sections: true
 bibliography: references.bib
-prefer-html: true
 ---
 
 ## Objetivos del día 3
@@ -303,9 +302,9 @@ RColorBrewer::brewer.pal(name = "Set3", n = 6) # para crear paleta
 
 grDevices::hcl.pals() # HCL Palettes   
 
-X11() 
-example("hcl.colors") 
-hcl.colors(n = 6, palette = "Lajolla") # para crear paleta 
+# X11() 
+# example("hcl.colors") 
+# hcl.colors(n = 6, palette = "Lajolla") # para crear paleta 
 
 # Viridis   
 ggplot(data = titanic, aes(x = Age, y = Fare, color = Age)) +
@@ -462,7 +461,7 @@ ggplot(data = titanic) +
 # install.packages("plotly")
 library(plotly)
 
-ggplotly(miplot) 
+# ggplotly(miplot) 
 
 titanic |> 
   mutate(orden = 1:nrow(titanic)) |> 
