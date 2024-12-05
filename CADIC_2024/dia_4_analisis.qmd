@@ -132,6 +132,7 @@ library(performance)
 library(sjPlot)
 # install.packages("broom")
 library(broom) # https://broom.tidymodels.org/articles/broom.html
+library(GGally)
 
 ozono <- read_delim(file = "Ozone.txt", delim = "\t") 
 ozono
@@ -256,7 +257,7 @@ anova(m_pinos)
 
 # Check residuals
 x11()
-check_model(m1)
+check_model(m_pinos)
 
 # Pero... no hemos acabado
 # Una de las principales razones de usar factores es conocer las diferencias entre los niveles del factor

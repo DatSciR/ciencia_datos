@@ -1,0 +1,1674 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Verónica Cruz-Alonso">
+<meta name="author" content="Enrique Andivia">
+<meta name="dcterms.date" content="2024-05-12">
+
+<title>quarto-input66601a0d18dcdf79</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="dia_4_analisis_files/libs/clipboard/clipboard.min.js"></script>
+<script src="dia_4_analisis_files/libs/quarto-html/quarto.js"></script>
+<script src="dia_4_analisis_files/libs/quarto-html/popper.min.js"></script>
+<script src="dia_4_analisis_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="dia_4_analisis_files/libs/quarto-html/anchor.min.js"></script>
+<link href="dia_4_analisis_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="dia_4_analisis_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="dia_4_analisis_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="dia_4_analisis_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="dia_4_analisis_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Índice</h2>
+   
+  <ul>
+  <li><a href="#objetivos-del-día-5" id="toc-objetivos-del-día-5" class="nav-link active" data-scroll-target="#objetivos-del-día-5"><span class="header-section-number">1</span> Objetivos del día 5</a></li>
+  <li><a href="#introducción-a-los-modelos-de-regresión" id="toc-introducción-a-los-modelos-de-regresión" class="nav-link" data-scroll-target="#introducción-a-los-modelos-de-regresión"><span class="header-section-number">2</span> Introducción a los modelos de regresión</a></li>
+  <li><a href="#supuestos-de-los-modelos-lineales" id="toc-supuestos-de-los-modelos-lineales" class="nav-link" data-scroll-target="#supuestos-de-los-modelos-lineales"><span class="header-section-number">3</span> Supuestos de los modelos lineales</a></li>
+  <li><a href="#fundamentos-matemáticos-de-una-regresión-lineal-simple" id="toc-fundamentos-matemáticos-de-una-regresión-lineal-simple" class="nav-link" data-scroll-target="#fundamentos-matemáticos-de-una-regresión-lineal-simple"><span class="header-section-number">4</span> Fundamentos matemáticos de una regresión lineal simple</a></li>
+  <li><a href="#ajustando-modelos-lineales-en-r" id="toc-ajustando-modelos-lineales-en-r" class="nav-link" data-scroll-target="#ajustando-modelos-lineales-en-r"><span class="header-section-number">5</span> Ajustando modelos lineales en R</a>
+  <ul>
+  <li><a href="#regresión-lineal-multiple" id="toc-regresión-lineal-multiple" class="nav-link" data-scroll-target="#regresión-lineal-multiple"><span class="header-section-number">5.1</span> Regresión lineal multiple</a></li>
+  <li><a href="#anova-analysis-of-variance" id="toc-anova-analysis-of-variance" class="nav-link" data-scroll-target="#anova-analysis-of-variance"><span class="header-section-number">5.2</span> ANOVA (ANalysis Of VAriance)</a></li>
+  <li><a href="#ancova" id="toc-ancova" class="nav-link" data-scroll-target="#ancova"><span class="header-section-number">5.3</span> ANCOVA</a></li>
+  </ul></li>
+  <li><a href="#modelos-lineales-mixtos" id="toc-modelos-lineales-mixtos" class="nav-link" data-scroll-target="#modelos-lineales-mixtos"><span class="header-section-number">6</span> Modelos lineales mixtos</a></li>
+  <li><a href="#modelos-lineales-generalizados" id="toc-modelos-lineales-generalizados" class="nav-link" data-scroll-target="#modelos-lineales-generalizados"><span class="header-section-number">7</span> Modelos lineales generalizados</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="dia_4_analisis.md"><i class="bi bi-file-code"></i>Github (GFM)</a></li></ul></div></nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><div class="line-block">Análisis de datos: modelos lineales habituales en ecología</div></h1>
+<p class="subtitle lead">Curso: Programación y análisis estadístico en R. CADIC, Ushuaia, Argentina</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Authors</div>
+    <div class="quarto-title-meta-contents">
+             <p>Verónica Cruz-Alonso </p>
+             <p>Enrique Andivia </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">05/12/2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="objetivos-del-día-5" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="objetivos-del-día-5"><span class="header-section-number">1</span> Objetivos del día 5</h2>
+<p>Los objetivos del día de hoy son:</p>
+<ul>
+<li><p>Aprender los fundamentos de los modelos lineales en R.</p></li>
+<li><p>Aprender qué son los modelos generalizados y mixtos y para qué se usan.</p></li>
+<li><p>Aprender a reportar los resultados de los modelos.</p></li>
+</ul>
+</section>
+<section id="introducción-a-los-modelos-de-regresión" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="introducción-a-los-modelos-de-regresión"><span class="header-section-number">2</span> Introducción a los modelos de regresión</h2>
+<p>El objetivo de un análisis estadístico es estimar los parámetros del modelo que conducen al mejor ajuste del mismo a nuestros datos. El mejor modelo es aquel que explica la mayor variabilidad posible de la variable respuesta, siempre que los parámetros del modelo sean estadísticamente significativos. No existe un único modelo sino una gran cantidad de modelos que se ajustan a nuestros datos en mayor o menor medida. De entre dos modelos que expliquen la misma variabilidad debemos quedarnos con el más simple de todos (el más parsimonioso).</p>
+<blockquote class="blockquote">
+<p>All models are wrong, but some are useful</p>
+<p>— George E. P. Box</p>
+</blockquote>
+<p>El <strong>análisis de regresión</strong> se usa para explicar o predecir la relación lineal entre una variable Y (variable respuesta o dependiente), y una o más variables explicativas o independientes. Cuando hay una variable explicativa hablamos de regresión simple y cuando hay varias es regresión múltiple. Si la(s) variable(s) explicativas son categóricas estamos ante un análisis de la varianza o ANOVA, que al igual que antes puede ser unifactorial si solo hay una variable explicativa (one-way ANOVA) o multifactorial si hay más. Por último, si las variables explicativas son una combinación de categóricas y continuas estaremos antes un ANCOVA (análisis de la covarianza) <span class="citation" data-cites="cayuela2022">(<a href="#ref-cayuela2022" role="doc-biblioref">Cayuela and De la Cruz 2022</a>)</span>. Todos estos nombres hacen referencia a tipos de análisis de regresión que en R se pueden calcular con una única función: <code>lm(m)</code>.</p>
+</section>
+<section id="supuestos-de-los-modelos-lineales" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="supuestos-de-los-modelos-lineales"><span class="header-section-number">3</span> Supuestos de los modelos lineales</h2>
+<p>La aplicación de un modelo lineal queda supeditado al cumplimiento de una serie de supuestos.</p>
+<ul>
+<li><p><strong>Independencia</strong>: las observaciones y, por tanto, los residuos del modelo deben ser independientes entre sí. Las formas más comunes de violar el supuesto de independencia son la <strong>autocorrelación</strong> espacial, cuando distintas observaciones están más próximas entre sí que otras, y la autocorrelación temporal cuando se realizan distintas mediciones de la variable dependiente en los mismos individuos o parcelas a lo largo del tiempo. El supuesto de independencia está muy relacionado con el diseño del estudio. Se puede lidiar con la dependencia de las observaciones promediando el valor de las que sean dependientes entre sí, a través de modelos mixtos que tienen en cuenta la no independencia sin perder la variabilidad asociada a ella, o con modelos autorregresivos.</p></li>
+<li><p><strong>Normalidad</strong>: los modelos lineales asumen una distribución normal de los residuos del modelo. El criterio de normalidad se refiere a los residuos del modelo y no a la variable dependiente, aunque en gran parte la distribución de los residuos viene definida por la distribución de la variable dependiente. Por eso, una forma de cumplir el supuesto de normalidad es transformar la variable respuesta. Si la variable dependiente son unos y ceros (presencia/ausencia o vivo/muerto), o bien es un conteo (nº individuos) los residuos no van a ser normales. En estos casos específicos utilizaremos modelos lineales generalizados.</p></li>
+<li><p><strong>Homocedasticidad</strong>: se asume que la varianza de los residuos es homogenea en todo el rango de la variable independiente. Esto implica que la varianza residual de nuestro modelo debe ser constante. La violación de este supuesto puede hacernos caer en errores de tipo I (falsos positivos). Para evaluar este aspecto se representan los residuos frente a los valores ajustados por el modelo. Uno de los principales problemas que suele haber es que los residuos aumenten conforme aumentan los valores ajustados por el modelo. Puede deberse a que alguna variable no se ha tenido en cuenta o también a la presencia de <em>outliers</em> en nuestros datos. Una forma de lidiar con este aspecto es transformar la variable respuesta.</p></li>
+<li><p><strong>Linealidad</strong>: la relación entre la variable dependiente y la independiente es lineal o puede expresarse como una combinación lineal de parámetros.</p></li>
+</ul>
+</section>
+<section id="fundamentos-matemáticos-de-una-regresión-lineal-simple" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="fundamentos-matemáticos-de-una-regresión-lineal-simple"><span class="header-section-number">4</span> Fundamentos matemáticos de una regresión lineal simple</h2>
+<p>Asumiendo la hipótesis de que <em>y</em> se puede explicar como una función lineal de <em>x</em>, podemos expresar <em>y</em> como:</p>
+<p><span class="math display">\[
+y = a + bx
+\]</span></p>
+<p>Al parámetro <em>a</em> se le denomina <strong>intercepto</strong> y es el valor de la variable respuesta cuando la variable independiente es igual a cero. Al parámetro <em>b</em> se le denomina <strong>pendiente</strong> y representa cuánto aumenta la variable respuesta por unidad de la variable independiente. Basta estimar los parámetros <em>a</em> y <em>b</em> para conocer el valor de la variable respuesta para cada valor de la variable independiente.</p>
+<p>Para entender cómo se estiman recordemos que los datos de una regresión son tomados de manera pareada, es decir que en una misma observación tenemos un dato para la variable respuesta (y<sub>i</sub>) y para la variable independiente (x<sub>i</sub>). Sin embargo, los parámetros <em>a</em> y <em>b</em> son los mismos para todos los pares de datos por lo que a menos que el modelo prediga con exactitud cada una de las observaciones tendremos un error asociado al modelo. Dicho <strong>error o residuo</strong> (𝜀<sub>𝑖</sub>) es la diferencia entre el valor predicho de la variable respuesta (Ŷ<sub>i</sub>) para un determinado valor de la variable independiente y el valor real observado de nuestra variable respuesta (y<sub>i</sub>) en dicha observación. Para cada observación tendremos:</p>
+<p><span class="math display">\[
+y_{i} = a + bx_{i} + 𝜀_{i}
+\]</span></p>
+<p>Los “mejores” parámetros del modelo se estiman mediante <strong>máxima verosimilitud</strong>, es decir, dados los datos, el valor de los parámetros será aquel que haga los datos más verosímiles. Si los supuestos de los modelos lineales se cumplen, la máxima verosimilitud viene dada por el <strong>método de los mínimos cuadrados.</strong> El término mínimos cuadrados se refiere a la <strong>suma de los residuos al cuadrado</strong> (RSS - Residual Sum of Squares). Los mejores parámetros del modelo serán aquellos que minimicen la suma de los residuos cuadrados del modelo . La RSS representa la variabilidad que el modelo NO es capaz de explicar.</p>
+<p>El <strong>error del modelo</strong> (residuos) es una variable aleatoria que sigue una distribución normal, de ahí el supuesto de normalidad, con media igual a cero y varianza 𝜎<sup>2</sup>. El valor de la varianza residual de la muestra es lo que se denomina <strong>cuadrados medios residuales</strong> (RMS). La varianza del error estará más cercana a cero cuando las observaciones estén más cerca de las predicciones. Para calcularla, la RSS se divide por n-2, calculando una especie de valor <em>medio</em> de la RSS.</p>
+<p><span class="math display">\[RMS = \frac{RSS}{n-2}\]</span> Asociado a los errores del modelo podemos calcular el grado de ajuste del mismo para lo que se utiliza el <strong>coeficiente de determinación</strong> (R<sup><sub>2</sub></sup>), que se define como la fracción de la variabilidad de la variable respuesta explicada por la variación de la variable independiente. Si la variabilidad total de la variable respuesta es SSY (la suma de las diferencias entre y<sub>i</sub> y la media de <em>y</em> al cuadrado) y la parte no explicada por el modelo es RSS, definimos el coeficiente de determinación como:</p>
+<p><span class="math display">\[R^2 = \frac{SSY-RSS}{SSY} \]</span> Al ser una proporción, el coeficiente de determinación se define entre 0 y 1, cuanto más se acerque a 1 mayor será la variabilidad explicada y mejor se ajustará el modelo a los datos.</p>
+<p>Los parámetros del modelo son realmente una estimación de los verdaderos valores de los parámetros poblacionales. Por ello, estos parámetros llevan asociados una incertidumbre y se necesita <strong>testar estadísticamente si los parámetros estimados son estadísticamente distintos de cero</strong>. Esto es especialmente importante para la pendiente ya que su significación nos indicaría que hay un efecto de la variable independiente sobre la variable respuesta. La hipótesis nula es que <em>b</em> no es diferente de cero. La significación de estos parámetros se comprueba mediante un t-test en la función <code>lm()</code> (evalúa la relación entre cada variable y la variable respuesta mientras se controlan las demás). Mediante F-ratio con <code>anova()</code> se evalúa la relación entre la variabilidad explicada por el modelo y la variabilidad explicada por esa variable.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>cars <span class="sc">|&gt;</span> </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> speed, <span class="at">y =</span> dist)) <span class="sc">+</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Velocidad (millas/h)"</span>, <span class="at">y =</span> <span class="st">"Distancia de frenado (pies)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="dia_4_analisis_files/figure-html/lm_simple-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>m_cars <span class="ot">&lt;-</span> <span class="fu">lm</span>(dist <span class="sc">~</span> speed, <span class="at">data =</span> cars)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m_cars)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = dist ~ speed, data = cars)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-29.069  -9.525  -2.272   9.215  43.201 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -17.5791     6.7584  -2.601   0.0123 *  
+speed         3.9324     0.4155   9.464 1.49e-12 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 15.38 on 48 degrees of freedom
+Multiple R-squared:  0.6511,    Adjusted R-squared:  0.6438 
+F-statistic: 89.57 on 1 and 48 DF,  p-value: 1.49e-12</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculamos a mano la bondad de ajuste del modelo:</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">resid</span>(m_cars)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(res)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+-29.069  -9.525  -2.272   0.000   9.215  43.201 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>RSS <span class="ot">&lt;-</span> <span class="fu">sum</span>(res<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>RMS <span class="ot">&lt;-</span> RSS<span class="sc">/</span>(<span class="fu">nrow</span>(cars)<span class="sc">-</span><span class="dv">2</span>) </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(RMS)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 15.37959</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>SSY <span class="ot">&lt;-</span> <span class="fu">sum</span>((cars<span class="sc">$</span>dist <span class="sc">-</span> <span class="fu">mean</span>(cars<span class="sc">$</span>dist))<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>R2 <span class="ot">&lt;-</span> (SSY<span class="sc">-</span>RSS)<span class="sc">/</span>SSY</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(m_cars) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Variance Table
+
+Response: dist
+          Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+speed      1  21186 21185.5  89.567 1.49e-12 ***
+Residuals 48  11354   236.5                     
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># La tabla ANOVA tiene una serie de columnas que resumen la partición de la suma de cuadrados</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># La F se calcula bajo el supuesto de b = 0</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Un p-valor de X quiere decir que X de cada 10 veces obtendremos por azar un F-ratio igual al que hemos obtenido con las observaciones.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="ajustando-modelos-lineales-en-r" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="ajustando-modelos-lineales-en-r"><span class="header-section-number">5</span> Ajustando modelos lineales en R</h2>
+<section id="regresión-lineal-multiple" class="level3" data-number="5.1">
+<h3 data-number="5.1" class="anchored" data-anchor-id="regresión-lineal-multiple"><span class="header-section-number">5.1</span> Regresión lineal multiple</h3>
+<p>La regresión lineal múltiple es un modelo lineal con dos o más variables independientes continuas. El efecto de las variables explicativas sobre la variable respuesta puede no ser exclusivamente independiente. Pudiera ser que la relación entre la variable respuesta y una variable explicativa estuviera modulada por otra variable explicativa y tendríamos una interacción.</p>
+<p>💡La inclusión de variables en el modelo aumenta el número de parámetros a estimar. De forma general se suele recomendar tener al menos 10 observaciones independientes por parámetro a estimar, aunque como siempre esto no debe tomarse a raja tabla.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("performance")</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(performance)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("")</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sjPlot)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("broom")</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom) <span class="co"># https://broom.tidymodels.org/articles/broom.html</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(GGally)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>ozono <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="at">file =</span> <span class="st">"Ozone.txt"</span>, <span class="at">delim =</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>) </span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>ozono</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 110 × 4
+     rad  temp  wind ozone
+   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1   190    67   7.4    41
+ 2   118    72   8      36
+ 3   149    74  12.6    12
+ 4   313    62  11.5    18
+ 5   299    65   8.6    23
+ 6    99    59  13.8    19
+ 7    19    61  20.1     8
+ 8   256    69   9.7    16
+ 9   290    66   9.2    11
+10   274    68  10.9    14
+# ℹ 100 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggpairs</span>(ozono <span class="sc">|&gt;</span> <span class="fu">select</span>(rad, temp, wind, ozone),</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">lower =</span> <span class="fu">list</span>(<span class="at">continuous =</span> <span class="fu">wrap</span>(<span class="st">"smooth"</span>, <span class="at">method =</span> <span class="st">"loess"</span>, <span class="at">color =</span> <span class="st">"darkslategrey"</span>, <span class="at">alpha =</span> <span class="fl">0.1</span>)),</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">diag =</span> <span class="fu">list</span>(<span class="at">continuous =</span> <span class="fu">wrap</span>(<span class="st">"barDiag"</span>)))  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="dia_4_analisis_files/figure-html/regresion_multiple-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>m_ozono <span class="ot">&lt;-</span> <span class="fu">lm</span>(ozone <span class="sc">~</span> rad <span class="sc">+</span> temp <span class="sc">+</span> wind, <span class="at">data =</span> ozono)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m_ozono)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = ozone ~ rad + temp + wind, data = ozono)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-38.760 -13.268  -1.992   9.971  62.020 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -76.76676   20.85138  -3.682 0.000366 ***
+rad           0.05403    0.02086   2.590 0.010940 *  
+temp          1.74138    0.22842   7.623 1.11e-11 ***
+wind         -2.76591    0.59804  -4.625 1.06e-05 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 19.03 on 106 degrees of freedom
+Multiple R-squared:  0.6373,    Adjusted R-squared:  0.627 
+F-statistic: 62.08 on 3 and 106 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(m_ozono)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Variance Table
+
+Response: ozone
+           Df Sum Sq Mean Sq F value    Pr(&gt;F)    
+rad         1  13152   13152  36.324 2.462e-08 ***
+temp        1  46531   46531 128.514 &lt; 2.2e-16 ***
+wind        1   7745    7745  21.390 1.063e-05 ***
+Residuals 106  38379     362                      
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Comprobamos residuos</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">check_model</span>(m_ozono)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="dia_4_analisis_files/figure-html/regresion_multiple-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Comprobamos residuos parciales</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_model</span>(m_ozono, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"rad"</span>, <span class="st">"temp"</span>, <span class="st">"wind"</span>), <span class="at">show.data =</span> <span class="cn">TRUE</span>, <span class="at">type =</span> <span class="st">"resid"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="dia_4_analisis_files/figure-html/regresion_multiple-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Comprobamos colinealidad</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">check_collinearity</span>(m_ozono)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Check for Multicollinearity
+
+Low Correlation
+
+ Term  VIF   VIF 95% CI Increased SE Tolerance Tolerance 95% CI
+  rad 1.09 [1.01, 1.86]         1.05      0.91     [0.54, 0.99]
+ temp 1.44 [1.21, 1.93]         1.20      0.70     [0.52, 0.83]
+ wind 1.33 [1.14, 1.80]         1.15      0.75     [0.55, 0.88]</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># El factor de inflación de la varianza (VIF) proporciona una estimación cuantitativa de la multicolinealidad entre covariables en un análisis de regresión. Este índice mide hasta qué punto la varianza de un coeficiente de regresión se incrementa a causa de la colinealidad. En cuanto a los valores de VIF a partir de los cuales hay que tomar en serio la colinealidad no existe un consenso claro (5 o 10). En caso de alta colinealidad se puede eliminar la variable con un VIF superior y volver a calcular el VIF.</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Modelo con interacciones </span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>ozono <span class="ot">&lt;-</span> ozono <span class="sc">%&gt;%</span> </span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rads =</span> <span class="fu">as.vector</span>(<span class="fu">scale</span>(rad)),</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">temps =</span> <span class="fu">as.vector</span>(<span class="fu">scale</span>(temp)),</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">winds =</span> <span class="fu">as.vector</span>(<span class="fu">scale</span>(wind)))</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>m_ozono_int <span class="ot">&lt;-</span> <span class="fu">lm</span>(ozone <span class="sc">~</span> rad<span class="sc">*</span>temp <span class="sc">+</span> wind<span class="sc">*</span>temp, <span class="at">data =</span> ozono)</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m_ozono_int)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = ozone ~ rad * temp + wind * temp, data = ozono)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-36.749  -9.885  -1.977   8.566  59.868 
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -1.496e+02  5.628e+01  -2.658 0.009109 ** 
+rad         -3.439e-01  1.535e-01  -2.241 0.027124 *  
+temp         2.550e+00  7.236e-01   3.524 0.000633 ***
+wind         1.150e+01  3.735e+00   3.079 0.002659 ** 
+rad:temp     5.514e-03  2.079e-03   2.653 0.009234 ** 
+temp:wind   -1.837e-01  4.757e-02  -3.862 0.000196 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 16.82 on 104 degrees of freedom
+Multiple R-squared:  0.7219,    Adjusted R-squared:  0.7086 
+F-statistic:    54 on 5 and 104 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(m_ozono_int)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Variance Table
+
+Response: ozone
+           Df Sum Sq Mean Sq F value    Pr(&gt;F)    
+rad         1  13152   13152  46.490 6.224e-10 ***
+temp        1  46531   46531 164.480 &lt; 2.2e-16 ***
+wind        1   7745    7745  27.376 8.737e-07 ***
+rad:temp    1   4739    4739  16.753 8.429e-05 ***
+temp:wind   1   4219    4219  14.912  0.000196 ***
+Residuals 104  29421     283                      
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(m_ozono_int)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                    2.5 %        97.5 %
+(Intercept) -2.612016e+02 -37.973601769
+rad         -6.482502e-01  -0.039648551
+temp         1.115168e+00   3.985137139
+wind         4.091851e+00  18.904284873
+rad:temp     1.392111e-03   0.009635842
+temp:wind   -2.780348e-01  -0.089366319</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># comprobar supuestos</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">check_model</span>(m_ozono_int)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="dia_4_analisis_files/figure-html/regresion_multiple-4.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_model</span>(m_ozono_int, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"rad"</span>, <span class="st">"temp"</span>, <span class="st">"wind"</span>), <span class="at">show.data =</span> <span class="cn">TRUE</span>, <span class="at">type =</span> <span class="st">"resid"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="dia_4_analisis_files/figure-html/regresion_multiple-5.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Para representar las predicciones del gráfico</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_model</span>(m_ozono_int, <span class="at">type =</span> <span class="st">"pred"</span>,</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"temp"</span>,<span class="st">"rad[90, 270]"</span>)) <span class="sc">+</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">""</span>, </span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Temperature"</span>, <span class="at">y =</span> <span class="st">"Ozone concentration"</span>, <span class="at">color =</span> <span class="st">"Radiation"</span>) <span class="sc">+</span> </span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="dia_4_analisis_files/figure-html/regresion_multiple-6.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_model</span>(m_ozono_int, <span class="at">type =</span> <span class="st">"pred"</span>,</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"temp"</span>,<span class="st">"wind[7, 13]"</span>)) <span class="sc">+</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">""</span>, </span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Temperature"</span>, <span class="at">y =</span> <span class="st">"Ozone concentration"</span>, <span class="at">color =</span> <span class="st">"Wind"</span>) <span class="sc">+</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="dia_4_analisis_files/figure-html/regresion_multiple-7.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tablas de resultados</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(m_ozono_int)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 5
+  term          estimate std.error statistic  p.value
+  &lt;chr&gt;            &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 (Intercept) -150.       56.3         -2.66 0.00911 
+2 rad           -0.344     0.153       -2.24 0.0271  
+3 temp           2.55      0.724        3.52 0.000633
+4 wind          11.5       3.73         3.08 0.00266 
+5 rad:temp       0.00551   0.00208      2.65 0.00923 
+6 temp:wind     -0.184     0.0476      -3.86 0.000196</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(<span class="fu">anova</span>(m_ozono_int))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 6
+  term         df  sumsq meansq statistic   p.value
+  &lt;chr&gt;     &lt;int&gt;  &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+1 rad           1 13152. 13152.      46.5  6.22e-10
+2 temp          1 46531. 46531.     164.   3.79e-23
+3 wind          1  7745.  7745.      27.4  8.74e- 7
+4 rad:temp      1  4739.  4739.      16.8  8.43e- 5
+5 temp:wind     1  4219.  4219.      14.9  1.96e- 4
+6 Residuals   104 29421.   283.      NA   NA       </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(m_ozono_int)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 12
+  r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC   BIC
+      &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1     0.722         0.709  16.8      54.0 2.26e-27     5  -463.  941.  960.
+# ℹ 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="anova-analysis-of-variance" class="level3" data-number="5.2">
+<h3 data-number="5.2" class="anchored" data-anchor-id="anova-analysis-of-variance"><span class="header-section-number">5.2</span> ANOVA (ANalysis Of VAriance)</h3>
+<p>Al calcular un ANOVA ajustamos un modelo lineal utilizando variables dummies (es decir, que toman valores de 0 o 1). El modelo ajusta tantas pendientes como n – 1 niveles del factor existan. El intercepto toma el valor de la variable respuesta para el nivel de referencia del factor (R lo identifica por orden alfabético). El valor de los parámetros estimado para el resto de niveles nos indica la diferencia que existe entre el valor medio de la variable respuesta para dichos niveles y el del nivel de referencia.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("emmeans")</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Guia de emmeans: https://rvlenth.github.io/emmeans/articles/AQuickStart.html</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>pinos <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="at">file =</span> <span class="st">"RxF_growth.csv"</span>, <span class="at">delim =</span> <span class="st">","</span>,</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">col_types =</span> <span class="fu">list</span>(<span class="at">Irrig =</span> <span class="st">"f"</span>,</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">Fert =</span> <span class="st">"f"</span>))</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a><span class="co"># pinos contiene datos de un experimento en el que se plantaron 144 plántulas de Pinus pinea en un campo abandonado y se sometieron a un experimento factorial con 4 niveles de riego (0, 150, 300 y 600 mm año⁻¹) y 3 tratamientos de fertilización nitrogenada (0, 150 y 300 kg N ha⁻¹) distribuidos aleatoriamente.</span></span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Queremos saber si el incremento en diamétro (DI) estuvo condicionado por la irrigación</span></span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>pinos</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 144 × 5
+   Plant Block Irrig Fert     DI
+   &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt; &lt;fct&gt; &lt;dbl&gt;
+ 1     1     1 R0    F0     27.2
+ 2     2     1 R0    F0     15.4
+ 3     3     1 R0    F0     35.0
+ 4    37     2 R0    F0     28.1
+ 5    38     2 R0    F0     23.6
+ 6    39     2 R0    F0     34.3
+ 7    73     3 R0    F0     34.2
+ 8    74     3 R0    F0     20.7
+ 9    75     3 R0    F0     15.9
+10   109     4 R0    F0     30.0
+# ℹ 134 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Exploración de las variables</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Outliers</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(pinos) <span class="sc">+</span></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> DI)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="dia_4_analisis_files/figure-html/anova-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(pinos) <span class="sc">+</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="fu">aes</span>(<span class="at">y =</span> DI, <span class="at">x =</span> <span class="dv">1</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="dia_4_analisis_files/figure-html/anova-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># considero que no hay</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Normalidad y homogeneidad</span></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(pinos) <span class="sc">+</span> <span class="co">#normal</span></span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> DI)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="dia_4_analisis_files/figure-html/anova-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(pinos) <span class="sc">+</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Irrig, <span class="at">y =</span> DI)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="dia_4_analisis_files/figure-html/anova-4.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajustamos un modelo lineal</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>m_pinos <span class="ot">&lt;-</span> <span class="fu">lm</span>(DI <span class="sc">~</span> Irrig, <span class="at">data =</span> pinos)</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m_pinos)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = DI ~ Irrig, data = pinos)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-16.8187  -4.3861  -0.7638   5.5471  17.3473 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   32.245      1.157  27.873  &lt; 2e-16 ***
+IrrigR1        3.158      1.636   1.931   0.0556 .  
+IrrigR2        7.429      1.636   4.541 1.20e-05 ***
+IrrigR3       12.676      1.636   7.748 1.72e-12 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 6.941 on 140 degrees of freedom
+Multiple R-squared:  0.3258,    Adjusted R-squared:  0.3114 
+F-statistic: 22.55 on 3 and 140 DF,  p-value: 5.682e-12</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ¿Qué significa cada parámetro?</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="co"># intercept = media del nivel de referencia, variables dummy</span></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>pinos <span class="ot">&lt;-</span> pinos <span class="sc">|&gt;</span> </span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">f1 =</span> <span class="fu">fitted</span>(m_pinos))</span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(pinos) <span class="sc">+</span></span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> f1, <span class="at">y =</span> DI)) <span class="sc">+</span></span>
+<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Observados"</span>, <span class="at">x =</span> <span class="st">"Predichos"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="dia_4_analisis_files/figure-html/anova-5.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tabla del anova</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(m_pinos)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Variance Table
+
+Response: DI
+           Df Sum Sq Mean Sq F value    Pr(&gt;F)    
+Irrig       3 3259.6 1086.53  22.553 5.682e-12 ***
+Residuals 140 6744.8   48.18                      
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Irrig SumSq / (Irrig SumSq + Residuals SumSq) = R2 </span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="fl">3259.6</span><span class="sc">/</span>(<span class="fl">3259.6+6744.8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.3258166</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check residuals</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="fu">x11</span>()</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="fu">check_model</span>(m_pinos)</span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Pero... no hemos acabado</span></span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Una de las principales razones de usar factores es conocer las diferencias entre los niveles del factor</span></span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>paircomp <span class="ot">&lt;-</span> emmeans<span class="sc">::</span><span class="fu">emmeans</span>(m_pinos, <span class="at">specs =</span> pairwise <span class="sc">~</span> Irrig)</span>
+<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a>paircomp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$emmeans
+ Irrig emmean   SE  df lower.CL upper.CL
+ R0      32.2 1.16 140     30.0     34.5
+ R1      35.4 1.16 140     33.1     37.7
+ R2      39.7 1.16 140     37.4     42.0
+ R3      44.9 1.16 140     42.6     47.2
+
+Confidence level used: 0.95 
+
+$contrasts
+ contrast estimate   SE  df t.ratio p.value
+ R0 - R1     -3.16 1.64 140  -1.931  0.2200
+ R0 - R2     -7.43 1.64 140  -4.541  0.0001
+ R0 - R3    -12.68 1.64 140  -7.748  &lt;.0001
+ R1 - R2     -4.27 1.64 140  -2.610  0.0487
+ R1 - R3     -9.52 1.64 140  -5.817  &lt;.0001
+ R2 - R3     -5.25 1.64 140  -3.207  0.0089
+
+P value adjustment: tukey method for comparing a family of 4 estimates </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Representación del modelo</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_model</span>(m_pinos, <span class="at">type =</span> <span class="st">"pred"</span>, <span class="at">terms =</span> <span class="st">"Irrig"</span>, <span class="at">show.data =</span> <span class="cn">TRUE</span>, <span class="at">jitter =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">""</span>, </span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Tratamiento de riego"</span>, <span class="at">y =</span> <span class="st">"Incremento en diámetro"</span>) <span class="sc">+</span></span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(paircomp, <span class="at">comparison =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">""</span>, </span>
+<span id="cb53-10"><a href="#cb53-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Tratamiento de riego"</span>, <span class="at">y =</span> <span class="st">"Incremento en diámetro"</span>) <span class="sc">+</span></span>
+<span id="cb53-11"><a href="#cb53-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb53-12"><a href="#cb53-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-13"><a href="#cb53-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Tablas de resultados</span></span>
+<span id="cb53-14"><a href="#cb53-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-15"><a href="#cb53-15" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(m_pinos)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 5
+  term        estimate std.error statistic  p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 (Intercept)    32.2       1.16     27.9  5.36e-59
+2 IrrigR1         3.16      1.64      1.93 5.56e- 2
+3 IrrigR2         7.43      1.64      4.54 1.20e- 5
+4 IrrigR3        12.7       1.64      7.75 1.72e-12</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(<span class="fu">anova</span>(m_pinos))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 6
+  term         df sumsq meansq statistic   p.value
+  &lt;chr&gt;     &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+1 Irrig         3 3260. 1087.       22.6  5.68e-12
+2 Residuals   140 6745.   48.2      NA   NA       </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(m_pinos)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 12
+  r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC   BIC
+      &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1     0.326         0.311  6.94      22.6 5.68e-12     3  -481.  973.  987.
+# ℹ 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="ancova" class="level3" data-number="5.3">
+<h3 data-number="5.3" class="anchored" data-anchor-id="ancova"><span class="header-section-number">5.3</span> ANCOVA</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>encinas <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="at">file =</span> <span class="st">"bellotas.csv"</span>, <span class="at">delim =</span> <span class="st">","</span>,</span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">col_types =</span> <span class="fu">list</span>(<span class="at">Competition =</span> <span class="st">"f"</span>,</span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">Fert =</span> <span class="st">"f"</span>))</span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a><span class="co"># encinas contiene información de 40 árboles adultos de encina (Quercus ilex). En alrededor de la mitad de ellos se eliminaron todas las plantas competidoras (herbáceas), dando lugar a dos tratamientos de competencia (sí y no). La mitad de las encinas en cada tratamiento de competencia se sometieron a fertilización durante tres años, mientras que la otra mitad se dejó como control. Después de 3 años, se midió el diámetro y se calculó el crecimiento como el aumento en diámetro (DI). La variable de respuesta fue la producción de bellotas por árbol.</span></span>
+<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-7"><a href="#cb59-7" aria-hidden="true" tabindex="-1"></a><span class="co"># El nombre "Acorn " tiene un espacio</span></span>
+<span id="cb59-8"><a href="#cb59-8" aria-hidden="true" tabindex="-1"></a>encinas <span class="ot">&lt;-</span> encinas <span class="sc">|&gt;</span> </span>
+<span id="cb59-9"><a href="#cb59-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Acorn =</span> <span class="st">`</span><span class="at">Acorn </span><span class="st">`</span>)</span>
+<span id="cb59-10"><a href="#cb59-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-11"><a href="#cb59-11" aria-hidden="true" tabindex="-1"></a><span class="co"># La hipótesis es que aquellos árboles que crezcan más también mostrarán una mayor producción de bellotas y que esta relación dependerá de la disponibilidad de recursos, es decir, más nutrientes y agua debido a la fertilización y la falta de competencia.</span></span>
+<span id="cb59-12"><a href="#cb59-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-13"><a href="#cb59-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Comprobaciones: outliers, normalidad, linealidad</span></span>
+<span id="cb59-14"><a href="#cb59-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-15"><a href="#cb59-15" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(encinas) <span class="sc">+</span></span>
+<span id="cb59-16"><a href="#cb59-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> Acorn, <span class="at">x =</span> <span class="dv">1</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="dia_4_analisis_files/figure-html/ancova-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(encinas) <span class="sc">+</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> Acorn, <span class="at">x =</span> Fert))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="dia_4_analisis_files/figure-html/ancova-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> encinas) <span class="sc">+</span></span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> Acorn, <span class="at">x =</span> Competition))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="dia_4_analisis_files/figure-html/ancova-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(encinas) <span class="sc">+</span></span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> Acorn, <span class="at">y =</span> DI))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="dia_4_analisis_files/figure-html/ancova-4.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(encinas) <span class="sc">+</span></span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> Acorn), <span class="at">bins =</span> <span class="dv">10</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="dia_4_analisis_files/figure-html/ancova-5.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajustamos el modelo</span></span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>m_encinas <span class="ot">&lt;-</span> <span class="fu">lm</span>(Acorn <span class="sc">~</span> Fert <span class="sc">*</span> DI <span class="sc">+</span> Competition <span class="sc">*</span> DI, <span class="at">data =</span> encinas)</span>
+<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m_encinas)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Acorn ~ Fert * DI + Competition * DI, data = encinas)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-13.9525  -3.1552   0.2527   3.5782  19.1172 
+
+Coefficients:
+                  Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)       -53.0252    25.5490  -2.075   0.0456 *  
+FertFertilized    -26.9843    23.3641  -1.155   0.2562    
+DI                 18.0298     3.7641   4.790 3.21e-05 ***
+Competitionyes    -41.4797    21.0138  -1.974   0.0566 .  
+FertFertilized:DI  -0.9199     3.3445  -0.275   0.7850    
+DI:Competitionyes   5.8043     2.9130   1.993   0.0544 .  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 6.651 on 34 degrees of freedom
+Multiple R-squared:  0.9367,    Adjusted R-squared:  0.9273 
+F-statistic: 100.6 on 5 and 34 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(m_encinas)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Variance Table
+
+Response: Acorn
+               Df  Sum Sq Mean Sq  F value    Pr(&gt;F)    
+Fert            1  2910.4  2910.4  65.7946 1.852e-09 ***
+DI              1 19148.9 19148.9 432.8892 &lt; 2.2e-16 ***
+Competition     1     2.9     2.9   0.0650   0.80034    
+Fert:DI         1     2.0     2.0   0.0443   0.83458    
+DI:Competition  1   175.6   175.6   3.9704   0.05438 .  
+Residuals      34  1504.0    44.2                       
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">check_model</span>(m_encinas)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="dia_4_analisis_files/figure-html/ancova-6.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ¿Quitaríais la interacción Fert * DI?</span></span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>m_encinas2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Acorn <span class="sc">~</span> Fert <span class="sc">+</span> Competition <span class="sc">*</span> DI, <span class="at">data =</span> encinas)</span>
+<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-5"><a href="#cb69-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m_encinas2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Acorn ~ Fert + Competition * DI, data = encinas)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-14.1955  -2.9304   0.1738   3.7067  18.9633 
+
+Coefficients:
+                  Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)        -49.566     21.943  -2.259   0.0302 *  
+FertFertilized     -33.334      3.545  -9.404 4.13e-11 ***
+Competitionyes     -41.915     20.676  -2.027   0.0503 .  
+DI                  17.506      3.203   5.465 3.92e-06 ***
+Competitionyes:DI    5.778      2.873   2.011   0.0520 .  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 6.563 on 35 degrees of freedom
+Multiple R-squared:  0.9365,    Adjusted R-squared:  0.9293 
+F-statistic: 129.1 on 4 and 35 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(m_encinas2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Variance Table
+
+Response: Acorn
+               Df  Sum Sq Mean Sq  F value    Pr(&gt;F)    
+Fert            1  2910.4  2910.4  67.5794 1.094e-09 ***
+Competition     1   103.3   103.3   2.3992   0.13040    
+DI              1 19048.5 19048.5 442.2996 &lt; 2.2e-16 ***
+Competition:DI  1   174.2   174.2   4.0459   0.05203 .  
+Residuals      35  1507.3    43.1                       
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">check_model</span>(m_encinas2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="dia_4_analisis_files/figure-html/ancova-7.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Interpretación de los parámetros</span></span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Figura con la relación entre las variables continuas para cada nivel del tratamiento</span></span>
+<span id="cb74-4"><a href="#cb74-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_model</span>(m_encinas2, <span class="at">type =</span> <span class="st">"pred"</span>, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"DI"</span>,<span class="st">"Competition"</span>)) <span class="sc">+</span></span>
+<span id="cb74-5"><a href="#cb74-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">""</span>, </span>
+<span id="cb74-6"><a href="#cb74-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Crecimiento"</span>, <span class="at">y =</span> <span class="st">"Producción de bellotas"</span>, <span class="at">color =</span> <span class="st">"Competencia"</span>) <span class="sc">+</span></span>
+<span id="cb74-7"><a href="#cb74-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="dia_4_analisis_files/figure-html/ancova-8.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="modelos-lineales-mixtos" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="modelos-lineales-mixtos"><span class="header-section-number">6</span> Modelos lineales mixtos</h2>
+<p>Los modelos mixtos estiman parámetros (interceptos o pendientes) que varían según unos niveles de agregación especificados en vez de considerarse plenamente independientes. Ahora el intercepto <em>a</em> o la pendiente <em>b</em> van a seguir una distribución normal que depende de otro/s predictor/es:</p>
+<p><span class="math display">\[
+a_{j} \sim N(𝜇_{j}, 𝜎^2)\\
+𝜇_{j}=𝛾+𝛿×predictor_{j}
+\]</span></p>
+<p>Este tipo de modelos es muy útil para modelizar datos estructurados en el espacio o en el tiempo (medidas repetidas) a la vez que permiten aprovechar todos los datos.</p>
+<p>💡Si te interesan los modelos mixtos, puedes leer el capítulo <em>Multilevel linear models: the basics</em> de <span class="citation" data-cites="gelman2006">Gelman and Hill (<a href="#ref-gelman2006" role="doc-biblioref">2006</a>)</span>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("glmmTMB")</span></span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(glmmTMB)</span>
+<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("lmerTest")</span></span>
+<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmerTest)</span>
+<span id="cb75-5"><a href="#cb75-5" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("broom.mixed")</span></span>
+<span id="cb75-6"><a href="#cb75-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom.mixed)</span>
+<span id="cb75-7"><a href="#cb75-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-8"><a href="#cb75-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(palmerpenguins)</span>
+<span id="cb75-9"><a href="#cb75-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-10"><a href="#cb75-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Un solo grupo de datos</span></span>
+<span id="cb75-11"><a href="#cb75-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-12"><a href="#cb75-12" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(flipper_length_mm <span class="sc">~</span> body_mass_g, <span class="at">data =</span> penguins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = flipper_length_mm ~ body_mass_g, data = penguins)
+
+Coefficients:
+(Intercept)  body_mass_g  
+  136.72956      0.01528  </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sin agrupamiento: un intercepto independiente por grupo.</span></span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(flipper_length_mm <span class="sc">~</span> body_mass_g <span class="sc">+</span> <span class="fu">factor</span>(year), <span class="at">data =</span> penguins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = flipper_length_mm ~ body_mass_g + factor(year), 
+    data = penguins)
+
+Coefficients:
+     (Intercept)       body_mass_g  factor(year)2008  factor(year)2009  
+       134.48739           0.01513           3.76753           4.62878  </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Con agrupamiento parcial: interceptos interrelacionados</span></span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a><span class="fu">glmmTMB</span>(flipper_length_mm <span class="sc">~</span> body_mass_g <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>year), <span class="at">data =</span> penguins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Formula:          flipper_length_mm ~ body_mass_g + (1 | year)
+Data: penguins
+      AIC       BIC    logLik  df.resid 
+ 2279.361  2294.700 -1135.680       338 
+Random-effects (co)variances:
+
+Conditional model:
+ Groups   Name        Std.Dev.
+ year     (Intercept) 1.907   
+ Residual             6.629   
+
+Number of obs: 342 / Conditional model: year, 3
+
+Dispersion estimate for gaussian family (sigma^2): 43.9 
+
+Fixed Effects:
+
+Conditional model:
+(Intercept)  body_mass_g  
+  137.23098      0.01514  </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajustamos modelo mixto</span></span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> body_mass_g, <span class="at">y =</span> flipper_length_mm, <span class="at">color =</span> <span class="fu">factor</span>(year))) <span class="sc">+</span></span>
+<span id="cb81-4"><a href="#cb81-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb81-5"><a href="#cb81-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="dia_4_analisis_files/figure-html/m_mixtos-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a>m_mixto <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(flipper_length_mm <span class="sc">~</span> body_mass_g <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>year), <span class="at">data =</span> penguins)</span>
+<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-3"><a href="#cb82-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m_mixto)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Family: gaussian  ( identity )
+Formula:          flipper_length_mm ~ body_mass_g + (1 | year)
+Data: penguins
+
+     AIC      BIC   logLik deviance df.resid 
+  2279.4   2294.7  -1135.7   2271.4      338 
+
+Random effects:
+
+Conditional model:
+ Groups   Name        Variance Std.Dev.
+ year     (Intercept)  3.638   1.907   
+ Residual             43.946   6.629   
+Number of obs: 342, groups:  year, 3
+
+Dispersion estimate for gaussian family (sigma^2): 43.9 
+
+Conditional model:
+             Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept) 1.372e+02  2.213e+00   62.02   &lt;2e-16 ***
+body_mass_g 1.514e-02  4.489e-04   33.73   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">check_model</span>(m_mixto)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="dia_4_analisis_files/figure-html/m_mixtos-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(m_mixto)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 8
+  effect   component group    term       estimate std.error statistic    p.value
+  &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+1 fixed    cond      &lt;NA&gt;     (Intercep… 137.      2.21          62.0  0        
+2 fixed    cond      &lt;NA&gt;     body_mass…   0.0151  0.000449      33.7  1.79e-249
+3 ran_pars cond      year     sd__(Inte…   1.91   NA             NA   NA        
+4 ran_pars cond      Residual sd__Obser…   6.63   NA             NA   NA        </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_model</span>(m_mixto, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"body_mass_g"</span>), <span class="at">show.data =</span> <span class="cn">TRUE</span>, <span class="at">type =</span> <span class="st">"pred"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="dia_4_analisis_files/figure-html/m_mixtos-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_model</span>(m_mixto, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"year"</span>), <span class="at">show.data =</span> <span class="cn">TRUE</span>, <span class="at">type =</span> <span class="st">"re"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="dia_4_analisis_files/figure-html/m_mixtos-4.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="co"># + (1 | group) varian interceptos</span></span>
+<span id="cb89-2"><a href="#cb89-2" aria-hidden="true" tabindex="-1"></a><span class="co"># + (1 + x | group) varian interceptos y pendientes</span></span>
+<span id="cb89-3"><a href="#cb89-3" aria-hidden="true" tabindex="-1"></a><span class="co"># + (1 | group/subgroup) varian interceptos anidados</span></span>
+<span id="cb89-4"><a href="#cb89-4" aria-hidden="true" tabindex="-1"></a><span class="co"># + (1 | group1) + (1 | group2) # varian interceptos según 2 grupos independientes</span></span>
+<span id="cb89-5"><a href="#cb89-5" aria-hidden="true" tabindex="-1"></a><span class="co"># + (1 + x | group1) + (1 + x | group2) # varian interceptos y pendientes según dos grupos</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="modelos-lineales-generalizados" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="modelos-lineales-generalizados"><span class="header-section-number">7</span> Modelos lineales generalizados</h2>
+<p>Los residuos dependen en gran medida de la naturaleza de la variable respuesta. ¿Que ocurre cuando no son normales ni la varianza homogénea? En ecología esto ocurre a menudo con variables binarias (0/1; datos de supervivencia, presencia-ausencia, sexo, etc.) y con conteos (0, 1, 2, 3…; nº de individiuos, nº de avistamientos, etc.).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(titanic)</span>
+<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb90-3"><a href="#cb90-3" aria-hidden="true" tabindex="-1"></a>titanic <span class="ot">&lt;-</span> titanic_train <span class="sc">|&gt;</span> </span>
+<span id="cb90-4"><a href="#cb90-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Pclass =</span> <span class="fu">factor</span>(Pclass))</span>
+<span id="cb90-5"><a href="#cb90-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb90-6"><a href="#cb90-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb90-7"><a href="#cb90-7" aria-hidden="true" tabindex="-1"></a>m_lin <span class="ot">&lt;-</span> <span class="fu">lm</span>(Survived <span class="sc">~</span> Pclass, <span class="at">data =</span> titanic)</span>
+<span id="cb90-8"><a href="#cb90-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb90-9"><a href="#cb90-9" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(<span class="fu">resid</span>(m_lin))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="dia_4_analisis_files/figure-html/generalizados-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Las <strong>funciones de enlace</strong> sirven para linealizar la relación entre la variable respuesta y la independiente. Para cada distribución de la variable respuesta y, por tanto de sus residuos, hay funciones de enlace por defecto (canónicas).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-746937596.png" class="img-fluid figure-img"></p>
+<figcaption>Funciones de enlace canónicas para diferentes distribuciones de errores.</figcaption>
+</figure>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("DHARMa")</span></span>
+<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DHARMa)</span>
+<span id="cb91-3"><a href="#cb91-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-4"><a href="#cb91-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(titanic) <span class="sc">+</span></span>
+<span id="cb91-5"><a href="#cb91-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_count</span>(<span class="fu">aes</span>(<span class="at">x =</span> Pclass, <span class="at">y =</span> Survived))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="dia_4_analisis_files/figure-html/binomial-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a>m_binomial <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(Survived <span class="sc">~</span> Pclass, <span class="at">data=</span> titanic, <span class="at">family =</span> <span class="st">"binomial"</span>)</span>
+<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-3"><a href="#cb92-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m_binomial)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Family: binomial  ( logit )
+Formula:          Survived ~ Pclass
+Data: titanic
+
+     AIC      BIC   logLik deviance df.resid 
+  1089.1   1103.5   -541.6   1083.1      888 
+
+
+Conditional model:
+            Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)   0.5306     0.1409   3.766 0.000166 ***
+Pclass2      -0.6394     0.2041  -3.133 0.001731 ** 
+Pclass3      -1.6704     0.1759  -9.496  &lt; 2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="co"># La estimación de los parámetros (= probabilidad de supervivencia) está en escala logit. logit(p) = ln(p / (1-p))</span></span>
+<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-3"><a href="#cb94-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Intercepto: probabilidad de supervivencia del nivel de referencia (primera clase)</span></span>
+<span id="cb94-4"><a href="#cb94-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-5"><a href="#cb94-5" aria-hidden="true" tabindex="-1"></a>co_binomial <span class="ot">&lt;-</span> <span class="fu">fixef</span>(m_binomial)</span>
+<span id="cb94-6"><a href="#cb94-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plogis</span>(co_binomial[[<span class="dv">1</span>]][<span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Intercept) 
+  0.6296297 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a>titanic <span class="sc">|&gt;</span> </span>
+<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Pclass) <span class="sc">|&gt;</span> </span>
+<span id="cb96-3"><a href="#cb96-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">n_class =</span> <span class="fu">n</span>()) <span class="sc">|&gt;</span> </span>
+<span id="cb96-4"><a href="#cb96-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Pclass, n_class, Survived) <span class="sc">|&gt;</span> </span>
+<span id="cb96-5"><a href="#cb96-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n_sur =</span> <span class="fu">n</span>()) <span class="sc">|&gt;</span> </span>
+<span id="cb96-6"><a href="#cb96-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">per_sur =</span> n_sur<span class="sc">/</span>n_class)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 5
+# Groups:   Pclass, n_class [3]
+  Pclass n_class Survived n_sur per_sur
+  &lt;fct&gt;    &lt;int&gt;    &lt;int&gt; &lt;int&gt;   &lt;dbl&gt;
+1 1          216        0    80   0.370
+2 1          216        1   136   0.630
+3 2          184        0    97   0.527
+4 2          184        1    87   0.473
+5 3          491        0   372   0.758
+6 3          491        1   119   0.242</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Para el resto de parámetros:</span></span>
+<span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-3"><a href="#cb98-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plogis</span>(co_binomial[[<span class="dv">1</span>]][<span class="dv">1</span>]<span class="sc">+</span>co_binomial[[<span class="dv">1</span>]][<span class="dv">2</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Intercept) 
+  0.4728261 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_model</span>(m_binomial, <span class="at">type =</span> <span class="st">"pred"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="dia_4_analisis_files/figure-html/binomial-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(m_binomial)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 7
+  effect component term        estimate std.error statistic  p.value
+  &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 fixed  cond      (Intercept)    0.531     0.141      3.77 1.66e- 4
+2 fixed  cond      Pclass2       -0.639     0.204     -3.13 1.73e- 3
+3 fixed  cond      Pclass3       -1.67      0.176     -9.50 2.19e-21</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="fu">simulateResiduals</span>(m_binomial, <span class="at">plot =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="dia_4_analisis_files/figure-html/binomial-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Object of Class DHARMa with simulated residuals based on 250 simulations with refit = FALSE . See ?DHARMa::simulateResiduals for help. 
+ 
+Scaled residual values: 0.5820151 0.8080241 0.9228156 0.9842659 0.2333578 0.4973875 0.1898462 0.1908719 0.9960875 0.7314862 0.9679369 0.9849238 0.3600107 0.3893774 0.4193544 0.6189507 0.3593321 0.5994035 0.2163067 0.9662837 ...</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="co"># DHARMa simula residuos utilizando las predicciones del modelo para generar múltiples conjuntos simulados de valores de respuesta, basándose en la distribución estadística asumida, en este caso y ~ binomial(n, p). Los residuos de DHARMa son redisuos simulados entre el nº de simulaciones, lo que hace que tome valores entre 0 y 1 a lo largo de toda la variable predictora.</span></span>
+<span id="cb105-2"><a href="#cb105-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb105-3"><a href="#cb105-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Sobredispersión: varianza residual entre grados de libertad de la varianza residual. Debería estar en torno a uno. Zuur et al. 2013 (A beginner’s guide to GLM and GLMM with R. A frequentist and Bayesian persperctive for ecologists.)</span></span>
+<span id="cb105-4"><a href="#cb105-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb105-5"><a href="#cb105-5" aria-hidden="true" tabindex="-1"></a>e <span class="ot">&lt;-</span> <span class="fu">resid</span>(m_binomial, <span class="at">type =</span> <span class="st">"pearson"</span>)</span>
+<span id="cb105-6"><a href="#cb105-6" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">nrow</span>(m_binomial<span class="sc">$</span>frame)</span>
+<span id="cb105-7"><a href="#cb105-7" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">fixef</span>(m_binomial))</span>
+<span id="cb105-8"><a href="#cb105-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(e<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>(n<span class="sc">-</span>p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.003378</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="fu">check_overdispersion</span>(m_binomial)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Overdispersion test
+
+ dispersion ratio = 1.001
+          p-value = 0.952</code></pre>
+</div>
+</div>
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-cayuela2022" class="csl-entry" role="listitem">
+Cayuela, Luis, and Marcelino De la Cruz. 2022. <em>Análisis de Datos Ecológicos En r</em>. MundiPrensa.
+</div>
+<div id="ref-gelman2006" class="csl-entry" role="listitem">
+Gelman, Andrew, and Jennifer Hill. 2006. <em>Data Analysis Using Regression and Multilevel/Hierarchical Models</em>. Analytical Methods for Social Research. Cambridge: Cambridge University Press.
+</div>
+</div></section></div></main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
