@@ -23,6 +23,8 @@ Verónica Cruz-Alonso, Enrique Andivia
   mixtos](#modelos-lineales-mixtos)
 - [<span class="toc-section-number">7</span> Modelos lineales
   generalizados](#modelos-lineales-generalizados)
+- [<span class="toc-section-number">8</span> Bibliografía de
+  interés](#bibliografía-de-interés)
 
 ## Objetivos del día 5
 
@@ -61,7 +63,7 @@ ANOVA) o multifactorial si hay más. Por último, si las variables
 explicativas son una combinación de categóricas y continuas estaremos
 antes un ANCOVA (análisis de la covarianza) (Cayuela and De la Cruz
 2022). Todos estos nombres hacen referencia a tipos de análisis de
-regresión que en R se pueden calcular con una única función: `lm(m)`.
+regresión que en R se pueden calcular con una única función: `lm()`.
 
 ## Supuestos de los modelos lineales
 
@@ -390,10 +392,10 @@ check_collinearity(m_ozono)
 
 # Modelo con interacciones 
 
-ozono <- ozono %>% 
-  mutate(rads = as.vector(scale(rad)),
-    temps = as.vector(scale(temp)),
-    winds = as.vector(scale(wind)))
+ozono <- ozono |> 
+  mutate(rad = as.vector(scale(rad)),
+    temp = as.vector(scale(temp)),
+    wind = as.vector(scale(wind)))
 
 m_ozono_int <- lm(ozone ~ rad*temp + wind*temp, data = ozono)
 summary(m_ozono_int)
@@ -408,13 +410,13 @@ summary(m_ozono_int)
     -36.749  -9.885  -1.977   8.566  59.868 
 
     Coefficients:
-                  Estimate Std. Error t value Pr(>|t|)    
-    (Intercept) -1.496e+02  5.628e+01  -2.658 0.009109 ** 
-    rad         -3.439e-01  1.535e-01  -2.241 0.027124 *  
-    temp         2.550e+00  7.236e-01   3.524 0.000633 ***
-    wind         1.150e+01  3.735e+00   3.079 0.002659 ** 
-    rad:temp     5.514e-03  2.079e-03   2.653 0.009234 ** 
-    temp:wind   -1.837e-01  4.757e-02  -3.862 0.000196 ***
+                Estimate Std. Error t value Pr(>|t|)    
+    (Intercept)   36.492      1.792  20.358  < 2e-16 ***
+    rad            7.756      1.892   4.101 8.20e-05 ***
+    temp          16.552      1.932   8.565 1.06e-13 ***
+    wind          -9.810      1.861  -5.272 7.36e-07 ***
+    rad:temp       4.824      1.818   2.653 0.009234 ** 
+    temp:wind     -6.187      1.602  -3.862 0.000196 ***
     ---
     Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -443,13 +445,13 @@ anova(m_ozono_int)
 confint(m_ozono_int)
 ```
 
-                        2.5 %        97.5 %
-    (Intercept) -2.612016e+02 -37.973601769
-    rad         -6.482502e-01  -0.039648551
-    temp         1.115168e+00   3.985137139
-    wind         4.091851e+00  18.904284873
-    rad:temp     1.392111e-03   0.009635842
-    temp:wind   -2.780348e-01  -0.089366319
+                     2.5 %    97.5 %
+    (Intercept)  32.937578 40.046755
+    rad           4.005437 11.507317
+    temp         12.719685 20.384019
+    wind        -13.499787 -6.120223
+    rad:temp      1.217851  8.429653
+    temp:wind    -9.363888 -3.009754
 
 ``` r
 # comprobar supuestos
@@ -489,18 +491,18 @@ plot_model(m_ozono_int, type = "pred",
 ``` r
 # Tablas de resultados
 
-tidy(m_ozono_int)
+tidy(m_ozono_int) 
 ```
 
     # A tibble: 6 × 5
-      term          estimate std.error statistic  p.value
-      <chr>            <dbl>     <dbl>     <dbl>    <dbl>
-    1 (Intercept) -150.       56.3         -2.66 0.00911 
-    2 rad           -0.344     0.153       -2.24 0.0271  
-    3 temp           2.55      0.724        3.52 0.000633
-    4 wind          11.5       3.73         3.08 0.00266 
-    5 rad:temp       0.00551   0.00208      2.65 0.00923 
-    6 temp:wind     -0.184     0.0476      -3.86 0.000196
+      term        estimate std.error statistic  p.value
+      <chr>          <dbl>     <dbl>     <dbl>    <dbl>
+    1 (Intercept)    36.5       1.79     20.4  4.58e-38
+    2 rad             7.76      1.89      4.10 8.20e- 5
+    3 temp           16.6       1.93      8.57 1.06e-13
+    4 wind           -9.81      1.86     -5.27 7.36e- 7
+    5 rad:temp        4.82      1.82      2.65 9.23e- 3
+    6 temp:wind      -6.19      1.60     -3.86 1.96e- 4
 
 ``` r
 tidy(anova(m_ozono_int))
@@ -676,7 +678,7 @@ check_model(m_pinos)
 # Pero... no hemos acabado
 # Una de las principales razones de usar factores es conocer las diferencias entre los niveles del factor
 
-paircomp <- emmeans::emmeans(m_pinos, specs = pairwise ~ Irrig)
+paircomp <- emmeans(m_pinos, specs = pairwise ~ Irrig)
 paircomp
 ```
 
@@ -703,7 +705,7 @@ paircomp
 ``` r
 # Representación del modelo
 
-plot_model(m_pinos, type = "pred", terms = "Irrig", show.data = TRUE, jitter = 0.5) +
+plot_model(m_pinos, type = "pred", terms = "Irrig", show.data = TRUE, jitter = 0.5, alpha = 0.2) +
   labs(title = "", 
     x = "Tratamiento de riego", y = "Incremento en diámetro") +
   theme_bw()
@@ -930,7 +932,9 @@ $$
 
 Este tipo de modelos es muy útil para modelizar datos estructurados en
 el espacio o en el tiempo (medidas repetidas) a la vez que permiten
-aprovechar todos los datos.
+aprovechar todos los datos. No se recomienda ajustar modelos mixtos
+cuando hay menos de 5-6 niveles del factor y 10-20 observaciones por
+nivel (Crawley 2007; Bolker et al. 2009).
 
 💡Si te interesan los modelos mixtos, puedes leer el capítulo
 *Multilevel linear models: the basics* de Gelman and Hill (2006).
@@ -938,8 +942,7 @@ aprovechar todos los datos.
 ``` r
 # install.packages("glmmTMB")
 library(glmmTMB)
-# install.packages("lmerTest")
-library(lmerTest)
+
 # install.packages("broom.mixed")
 library(broom.mixed)
 
@@ -1001,6 +1004,8 @@ glmmTMB(flipper_length_mm ~ body_mass_g + (1|year), data = penguins)
       137.23098      0.01514  
 
 ``` r
+# Ojo, esto es solo un ejemplo. No se recomienda ajustar modelos mixtos cuando hay menos de 5-6 niveles del factor. 
+
 # Ajustamos modelo mixto
 
 ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm, color = factor(year))) +
@@ -1119,7 +1124,7 @@ ggplot(titanic) +
 ![](dia_4_analisis_files/figure-commonmark/binomial-1.png)
 
 ``` r
-m_binomial <- glmmTMB(Survived ~ Pclass, data= titanic, family = "binomial")
+m_binomial <- glmmTMB(Survived ~ Pclass, data = titanic, family = "binomial")
 
 summary(m_binomial)
 ```
@@ -1230,13 +1235,31 @@ check_overdispersion(m_binomial)
      dispersion ratio = 1.001
               p-value = 0.952
 
+## Bibliografía de interés
+
 <div id="refs" class="references csl-bib-body hanging-indent"
 entry-spacing="0">
+
+<div id="ref-bolker2009" class="csl-entry">
+
+Bolker, Benjamin M., Mollie E. Brooks, Connie J. Clark, Shane W. Geange,
+John R. Poulsen, M. Henry H. Stevens, and Jada-Simone S. White. 2009.
+“Generalized Linear Mixed Models: A Practical Guide for Ecology and
+Evolution.” *Trends in Ecology & Evolution* 24 (3): 127–35.
+<https://doi.org/10.1016/j.tree.2008.10.008>.
+
+</div>
 
 <div id="ref-cayuela2022" class="csl-entry">
 
 Cayuela, Luis, and Marcelino De la Cruz. 2022. *Análisis de Datos
 Ecológicos En r*. MundiPrensa.
+
+</div>
+
+<div id="ref-crawley2007" class="csl-entry">
+
+Crawley, Michael J. 2007. *The r Book.* Chichester, UK: Wiley.
 
 </div>
 

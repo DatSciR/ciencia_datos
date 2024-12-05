@@ -10,7 +10,7 @@
 <meta name="author" content="Enrique Andivia">
 <meta name="dcterms.date" content="2024-05-12">
 
-<title>quarto-input66601a0d18dcdf79</title>
+<title>quarto-inputc0a54de7062a8f57</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -143,6 +143,7 @@ window.Quarto = {
   </ul></li>
   <li><a href="#modelos-lineales-mixtos" id="toc-modelos-lineales-mixtos" class="nav-link" data-scroll-target="#modelos-lineales-mixtos"><span class="header-section-number">6</span> Modelos lineales mixtos</a></li>
   <li><a href="#modelos-lineales-generalizados" id="toc-modelos-lineales-generalizados" class="nav-link" data-scroll-target="#modelos-lineales-generalizados"><span class="header-section-number">7</span> Modelos lineales generalizados</a></li>
+  <li><a href="#bibliografía-de-interés" id="toc-bibliografía-de-interés" class="nav-link" data-scroll-target="#bibliografía-de-interés"><span class="header-section-number">8</span> Bibliografía de interés</a></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="dia_4_analisis.md"><i class="bi bi-file-code"></i>Github (GFM)</a></li></ul></div></nav>
 </div>
@@ -197,7 +198,7 @@ window.Quarto = {
 <p>All models are wrong, but some are useful</p>
 <p>— George E. P. Box</p>
 </blockquote>
-<p>El <strong>análisis de regresión</strong> se usa para explicar o predecir la relación lineal entre una variable Y (variable respuesta o dependiente), y una o más variables explicativas o independientes. Cuando hay una variable explicativa hablamos de regresión simple y cuando hay varias es regresión múltiple. Si la(s) variable(s) explicativas son categóricas estamos ante un análisis de la varianza o ANOVA, que al igual que antes puede ser unifactorial si solo hay una variable explicativa (one-way ANOVA) o multifactorial si hay más. Por último, si las variables explicativas son una combinación de categóricas y continuas estaremos antes un ANCOVA (análisis de la covarianza) <span class="citation" data-cites="cayuela2022">(<a href="#ref-cayuela2022" role="doc-biblioref">Cayuela and De la Cruz 2022</a>)</span>. Todos estos nombres hacen referencia a tipos de análisis de regresión que en R se pueden calcular con una única función: <code>lm(m)</code>.</p>
+<p>El <strong>análisis de regresión</strong> se usa para explicar o predecir la relación lineal entre una variable Y (variable respuesta o dependiente), y una o más variables explicativas o independientes. Cuando hay una variable explicativa hablamos de regresión simple y cuando hay varias es regresión múltiple. Si la(s) variable(s) explicativas son categóricas estamos ante un análisis de la varianza o ANOVA, que al igual que antes puede ser unifactorial si solo hay una variable explicativa (one-way ANOVA) o multifactorial si hay más. Por último, si las variables explicativas son una combinación de categóricas y continuas estaremos antes un ANCOVA (análisis de la covarianza) <span class="citation" data-cites="cayuela2022">(<a href="#ref-cayuela2022" role="doc-biblioref">Cayuela and De la Cruz 2022</a>)</span>. Todos estos nombres hacen referencia a tipos de análisis de regresión que en R se pueden calcular con una única función: <code>lm()</code>.</p>
 </section>
 <section id="supuestos-de-los-modelos-lineales" class="level2" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="supuestos-de-los-modelos-lineales"><span class="header-section-number">3</span> Supuestos de los modelos lineales</h2>
@@ -409,10 +410,10 @@ Low Correlation
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Modelo con interacciones </span></span>
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>ozono <span class="ot">&lt;-</span> ozono <span class="sc">%&gt;%</span> </span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rads =</span> <span class="fu">as.vector</span>(<span class="fu">scale</span>(rad)),</span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">temps =</span> <span class="fu">as.vector</span>(<span class="fu">scale</span>(temp)),</span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">winds =</span> <span class="fu">as.vector</span>(<span class="fu">scale</span>(wind)))</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>ozono <span class="ot">&lt;-</span> ozono <span class="sc">|&gt;</span> </span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rad =</span> <span class="fu">as.vector</span>(<span class="fu">scale</span>(rad)),</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">temp =</span> <span class="fu">as.vector</span>(<span class="fu">scale</span>(temp)),</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">wind =</span> <span class="fu">as.vector</span>(<span class="fu">scale</span>(wind)))</span>
 <span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>m_ozono_int <span class="ot">&lt;-</span> <span class="fu">lm</span>(ozone <span class="sc">~</span> rad<span class="sc">*</span>temp <span class="sc">+</span> wind<span class="sc">*</span>temp, <span class="at">data =</span> ozono)</span>
 <span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m_ozono_int)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -426,13 +427,13 @@ Residuals:
 -36.749  -9.885  -1.977   8.566  59.868 
 
 Coefficients:
-              Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) -1.496e+02  5.628e+01  -2.658 0.009109 ** 
-rad         -3.439e-01  1.535e-01  -2.241 0.027124 *  
-temp         2.550e+00  7.236e-01   3.524 0.000633 ***
-wind         1.150e+01  3.735e+00   3.079 0.002659 ** 
-rad:temp     5.514e-03  2.079e-03   2.653 0.009234 ** 
-temp:wind   -1.837e-01  4.757e-02  -3.862 0.000196 ***
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   36.492      1.792  20.358  &lt; 2e-16 ***
+rad            7.756      1.892   4.101 8.20e-05 ***
+temp          16.552      1.932   8.565 1.06e-13 ***
+wind          -9.810      1.861  -5.272 7.36e-07 ***
+rad:temp       4.824      1.818   2.653 0.009234 ** 
+temp:wind     -6.187      1.602  -3.862 0.000196 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -457,13 +458,13 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(m_ozono_int)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>                    2.5 %        97.5 %
-(Intercept) -2.612016e+02 -37.973601769
-rad         -6.482502e-01  -0.039648551
-temp         1.115168e+00   3.985137139
-wind         4.091851e+00  18.904284873
-rad:temp     1.392111e-03   0.009635842
-temp:wind   -2.780348e-01  -0.089366319</code></pre>
+<pre><code>                 2.5 %    97.5 %
+(Intercept)  32.937578 40.046755
+rad           4.005437 11.507317
+temp         12.719685 20.384019
+wind        -13.499787 -6.120223
+rad:temp      1.217851  8.429653
+temp:wind    -9.363888 -3.009754</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># comprobar supuestos</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">check_model</span>(m_ozono_int)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -510,17 +511,17 @@ temp:wind   -2.780348e-01  -0.089366319</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tablas de resultados</span></span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(m_ozono_int)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(m_ozono_int) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 5
-  term          estimate std.error statistic  p.value
-  &lt;chr&gt;            &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-1 (Intercept) -150.       56.3         -2.66 0.00911 
-2 rad           -0.344     0.153       -2.24 0.0271  
-3 temp           2.55      0.724        3.52 0.000633
-4 wind          11.5       3.73         3.08 0.00266 
-5 rad:temp       0.00551   0.00208      2.65 0.00923 
-6 temp:wind     -0.184     0.0476      -3.86 0.000196</code></pre>
+  term        estimate std.error statistic  p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 (Intercept)    36.5       1.79     20.4  4.58e-38
+2 rad             7.76      1.89      4.10 8.20e- 5
+3 temp           16.6       1.93      8.57 1.06e-13
+4 wind           -9.81      1.86     -5.27 7.36e- 7
+5 rad:temp        4.82      1.82      2.65 9.23e- 3
+6 temp:wind      -6.19      1.60     -3.86 1.96e- 4</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(<span class="fu">anova</span>(m_ozono_int))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -688,7 +689,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Pero... no hemos acabado</span></span>
 <span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Una de las principales razones de usar factores es conocer las diferencias entre los niveles del factor</span></span>
 <span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>paircomp <span class="ot">&lt;-</span> emmeans<span class="sc">::</span><span class="fu">emmeans</span>(m_pinos, <span class="at">specs =</span> pairwise <span class="sc">~</span> Irrig)</span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>paircomp <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(m_pinos, <span class="at">specs =</span> pairwise <span class="sc">~</span> Irrig)</span>
 <span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a>paircomp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$emmeans
@@ -713,7 +714,7 @@ P value adjustment: tukey method for comparing a family of 4 estimates </code></
 </div>
 <div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Representación del modelo</span></span>
 <span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_model</span>(m_pinos, <span class="at">type =</span> <span class="st">"pred"</span>, <span class="at">terms =</span> <span class="st">"Irrig"</span>, <span class="at">show.data =</span> <span class="cn">TRUE</span>, <span class="at">jitter =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_model</span>(m_pinos, <span class="at">type =</span> <span class="st">"pred"</span>, <span class="at">terms =</span> <span class="st">"Irrig"</span>, <span class="at">show.data =</span> <span class="cn">TRUE</span>, <span class="at">jitter =</span> <span class="fl">0.5</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
 <span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">""</span>, </span>
 <span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Tratamiento de riego"</span>, <span class="at">y =</span> <span class="st">"Incremento en diámetro"</span>) <span class="sc">+</span></span>
 <span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
@@ -941,21 +942,20 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 a_{j} \sim N(𝜇_{j}, 𝜎^2)\\
 𝜇_{j}=𝛾+𝛿×predictor_{j}
 \]</span></p>
-<p>Este tipo de modelos es muy útil para modelizar datos estructurados en el espacio o en el tiempo (medidas repetidas) a la vez que permiten aprovechar todos los datos.</p>
+<p>Este tipo de modelos es muy útil para modelizar datos estructurados en el espacio o en el tiempo (medidas repetidas) a la vez que permiten aprovechar todos los datos. No se recomienda ajustar modelos mixtos cuando hay menos de 5-6 niveles del factor y 10-20 observaciones por nivel <span class="citation" data-cites="crawley2007 bolker2009">(<a href="#ref-crawley2007" role="doc-biblioref">Crawley 2007</a>; <a href="#ref-bolker2009" role="doc-biblioref">Bolker et al. 2009</a>)</span>.</p>
 <p>💡Si te interesan los modelos mixtos, puedes leer el capítulo <em>Multilevel linear models: the basics</em> de <span class="citation" data-cites="gelman2006">Gelman and Hill (<a href="#ref-gelman2006" role="doc-biblioref">2006</a>)</span>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("glmmTMB")</span></span>
 <span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(glmmTMB)</span>
-<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("lmerTest")</span></span>
-<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmerTest)</span>
-<span id="cb75-5"><a href="#cb75-5" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("broom.mixed")</span></span>
-<span id="cb75-6"><a href="#cb75-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom.mixed)</span>
-<span id="cb75-7"><a href="#cb75-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-8"><a href="#cb75-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(palmerpenguins)</span>
-<span id="cb75-9"><a href="#cb75-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-10"><a href="#cb75-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Un solo grupo de datos</span></span>
-<span id="cb75-11"><a href="#cb75-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-12"><a href="#cb75-12" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(flipper_length_mm <span class="sc">~</span> body_mass_g, <span class="at">data =</span> penguins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("broom.mixed")</span></span>
+<span id="cb75-5"><a href="#cb75-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom.mixed)</span>
+<span id="cb75-6"><a href="#cb75-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-7"><a href="#cb75-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(palmerpenguins)</span>
+<span id="cb75-8"><a href="#cb75-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-9"><a href="#cb75-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Un solo grupo de datos</span></span>
+<span id="cb75-10"><a href="#cb75-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-11"><a href="#cb75-11" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(flipper_length_mm <span class="sc">~</span> body_mass_g, <span class="at">data =</span> penguins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -1003,11 +1003,13 @@ Conditional model:
 (Intercept)  body_mass_g  
   137.23098      0.01514  </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajustamos modelo mixto</span></span>
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ojo, esto es solo un ejemplo. No se recomienda ajustar modelos mixtos cuando hay menos de 5-6 niveles del factor. </span></span>
 <span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> body_mass_g, <span class="at">y =</span> flipper_length_mm, <span class="at">color =</span> <span class="fu">factor</span>(year))) <span class="sc">+</span></span>
-<span id="cb81-4"><a href="#cb81-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb81-5"><a href="#cb81-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajustamos modelo mixto</span></span>
+<span id="cb81-4"><a href="#cb81-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb81-5"><a href="#cb81-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> body_mass_g, <span class="at">y =</span> flipper_length_mm, <span class="at">color =</span> <span class="fu">factor</span>(year))) <span class="sc">+</span></span>
+<span id="cb81-6"><a href="#cb81-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb81-7"><a href="#cb81-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1125,7 +1127,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a>m_binomial <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(Survived <span class="sc">~</span> Pclass, <span class="at">data=</span> titanic, <span class="at">family =</span> <span class="st">"binomial"</span>)</span>
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a>m_binomial <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(Survived <span class="sc">~</span> Pclass, <span class="at">data =</span> titanic, <span class="at">family =</span> <span class="st">"binomial"</span>)</span>
 <span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb92-3"><a href="#cb92-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m_binomial)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1229,12 +1231,21 @@ Scaled residual values: 0.5820151 0.8080241 0.9228156 0.9842659 0.2333578 0.4973
           p-value = 0.952</code></pre>
 </div>
 </div>
+</section>
+<section id="bibliografía-de-interés" class="level2 unnumbered" data-number="8">
+
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">8 Bibliografía de interés</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-bolker2009" class="csl-entry" role="listitem">
+Bolker, Benjamin M., Mollie E. Brooks, Connie J. Clark, Shane W. Geange, John R. Poulsen, M. Henry H. Stevens, and Jada-Simone S. White. 2009. <span>“Generalized Linear Mixed Models: A Practical Guide for Ecology and Evolution.”</span> <em>Trends in Ecology &amp; Evolution</em> 24 (3): 127–35. <a href="https://doi.org/10.1016/j.tree.2008.10.008">https://doi.org/10.1016/j.tree.2008.10.008</a>.
+</div>
 <div id="ref-cayuela2022" class="csl-entry" role="listitem">
 Cayuela, Luis, and Marcelino De la Cruz. 2022. <em>Análisis de Datos Ecológicos En r</em>. MundiPrensa.
+</div>
+<div id="ref-crawley2007" class="csl-entry" role="listitem">
+Crawley, Michael J. 2007. <em>The r Book.</em> Chichester, UK: Wiley.
 </div>
 <div id="ref-gelman2006" class="csl-entry" role="listitem">
 Gelman, Andrew, and Jennifer Hill. 2006. <em>Data Analysis Using Regression and Multilevel/Hierarchical Models</em>. Analytical Methods for Social Research. Cambridge: Cambridge University Press.

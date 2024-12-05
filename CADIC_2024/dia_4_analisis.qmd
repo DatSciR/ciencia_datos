@@ -42,7 +42,7 @@ El objetivo de un análisis estadístico es estimar los parámetros del modelo q
 >
 > --- George E. P. Box
 
-El **análisis de regresión** se usa para explicar o predecir la relación lineal entre una variable Y (variable respuesta o dependiente), y una o más variables explicativas o independientes. Cuando hay una variable explicativa hablamos de regresión simple y cuando hay varias es regresión múltiple. Si la(s) variable(s) explicativas son categóricas estamos ante un análisis de la varianza o ANOVA, que al igual que antes puede ser unifactorial si solo hay una variable explicativa (one-way ANOVA) o multifactorial si hay más. Por último, si las variables explicativas son una combinación de categóricas y continuas estaremos antes un ANCOVA (análisis de la covarianza) [@cayuela2022]. Todos estos nombres hacen referencia a tipos de análisis de regresión que en R se pueden calcular con una única función: `lm(m)`.
+El **análisis de regresión** se usa para explicar o predecir la relación lineal entre una variable Y (variable respuesta o dependiente), y una o más variables explicativas o independientes. Cuando hay una variable explicativa hablamos de regresión simple y cuando hay varias es regresión múltiple. Si la(s) variable(s) explicativas son categóricas estamos ante un análisis de la varianza o ANOVA, que al igual que antes puede ser unifactorial si solo hay una variable explicativa (one-way ANOVA) o multifactorial si hay más. Por último, si las variables explicativas son una combinación de categóricas y continuas estaremos antes un ANCOVA (análisis de la covarianza) [@cayuela2022]. Todos estos nombres hacen referencia a tipos de análisis de regresión que en R se pueden calcular con una única función: `lm()`.
 
 ## Supuestos de los modelos lineales
 
@@ -158,10 +158,10 @@ check_collinearity(m_ozono)
 
 # Modelo con interacciones 
 
-ozono <- ozono %>% 
-  mutate(rads = as.vector(scale(rad)),
-    temps = as.vector(scale(temp)),
-    winds = as.vector(scale(wind)))
+ozono <- ozono |> 
+  mutate(rad = as.vector(scale(rad)),
+    temp = as.vector(scale(temp)),
+    wind = as.vector(scale(wind)))
 
 m_ozono_int <- lm(ozone ~ rad*temp + wind*temp, data = ozono)
 summary(m_ozono_int)
@@ -189,7 +189,7 @@ plot_model(m_ozono_int, type = "pred",
 
 # Tablas de resultados
 
-tidy(m_ozono_int)
+tidy(m_ozono_int) 
 tidy(anova(m_ozono_int))
 glance(m_ozono_int)
 
@@ -262,12 +262,12 @@ check_model(m_pinos)
 # Pero... no hemos acabado
 # Una de las principales razones de usar factores es conocer las diferencias entre los niveles del factor
 
-paircomp <- emmeans::emmeans(m_pinos, specs = pairwise ~ Irrig)
+paircomp <- emmeans(m_pinos, specs = pairwise ~ Irrig)
 paircomp
 
 # Representación del modelo
 
-plot_model(m_pinos, type = "pred", terms = "Irrig", show.data = TRUE, jitter = 0.5) +
+plot_model(m_pinos, type = "pred", terms = "Irrig", show.data = TRUE, jitter = 0.5, alpha = 0.2) +
   labs(title = "", 
     x = "Tratamiento de riego", y = "Incremento en diámetro") +
   theme_bw()
@@ -353,7 +353,7 @@ a_{j} \sim N(𝜇_{j}, 𝜎^2)\\
 𝜇_{j}=𝛾+𝛿×predictor_{j}
 $$
 
-Este tipo de modelos es muy útil para modelizar datos estructurados en el espacio o en el tiempo (medidas repetidas) a la vez que permiten aprovechar todos los datos.
+Este tipo de modelos es muy útil para modelizar datos estructurados en el espacio o en el tiempo (medidas repetidas) a la vez que permiten aprovechar todos los datos. No se recomienda ajustar modelos mixtos cuando hay menos de 5-6 niveles del factor y 10-20 observaciones por nivel [@crawley2007; @bolker2009].
 
 💡Si te interesan los modelos mixtos, puedes leer el capítulo *Multilevel linear models: the basics* de @gelman2006.
 
@@ -362,8 +362,7 @@ Este tipo de modelos es muy útil para modelizar datos estructurados en el espac
 
 # install.packages("glmmTMB")
 library(glmmTMB)
-# install.packages("lmerTest")
-library(lmerTest)
+
 # install.packages("broom.mixed")
 library(broom.mixed)
 
@@ -380,6 +379,8 @@ lm(flipper_length_mm ~ body_mass_g + factor(year), data = penguins)
 # Con agrupamiento parcial: interceptos interrelacionados
 
 glmmTMB(flipper_length_mm ~ body_mass_g + (1|year), data = penguins)
+
+# Ojo, esto es solo un ejemplo. No se recomienda ajustar modelos mixtos cuando hay menos de 5-6 niveles del factor. 
 
 # Ajustamos modelo mixto
 
@@ -437,7 +438,7 @@ library(DHARMa)
 ggplot(titanic) +
   geom_count(aes(x = Pclass, y = Survived))
 
-m_binomial <- glmmTMB(Survived ~ Pclass, data= titanic, family = "binomial")
+m_binomial <- glmmTMB(Survived ~ Pclass, data = titanic, family = "binomial")
 
 summary(m_binomial)
 
@@ -475,3 +476,5 @@ sum(e^2)/(n-p)
 check_overdispersion(m_binomial)
 
 ```
+
+## Bibliografía de interés
