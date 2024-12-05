@@ -42,45 +42,45 @@ El objetivo de un análisis estadístico es estimar los parámetros del modelo q
 >
 > --- George E. P. Box
 
-El **análisis de regresión** se usa para explicar o predecir la relación lineal entre una variable Y (variable respuesta o dependiente), y una o más variables explicativas o independientes. Cuando hay una variable explicativa hablamos de regresión simple y cuando hay varias es regresión múltiple. Si la(s) variable(s) explicativas son categóricas estamos ante un análisis de la varianza o ANOVA, que al igual que antes puede ser unifactorial si solo hay una variable explicativa (one-way ANOVA) o multifactorial si hay más. Por último, si las variables explicativas son una combinación de categóricas y continuas estaremos antes un ANCOVA (análisis de la covarianza) [@cayuela2016]. Todos estos nombres hacen referencia a tipos de análisis de regresión que en R se pueden calcular con una única función (`lm(m)`).
+El **análisis de regresión** se usa para explicar o predecir la relación lineal entre una variable Y (variable respuesta o dependiente), y una o más variables explicativas o independientes. Cuando hay una variable explicativa hablamos de regresión simple y cuando hay varias es regresión múltiple. Si la(s) variable(s) explicativas son categóricas estamos ante un análisis de la varianza o ANOVA, que al igual que antes puede ser unifactorial si solo hay una variable explicativa (one-way ANOVA) o multifactorial si hay más. Por último, si las variables explicativas son una combinación de categóricas y continuas estaremos antes un ANCOVA (análisis de la covarianza) [@cayuela2022]. Todos estos nombres hacen referencia a tipos de análisis de regresión que en R se pueden calcular con una única función: `lm(m)`.
 
 ## Supuestos de los modelos lineales
 
 La aplicación de un modelo lineal queda supeditado al cumplimiento de una serie de supuestos.
 
--   **Independencia**: las observaciones y, por tanto, los residuos del modelo deben ser independientes entre sí. Las formas más comunes de violar el supuesto de independencia son la **autocorrelación** espacial, cuando distintas observaciones están más próximas entre sí que otras, y la autocorrelación temporal cuando se realizan distintas mediciones de la variable dependiente en los mismos individuos o parcelas a lo largo del tiempo. El supuesto de independencia está muy relacionado con el diseño del estudio. Se puede lidiar con la dependencia de las observaciones promediando el valor de las que sean dependientes entre sí o a través de modelos mixtos que tienen en cuenta la no independencia sin perder la variabilidad asociada a ella.
+-   **Independencia**: las observaciones y, por tanto, los residuos del modelo deben ser independientes entre sí. Las formas más comunes de violar el supuesto de independencia son la **autocorrelación** espacial, cuando distintas observaciones están más próximas entre sí que otras, y la autocorrelación temporal cuando se realizan distintas mediciones de la variable dependiente en los mismos individuos o parcelas a lo largo del tiempo. El supuesto de independencia está muy relacionado con el diseño del estudio. Se puede lidiar con la dependencia de las observaciones promediando el valor de las que sean dependientes entre sí, a través de modelos mixtos que tienen en cuenta la no independencia sin perder la variabilidad asociada a ella, o con modelos autorregresivos.
 
--   **Normalidad**: los modelos lineales asumen una distribución normal de los residuos del modelo. El criterio de normalidad se refiere a los residuos del modelo y no a la variable dependiente, aunque en gran parte la distribución de los residuos viene definida por la distribución de la variable dependiente. Por eso, una forma de cumplir el supuesto de normalidad es transformar la variable respuesta. Si nuestra variable dependiente son unos y ceros (presencia/ausencia o vivo/muerto), o bien es un conteo (nº individuos) los residuos de nuestro modelo lineal no van a ser normales. En estos casos específicos utilizaremos modelos lineales generalizados.
+-   **Normalidad**: los modelos lineales asumen una distribución normal de los residuos del modelo. El criterio de normalidad se refiere a los residuos del modelo y no a la variable dependiente, aunque en gran parte la distribución de los residuos viene definida por la distribución de la variable dependiente. Por eso, una forma de cumplir el supuesto de normalidad es transformar la variable respuesta. Si la variable dependiente son unos y ceros (presencia/ausencia o vivo/muerto), o bien es un conteo (nº individuos) los residuos no van a ser normales. En estos casos específicos utilizaremos modelos lineales generalizados.
 
--   **Homocedasticidad**: se asume que la varianza es homogenea en todo el rango de la variable independiente. Esto implica que la varianza residual de nuestro modelo debe ser constante. La violación de este supuesto puede hacernos caer en errores de tipo I (falsos positivos). Para evaluar este aspecto se representan los residuos frente a los valores ajustados por el modelo. Uno de los principales problemas que suele haber es que los residuos aumenten conforme aumentan los valores ajustados por el modelo. Puede deberse a que alguna variable no se ha tenido en cuenta o bien a la presencia de *outliers* en nuestros datos. Una forma de lidiar con este aspecto es transformar la variable respuesta.
+-   **Homocedasticidad**: se asume que la varianza de los residuos es homogenea en todo el rango de la variable independiente. Esto implica que la varianza residual de nuestro modelo debe ser constante. La violación de este supuesto puede hacernos caer en errores de tipo I (falsos positivos). Para evaluar este aspecto se representan los residuos frente a los valores ajustados por el modelo. Uno de los principales problemas que suele haber es que los residuos aumenten conforme aumentan los valores ajustados por el modelo. Puede deberse a que alguna variable no se ha tenido en cuenta o también a la presencia de *outliers* en nuestros datos. Una forma de lidiar con este aspecto es transformar la variable respuesta.
 
 -   **Linealidad**: la relación entre la variable dependiente y la independiente es lineal o puede expresarse como una combinación lineal de parámetros.
 
 ## Fundamentos matemáticos de una regresión lineal simple
 
-Asumiendo la hipótesis de que y se puede explicar como una función lineal de x, podemos expresar y como:
+Asumiendo la hipótesis de que *y* se puede explicar como una función lineal de *x*, podemos expresar *y* como:
 
 $$
-Y = a + bX
+y = a + bx
 $$
 
-Al parámetro a se le denomina **intercepto** y es el valor de la variable respuesta cuando la variable independiente es igual a cero. Al parámetro b se le denomina **pendiente** y representa cuánto aumenta la variable respuesta por unidad de la variable independiente. Basta pues estimar los parámetros a y b para conocer el valor de la variable respuesta para cada valor de la variable independiente.
+Al parámetro *a* se le denomina **intercepto** y es el valor de la variable respuesta cuando la variable independiente es igual a cero. Al parámetro *b* se le denomina **pendiente** y representa cuánto aumenta la variable respuesta por unidad de la variable independiente. Basta estimar los parámetros *a* y *b* para conocer el valor de la variable respuesta para cada valor de la variable independiente.
 
-Para entender cómo se estiman tenemos que recordar que los datos de una regresión son tomados de manera pareada, es decir que en una misma observación tenemos un dato para la variable respuesta (y~i~) y para la variable independiente (x~i~). Sin embargo, los parámetros a y b son los mismos para todos los pares de datos por lo que al menos que nuestro modelo prediga con exactitud cada una de nuestras observaciones tendremos un error asociado al modelo. Dicho error o residuo (𝜀~𝑖~) es la diferencia entre el valor predicho de la variable respuesta (Ŷi) para un determinado valor de la variable independiente y el valor real observado de nuestra variable respuesta (y~i~) en dicha observación. Para cada observación tendremos:
+Para entender cómo se estiman recordemos que los datos de una regresión son tomados de manera pareada, es decir que en una misma observación tenemos un dato para la variable respuesta (y~i~) y para la variable independiente (x~i~). Sin embargo, los parámetros *a* y *b* son los mismos para todos los pares de datos por lo que a menos que el modelo prediga con exactitud cada una de las observaciones tendremos un error asociado al modelo. Dicho **error o residuo** (𝜀~𝑖~) es la diferencia entre el valor predicho de la variable respuesta (Ŷ~i~) para un determinado valor de la variable independiente y el valor real observado de nuestra variable respuesta (y~i~) en dicha observación. Para cada observación tendremos:
 
 $$
-yi = a + bxi + 𝜀i
+y_{i} = a + bx_{i} + 𝜀_{i}
 $$
 
-Los “mejores” parámetros del modelo se estiman mediante **máxima verosimilitud**, es decir, dados los datos, el valor de los parámetros será aquel que haga los datos más verosímiles. Si los supuestos de los modelos lineales se cumplen, la máxima verosimilitud viene dada por el **método de los mínimos cuadrados.** El término mínimos cuadrados se refiere a la suma de los residuos al cuadrado. Los mejores parámetros del modelo serán aquellos que minimicen la **suma de los residuos cuadrados** del modelo (RSS - Residual Sum of Squares). La RSS representa la variabilidad que el modelo NO es capaz de explicar.
+Los “mejores” parámetros del modelo se estiman mediante **máxima verosimilitud**, es decir, dados los datos, el valor de los parámetros será aquel que haga los datos más verosímiles. Si los supuestos de los modelos lineales se cumplen, la máxima verosimilitud viene dada por el **método de los mínimos cuadrados.** El término mínimos cuadrados se refiere a la **suma de los residuos al cuadrado** (RSS - Residual Sum of Squares). Los mejores parámetros del modelo serán aquellos que minimicen la suma de los residuos cuadrados del modelo . La RSS representa la variabilidad que el modelo NO es capaz de explicar.
 
-El **error del modelo** (residuos) es una variable aleatoria que sigue una distribución normal, de ahí el supuesto de normalidad, con media igual a cero y varianza 𝜎^2^ (= cuadrados medios residuales). Como vemos la suma cuadrada de residuos se divide por n-2, esto es debido a que ya hemos usado dos observaciones para calcular los dos parámetros del modelo (a y b). La varianza del error estará más cercana a cero cuando las observaciones estén más cerca de las predicciones, y se estima el valor *medio* de la RSS:
+El **error del modelo** (residuos) es una variable aleatoria que sigue una distribución normal, de ahí el supuesto de normalidad, con media igual a cero y varianza 𝜎^2^. El valor de la varianza residual de la muestra es lo que se denomina **cuadrados medios residuales** (RMS). La varianza del error estará más cercana a cero cuando las observaciones estén más cerca de las predicciones. Para calcularla, la RSS se divide por n-2, calculando una especie de valor *medio* de la RSS.
 
-$$𝜎2 = RSS/n-2$$ Asociado a los errores del modelo podemos calcular el grado de ajuste del mismo para lo que se utiliza el **coeficiente de determinación** (R^~2~^), que se define como la fracción de la variabilidad de la variable respuesta explicada por la variación de la variable independiente. Si la variabilidad total de la variable respuesta es SSY (la suma de las diferencias entre y~i~ y la media de Y al cuadrado) y la parte no explicada por el modelo es RSS, definimos el coeficiente de determinación como:
+$$RMS = \frac{RSS}{n-2}$$ Asociado a los errores del modelo podemos calcular el grado de ajuste del mismo para lo que se utiliza el **coeficiente de determinación** (R^~2~^), que se define como la fracción de la variabilidad de la variable respuesta explicada por la variación de la variable independiente. Si la variabilidad total de la variable respuesta es SSY (la suma de las diferencias entre y~i~ y la media de *y* al cuadrado) y la parte no explicada por el modelo es RSS, definimos el coeficiente de determinación como:
 
-$$R^2 = SSY-RSS / SSY$$ Al ser una proporción, el coeficiente de determinación se define entre 0 y 1, cuanto más se acerque a 1 mayor será la variabilidad explicada y mejor se ajustará nuestro modelo a los datos.
+$$R^2 = \frac{SSY-RSS}{SSY} $$ Al ser una proporción, el coeficiente de determinación se define entre 0 y 1, cuanto más se acerque a 1 mayor será la variabilidad explicada y mejor se ajustará el modelo a los datos.
 
-Los parámetros del modelo son realmente una estimación de los verdaderos valores de los parámetros poblacionales. Por ello, estos parámetros llevan asociados una incertidumbre. El siguiente paso es **testar estadísticamente si los parámetros estimados son estadísticamente distintos de cero**. Esto es especialmente importante para la pendiente ya que su significación nos indicaría que hay un efecto de la variable independiente sobre la variable respuesta. La hipótesis nula es que b no es diferente de cero. La significación de estos parámetros se comprueba mediante un t-test en la función `lm()` (evalúa la relación entre cada variable y la variable respuesta mientras se controlan las demás). Mediante F-ratio con `anova()` se evalúa la relación entre la variabilidad expicada por el modelo y la variabilidad explicada por esa variable (que puede tener varios parámetros asociados).
+Los parámetros del modelo son realmente una estimación de los verdaderos valores de los parámetros poblacionales. Por ello, estos parámetros llevan asociados una incertidumbre y se necesita **testar estadísticamente si los parámetros estimados son estadísticamente distintos de cero**. Esto es especialmente importante para la pendiente ya que su significación nos indicaría que hay un efecto de la variable independiente sobre la variable respuesta. La hipótesis nula es que *b* no es diferente de cero. La significación de estos parámetros se comprueba mediante un t-test en la función `lm()` (evalúa la relación entre cada variable y la variable respuesta mientras se controlan las demás). Mediante F-ratio con `anova()` se evalúa la relación entre la variabilidad explicada por el modelo y la variabilidad explicada por esa variable.
 
 ```{r lm_simple}
 
@@ -95,39 +95,114 @@ m_cars <- lm(dist ~ speed, data = cars)
 
 summary(m_cars)
 
-resid(m_cars)
-RSS <- sum(resid(m_cars)^2)
-sigma2 <- RSS/(nrow(cars)-2) 
-sqrt(sigma2)
+# Calculamos a mano la bondad de ajuste del modelo:
+res <- resid(m_cars)
+
+summary(res)
+
+RSS <- sum(res^2)
+RMS <- RSS/(nrow(cars)-2) 
+sqrt(RMS)
 
 SSY <- sum((cars$dist - mean(cars$dist))^2)
 R2 <- (SSY-RSS)/SSY
 
 anova(m_cars) 
+
 # La tabla ANOVA tiene una serie de columnas que resumen la partición de la suma de cuadrados
-# p-valor es de X, quiere decir que X de cada 10 veces obtendremos por azar un F-ratio igual al que hemos obtenido con las observaciones.
+# La F se calcula bajo el supuesto de b = 0
+# Un p-valor de X quiere decir que X de cada 10 veces obtendremos por azar un F-ratio igual al que hemos obtenido con las observaciones.
 ```
 
 ## Ajustando modelos lineales en R
 
-### ANOVA
+### Regresión lineal multiple
 
-```{r anova}
+La regresión lineal múltiple es un modelo lineal con dos o más variables independientes continuas. El efecto de las variables explicativas sobre la variable respuesta puede no ser exclusivamente independiente. Pudiera ser que la relación entre la variable respuesta y una variable explicativa estuviera modulada por otra variable explicativa y tendríamos una interacción.
+
+💡La inclusión de variables en el modelo aumenta el número de parámetros a estimar. De forma general se suele recomendar tener al menos 10 observaciones independientes por parámetro a estimar, aunque como siempre esto no debe tomarse a raja tabla.
+
+```{r regresion_multiple}
 
 # install.packages("performance")
 library(performance)
-# install.packages("emmeans")
-library(emmeans)
 # install.packages("")
 library(sjPlot)
 # install.packages("broom")
 library(broom) #https://broom.tidymodels.org/articles/broom.html
 
+ozono <- read_delim(file = "Ozone.txt", delim = "\t") 
+ozono
+
+ggpairs(ozono |> select(rad, temp, wind, ozone),
+        lower = list(continuous = wrap("smooth", method = "loess", color = "darkslategrey", alpha = 0.1)),
+        diag = list(continuous = wrap("barDiag")))  
+
+m_ozono <- lm(ozone ~ rad + temp + wind, data = ozono)
+summary(m_ozono)
+anova(m_ozono)
+
+# Comprobamos residuos
+x11()
+check_model(m_ozono)
+
+plot_model(m_ozono, terms = c("rad", "temp", "wind"), show.data = TRUE, type = "resid")
+
+# Modelo con interacciones 
+
+ozono <- ozono %>% 
+  mutate(rads = as.vector(scale(rad)),
+    temps = as.vector(scale(temp)),
+    winds = as.vector(scale(wind)))
+
+m_ozono_int <- lm(ozone ~ rad*temp + wind*temp, data = ozono)
+summary(m_ozono_int)
+anova(m_ozono_int)
+confint(m_ozono_int)
+
+# comprobar supuestos
+x11()
+check_model(m_ozono_int)
+
+plot_model(m_ozono_int, terms = c("rad", "temp", "wind"), show.data = TRUE, type = "resid")
+
+# Para representar las predicciones del gráfico
+
+plot_model(m_ozono_int, type = "pred",
+  terms = c("temp","rad[90, 270]")) +
+  labs(title = "", 
+    x = "Temperature", y = "Ozone concentration", color = "Radiation") + 
+  theme_bw()
+
+plot_model(m_ozono_int, type = "pred",
+  terms = c("temp","wind[7, 13]")) +
+  labs(title = "", 
+    x = "Temperature", y = "Ozone concentration", color = "Wind") +
+  theme_bw()
+
+# Tablas de resultados
+
+tidy(m_ozono_int)
+tidy(anova(m_ozono_int))
+glance(m_ozono_int)
+
+```
+
+### ANOVA (ANalysis Of VAriance)
+
+Al calcular un ANOVA ajustamos un modelo lineal utilizando variables dummies (es decir, que toman valores de 0 o 1). El modelo ajusta tantas pendientes como n – 1 niveles del factor existan. El intercepto toma el valor de la variable respuesta para el nivel de referencia del factor (R lo identifica por orden alfabético). El valor de los parámetros estimado para el resto de niveles nos indica la diferencia que existe entre el valor medio de la variable respuesta para dichos niveles y el del nivel de referencia.
+
+```{r anova}
+
+# install.packages("emmeans")
+library(emmeans)
+# Guia de emmeans: https://rvlenth.github.io/emmeans/articles/AQuickStart.html
+
 pinos <- read_delim(file = "RxF_growth.csv", delim = ",",
            col_types = list(Irrig = "f",
              Fert = "f"))
 
-# pinos contiene datos de un experimento en el que se plantaron 144 plántulas de Pinus pinea en 4 bloques en un campo abandonado y se sometieron a un experimento factorial con 4 niveles de riego (0, 150, 300 y 600 mm año⁻¹) y 3 tratamientos de fertilización nitrogenada (0, 150 y 300 kg N ha⁻¹) distribuidos aleatoriamente dentro de cada uno de los 4 bloques.
+# pinos contiene datos de un experimento en el que se plantaron 144 plántulas de Pinus pinea en un campo abandonado y se sometieron a un experimento factorial con 4 niveles de riego (0, 150, 300 y 600 mm año⁻¹) y 3 tratamientos de fertilización nitrogenada (0, 150 y 300 kg N ha⁻¹) distribuidos aleatoriamente.
 
 # Queremos saber si el incremento en diamétro (DI) estuvo condicionado por la irrigación
 
@@ -139,39 +214,27 @@ pinos
 
 ggplot(pinos) +
   geom_boxplot(aes(y = DI)) 
-
 ggplot(pinos) +
   geom_jitter(aes(y = DI, x = 1)) 
-# no real outliers
+# considero que no hay
 
 # Normalidad y homogeneidad
 
 ggplot(pinos) + #normal
   geom_histogram(aes(x = DI)) 
-
 ggplot(pinos) +
   geom_boxplot(aes(x = Irrig, y = DI)) 
 
-pinos |> 
-  group_by(Irrig) |> 
-  summarize(var = var(DI))
-
-# Independencia?
-
-ggplot(pinos) +
-  geom_boxplot(aes(x = as.factor(Block), y = DI)) 
-
-
 # Ajustamos un modelo lineal
 
-m1 <- lm(DI ~ Irrig, data = pinos)
-summary(m1)
+m_pinos <- lm(DI ~ Irrig, data = pinos)
+summary(m_pinos)
 
 # ¿Qué significa cada parámetro?
 # intercept = media del nivel de referencia, variables dummy
 
 pinos <- pinos |> 
-  mutate(f1 = fitted(m1))
+  mutate(f1 = fitted(m_pinos))
 
 ggplot(pinos) +
   geom_point(aes(x = f1, y = DI)) +
@@ -179,7 +242,7 @@ ggplot(pinos) +
 
 # Tabla del anova
 
-anova(m1)
+anova(m_pinos)
 
 # Irrig SumSq / (Irrig SumSq + Residuals SumSq) = R2 
 3259.6/(3259.6+6744.8)
@@ -191,22 +254,26 @@ check_model(m1)
 # Pero... no hemos acabado
 # Una de las principales razones de usar factores es conocer las diferencias entre los niveles del factor
 
-paircomp <- emmeans::emmeans(m1, specs = pairwise ~ Irrig)
+paircomp <- emmeans::emmeans(m_pinos, specs = pairwise ~ Irrig)
 paircomp
 
 # Representación del modelo
 
-plot_model(m1, type = "pred", terms = "Irrig", show.data = TRUE, jitter = 0.5) +
+plot_model(m_pinos, type = "pred", terms = "Irrig", show.data = TRUE, jitter = 0.5) +
   labs(title = "", 
-    x = "Irrigation treatment", y = "Diameter increase (mm/year)") +
+    x = "Tratamiento de riego", y = "Incremento en diámetro") +
+  theme_bw()
+
+plot(paircomp, comparison = TRUE) +
+  labs(title = "", 
+    x = "Tratamiento de riego", y = "Incremento en diámetro") +
   theme_bw()
 
 # Tablas de resultados
 
-tidy(m1)
-tidy(anova(m1))
-augment(m1)
-glance(m1)
+tidy(m_pinos)
+tidy(anova(m_pinos))
+glance(m_pinos)
 ```
 
 ### ANCOVA
@@ -223,9 +290,9 @@ encinas <- read_delim(file = "bellotas.csv", delim = ",",
 encinas <- encinas |> 
   rename(Acorn = `Acorn `)
 
-# Nuestra hipótesis es que aquellos árboles que crezcan más también mostrarán una mayor producción de bellotas y que esta relación dependerá de la disponibilidad de recursos, es decir, más nutrientes y agua debido a la fertilización y la falta de competencia.
+# La hipótesis es que aquellos árboles que crezcan más también mostrarán una mayor producción de bellotas y que esta relación dependerá de la disponibilidad de recursos, es decir, más nutrientes y agua debido a la fertilización y la falta de competencia.
 
-# Detección de outliers
+# Comprobaciones: outliers, normalidad, linealidad
 
 ggplot(encinas) +
   geom_boxplot(aes(y = Acorn, x = 1)) 
@@ -236,49 +303,35 @@ ggplot(encinas) +
 ggplot(data = encinas) +
   geom_boxplot(aes(y = Acorn, x = Competition))
 
-# Normalidad y homogeneidad
+ggplot(encinas) +
+  geom_point(aes(x = Acorn, y = DI))
 
 ggplot(encinas) +
   geom_histogram(aes(x = Acorn), bins = 10) 
 
-# Relaciones entre variables
+# Ajustamos el modelo
 
-ggplot(encinas) +
-  geom_point(aes(x = Acorn, y = DI))
+m_encinas <- lm(Acorn ~ Fert * DI + Competition * DI, data = encinas)
 
-# Ajustamos un modelo, empezamos por uno sencillo
+summary(m_encinas)
+anova(m_encinas)
+check_model(m_encinas)
+# ¿Quitaríais la interacción Fert * DI?
 
-ancova1 <- lm(Acorn ~ Fert * DI, data = encinas)
-summary(ancova1)
-anova(ancova1)
-check_model(ancova1)
+m_encinas2 <- lm(Acorn ~ Fert + Competition * DI, data = encinas)
+
+summary(m_encinas2)
+anova(m_encinas2)
+check_model(m_encinas2)
 
 # Interpretación de los parámetros
 
 # Figura con la relación entre las variables continuas para cada nivel del tratamiento
-plot_model(ancova1, type = "pred", terms = c("DI","Fert"), show.data = TRUE) +
+plot_model(m_encinas2, type = "pred", terms = c("DI","Competition")) +
   labs(title = "", 
-    x = "Crecimiento", y = "Producción de bellotas") +
+    x = "Crecimiento", y = "Producción de bellotas", color = "Competencia") +
   theme_bw()
 
-# Nuestra hipótesis es que la competencia también influye
-
-ancova2 <- lm(Acorn ~ Competition * DI, data = encinas)
-summary(ancova2)
-check_model(ancova2)
-
-plot_model(ancova2, type = "pred", terms = c("DI","Competition"), show.data = TRUE) +
-  labs(title = "", 
-    x = "Crecimiento", y = "Producción de bellotas") +
-  theme_bw()
-
-# 
-
-ancova3 <- lm(Acorn ~ Fert * DI + Competition * DI, data = encinas)
-summary(ancova3)
-check_model(ancova3)
-
-AIC(ancova1, ancova2, ancova3)
 
 ```
 
@@ -286,25 +339,64 @@ AIC(ancova1, ancova2, ancova3)
 
 VIF root of 1 / (1 Rj ), also called the variance inflation factor (VIF), whichmeans that the P-values get largermaking it more difficult to detect an effect El factor de inflación de la varianza proporciona una estimación cuantitativa de la multicolinealidad entre covariables en un análisis de regresión. Este índice mide hasta qué punto la varianza de un coeficiente de regresión estimado se incrementa a causa de la colinealidad. Si echamos un vistazo a la fórmula mediante la que se calcula la varianza asociada a la estimación de un parámetro mediante mínimos cuadrados veremos que a mayor R2 (más cercano a 1) mayor varianza asociada al parámetros. Hay que aclarar que este R2 es el cuadrado del coeficiente de correlación múltiple entre las variables independientes del modelo y no el coeficiente de determinación del mismo. En términos prácticos, si introducimos una variable en el modelo que aumenta la correlación entre las mismas significa que la información proporcionada por esta variable ya está incluida en el resto y además aumentamos la varianza asociada a la estimación de nuestros parámetros por lo que podemos estar influyendo la significación de los mismos. En cuanto a los valores de VIF a partir de los cuales hay que tomar en serio la colinealidad entre nuestras variables no existe un consenso claro. El límite más aceptado es el de 5, aunque algunos autores establecen este límite en 10. Sin embargo cuando nuestras variables no tienen un efecto muy marcada sobre nuestra variable respuesta, tener valores de VIF mayores de 3 podría suponer un problema ya que muchos de los parámetros podrían dejar de ser significativos. El procedimiento a seguir es calcular el VIF sobre las variables independientes presentes en el modelo y en caso de alta colinealidad eliminar aquella con un VIF superior y volver a calcular el VIF para cada covariable.
 
-## Modelos lineales generalizados
-
 ## Modelos lineales mixtos
 
-```{r}
-# Modelos mixtos y generalizados
+Los modelos mixtos estiman parámetros (interceptos o pendientes) que varían según unos niveles de agregación especificados en vez de considerarse plenamente independientes. Ahora el intercepto *a* o la pendiente *b* van a seguir una distribución normal que depende de otro/s predictor/es:
 
-# Instalar paquetes (aquellos que no tengais) y cargadlos en R
-library(tidyverse)
-library(GGally)
-library(performance)
-library(sjPlot)
-library(lme4)
+$$
+a_{j} \sim N(𝜇_{j}, 𝜎^2)\\
+𝜇_{j}=𝛾+𝛿×predictor_{j}
+$$
+
+Este tipo de modelos es muy útil para modelizar datos estructurados en el espacio o en el tiempo (medidas repetidas) a la vez que permiten aprovechar todos los datos.
+
+💡Si te interesan los modelos mixtos, puedes leer el capítulo *Multilevel linear models: the basics* de @gelman2006.
+
+```{r m_mixtos}
+# install.packages("glmmTMB")
+library(glmmTMB)
+# install.packages("lmerTest")
 library(lmerTest)
-library(nlme)
-library(AER)
-library(MuMIn)
+# install.packages("broom.mixed")
+library(broom.mixed)
+# install.packages("DHARMa")
+library(DHARMa)
 
-#setwd("C:\\Users\\user\\OneDrive - Universidad Complutense de Madrid (UCM)\\Data analysis\\CursoR")
+library(palmerpenguins)
+
+# Un solo grupo de datos
+
+lm(flipper_length_mm ~ body_mass_g, data = penguins)
+
+# Sin agrupamiento: un intercepto independiente por grupo.
+
+lm(flipper_length_mm ~ body_mass_g + factor(year), data = penguins)
+
+# Con agrupamiento parcial: interceptos interrelacionados
+
+glmmTMB(flipper_length_mm ~ body_mass_g + (1|year), data = penguins)
+
+# Ajustamos modelo mixto
+
+ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm, color = factor(year))) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm")
+
+m_mixto <- glmmTMB(flipper_length_mm ~ body_mass_g + (1|year), data = penguins)
+
+summary(m_mixto)
+check_model(m_mixto)
+
+tidy(m_mixto)
+
+plot_model(m_mixto, terms = c("body_mass_g"), show.data = TRUE, type = "pred")
+plot_model(m_mixto, terms = c("year"), show.data = TRUE, type = "re")
+
+# + (1 | group) varian interceptos
+# + (1 + x | group) varian interceptos y pendientes
+# + (1 | group/subgroup) varian interceptos anidados
+# + (1 | group1) + (1 | group2) # varian interceptos según 2 grupos independientes
+# + (1 + x | group1) + (1 + x | group2) # varian interceptos y pendientes según dos grupos
 
 #### 1. Conteo Poisson ####
 
@@ -443,63 +535,7 @@ range(PO$MedSand)
 plot_model(M1, terms = c("MedSand","Level"), show.data = TRUE, type = "pred")
 plot_model(M1, terms = c("Level"), show.data = TRUE, type = "pred")
 
-#### 3. Modelos mixtos ####
 
-# Matriz de sitios x abundancias de especie
-rikz <- read_delim(file = "DatosCursoR/RIKZ.txt", delim = "\t", 
-  col_types = list(Beach = "f"))
-rikz
-
-# Calculamos la riqueza de especie, convirtiendo las abundancias en presencia y sumando
-rikz$Richness <- apply(rikz[, 2:76] > 0, 1, sum)
-
-# Modelo lineal
-M1 <- lm(Richness ~ NAP, data = rikz)
-summary(M1)
-
-plot_model(M1, type = "pred", terms = "NAP", show.data = TRUE) +
-  labs(x = "NAP", y = "Richness", title = "")
-  
-# Plots intercepto y pendiente distintas
-M1.1 <- lm(Richness ~ NAP + Beach, data = rikz)
-summary(M1.1)
-
-rikz <- rikz |> 
-  mutate(fit = M1.1$fitted.values)
-
-ggplot(rikz) +
-  geom_point(aes(x = NAP, y = Richness, color = Beach)) +
-  geom_line(aes(x = NAP, y = fit, color = Beach))
-
-M1.2 <- lm(Richness ~ NAP * Beach, data = rikz)
-summary(M1.2)
-
-rikz <- rikz |> 
-  mutate(fit = M1.2$fitted.values)
-
-ggplot(rikz) +
-  geom_point(aes(x = NAP, y = Richness, color = Beach)) +
-  geom_line(aes(x = NAP, y = fit, color = Beach))
-
-summary(M1.1) # 10 parametros
-summary(M1.2) # 18 parametros
-AIC(M1,M1.1,M1.2)
-
-# Modelo mixto
-M2 <- lmer(Richness ~ NAP + (1|Beach), data = rikz)
-summary(M2)
-anova(M2)
-# No p values si no cargamos el paquete lmerTest
-
-# Usar lme
-M2 <- lme(Richness ~ NAP, random = ~1|Beach, data = rikz)
-summary(M2)
-anova(M2)
-
-# Simplificación del modelo
-M2.1 <- lme(Richness ~ NAP, random = ~1|Beach, data = rikz, method = "REML")
-M2.2 <- lme(Richness ~ 1, random = ~1|Beach, data = rikz, method = "REML")
-AIC(M2.1,M2.2)
 
 # Con efecto sobre la pendiente
 M3 <- lme(Richness ~ NAP, random = ~NAP|Beach, data = rikz)
@@ -543,3 +579,5 @@ check_outliers(m1) |> plot()
 check_outliers(m2)
 
 ```
+
+## Modelos lineales generalizados
