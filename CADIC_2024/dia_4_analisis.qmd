@@ -83,6 +83,7 @@ $$R^2 = \frac{SSY-RSS}{SSY} $$ Al ser una proporción, el coeficiente de determi
 Los parámetros del modelo son realmente una estimación de los verdaderos valores de los parámetros poblacionales. Por ello, estos parámetros llevan asociados una incertidumbre y se necesita **testar estadísticamente si los parámetros estimados son estadísticamente distintos de cero**. Esto es especialmente importante para la pendiente ya que su significación nos indicaría que hay un efecto de la variable independiente sobre la variable respuesta. La hipótesis nula es que *b* no es diferente de cero. La significación de estos parámetros se comprueba mediante un t-test en la función `lm()` (evalúa la relación entre cada variable y la variable respuesta mientras se controlan las demás). Mediante F-ratio con `anova()` se evalúa la relación entre la variabilidad explicada por el modelo y la variabilidad explicada por esa variable.
 
 ```{r lm_simple}
+#| warning: false
 
 library(tidyverse)
 
@@ -123,13 +124,14 @@ La regresión lineal múltiple es un modelo lineal con dos o más variables inde
 💡La inclusión de variables en el modelo aumenta el número de parámetros a estimar. De forma general se suele recomendar tener al menos 10 observaciones independientes por parámetro a estimar, aunque como siempre esto no debe tomarse a raja tabla.
 
 ```{r regresion_multiple}
+#| warning: false
 
 # install.packages("performance")
 library(performance)
 # install.packages("")
 library(sjPlot)
 # install.packages("broom")
-library(broom) #https://broom.tidymodels.org/articles/broom.html
+library(broom) # https://broom.tidymodels.org/articles/broom.html
 
 ozono <- read_delim(file = "Ozone.txt", delim = "\t") 
 ozono
@@ -143,10 +145,15 @@ summary(m_ozono)
 anova(m_ozono)
 
 # Comprobamos residuos
-x11()
 check_model(m_ozono)
 
+# Comprobamos residuos parciales
 plot_model(m_ozono, terms = c("rad", "temp", "wind"), show.data = TRUE, type = "resid")
+
+# Comprobamos colinealidad
+check_collinearity(m_ozono)
+
+# El factor de inflación de la varianza (VIF) proporciona una estimación cuantitativa de la multicolinealidad entre covariables en un análisis de regresión. Este índice mide hasta qué punto la varianza de un coeficiente de regresión se incrementa a causa de la colinealidad. En cuanto a los valores de VIF a partir de los cuales hay que tomar en serio la colinealidad no existe un consenso claro (5 o 10). En caso de alta colinealidad se puede eliminar la variable con un VIF superior y volver a calcular el VIF.
 
 # Modelo con interacciones 
 
@@ -161,7 +168,6 @@ anova(m_ozono_int)
 confint(m_ozono_int)
 
 # comprobar supuestos
-x11()
 check_model(m_ozono_int)
 
 plot_model(m_ozono_int, terms = c("rad", "temp", "wind"), show.data = TRUE, type = "resid")
@@ -193,6 +199,7 @@ glance(m_ozono_int)
 Al calcular un ANOVA ajustamos un modelo lineal utilizando variables dummies (es decir, que toman valores de 0 o 1). El modelo ajusta tantas pendientes como n – 1 niveles del factor existan. El intercepto toma el valor de la variable respuesta para el nivel de referencia del factor (R lo identifica por orden alfabético). El valor de los parámetros estimado para el resto de niveles nos indica la diferencia que existe entre el valor medio de la variable respuesta para dichos niveles y el del nivel de referencia.
 
 ```{r anova}
+#| warning: false
 
 # install.packages("emmeans")
 library(emmeans)
@@ -279,6 +286,7 @@ glance(m_pinos)
 ### ANCOVA
 
 ```{r ancova}
+#| warning: false
 
 encinas <- read_delim(file = "bellotas.csv", delim = ",",
            col_types = list(Competition = "f",
@@ -335,10 +343,6 @@ plot_model(m_encinas2, type = "pred", terms = c("DI","Competition")) +
 
 ```
 
-### Colinealidad en modelos lineales
-
-VIF root of 1 / (1 Rj ), also called the variance inflation factor (VIF), whichmeans that the P-values get largermaking it more difficult to detect an effect El factor de inflación de la varianza proporciona una estimación cuantitativa de la multicolinealidad entre covariables en un análisis de regresión. Este índice mide hasta qué punto la varianza de un coeficiente de regresión estimado se incrementa a causa de la colinealidad. Si echamos un vistazo a la fórmula mediante la que se calcula la varianza asociada a la estimación de un parámetro mediante mínimos cuadrados veremos que a mayor R2 (más cercano a 1) mayor varianza asociada al parámetros. Hay que aclarar que este R2 es el cuadrado del coeficiente de correlación múltiple entre las variables independientes del modelo y no el coeficiente de determinación del mismo. En términos prácticos, si introducimos una variable en el modelo que aumenta la correlación entre las mismas significa que la información proporcionada por esta variable ya está incluida en el resto y además aumentamos la varianza asociada a la estimación de nuestros parámetros por lo que podemos estar influyendo la significación de los mismos. En cuanto a los valores de VIF a partir de los cuales hay que tomar en serio la colinealidad entre nuestras variables no existe un consenso claro. El límite más aceptado es el de 5, aunque algunos autores establecen este límite en 10. Sin embargo cuando nuestras variables no tienen un efecto muy marcada sobre nuestra variable respuesta, tener valores de VIF mayores de 3 podría suponer un problema ya que muchos de los parámetros podrían dejar de ser significativos. El procedimiento a seguir es calcular el VIF sobre las variables independientes presentes en el modelo y en caso de alta colinealidad eliminar aquella con un VIF superior y volver a calcular el VIF para cada covariable.
-
 ## Modelos lineales mixtos
 
 Los modelos mixtos estiman parámetros (interceptos o pendientes) que varían según unos niveles de agregación especificados en vez de considerarse plenamente independientes. Ahora el intercepto *a* o la pendiente *b* van a seguir una distribución normal que depende de otro/s predictor/es:
@@ -353,14 +357,14 @@ Este tipo de modelos es muy útil para modelizar datos estructurados en el espac
 💡Si te interesan los modelos mixtos, puedes leer el capítulo *Multilevel linear models: the basics* de @gelman2006.
 
 ```{r m_mixtos}
+#| warning: false
+
 # install.packages("glmmTMB")
 library(glmmTMB)
 # install.packages("lmerTest")
 library(lmerTest)
 # install.packages("broom.mixed")
 library(broom.mixed)
-# install.packages("DHARMa")
-library(DHARMa)
 
 library(palmerpenguins)
 
@@ -398,186 +402,75 @@ plot_model(m_mixto, terms = c("year"), show.data = TRUE, type = "re")
 # + (1 | group1) + (1 | group2) # varian interceptos según 2 grupos independientes
 # + (1 + x | group1) + (1 + x | group2) # varian interceptos y pendientes según dos grupos
 
-#### 1. Conteo Poisson ####
-
-# Importar datos
-# Base de datos para estudiar el efecto de la composicion forestal y la disponibilidad
-# de alimento sobre la abundacia de la ardilla roja en Escocia
-# SqCones= n pinas comidas (variable dep)
-# Ntrees= n trees per plot; DBH= mean tree DBH; TreeHeight= mean tree height; CanopyCover
-SQ <- read_delim(file = "RedSquirrels.txt", delim = "\t") 
-SQ
-
-# Exploratory
-outliers <- list(NULL)
-for (i in 2:6){
-  midf <- data.frame(a = SQ[[i]])
-  outliers[[i-1]] <- ggplot(midf) +
-    geom_boxplot(aes(y = a)) +
-    labs(y = names(SQ)[i], x = "")
-}
-
-outliersplot <- patchwork::wrap_plots(outliers, nrow = 2)
-outliersplot
-
-# outlier en DBH
-SQ2 <- SQ |> 
-  filter(DBH < 0.7)
-
-ggpairs(
-  SQ |> select(SqCones, Ntrees, DBH, TreeHeight, CanopyCover),
-  lower = list(
-    continuous = wrap("smooth", method = "loess", color = "darkslategrey", alpha = 0.1)),
-  diag = list(continuous = wrap("barDiag"))
-)
-
-SQ2 <- SQ2 %>% 
-  mutate(Ntreess = as.vector(scale(Ntrees)),
-         TreeHeights = as.vector(scale(TreeHeight)),
-         CanopyCovers = as.vector(scale(CanopyCover)),
-         DBHs = as.vector(scale(DBH)))
-
-summary(SQ2)
-
-# Modelo
-mod <- lm(SqCones ~ Ntreess + DBHs + TreeHeights + CanopyCovers, 
-  data = SQ2)
-summary(mod)
-check_model(mod)
-
-# Ajustamos el modelo (conteo - poisson)
-M1 <- glm(SqCones ~ Ntreess + DBHs + TreeHeights + CanopyCovers,
-  family = "poisson", data = SQ2)
-summary(M1)
-(882.20 - 647.35) / 882.20 # devianza explicada
-
-# Predicciones (Para una de las covariables)
-plot_model(M1, terms = "Ntreess", show.data = TRUE, type = "pred")
-plot_model(M1, terms = "DBHs", show.data = TRUE, type = "pred")
-plot_model(M1, terms = "TreeHeights", show.data = TRUE, type = "pred")
-plot_model(M1, terms = "CanopyCovers", show.data = TRUE, type = "pred")
-
-# Check overdispersion 
-summary(M1)
-647.35/46
-dispersiontest(M1)
-check_overdispersion(M1)
-
-# Zero-inflated, missing covariate, wrong error distribution, wrong link function???
-x11()
-check_model(M1)
-
-# Residuals vs fitted
-# Hay dos observaciones que influyen mucho y muchas cercanas a 1, demasiadas para quitarlas
-# Cuando hay sobredispersion en poisson se suele usar una binomial negativa
-M2 <- MASS::glm.nb(
-  SqCones ~ Ntreess + DBHs + TreeHeights + CanopyCovers,
-  data = SQ2,
-  na.action = na.fail
-)
-summary(M2)
-
-# Hay un nuevo parametro para la varianza theta
-59.027/46 # Sin sobredispersión
-
-x11()
-check_model(M2)
-
-# Model selection
-dredge(M2)
-M3 <- MASS::glm.nb(SqCones ~ CanopyCovers, data = SQ2, na.action = na.fail)
-
-# Predicciones
-p <- plot_model(M3, type = "pred", terms = c("CanopyCovers")) +
-  geom_ribbon(aes(ymin = conf.low, ymax = conf.high), alpha=0.3, fill="purple3")+
-  geom_line(size = 0.8) +
-  geom_point(data = SQ2, aes(y = SqCones, x = CanopyCovers), alpha = 0.5) +
-  labs(y = "Nº de piñas comidas", x = "Cobertura de copa") +
-  theme_bw() +
-  theme(plot.title = element_blank(),
-        axis.title = element_text(size = 16, 
-                                  face = "bold"),
-        axis.text = element_text(size = 14)) +
-  theme(panel.grid = element_blank())
-
-p
-
-ggsave(filename="miGGplot.jpg", dpi = 1200, 
-       plot = p, width = 100, height = 100, 
-       units = "mm")
-
-#### 2. Modelo presencia-ausencia ####
-
-# Importar datos
-# Heteromastus similis es un gusano marino, 
-# modelamos su presencia (Hsimilis) en funcion de
-# MedSand= porcentaje de arena
-# Level = preferencia profundidad sustrato 
-# Location= 3 areas con distintas condiciones ambientales
-PO <- read_delim(file = "PolychaetaV3.txt", delim = "\t",
-  col_types = list(Level = "f",
-    Location = "f"))
-
-PO
-
-# Modelo
-M1 <- glm(Hsimilis ~ MedSand * Level, data = PO, family = "binomial")
-summary(M1)
-M1.1 <- glm(Hsimilis ~ MedSand + Level, data = PO, family = "binomial")
-AIC(M1, M1.1)
-# Validacion modelo
-x11()
-check_model(M1)
-
-# Predicciones
-range(PO$MedSand)
-
-plot_model(M1, terms = c("MedSand","Level"), show.data = TRUE, type = "pred")
-plot_model(M1, terms = c("Level"), show.data = TRUE, type = "pred")
-
-
-
-# Con efecto sobre la pendiente
-M3 <- lme(Richness ~ NAP, random = ~NAP|Beach, data = rikz)
-summary(M3)
-anova(M3)
-
-M3.1 <- lme(Richness ~ NAP, random = ~NAP|Beach, data = rikz, method = "REML")
-AIC(M2.1, M3.1)
-
-# Residuos
-check_model(M3)
-
-M3.2 <- lmer(Richness ~ NAP + (NAP|Beach), data = rikz)
-check_model(M3.2)
-
-#### 4. Modelo mixto generalizado ####
-
-M4 <- glmer(Richness ~ NAP + (NAP|Beach), data = rikz, family=poisson)
-summary(M4)
-
-x11()
-check_model(M4)
-
-plot_model(M4, terms = "NAP", show.data = TRUE, type = "pred")
-
-# Múltiples covariables - distancias de Cook
-
-ggplot(data = wclam) + 
-  geom_point(aes(x = log10(LENGTH), y = log10(AFD))) +
-  labs(y = "Peso", x = "Longitud") 
-
-m1 <- lm(log10(AFD) ~ log10(LENGTH), data = wclam) 
-m2 <- lm(log10(AFD) ~ log10(LENGTH), data = wclam |> slice(-108)) # Otro sin 108
-
-plot(m1, which = 4) # mayor de 1
-plot(m2, which = 4)
-
-check_outliers(m1)
-x11()
-check_outliers(m1) |> plot()
-check_outliers(m2)
-
 ```
 
 ## Modelos lineales generalizados
+
+Los residuos dependen en gran medida de la naturaleza de la variable respuesta. ¿Que ocurre cuando no son normales ni la varianza homogénea? En ecología esto ocurre a menudo con variables binarias (0/1; datos de supervivencia, presencia-ausencia, sexo, etc.) y con conteos (0, 1, 2, 3...; nº de individiuos, nº de avistamientos, etc.).
+
+```{r generalizados}
+#| warning: false
+
+library(titanic)
+
+titanic <- titanic_train |> 
+  mutate(Pclass = factor(Pclass))
+
+
+m_lin <- lm(Survived ~ Pclass, data = titanic)
+
+hist(resid(m_lin))
+
+```
+
+Las **funciones de enlace** sirven para linealizar la relación entre la variable respuesta y la independiente. Para cada distribución de la variable respuesta y, por tanto de sus residuos, hay funciones de enlace por defecto (canónicas).
+
+![Funciones de enlace canónicas para diferentes distribuciones de errores.](images/clipboard-746937596.png)
+
+```{r binomial}
+#| warning: false
+
+# install.packages("DHARMa")
+library(DHARMa)
+
+ggplot(titanic) +
+  geom_count(aes(x = Pclass, y = Survived))
+
+m_binomial <- glmmTMB(Survived ~ Pclass, data= titanic, family = "binomial")
+
+summary(m_binomial)
+
+# La estimación de los parámetros (= probabilidad de supervivencia) está en escala logit. logit(p) = ln(p / (1-p))
+
+# Intercepto: probabilidad de supervivencia del nivel de referencia (primera clase)
+
+co_binomial <- fixef(m_binomial)
+plogis(co_binomial[[1]][1])
+
+titanic |> 
+  group_by(Pclass) |> 
+  mutate(n_class = n()) |> 
+  group_by(Pclass, n_class, Survived) |> 
+  summarise(n_sur = n()) |> 
+  mutate(per_sur = n_sur/n_class)
+
+# Para el resto de parámetros:
+
+plogis(co_binomial[[1]][1]+co_binomial[[1]][2])
+
+plot_model(m_binomial, type = "pred")
+tidy(m_binomial)
+
+simulateResiduals(m_binomial, plot = TRUE)
+# DHARMa simula residuos utilizando las predicciones del modelo para generar múltiples conjuntos simulados de valores de respuesta, basándose en la distribución estadística asumida, en este caso y ~ binomial(n, p). Los residuos de DHARMa son redisuos simulados entre el nº de simulaciones, lo que hace que tome valores entre 0 y 1 a lo largo de toda la variable predictora.
+
+# Sobredispersión: varianza residual entre grados de libertad de la varianza residual. Debería estar en torno a uno. Zuur et al. 2013 (A beginner’s guide to GLM and GLMM with R. A frequentist and Bayesian persperctive for ecologists.)
+
+e <- resid(m_binomial, type = "pearson")
+n <- nrow(m_binomial$frame)
+p <- length(fixef(m_binomial))
+sum(e^2)/(n-p)
+
+check_overdispersion(m_binomial)
+
+```
