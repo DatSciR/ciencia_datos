@@ -24,7 +24,7 @@ number-sections: true
 bibliography: references.bib
 ---
 
-## Objetivos del día 5
+## Objetivos del día 4
 
 Los objetivos del día de hoy son:
 

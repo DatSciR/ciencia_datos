@@ -1,10 +1,10 @@
 # Análisis de datos: modelos lineales habituales en ecología
 
 Verónica Cruz-Alonso, Enrique Andivia
-05/12/2024
+06/12/2024
 
 - [<span class="toc-section-number">1</span> Objetivos del día
-  5](#objetivos-del-día-5)
+  4](#objetivos-del-día-4)
 - [<span class="toc-section-number">2</span> Introducción a los modelos
   de regresión](#introducción-a-los-modelos-de-regresión)
 - [<span class="toc-section-number">3</span> Supuestos de los modelos
@@ -26,7 +26,7 @@ Verónica Cruz-Alonso, Enrique Andivia
 - [<span class="toc-section-number">8</span> Bibliografía de
   interés](#bibliografía-de-interés)
 
-## Objetivos del día 5
+## Objetivos del día 4
 
 Los objetivos del día de hoy son:
 

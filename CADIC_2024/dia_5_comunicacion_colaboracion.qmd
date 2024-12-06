@@ -21,6 +21,7 @@ editor: visual
 editor_options: 
   chunk_output_type: console
 number-sections: true
+bibliography: references.bib
 ---
 
 ## Objetivos del día 5
@@ -73,13 +74,14 @@ Para compilar un archivo, se ejecuta el botón de `Render` en RStudio (atajo: `C
 
 💡Con el editor visual de RStudio puedes ver en tiempo real cómo es la conversión a word, HTML, etc.
 
-💡Opciones de ejecución de los chunk: <https://bookdown.org/yihui/rmarkdown/r-code.html>
+💡Opciones de ejecución de los chunk: <https://quarto.org/docs/computations/execution-options.html>
 
 Son compatibles con muchos lenguajes de programación:
 
-<!--# Que es esto de reticulate -->
-
-```{r reticulate, echo = FALSE, eval = TRUE, warning = FALSE}
+```{r reticulate}
+#| echo: FALSE
+#| eval: TRUE
+#| warning: FALSE
 
 library(knitr)
 
@@ -98,6 +100,7 @@ print(x.split(" "))
 ```
 
 ```{r example}
+#| warning: FALSE
 
 library(ggplot2)
 names(cars)
@@ -164,7 +167,7 @@ Genera un documento Quarto que esté compuesto por al menos metadatos, código y
 
 Algunas diferencias entre Quarto y R Markdown en cuanto al código (chunks):
 
--   Estructura de las opciones tipo `key: value`. Las [opciones de los chunks](#0) son similares a las de R Markdown.
+-   Estructura de las opciones tipo `key: value`. Las [opciones de los chunks](https://quarto.org/docs/computations/execution-options.html) son similares a las de R Markdown.
 
 -   `#|` sintaxis *(hash pipe)*. Esta es la sintaxis preferida de Quarto, aunque es compatible con la sintaxis anterior de R Markdown. El *hash pipe* le añade más consistencia entre los *engine* (Jupyter, knitr) y nos da más control sobre el orden o espacio de las opciones del chunk (no está limitado a una línea de opciones). No hay ningún atajo para un *hash pipe* pero si escribes uno los siguientes se añadirán automáticamente cuando le das a enter.
 
@@ -201,9 +204,9 @@ No tienes que convertir la sintaxis de todos tus documentos antiguos. Quarto es 
 
 Existen tres formas para renderizar un documento en Quarto:
 
-1.  Dentro de RStudio puedes seguir usando el botón de *Render*
+1.  Dentro de RStudio puedes usar el botón de *Render*
 
-2.  En el shell mediante quarto render: 🤓
+2.  En el terminal mediante quarto render: 🤓
 
 `quarto render archivo.qmd` (por defecto a HTML)
 
@@ -213,7 +216,7 @@ Existen tres formas para renderizar un documento en Quarto:
 
 `quarto --help`
 
-💡Sobre la importancia del YAML: las especificaciones del YAML se puede incluir también en el shell, pero si las hemos incluido en el YAML no tendremos que escribirlas cada vez.
+💡Sobre la importancia del YAML: las especificaciones del YAML se puede incluir también en el terminal, pero si las hemos incluido en el YAML no tendremos que escribirlas cada vez.
 
 `quarto render archivo.qmd --to html`
 
@@ -240,6 +243,8 @@ Títulos coloreados en azul, el texto no está con un espaciado doble, no hay n�
 2.  Modificamos la plantilla generada como la queramos utilizando los estilos de Word.
 
 3.  Lo añadimos al YAML
+
+💡Fíjate en [este link](https://quarto.org/docs/output-formats/ms-word-templates.html) para saber como modificar una plantilla de Word.
 
 ```{r plantilla}
 #| eval: false
@@ -305,6 +310,8 @@ Las ramas se pueden generar en la [terminal](https://github.com/DatSciR/intro_gi
 3.  Vuelve a la rama main y comprueba el archivo .qmd
 
 ![](images/github_code.png){fig-align="center" width="543"}
+
+💡¿Te animas a editar un manuscrito usando R, RStudio, Git y GitHub? Lee más sobre el *trackdown workflow* [aquí](https://claudiozandonella.github.io/trackdown/articles/trackdown-workflow.html).
 
 ### ¿Cómo se unen distintas ramas?
 
